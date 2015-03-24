@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+ <session-factory>
+  <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+  <property name="hibernate.connection.url">jdbc:mysql://PC201311192237.lan:3306/IPCS</property>
+  <property name="hibernate.connection.username">ipcs_user</property>
+  <property name="hibernate.connection.password"></property>
+  <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+  <property name="show_sql">true</property>
+  <mapping resource="mapping/Person.hbm.xml"></mapping>
+  <mapping resource="mapping/Role.hbm.xml"></mapping>
+</session-factory>
+</hibernate-configuration>
