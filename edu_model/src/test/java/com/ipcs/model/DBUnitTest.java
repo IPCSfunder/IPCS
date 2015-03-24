@@ -1,4 +1,4 @@
-package model;
+package com.ipcs.model;
 
 import java.io.FileInputStream;
 
@@ -8,15 +8,15 @@ import org.dbunit.dataset.IDataSet;
 import org.dbunit.dataset.xml.FlatXmlDataSetBuilder;
 import org.dbunit.operation.DatabaseOperation;
 import org.hibernate.Session;
-import org.junit.Test;
 
-import com.online_edu.model.Person;
-import com.online_edu.model.Role;
-import com.online_edu.util.HibernateUtil;
+import com.ipcs.model.Person;
+import com.ipcs.model.Role;
+import com.ipcsutil.HibernateUtil;
 
-public class PersonDaoTest extends DBTestCase {  
+public abstract class DBUnitTest extends DBTestCase{
+  
 	
-    public PersonDaoTest() {  
+    public DBUnitTest() {  
               System.setProperty(PropertiesBasedJdbcDatabaseTester.DBUNIT_DRIVER_CLASS, "com.mysql.jdbc.Driver");  
               System.setProperty(PropertiesBasedJdbcDatabaseTester.DBUNIT_CONNECTION_URL, "jdbc:mysql://PC201311192237.lan:3306/IPCS");  
               System.setProperty(PropertiesBasedJdbcDatabaseTester.DBUNIT_USERNAME, "ipcs_user");  
@@ -25,7 +25,7 @@ public class PersonDaoTest extends DBTestCase {
 
     @Override  
     protected DatabaseOperation getSetUpOperation() throws Exception {  
-              return DatabaseOperation.DELETE_ALL;  
+              return DatabaseOperation.REFRESH;  
     }  
 
     @Override  
@@ -37,19 +37,6 @@ public class PersonDaoTest extends DBTestCase {
               super.setUp();  
     }  
 
-    @Test
-    public void testInsertPersonRole() {
-		Session session = HibernateUtil.getSessionFactory().openSession();
- 
-		session.beginTransaction();
-		Role role = new Role("Merchant4");
-		Person person = new Person("James4","111");
-		person.addRole(role);
-		
-//		session.save(role);
-		session.save(person);
-		session.getTransaction().commit();
-	}  
 
 
  
@@ -58,4 +45,5 @@ public class PersonDaoTest extends DBTestCase {
               return new FlatXmlDataSetBuilder().build(new FileInputStream(  
                                 "src/test/resource/dataset.xml"));
     }  
-}  
+
+}

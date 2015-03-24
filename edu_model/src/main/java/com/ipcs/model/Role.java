@@ -1,4 +1,4 @@
-package com.online_edu.model;
+package com.ipcs.model;
 
 import java.util.HashSet;
 import java.util.Set;

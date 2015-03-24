@@ -1,4 +1,4 @@
-package com.online_edu.model;
+package com.ipcs.model;
 
 public class Permission {
 

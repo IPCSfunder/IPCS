@@ -2,7 +2,7 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
-    <class name="com.online_edu.model.Person" table="PERSON">
+    <class name="com.ipcs.model.Person" table="PERSON">
         <id name="objectId" type="java.lang.Long">
             <column name="person_objid" />
             <generator class="native" />
@@ -25,7 +25,7 @@
         
         <set cascade ="all-delete-orphan" name="roles" table="person_role">  
             <key column="person_fk" />  
-            <many-to-many class="com.online_edu.model.Role" column="role_fk" />  
+            <many-to-many class="com.ipcs.model.Role" column="role_fk" />  
         </set>  
     </class>
 </hibernate-mapping>

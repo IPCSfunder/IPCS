@@ -1,34 +1,32 @@
-package model;
+package com.ipcs.model;
+
 
 import org.hibernate.Session;
-import org.junit.Test;
 
-import com.online_edu.model.Role;
-import com.online_edu.util.HibernateUtil;
+import com.ipcs.model.Role;
+import com.ipcsutil.HibernateUtil;
 
 /**
  * Hello world!
  *
  */
-public class RoleTest 
+public class RoleTest extends DBUnitTest
 {
 	
-	@Test
-    public void saveRole()
-    {
+
+	public void testInsertPerson() {
     	Session session = HibernateUtil.getSessionFactory().openSession();
-   	 
+  	 
 		session.beginTransaction();
 		Role role = new Role();
- 
+
 //		user.setUserId(100);
 		role.setName("Student");
 //		user.setCreatedDate(new Date());
- 
+
 		session.save(role);
 		session.getTransaction().commit();
-    }
-    
-    
-    
+	}  
+
+
 }

@@ -1,9 +1,9 @@
-package com.online_edu;
+package com.ipcs;
 
 import org.hibernate.Session;
 
-import com.online_edu.model.Person;
-import com.online_edu.util.HibernateUtil;
+import com.ipcs.model.Person;
+import com.ipcsutil.HibernateUtil;
 
 /**
  * Hello world!

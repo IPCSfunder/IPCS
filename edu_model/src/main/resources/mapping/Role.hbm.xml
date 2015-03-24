@@ -2,7 +2,7 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
-    <class name="com.online_edu.model.Role" table="Role">
+    <class name="com.ipcs.model.Role" table="Role">
         <id name="objectId" type="java.lang.Long">
             <column name="role_objid" />
             <generator class="native" />
@@ -22,7 +22,7 @@
         
          <set name="persons" table="person_role">  
             <key column="role_fk" />  
-            <many-to-many class="com.online_edu.model.Person" column="person_fk" />  
+            <many-to-many class="com.ipcs.model.Person" column="person_fk" />  
         </set> 
     </class>
 </hibernate-mapping>
