@@ -12,11 +12,62 @@
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <slf4jVersion>1.5.11</slf4jVersion>
   </properties>
+  
+  
 
   <dependencies>
+  	<!-- DBunit testing framework -->
+  		<dependency>
+			<groupId>org.dbunit</groupId>
+			<artifactId>dbunit</artifactId>
+			<version>2.4.9</version>
+		</dependency>
+		
+		
+
+    <dependency>
+        <groupId>org.slf4j</groupId>
+        <artifactId>slf4j-api</artifactId>
+        <version>${slf4jVersion}</version>
+    </dependency>
+    <dependency>
+        <!-- any library that uses commons-logging will be directed to slf4j -->
+        <groupId>org.slf4j</groupId>
+        <artifactId>jcl-over-slf4j</artifactId>
+        <version>${slf4jVersion}</version>
+        </dependency>
+    <dependency>
+        <!-- any library that uses slf4j will be directed to java.util.logging -->
+        <groupId>org.slf4j</groupId>
+        <artifactId>slf4j-jdk14</artifactId>
+        <version>${slf4jVersion}</version>
+    </dependency>
+    <dependency>
+        <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-simple</artifactId>
+            <version>${slf4jVersion}</version>
+            <scope>test</scope>
+    </dependency>
+    <dependency>
+        <groupId>org.slf4j</groupId>
+        <artifactId>slf4j-log4j12</artifactId>
+        <version>${slf4jVersion}</version>
+    </dependency>
+		
+	<dependency>
+		<groupId>log4j</groupId>
+		<artifactId>log4j</artifactId>
+		<version>1.2.17</version>
+	</dependency>
+  
+  
+  
+  
+  
      <!-- JUnit testing framework -->
-        <dependency>
+     <dependency>
                 <groupId>junit</groupId>
                 <artifactId>junit</artifactId>
                 <version>3.8.1</version>
@@ -24,7 +75,7 @@
         </dependency>
        
  
-        <!-- MySQL database driver -->
+	<!-- MySQL database driver -->
 	<dependency>
 		<groupId>mysql</groupId>
 		<artifactId>mysql-connector-java</artifactId>

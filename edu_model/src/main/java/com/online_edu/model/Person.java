@@ -1,10 +1,26 @@
 package com.online_edu.model;
 
+import java.util.HashSet;
+import java.util.Set;
+
 public class Person extends BasicObject{
 	
 	private String account_name;
 	
 	private String password_hash;
+	
+	private Set<Role> roles = new HashSet<Role>();
+	
+	public Person(String name, String password){
+		super();
+		this.account_name = name;
+		this.password_hash = password;
+	}
+	
+	public Person(){
+		super();
+	}
+	
 	
 	public String getAccount_name() {
 		return account_name;
@@ -22,6 +38,18 @@ public class Person extends BasicObject{
 		this.password_hash = password_hash;
 	}
 	
+	public Set<Role> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(Set<Role> roles) {
+		this.roles = roles;
+	}
+	
+	public void addRole(Role role){
+		this.roles.add(role);
+	}
+
 	public int hashCode(){
 		return 31*account_name.hashCode();
 	}

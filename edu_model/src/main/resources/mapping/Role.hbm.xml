@@ -2,16 +2,13 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
-    <class name="com.online_edu.model.Person" table="PERSON">
+    <class name="com.online_edu.model.Role" table="Role">
         <id name="objectId" type="java.lang.Long">
-            <column name="person_objid" />
+            <column name="role_objid" />
             <generator class="native" />
         </id>
-        <property name="account_name" type="string">
-            <column name="account_name" length="45" not-null="true" />
-        </property>
-        <property name="password_hash" type="string">
-            <column name="password_hash" length="45"/>
+        <property name="name" type="string">
+            <column name="name" length="45" not-null="true" />
         </property>
         
         <property name="createdTime" type="date">
@@ -23,9 +20,9 @@
         </property>
         
         
-        <set cascade ="all-delete-orphan" name="roles" table="person_role">  
-            <key column="person_fk" />  
-            <many-to-many class="com.online_edu.model.Role" column="role_fk" />  
-        </set>  
+         <set name="persons" table="person_role">  
+            <key column="role_fk" />  
+            <many-to-many class="com.online_edu.model.Person" column="person_fk" />  
+        </set> 
     </class>
 </hibernate-mapping>
