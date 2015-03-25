@@ -1,4 +1,4 @@
-package com.online_edu;
+package com.ipcs;
 
 /**
  * Hello world!
