@@ -1,47 +1,55 @@
 package com.ipcs.model;
 
-import java.util.HashSet;
-import java.util.Set;
 
 public class Contact extends BasicObject{
 	
-	private String name;
-
-	private Set<Person> persons = new HashSet<Person>();
+	private String address;
 	
-	public Contact(String name){
+	private String mobile_number;
+	
+	private String email_address;
+	
+	
+	
+	
+	public Contact(String address, String mobile_number, String email_address) {
 		super();
-		this.name = name;
-	}
-	
-	public Contact(){
-		super();
-	}
-	
-	public String getName() {
-		return name;
+		this.address = address;
+		this.mobile_number = mobile_number;
+		this.email_address = email_address;
 	}
 
-	public void setName(String name) {
-		this.name = name;
-	}
-	
-
-	public Set<Person> getPersons() {
-		return persons;
+	public String getAddress() {
+		return address;
 	}
 
-	public void setPersons(Set<Person> persons) {
-		this.persons = persons;
+	public void setAddress(String address) {
+		this.address = address;
 	}
 
-	public void addPerson(Person person){
-		persons.add(person);
+	public String getMobile_number() {
+		return mobile_number;
 	}
-	
-	
+
+	public void setMobile_number(String mobile_number) {
+		this.mobile_number = mobile_number;
+	}
+
+	public String getEmail_address() {
+		return email_address;
+	}
+
+	public void setEmail_address(String email_address) {
+		this.email_address = email_address;
+	}
+
 	public int hashCode(){
-		return 31*name.hashCode();
+		final int facter = 31;
+		int result =1;
+		result = facter*17+address.hashCode();
+		result = result*17+mobile_number.hashCode();
+		result = result*17+email_address.hashCode();
+		return result;
 	}
 	
 	public boolean equals(Object obj){
@@ -51,12 +59,19 @@ public class Contact extends BasicObject{
 			return true;
 		if(obj.getClass() != Person.class)
 			return false;
-		Contact role = (Contact)obj;
-		return role.getName().equals(this.name);
+		Contact contact = (Contact)obj;
+		return (contact.getAddress().equals(this.address))
+				&&(contact.getEmail_address().equals(this.email_address))
+				&&(contact.getMobile_number().equals(this.mobile_number));
 	}
 	
 	public String toString(){
-		return "Role name is "+ name +super.toString();
+		StringBuilder details = new StringBuilder();
+		details.append("Contact address is ").append(address);
+		details.append("mobile number is ").append(mobile_number);
+		details.append("email address is ").append(email_address);
+		details.append(super.toString());
+		return details.toString();
 	}
 
 }

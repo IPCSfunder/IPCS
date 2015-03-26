@@ -23,9 +23,12 @@
         </property>
         
         
-        <set cascade ="all-delete-orphan" name="roles" table="person_role">  
+        <set cascade ="all-delete-orphan" name="roles" table="person_role" lazy="true">  
             <key column="person_fk" />  
             <many-to-many class="com.ipcs.model.Role" column="role_fk" />  
         </set>  
+        
+        <many-to-one name="contact" column="contact_fk" unique="true" cascade ="all-delete-orphan"
+        class="com.ipcs.model.Contact"/>
     </class>
 </hibernate-mapping>

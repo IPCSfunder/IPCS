@@ -3,7 +3,7 @@ package com.ipcs;
 import org.hibernate.Session;
 
 import com.ipcs.model.Person;
-import com.ipcsutil.HibernateUtil;
+import com.ipcs.util.HibernateUtil;
 
 /**
  * Hello world!
@@ -24,6 +24,7 @@ public class App
 //		user.setCreatedDate(new Date());
  
 		session.save(user);
+	
 		session.getTransaction().commit();
     }
     

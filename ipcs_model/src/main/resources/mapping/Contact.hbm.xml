@@ -2,13 +2,21 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
-    <class name="com.ipcs.model.Role" table="Role">
+    <class name="com.ipcs.model.Contact" table="Contact">
         <id name="objectId" type="java.lang.Long">
-            <column name="role_objid" />
+            <column name="contact_objid" />
             <generator class="native" />
         </id>
-        <property name="name" type="string">
-            <column name="name" length="45" not-null="true" />
+        <property name="address" type="string">
+            <column name="address" length="255"/>
+        </property>
+        
+        <property name="mobile_number" type="string">
+            <column name="mobile_number" length="45"/>
+        </property>
+        
+        <property name="email_address" type="string">
+            <column name="email_address" length="45"/>
         </property>
         
         <property name="createdTime" type="date">
@@ -18,11 +26,5 @@
         <property name="modifiedTime" type="date">
             <column name="date_modified"/> 
         </property>
-        
-        
-         <set name="persons" table="person_role" lazy="true">  
-            <key column="role_fk" />  
-            <many-to-many class="com.ipcs.model.Person" column="person_fk" />  
-        </set> 
     </class>
 </hibernate-mapping>

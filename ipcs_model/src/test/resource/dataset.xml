@@ -1,6 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <dataset>
-	<person/>
-	<role/>
-	<person_role/>
+	<person person_objid="2" date_created="2015-03-25 00:55:24" date_modified="2015-03-25 00:55:24" account_name="Person" password_hash="11"/>
+	<role role_objid = "5" date_created="2015-03-25 00:55:24" date_modified="2015-03-25 00:55:24" name = "Test"/>
+	<person_role person_role_objid = "2" person_fk = "2" role_fk = "5"/>
+	<contact/>
 </dataset>

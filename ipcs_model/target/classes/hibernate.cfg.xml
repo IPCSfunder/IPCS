@@ -12,5 +12,6 @@
   <property name="show_sql">true</property>
   <mapping resource="mapping/Person.hbm.xml"></mapping>
   <mapping resource="mapping/Role.hbm.xml"></mapping>
+  <mapping resource="mapping/Contact.hbm.xml"></mapping>
 </session-factory>
 </hibernate-configuration>

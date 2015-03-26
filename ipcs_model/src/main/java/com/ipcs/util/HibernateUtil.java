@@ -1,4 +1,4 @@
-package com.ipcsutil;
+package com.ipcs.util;
 
 
 

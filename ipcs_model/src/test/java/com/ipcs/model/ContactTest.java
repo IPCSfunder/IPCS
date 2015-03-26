@@ -5,22 +5,18 @@ import org.hibernate.Session;
 
 import com.ipcs.model.Person;
 import com.ipcs.model.Role;
-import com.ipcsutil.HibernateUtil;
+import com.ipcs.util.HibernateUtil;
 
-public class PersonDaoTest extends DBUnitTest{  
-	
-	ThreadLocal test = new ThreadLocal();
+public class ContactTest extends DBUnitTest{  
 	
 	public void testInsertPersonRole() {
 	Session session = HibernateUtil.getSessionFactory().openSession();
 	 
 	session.beginTransaction();
-	Role role = new Role("Merchant4");
-	Person person = new Person("James4","111");
-	person.addRole(role);
-	
+	session.beginTransaction();
+	Contact contact = new Contact("Shenzhen","186232","test@email.com");
 //	session.save(role);
-	session.save(person);
+	session.save(contact);
 	session.getTransaction().commit();
 }  
 }  

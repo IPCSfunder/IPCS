@@ -11,6 +11,8 @@ public class Person extends BasicObject{
 	
 	private Set<Role> roles = new HashSet<Role>();
 	
+	private Contact contact;
+	
 	public Person(String name, String password){
 		super();
 		this.account_name = name;
@@ -50,8 +52,16 @@ public class Person extends BasicObject{
 		this.roles.add(role);
 	}
 
+	public Contact getContact() {
+		return contact;
+	}
+
+	public void setContact(Contact contact) {
+		this.contact = contact;
+	}
+
 	public int hashCode(){
-		return 31*account_name.hashCode();
+		return 31*17+account_name.hashCode();
 	}
 	
 	public boolean equals(Object obj){

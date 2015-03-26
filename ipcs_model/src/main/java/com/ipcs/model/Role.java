@@ -41,7 +41,7 @@ public class Role extends BasicObject{
 	
 	
 	public int hashCode(){
-		return 31*name.hashCode();
+		return 31*17+name.hashCode();
 	}
 	
 	public boolean equals(Object obj){

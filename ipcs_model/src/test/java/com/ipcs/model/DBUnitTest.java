@@ -11,7 +11,7 @@ import org.hibernate.Session;
 
 import com.ipcs.model.Person;
 import com.ipcs.model.Role;
-import com.ipcsutil.HibernateUtil;
+import com.ipcs.util.HibernateUtil;
 
 public abstract class DBUnitTest extends DBTestCase{
   

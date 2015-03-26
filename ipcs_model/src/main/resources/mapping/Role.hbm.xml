@@ -20,7 +20,7 @@
         </property>
         
         
-         <set name="persons" table="person_role">  
+         <set name="persons" table="person_role" lazy="true">  
             <key column="role_fk" />  
             <many-to-many class="com.ipcs.model.Person" column="person_fk" />  
         </set> 

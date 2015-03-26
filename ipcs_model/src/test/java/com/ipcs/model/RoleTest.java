@@ -3,8 +3,7 @@ package com.ipcs.model;
 
 import org.hibernate.Session;
 
-import com.ipcs.model.Role;
-import com.ipcsutil.HibernateUtil;
+import com.ipcs.util.HibernateUtil;
 
 /**
  * Hello world!
@@ -14,7 +13,7 @@ public class RoleTest extends DBUnitTest
 {
 	
 
-	public void testInsertPerson() {
+	public void testInsertRole() {
     	Session session = HibernateUtil.getSessionFactory().openSession();
   	 
 		session.beginTransaction();
@@ -27,6 +26,17 @@ public class RoleTest extends DBUnitTest
 		session.save(role);
 		session.getTransaction().commit();
 	}  
+	
+	public void testGetRole(){
+		Session session = HibernateUtil.getSessionFactory().openSession();
+	  	 
+		session.beginTransaction();
+		Role role = (Role)session.load(Role.class, 5L);
+		System.out.println(role.getObjectId());
+		session.getTransaction().commit();
+//		session.clear();
+//		System.out.println(role.getName());
+	}
 
 
 }
