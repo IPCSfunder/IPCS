@@ -13,6 +13,8 @@ public class Person extends BasicObject{
 	
 	private Contact contact;
 	
+	private PersonDetail personDetail;
+	
 	public Person(String name, String password){
 		super();
 		this.account_name = name;
@@ -58,6 +60,14 @@ public class Person extends BasicObject{
 
 	public void setContact(Contact contact) {
 		this.contact = contact;
+	}
+
+	public PersonDetail getPersonDetail() {
+		return personDetail;
+	}
+
+	public void setPersonDetail(PersonDetail personDetail) {
+		this.personDetail = personDetail;
 	}
 
 	public int hashCode(){

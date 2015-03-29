@@ -30,5 +30,8 @@
         
         <many-to-one name="contact" column="contact_fk" unique="true" cascade ="all-delete-orphan"
         class="com.ipcs.model.Contact"/>
+        
+        <many-to-one name="personDetail" column="person_detail_fk" unique="true" cascade ="all-delete-orphan"
+        class="com.ipcs.model.PersonDetail"/>
     </class>
 </hibernate-mapping>
