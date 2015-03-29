@@ -5,4 +5,9 @@
 	<person_role person_role_objid = "2" person_fk = "2" role_fk = "5"/>
 	<contact/>
 	<person_detail/>
+	<school_type/>
+	<school/>
+	<person_school/>
+	<permission/>
+	<role_permission/>
 </dataset>

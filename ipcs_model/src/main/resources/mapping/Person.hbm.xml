@@ -23,10 +23,16 @@
         </property>
         
         
-        <set cascade ="all-delete-orphan" name="roles" table="person_role" lazy="true">  
+        <set cascade ="all-delete-orphan" name="roles" table="person_role" lazy="true" >  
             <key column="person_fk" />  
             <many-to-many class="com.ipcs.model.Role" column="role_fk" />  
         </set>  
+        
+        <set cascade ="all-delete-orphan" name="schools" table="person_school" lazy="true">  
+            <key column="person_fk" />  
+            <many-to-many class="com.ipcs.model.School" column="school_fk" />  
+        </set>  
+        
         
         <many-to-one name="contact" column="contact_fk" unique="true" cascade ="all-delete-orphan"
         class="com.ipcs.model.Contact"/>

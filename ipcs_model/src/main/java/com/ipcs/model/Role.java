@@ -9,6 +9,8 @@ public class Role extends BasicObject{
 
 	private Set<Person> persons = new HashSet<Person>();
 	
+	private Set<Permission> permissions = new HashSet<Permission>();
+	
 	public Role(String name){
 		super();
 		this.name = name;
@@ -39,7 +41,19 @@ public class Role extends BasicObject{
 		persons.add(person);
 	}
 	
+	public void addPermission(Permission permission){
+		permissions.add(permission);
+	}
 	
+	
+	public Set<Permission> getPermissions() {
+		return permissions;
+	}
+
+	public void setPermissions(Set<Permission> permissions) {
+		this.permissions = permissions;
+	}
+
 	public int hashCode(){
 		return 31*17+name.hashCode();
 	}

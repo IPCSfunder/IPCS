@@ -14,5 +14,8 @@
   <mapping resource="mapping/Role.hbm.xml"></mapping>
   <mapping resource="mapping/Contact.hbm.xml"></mapping>
   <mapping resource="mapping/PersonDetail.hbm.xml"></mapping>
+  <mapping resource="mapping/SchoolType.hbm.xml"></mapping>
+  <mapping resource="mapping/School.hbm.xml"></mapping>
+  <mapping resource="mapping/Permission.hbm.xml"></mapping>
 </session-factory>
 </hibernate-configuration>

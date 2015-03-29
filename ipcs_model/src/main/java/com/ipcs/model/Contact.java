@@ -9,7 +9,7 @@ public class Contact extends BasicObject{
 	
 	private String email_address;
 	
-	
+	private Person person;
 	
 	
 	public Contact(String address, String mobile_number, String email_address) {
@@ -41,6 +41,14 @@ public class Contact extends BasicObject{
 
 	public void setEmail_address(String email_address) {
 		this.email_address = email_address;
+	}
+
+	public Person getPerson() {
+		return person;
+	}
+
+	public void setPerson(Person person) {
+		this.person = person;
 	}
 
 	public int hashCode(){

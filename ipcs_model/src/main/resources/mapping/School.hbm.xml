@@ -2,13 +2,17 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
-    <class name="com.ipcs.model.Role" table="Role">
+    <class name="com.ipcs.model.School" table="school">
         <id name="objectId" type="java.lang.Long">
-            <column name="role_objid" />
+            <column name="school_objid" />
             <generator class="native" />
         </id>
         <property name="name" type="string">
-            <column name="name" length="45" not-null="true" />
+            <column name="name" />
+        </property>
+        
+        <property name="address" type="string">
+            <column name="address" length="45"/>
         </property>
         
         <property name="createdTime" type="date">
@@ -19,15 +23,12 @@
             <column name="date_modified"/> 
         </property>
         
+        <many-to-one name="type" column="school_type_fk" unique="true" cascade ="all-delete-orphan"
+        class="com.ipcs.model.SchoolType"/>
         
-         <set name="persons" table="person_role" lazy="true" cascade ="all-delete-orphan">  
-            <key column="role_fk" />  
+        <set name="persons" table="person_school" lazy="true" cascade ="all-delete-orphan">  
+            <key column="school_fk" />  
             <many-to-many class="com.ipcs.model.Person" column="person_fk" />  
-        </set> 
-        
-        <set cascade ="all-delete-orphan" name="permissions" table="role_permission" lazy="true">  
-            <key column="role_fk" />  
-            <many-to-many class="com.ipcs.model.Permission" column="permission_fk" />  
-        </set> 
+        </set>
     </class>
 </hibernate-mapping>

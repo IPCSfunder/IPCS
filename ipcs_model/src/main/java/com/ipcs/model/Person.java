@@ -15,6 +15,9 @@ public class Person extends BasicObject{
 	
 	private PersonDetail personDetail;
 	
+	private Set<School> schools = new HashSet<School>();
+	
+	
 	public Person(String name, String password){
 		super();
 		this.account_name = name;
@@ -50,8 +53,22 @@ public class Person extends BasicObject{
 		this.roles = roles;
 	}
 	
+	
+	
+	public Set<School> getSchools() {
+		return schools;
+	}
+
+	public void setSchools(Set<School> schools) {
+		this.schools = schools;
+	}
+
 	public void addRole(Role role){
 		this.roles.add(role);
+	}
+	
+	public void addSchool(School school){
+		this.schools.add(school);
 	}
 
 	public Contact getContact() {

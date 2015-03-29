@@ -2,21 +2,14 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
-    <class name="com.ipcs.model.Contact" table="Contact">
+    <class name="com.ipcs.model.SchoolType" table="school_type">
         <id name="objectId" type="java.lang.Long">
-            <column name="contact_objid" />
+            <column name="school_type_objid" />
             <generator class="native" />
         </id>
-        <property name="address" type="string">
-            <column name="address" length="255"/>
-        </property>
         
-        <property name="mobile_number" type="string">
-            <column name="mobile_number" length="45"/>
-        </property>
-        
-        <property name="email_address" type="string">
-            <column name="email_address" length="45"/>
+        <property name="name" type="string">
+            <column name="name" length="45"/>
         </property>
         
         <property name="createdTime" type="date">
@@ -26,7 +19,5 @@
         <property name="modifiedTime" type="date">
             <column name="date_modified"/> 
         </property>
-        
-        <one-to-one name="person" property-ref="contact" cascade ="all-delete-orphan"/>
     </class>
 </hibernate-mapping>
