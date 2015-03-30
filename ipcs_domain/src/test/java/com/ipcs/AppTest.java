@@ -1,4 +1,4 @@
-package com.online_edu;
+package com.ipcs;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
