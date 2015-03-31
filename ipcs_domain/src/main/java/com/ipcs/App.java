@@ -18,13 +18,11 @@ public class App
 	  new ClassPathXmlApplicationContext("GenericHiberDao.xml");
     
 	GenericHibernateDao<Person, Integer> stockBo = (GenericHibernateDao)appContext.getBean("genericHibernateDao");
-	Integer i = null;
-
 	/** insert **/
 	Person person = new Person();
 	person.setAccount_name("James2");
 	person.setPassword_hash("111");
-	stockBo.save(person);
+//	stockBo.save(person);
 
 
 	System.out.println("Done");}

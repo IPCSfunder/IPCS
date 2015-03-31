@@ -6,60 +6,70 @@ import java.lang.reflect.Type;
 import java.util.Collection;
 import java.util.List;
 
-import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 
 import com.ipcs.model.BasicObject;
-import com.ipcs.model.Person;
 
-public class GenericHibernateDao<T extends BasicObject, PK extends Serializable> extends HibernateDaoSupport implements BaseDao<T, PK>{
+public abstract class GenericHibernateDao<T extends BasicObject, PK extends Serializable>
+		implements BaseDao<T, PK> {
 
-	  private Class<T> entityClass;
-
-	    public GenericHibernateDao() {
-	        this.entityClass = null;
-	        Class c = getClass();
-	        Type t = c.getGenericSuperclass();
-	        if (t instanceof ParameterizedType) {
-	            Type[] p = ((ParameterizedType) t).getActualTypeArguments();
-	            this.entityClass = (Class<T>) p[0];
-	        }
-	    }
+	private Class<T> entityClass;
+	
+	private SessionFactory sessionFactory = null;
 	
 	
-	public void save(T entity) {
-		getHibernateTemplate().save(entity);
+
+	public SessionFactory getSessionFactory() {
+		return sessionFactory;
 	}
 
-	public T get(PK id) {
-		return (T) getHibernateTemplate().get(entityClass, id);
+	public void setSessionFactory(SessionFactory sessionFactory) {
+		this.sessionFactory = sessionFactory;
 	}
 
-	public T load(PK id) {
-		return getHibernateTemplate().load(entityClass, id);
+	public GenericHibernateDao() {
+		this.entityClass = null;
+		Class c = getClass();
+		Type t = c.getGenericSuperclass();
+		if (t instanceof ParameterizedType) {
+			Type[] p = ((ParameterizedType) t).getActualTypeArguments();
+			this.entityClass = (Class<T>) p[0];
+		}
 	}
 
-	public List<T> loadAll() {
-		return getHibernateTemplate().loadAll(entityClass);
+	public PK save(Session session, T entity) {
+		return (PK) session.save(entity);
 	}
 
-	public void update(T entity) {
-		getHibernateTemplate().update(entity);
+	public T get(Session session, PK id) {
+		return (T) session.get(entityClass, id);
 	}
 
-	public void saveOrUpdate(T entity) {
-		getHibernateTemplate().saveOrUpdate(entity);
+	public T load(Session session, PK id) {
+		System.out.println("Class name"+entityClass.getName());
+		return (T)session.load(entityClass, id);
 	}
 
-	public void delete(T entity) {
-		getHibernateTemplate().delete(entity);
+	public void update(Session session, T entity) {
+		session.update(entity);
 	}
 
-	public void deleteAll(Collection<T> entities) {
-		getHibernateTemplate().delete(entityClass);
+	public void saveOrUpdate(Session session, T entity) {
+		session.saveOrUpdate(entity);
 	}
 
-	public List<T> find(String queryString) {
-		return (List<T>)getHibernateTemplate().find(queryString);
+	public void delete(Session session, T entity) {
+		session.delete(entity);
+	}
+	
+
+	public void deleteAll(Session session, Collection<T> entities) {
+		session.delete(entityClass);
+	}
+
+	public List<T> find(Session session, String queryString) {
+		return (List<T>) session.createQuery(queryString);
 	}
 
 }

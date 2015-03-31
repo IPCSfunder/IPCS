@@ -4,26 +4,26 @@ import java.io.Serializable;
 import java.util.Collection;
 import java.util.List;
 
+import org.hibernate.Session;
+
 import com.ipcs.model.BasicObject;
 
 public interface BaseDao<T extends BasicObject, PK extends Serializable> {
 	
-	public void save(T entity);
+	public PK save(Session session, T entity);
 	
-	public T get(PK id);
+	public T get(Session session, PK id);
 	
-	public T load(PK id);
+	public T load(Session session, PK id);
 	
-	public List<T> loadAll();
-	
-    public void update(T entity);
+    public void update(Session session, T entity);
     
-    public void saveOrUpdate(T entity);
+    public void saveOrUpdate(Session session, T entity);
     
-    public void delete(T entity);
+    public void delete(Session session, T entity);
     
-    public void deleteAll(Collection<T> entities);
+    public void deleteAll(Session session, Collection<T> entities);
     
-    public List<T> find(String queryString);
+    public List<T> find(Session session, String queryString);
 
 }

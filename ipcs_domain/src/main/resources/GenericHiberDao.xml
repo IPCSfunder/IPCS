@@ -5,7 +5,7 @@ http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
  	<import resource="classpath:/hibernate.xml" />
  	<import resource="classpath:DataSource.xml" />
    <!-- Person Data Access Object -->
-   <bean id="genericHibernateDao" class="com.ipcs.dao.GenericHibernateDao" >
+   <bean id="personDao" class="com.ipcs.dao.PersonDao" >
    		<property name="sessionFactory" ref="sessionFactory"></property>
    </bean>
  
