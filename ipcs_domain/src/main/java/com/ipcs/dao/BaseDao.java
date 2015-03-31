@@ -8,6 +8,10 @@ import org.hibernate.Session;
 
 import com.ipcs.model.BasicObject;
 
+/**
+ * @author Chen Chao
+ *
+ */
 public interface BaseDao<T extends BasicObject, PK extends Serializable> {
 	
 	public PK save(Session session, T entity);

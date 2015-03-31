@@ -11,6 +11,10 @@ import org.hibernate.SessionFactory;
 
 import com.ipcs.model.BasicObject;
 
+/**
+ * @author Chen Chao
+ *
+ */
 public abstract class GenericHibernateDao<T extends BasicObject, PK extends Serializable>
 		implements BaseDao<T, PK> {
 
