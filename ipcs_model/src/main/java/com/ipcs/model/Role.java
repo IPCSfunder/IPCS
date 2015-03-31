@@ -3,6 +3,10 @@ package com.ipcs.model;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * @author Chen Chao
+ *
+ */
 public class Role extends BasicObject{
 	
 	private String name;

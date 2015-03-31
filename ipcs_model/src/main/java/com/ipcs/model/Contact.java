@@ -1,6 +1,9 @@
 package com.ipcs.model;
 
-
+/**
+ * @author Chen Chao
+ *
+ */
 public class Contact extends BasicObject{
 	
 	private String address;

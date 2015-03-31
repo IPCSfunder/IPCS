@@ -2,6 +2,10 @@ package com.ipcs.model;
 
 import java.util.Date;
 
+/**
+ * @author Chen Chao
+ *
+ */
 public abstract class BasicObject {
 	
 	private Long objectId;

@@ -1,5 +1,9 @@
 package com.ipcs.model;
 
+/**
+ * @author Chen Chao
+ *
+ */
 import java.util.HashSet;
 import java.util.Set;
 

@@ -1,7 +1,10 @@
 package com.ipcs.util;
 
 
-
+/**
+ * @author Chen Chao
+ *
+ */
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
