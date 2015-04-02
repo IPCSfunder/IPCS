@@ -4,7 +4,7 @@
 <hibernate-mapping>
     <class name="com.ipcs.model.PersonDetail" table="person_detail">
         <id name="objectId" type="java.lang.Long">
-            <column name="contact_objid" />
+            <column name="person_detail_objid" />
             <generator class="native" />
         </id>
         <property name="last_name" type="string">
@@ -19,8 +19,10 @@
             <column name="age" />
         </property>
         
-         <property name="sex" type="string">
-            <column name="sex" />
+         <property name="sex">
+            <type name="org.hibernate.type.EnumType">
+         		<param name="enumClass">com.ipcs.model.PersonDetail$Sex</param>
+     		 </type>
         </property>
         
          <property name="nationality" type="string">
