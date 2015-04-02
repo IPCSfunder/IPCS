@@ -11,8 +11,8 @@ public interface SecurityService {
 	
 	public boolean authenticateLoginInfo(String userName, String password);
 	
-	public List<Permission>
+//	public List<Permission>
 	
-	public List<Role> listRole()
+//	public List<Role> listRole()
 
 }
