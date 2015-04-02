@@ -7,25 +7,23 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import com.ipcs.model.Person;
+import com.ipcs.model.Role;
 
 
-public class PersonIntegrationTest extends BaseTest {
-	Person person = null;
+public class RoleIntegrationTest extends BaseTest {
 	
 	@DataProvider
     public Object[][] providerPerson(){
-        Object[][] result = new Object[][] {{"MyFirstTest","111"}};
+        Object[][] result = new Object[][] {{"Admin"}};
         return result;
     }
 	
 	@Test(dataProvider = "providerPerson")
-	public void insertSinglePerson(String username, String password){
+	public void insertSinglePerson(String roleName){
 		Session session = getCurrentSession();
 		session.beginTransaction();
-		person = new Person();
-		person.setAccount_name(username);
-		person.setPassword_hash(password);
-		personDao.save(session,person);
+		Role role = new Role.RoleBuilder().withName(roleName).build();
+//		personDao.save(session,role);
 		session.getTransaction().commit();
 	}
 	
@@ -33,16 +31,17 @@ public class PersonIntegrationTest extends BaseTest {
 	public void loadPerson(String username, String password) { 	
 		Session session = getCurrentSession();
 		session.beginTransaction();
-		Person loadedPerson = personDao.load(session,person.getObjectId());
-		Assert.assertEquals(username, loadedPerson.getAccount_name());
-		Assert.assertEquals(password, loadedPerson.getPassword_hash());
+//		Role role = personDao.load(session,person.getObjectId());
+//		Assert.assertEquals(username, person.getAccount_name());
+//		Assert.assertEquals(password, person.getPassword_hash());
 	}
 	
 	@Test(dependsOnMethods = { "loadPerson" })
 	public void deletePerson(){
 		Session session = getCurrentSession();
 		session.beginTransaction();
-		personDao.delete(session,person);			
+//		personDao.delete(session,person);	
+		
 		session.getTransaction().commit();
 	}
 }

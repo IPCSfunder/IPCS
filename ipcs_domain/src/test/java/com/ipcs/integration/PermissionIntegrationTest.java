@@ -9,7 +9,7 @@ import org.testng.annotations.Test;
 import com.ipcs.model.Person;
 
 
-public class PersonIntegrationTest extends BaseTest {
+public class PermissionIntegrationTest extends BaseTest {
 	Person person = null;
 	
 	@DataProvider
@@ -33,16 +33,17 @@ public class PersonIntegrationTest extends BaseTest {
 	public void loadPerson(String username, String password) { 	
 		Session session = getCurrentSession();
 		session.beginTransaction();
-		Person loadedPerson = personDao.load(session,person.getObjectId());
-		Assert.assertEquals(username, loadedPerson.getAccount_name());
-		Assert.assertEquals(password, loadedPerson.getPassword_hash());
+		personDao.load(session,person.getObjectId());
+		Assert.assertEquals(username, person.getAccount_name());
+		Assert.assertEquals(password, person.getPassword_hash());
 	}
 	
 	@Test(dependsOnMethods = { "loadPerson" })
 	public void deletePerson(){
 		Session session = getCurrentSession();
 		session.beginTransaction();
-		personDao.delete(session,person);			
+		personDao.delete(session,person);	
+		
 		session.getTransaction().commit();
 	}
 }

@@ -8,5 +8,9 @@ http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
    <bean id="personDao" class="com.ipcs.dao.PersonDao" >
    		<property name="sessionFactory" ref="sessionFactory"></property>
    </bean>
+   
+   <bean id="roleDao" class="com.ipcs.dao.PersonDao" >
+   		<property name="sessionFactory" ref="sessionFactory"></property>
+   </bean>
  
 </beans>
