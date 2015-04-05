@@ -5,10 +5,13 @@ package com.ipcs.service;
 
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
 /**
  * @author Chen Chao
  *
  */
+
 public interface AdminService<T> {
 	public void addBatchSubodinates(List<T> subodidates);
 	
