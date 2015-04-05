@@ -8,7 +8,9 @@ import java.util.List;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.testng.Assert;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
@@ -24,7 +26,7 @@ public class AdminServiceTest {
     List<Person> adminAndStudents = null;
 
     @SuppressWarnings("unchecked")
-    @BeforeTest
+    @BeforeClass
     public void setUp() {
 	ApplicationContext appContext = new ClassPathXmlApplicationContext(
 		"Services.xml");
@@ -35,7 +37,7 @@ public class AdminServiceTest {
 
     @Test
     public void insertAdmin() {
-	adminAndStudents = DummyDataFactory.getAdminInstance();
+	adminAndStudents = new DummyDataFactory().getAdminInstance();
 	adminService.addBatchSubodinates(adminAndStudents);
     }
     
@@ -45,7 +47,7 @@ public class AdminServiceTest {
 	Assert.assertEquals(students.size(), 3);
     }
     
-    @AfterTest
+    @AfterClass
     public void tearDown(){
 	adminService.deleteBatchSubodinates(adminAndStudents);
     }

@@ -3,6 +3,14 @@
  */
 package com.ipcs.service.impl;
 
+import java.util.List;
+
+import org.hibernate.criterion.Criterion;
+import org.hibernate.criterion.Restrictions;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.ipcs.dao.PersonDao;
 import com.ipcs.model.Person;
 import com.ipcs.service.RegistoryService;
 
@@ -10,29 +18,35 @@ import com.ipcs.service.RegistoryService;
  * @author Chen Chao
  *
  */
+
+@Service
 public class RegistoryServiceImpl implements RegistoryService{
+    @Autowired
+    private PersonDao personDao;
 
-    /* (non-Javadoc)
-     * @see com.ipcs.service.RegistoryService#registerNewPerson(com.ipcs.model.Person)
-     */
+    public PersonDao getPersonDao() {
+        return personDao;
+    }
+
+    public void setPersonDao(PersonDao personDao) {
+        this.personDao = personDao;
+    }
+
     public void registerNewPerson(Person person) {
-	// TODO Auto-generated method stub
-	
+	personDao.save(person);
     }
 
-    /* (non-Javadoc)
-     * @see com.ipcs.service.RegistoryService#retrievePasswordByName(java.lang.String)
-     */
+
     public String retrievePasswordByName(String userName) {
-	// TODO Auto-generated method stub
-	return null;
+	Criterion[] criterion = { Restrictions.eq("account_name", userName) };
+	List<Person> persons = personDao.createCriteria(criterion);
+	if (null == persons || persons.size() > 1)
+	    return null;
+	return persons.get(0).getPassword_hash();
     }
 
-    /* (non-Javadoc)
-     * @see com.ipcs.service.RegistoryService#retrievePasswordByContactNumber(java.lang.String)
-     */
+
     public String retrievePasswordByContactNumber(String phoneNumber) {
-	// TODO Auto-generated method stub
 	return null;
     }
 

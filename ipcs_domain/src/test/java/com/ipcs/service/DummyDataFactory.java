@@ -20,7 +20,7 @@ import com.ipcs.model.SchoolType;
  */
 public class DummyDataFactory {
     
-    public static List<Person> getAdminInstance(){
+    public List<Person> getAdminInstance(){
 	DummyDataFactory dummy = new DummyDataFactory();
 	Role adminRole = dummy.prepareRole("Admin");
 	Permission teacherPermission = dummy.perparePermission("Add_Teacher");

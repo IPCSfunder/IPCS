@@ -20,9 +20,9 @@ public interface AdminService<T> {
 	
 	public List<T> listAllTeachers(String schoolName);
 	
-	public boolean updateChild(T person);
+	public void updateChild(T person);
 	
-	public boolean updateTeacher(T teacher);
+	public void updateTeacher(T teacher);
 	
 	public boolean broadcaseMessageTo(List<T> subodidates);
 	

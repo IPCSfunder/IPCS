@@ -49,28 +49,24 @@ public class AdminServiceImpl implements AdminService<Person>{
 
 	@Transactional
 	public List<Person> listAllStudents(String schoolName) {
-	    return (List<Person>)personDao.find("select p from Person as p left join p.schools s left join p.roles as r where  s.name = '"+schoolName+"' and r.name = 'student'");
+	    return (List<Person>)personDao.find("select p from Person as p inner join p.schools s inner join p.roles as r where  s.name = '"+schoolName+"' and r.name = 'student'");
 	}
 
-
+	@Transactional
 	public List<Person> listAllTeachers(String schoolName) {
-	    return (List<Person>)personDao.find("select p from Person as p left join p.schools s left join p.roles as r where  s.name = '"+schoolName+"' and r.name = 'teacher'");
+	    return (List<Person>)personDao.find("select p from Person as p inner join p.schools s inner join p.roles as r where  s.name = '"+schoolName+"' and r.name = 'teacher'");
 	}
 
-	/* (non-Javadoc)
-	 * @see com.ipcs.service.AdminService#updateChild(java.lang.Object)
-	 */
-	public boolean updateChild(Person person) {
-	    // TODO Auto-generated method stub
-	    return false;
+
+	@Transactional
+	public void updateChild(Person child) {
+	    personDao.update(child);
 	}
 
-	/* (non-Javadoc)
-	 * @see com.ipcs.service.AdminService#updateTeacher(java.lang.Object)
-	 */
-	public boolean updateTeacher(Person teacher) {
-	    // TODO Auto-generated method stub
-	    return false;
+
+	@Transactional
+	public void updateTeacher(Person teacher) {
+	    personDao.update(teacher);
 	}
 
 	/* (non-Javadoc)
