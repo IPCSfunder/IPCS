@@ -124,7 +124,6 @@ public abstract class GenericHibernateDao<T extends BasicObject, PK extends Seri
     }
 
     public List<T> findAll() {
-
 	return (List<T>) getCurrentSession().createCriteria(entityClass).list();
     }
 

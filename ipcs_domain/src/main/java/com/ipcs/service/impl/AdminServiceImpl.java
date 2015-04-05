@@ -49,14 +49,12 @@ public class AdminServiceImpl implements AdminService<Person>{
 
 	@Transactional
 	public List<Person> listAllStudents(String schoolName) {
-	    List<Person> students = personDao.find("from Person as p left join p.schools s left join p.roles as r where  s.name = '"+schoolName+"' and r.name = 'student'");    
-	    return students;
+	    return (List<Person>)personDao.find("select p from Person as p left join p.schools s left join p.roles as r where  s.name = '"+schoolName+"' and r.name = 'student'");
 	}
 
 
 	public List<Person> listAllTeachers(String schoolName) {
-	    List<Person> students = personDao.find("from Person as p left join p.schools s left join p.roles as r where  s.name = '"+schoolName+"' and r.name = 'teacher'");    
-	    return students;
+	    return (List<Person>)personDao.find("select p from Person as p left join p.schools s left join p.roles as r where  s.name = '"+schoolName+"' and r.name = 'teacher'");
 	}
 
 	/* (non-Javadoc)

@@ -23,6 +23,10 @@ public class DummyDataFactory {
     public static List<Person> getAdminInstance(){
 	DummyDataFactory dummy = new DummyDataFactory();
 	Role adminRole = dummy.prepareRole("Admin");
+	Permission teacherPermission = dummy.perparePermission("Add_Teacher");
+	Permission studentPermission = dummy.perparePermission("Add_Child");
+	adminRole.addPermission(studentPermission);
+	adminRole.addPermission(teacherPermission);
 	Role studentRole = dummy.prepareRole("Student");
 	Person admin = dummy.prepareAdmin();
 	List<Person> adminAndStudents = dummy.prepareStudent(3);
@@ -65,9 +69,9 @@ public class DummyDataFactory {
 	return role;
     }
 
-    public Permission perparePermission() {
+    public Permission perparePermission(String permissionName) {
 	Permission permission = new Permission();
-	permission.setName("Create_Person");
+	permission.setName(permissionName);
 	return permission;
     }
 
