@@ -6,7 +6,7 @@ http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
  
 <!-- Hibernate session factory -->
 <bean id="sessionFactory" 
-     class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+     class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
  
     <property name="dataSource">
       <ref bean="dataSource"/>
@@ -16,7 +16,7 @@ http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
        <props>
          <prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
          <prop key="hibernate.show_sql">true</prop>
-         <prop key="hibernate.current_session_context_class">thread</prop>
+         <!-- <prop key="hibernate.current_session_context_class">thread</prop> -->
        </props>
      </property>
  

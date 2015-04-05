@@ -10,10 +10,15 @@ import java.util.List;
  *
  */
 public interface AdminService<T> {
+	public void addBatchSubodinates(List<T> subodidates);
 	
-	public List<T> listAllChild(String adminName);
+	public void deleteBatchSubodinates(List<T> subodinates);
 	
-	public List<T> listAllTeachers(String adminName);
+	public void addAdmin(T admin);
+	
+	public List<T> listAllStudents(String schoolName);
+	
+	public List<T> listAllTeachers(String schoolName);
 	
 	public boolean updateChild(T person);
 	
@@ -21,7 +26,6 @@ public interface AdminService<T> {
 	
 	public boolean broadcaseMessageTo(List<T> subodidates);
 	
-//	pulbic List
 	
 	
 
