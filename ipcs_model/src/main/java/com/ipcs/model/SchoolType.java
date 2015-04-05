@@ -16,6 +16,13 @@ public class SchoolType extends BasicObject{
 		this.name = name;
 	}
 	
+	public SchoolType(){
+	}
+	
+	public SchoolType(String name){
+	    this.name = name;
+	}
+	
 	
 
 	public int hashCode(){
