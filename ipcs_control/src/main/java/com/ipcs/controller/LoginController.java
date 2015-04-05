@@ -7,10 +7,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
-
 import com.ipcs.model.Person;
 import com.ipcs.service.SecurityService;
-import com.ipcs.service.impl.SecurityServiceImpl;
 
 @Controller
 public class LoginController {
