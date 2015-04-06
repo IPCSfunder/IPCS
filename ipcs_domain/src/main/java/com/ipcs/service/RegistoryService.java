@@ -10,6 +10,7 @@ import com.ipcs.model.Person;
  *
  */
 public interface RegistoryService {
+    
     public void registerNewPerson(Person person);
     
     public String retrievePasswordByName(String userName);

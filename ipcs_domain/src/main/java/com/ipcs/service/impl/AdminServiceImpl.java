@@ -3,18 +3,17 @@
  */
 package com.ipcs.service.impl;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
-import org.hibernate.criterion.Criterion;
-import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.ipcs.dao.PersonDao;
+import com.ipcs.dao.RoleDao;
+import com.ipcs.dao.SchoolDao;
 import com.ipcs.model.Person;
+import com.ipcs.model.Role;
 import com.ipcs.model.School;
 import com.ipcs.service.AdminService;
 
@@ -24,17 +23,27 @@ import com.ipcs.service.AdminService;
  */
 
 @Service
-public class AdminServiceImpl implements AdminService<Person>{
+public class AdminServiceImpl implements AdminService{
 	@Autowired
 	private PersonDao personDao;
 	
 	
-	public PersonDao getPersonDao() {
-		return personDao;
-	}
-
+	@Autowired
+	private RoleDao roleDao;
+	
+	@Autowired
+	private SchoolDao schoolDao;
+	
 	public void setPersonDao(PersonDao personDao) {
 		this.personDao = personDao;
+	}
+
+	public void setRoleDao(RoleDao roleDao) {
+	    this.roleDao = roleDao;
+	}
+
+	public void setSchoolDao(SchoolDao schoolDao) {
+	    this.schoolDao = schoolDao;
 	}
 
 	@Transactional
@@ -43,35 +52,27 @@ public class AdminServiceImpl implements AdminService<Person>{
 	}
 	
 	@Transactional
-	public void addAdmin(Person admin){
-	    personDao.save(admin);
+	public void addPerson(Person person){
+	    personDao.save(person);
+	}
+	
+	@Transactional
+	public void removePerson(Person person){
+	    personDao.delete(person);
 	}
 
 	@Transactional
-	public List<Person> listAllStudents(String schoolName) {
-	    return (List<Person>)personDao.find("select p from Person as p inner join p.schools s inner join p.roles as r where  s.name = '"+schoolName+"' and r.name = 'student'");
-	}
-
-	@Transactional
-	public List<Person> listAllTeachers(String schoolName) {
-	    return (List<Person>)personDao.find("select p from Person as p inner join p.schools s inner join p.roles as r where  s.name = '"+schoolName+"' and r.name = 'teacher'");
-	}
-
-
-	@Transactional
-	public void updateChild(Person child) {
-	    personDao.update(child);
+	public List<Person> listAllPersonByRoleName(String schoolName, String roleName) {
+	    return (List<Person>)personDao.find("select p from Person as p inner join p.schools s inner join p.roles as r where  s.name = '"+schoolName+"' and r.name = '"+roleName+"'");
 	}
 
 
 	@Transactional
-	public void updateTeacher(Person teacher) {
-	    personDao.update(teacher);
+	public void updatePerson(Person person) {
+	    personDao.update(person);
 	}
 
-	/* (non-Javadoc)
-	 * @see com.ipcs.service.AdminService#broadcaseMessageTo(java.util.List)
-	 */
+	@Transactional
 	public boolean broadcaseMessageTo(List<Person> subodidates) {
 	    // TODO Auto-generated method stub
 	    return false;
@@ -81,5 +82,20 @@ public class AdminServiceImpl implements AdminService<Person>{
 	@Transactional
 	public void deleteBatchSubodinates(List<Person> subodinates) {
 	    personDao.deleteAll(subodinates);
+	}
+
+	@Transactional
+	public Role getRoleByName(String name) {	    
+	    return roleDao.find("select r from Role as r where  r.name = '"+name+"'").get(0);
+	}
+	
+	@Transactional
+	public School getSchoolByName(String name) {
+	    return schoolDao.find("select s from School as s where s.name = '"+name+"'").get(0);
+	}
+	
+	@Transactional
+	public List<School> getSchoolByType(String type) {
+	    return schoolDao.find("select s from School as s inner join s.type as t where  t.name = '"+type+"'");
 	}
 }

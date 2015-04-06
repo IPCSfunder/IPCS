@@ -9,6 +9,7 @@ import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.ipcs.dao.PersonDao;
 import com.ipcs.model.Person;
@@ -32,11 +33,12 @@ public class RegistoryServiceImpl implements RegistoryService{
         this.personDao = personDao;
     }
 
+    @Transactional
     public void registerNewPerson(Person person) {
 	personDao.save(person);
     }
 
-
+    @Transactional
     public String retrievePasswordByName(String userName) {
 	Criterion[] criterion = { Restrictions.eq("account_name", userName) };
 	List<Person> persons = personDao.createCriteria(criterion);
@@ -45,7 +47,7 @@ public class RegistoryServiceImpl implements RegistoryService{
 	return persons.get(0).getPassword_hash();
     }
 
-
+    @Transactional
     public String retrievePasswordByContactNumber(String phoneNumber) {
 	return null;
     }

@@ -7,29 +7,35 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.ipcs.model.Person;
+import com.ipcs.model.Role;
+import com.ipcs.model.School;
+
 /**
  * @author Chen Chao
  *
  */
 
-public interface AdminService<T> {
-	public void addBatchSubodinates(List<T> subodidates);
+public interface AdminService {
+	public void addBatchSubodinates(List<Person> subodidates);
 	
-	public void deleteBatchSubodinates(List<T> subodinates);
+	public void deleteBatchSubodinates(List<Person> subodinates);
 	
-	public void addAdmin(T admin);
+	public void addPerson(Person person);	
 	
-	public List<T> listAllStudents(String schoolName);
+	public void removePerson(Person person);
+
+	public List<Person> listAllPersonByRoleName(String schoolName, String roleName);
 	
-	public List<T> listAllTeachers(String schoolName);
+	public void updatePerson(Person person);
 	
-	public void updateChild(T person);
+	public boolean broadcaseMessageTo(List<Person> subodidates);
 	
-	public void updateTeacher(T teacher);
+	public Role getRoleByName(String name);
 	
-	public boolean broadcaseMessageTo(List<T> subodidates);
+	public School getSchoolByName(String name);
 	
-	
+	public List<School> getSchoolByType(String type);
 	
 
 }
