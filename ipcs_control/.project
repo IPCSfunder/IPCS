@@ -3,6 +3,8 @@
 	<name>ipcs_control</name>
 	<comment></comment>
 	<projects>
+		<project>ipcs_domain</project>
+		<project>ipcs_model</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

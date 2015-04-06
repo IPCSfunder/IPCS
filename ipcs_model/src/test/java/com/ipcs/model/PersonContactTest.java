@@ -17,7 +17,6 @@ public class PersonContactTest extends DBUnitTest{
 	Contact contact = new Contact("Shenzhen","186232","test@email.com");
 	Person person = new Person("James4","111");
 	person.setContact(contact);
-//	session.save(role);
 	session.save(person);
 	session.getTransaction().commit();
 }  

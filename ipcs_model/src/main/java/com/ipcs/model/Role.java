@@ -24,12 +24,30 @@ public class Role extends BasicObject{
 		super();
 	}
 	
+	public Role(RoleBuilder roleBuilder){
+		this.name = roleBuilder.name;
+	}
+	
 	public String getName() {
 		return name;
 	}
 
 	public void setName(String name) {
 		this.name = name;
+	}
+	
+	public static class RoleBuilder{
+		
+		private String name;
+		
+		public RoleBuilder withName(String name){
+			this.name = name;
+			return this;
+		}
+		
+		public Role build(){
+			return new Role(this);
+		}
 	}
 	
 

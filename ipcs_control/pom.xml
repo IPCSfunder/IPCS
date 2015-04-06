@@ -1,60 +1,68 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
 
-  <groupId>com.ipcs</groupId>
-  <artifactId>ipcs_control</artifactId>
-  <version>1.0-SNAPSHOT</version>
-  <packaging>war</packaging>
+	<groupId>com.ipcs</groupId>
+	<artifactId>ipcs_control</artifactId>
+	<version>1.0-SNAPSHOT</version>
+	<packaging>war</packaging>
 
-  <name>ipcs_control</name>
-  <url>http://maven.apache.org</url>
+	<name>ipcs_control</name>
+	<url>http://maven.apache.org</url>
 
-  <properties>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <spring.version>3.0.5.RELEASE</spring.version>
-  </properties>
 
-  <dependencies>
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>3.8.1</version>
-      <scope>test</scope>
-    </dependency>
-    
-    
-    <dependency>
-      <groupId>com.ipcs</groupId>
-      <artifactId>ipcs_model</artifactId>
-      <version>1.0-SNAPSHOT</version>
-    </dependency>
-    
-    
-    
-    <!-- Spring 3 dependencies -->
+
+	<dependencies>
+
 		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-core</artifactId>
-			<version>${spring.version}</version>
+			<groupId>org.testng</groupId>
+			<artifactId>testng</artifactId>
+			<version>6.1.1</version>
+			<scope>test</scope>
 		</dependency>
 
 		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-web</artifactId>
-			<version>${spring.version}</version>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.11</version>
+			<scope>test</scope>
 		</dependency>
 
 		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-webmvc</artifactId>
-			<version>${spring.version}</version>
+			<groupId>com.ipcs</groupId>
+			<artifactId>ipcs_model</artifactId>
+			<version>1.0-SNAPSHOT</version>
 		</dependency>
-    
-  </dependencies>
-  
-  
-  <build>
+
+		<dependency>
+			<groupId>com.ipcs</groupId>
+			<artifactId>ipcs_domain</artifactId>
+			<version>1.0-SNAPSHOT</version>
+		</dependency>
+		
+		
+		<!-- Servlet -->
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>servlet-api</artifactId>
+			<version>2.5</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet.jsp</groupId>
+			<artifactId>jsp-api</artifactId>
+			<version>2.1</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>jstl</artifactId>
+			<version>1.2</version>
+		</dependency>
+	</dependencies>
+
+
+	<build>
 		<finalName>ipcs</finalName>
 		<plugins>
 			<plugin>
@@ -64,18 +72,18 @@
 					<target>1.6</target>
 				</configuration>
 			</plugin>
-			
-			
+
+
 			<plugin>
 				<groupId>org.apache.tomcat.maven</groupId>
 				<artifactId>tomcat7-maven-plugin</artifactId>
 				<version>2.2</version>
-				<configuration> 
+				<configuration>
 					<url>http://localhost:8080/manager/text</url>
-					<path>/ipcs</path> 
+					<path>/ipcs</path>
 					<username>admin</username>
-    				<password>password</password>
-				</configuration> 
+					<password>password</password>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>

@@ -5,6 +5,7 @@ import java.util.Collection;
 import java.util.List;
 
 import org.hibernate.Session;
+import org.hibernate.criterion.Criterion;
 
 import com.ipcs.model.BasicObject;
 
@@ -13,21 +14,25 @@ import com.ipcs.model.BasicObject;
  *
  */
 public interface BaseDao<T extends BasicObject, PK extends Serializable> {
-	
-	public PK save(Session session, T entity);
-	
-	public T get(Session session, PK id);
-	
-	public T load(Session session, PK id);
-	
-    public void update(Session session, T entity);
+
+    public PK save(T entity);
+
+    public T get(PK id);
+
+    public T load(PK id);
+
+    public void update(T entity);
+
+    public void saveOrUpdate(T entity);
+
+    public void delete(T entity);
+
+    public void deleteAll(Collection<T> entities);
+
+    public List<T> find(String queryString);
     
-    public void saveOrUpdate(Session session, T entity);
-    
-    public void delete(Session session, T entity);
-    
-    public void deleteAll(Session session, Collection<T> entities);
-    
-    public List<T> find(Session session, String queryString);
+    public List<T> findAll();
+
+    public List<T> createCriteria(Criterion[] Criterions);
 
 }

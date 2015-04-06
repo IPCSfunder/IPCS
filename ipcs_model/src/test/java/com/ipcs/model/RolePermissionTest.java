@@ -22,7 +22,7 @@ public class RolePermissionTest extends DBUnitTest
 		Permission permission = new Permission();
 		permission.setName("login");
 		role.addPermission(permission);
-
+		session.save(permission);
 		session.save(role);
 		session.getTransaction().commit();
 	}  
