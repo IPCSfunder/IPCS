@@ -23,10 +23,10 @@
             <column name="date_modified"/> 
         </property>
         
-        <many-to-one name="type" column="school_type_fk" unique="true" cascade ="all-delete-orphan"
+        <many-to-one name="type" column="school_type_fk" unique="true" 
         class="com.ipcs.model.SchoolType"/>
         
-        <set name="persons" table="person_school" lazy="true" cascade ="all-delete-orphan">  
+        <set name="persons" table="person_school" lazy="true">  
             <key column="school_fk" />  
             <many-to-many class="com.ipcs.model.Person" column="person_fk" />  
         </set>

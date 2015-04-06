@@ -20,12 +20,12 @@
         </property>
         
         
-         <set name="persons" table="person_role" lazy="true" cascade ="all-delete-orphan">  
+         <set name="persons" table="person_role" lazy="true">  
             <key column="role_fk" />  
             <many-to-many class="com.ipcs.model.Person" column="person_fk" />  
         </set> 
         
-        <set cascade ="all-delete-orphan" name="permissions" table="role_permission" lazy="true">  
+        <set name="permissions" table="role_permission" lazy="true">  
             <key column="role_fk" />  
             <many-to-many class="com.ipcs.model.Permission" column="permission_fk" />  
         </set> 

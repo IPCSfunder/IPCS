@@ -22,7 +22,7 @@ public class PersonTest extends DBUnitTest{
 		Person person = new Person("James4", "111");
 		person.addRole(role);
 
-		// session.save(role);
+		session.save(role);
 		session.save(person);
 		session.getTransaction().commit();
 		

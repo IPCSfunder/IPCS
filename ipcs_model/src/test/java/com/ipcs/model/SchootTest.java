@@ -22,6 +22,7 @@ public class SchootTest extends DBUnitTest{
 		schoolType.setName("Primary School");
 		
 		school.setType(schoolType);
+		session.save(schoolType);
 		session.save(school);
 		session.getTransaction().commit();
 

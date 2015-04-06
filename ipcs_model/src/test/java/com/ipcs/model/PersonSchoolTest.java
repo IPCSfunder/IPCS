@@ -24,9 +24,11 @@ public class PersonSchoolTest extends DBUnitTest{
 		SchoolType schoolType = new SchoolType();
 		schoolType.setName("Primary School");
 		
-		school.setType(schoolType);		
+		school.setType(schoolType);	
 		
-//		session.save(role);
+		session.save(schoolType);
+		session.save(school);
+		
 		person.addSchool(school);
 		session.save(person);
 		session.getTransaction().commit();
