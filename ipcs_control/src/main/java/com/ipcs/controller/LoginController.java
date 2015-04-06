@@ -36,7 +36,7 @@ public class LoginController {
 	if (authenticated) {
 	    model.addAttribute("name", admin.getAccount_name());
 	    model.addAttribute("password", admin.getPassword_hash());
-	    return "result";
+	    return "navigator";
 	} else
 	    return "error";
     }
