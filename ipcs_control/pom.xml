@@ -1,15 +1,14 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<parent>  
+        <artifactId>ipcs-parent</artifactId>  
+        <groupId>com.ipcs</groupId>  
+        <version>1.0-SNAPSHOT</version>  
+    </parent>  
+	
+	
 	<modelVersion>4.0.0</modelVersion>
-
-	<groupId>com.ipcs</groupId>
-	<artifactId>ipcs_control</artifactId>
-	<version>1.0-SNAPSHOT</version>
-	<packaging>war</packaging>
-
-	<name>ipcs_control</name>
-	<url>http://maven.apache.org</url>
-
+	<artifactId>ipcs_control</artifactId>	
 
 
 	<dependencies>
@@ -31,13 +30,13 @@
 		<dependency>
 			<groupId>com.ipcs</groupId>
 			<artifactId>ipcs_model</artifactId>
-			<version>1.0-SNAPSHOT</version>
+			<version>${project.version}</version>
 		</dependency>
 
 		<dependency>
 			<groupId>com.ipcs</groupId>
 			<artifactId>ipcs_domain</artifactId>
-			<version>1.0-SNAPSHOT</version>
+			<version>${project.version}</version>
 		</dependency>
 		
 		
