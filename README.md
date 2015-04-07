@@ -8,5 +8,5 @@ How to import IPCS into Intellij Idea
 4 Import project from existing module  
 5 Select maven  
 6 Go to next, follow the default instruction 
-7 Choose the modules from IPCS, ipcs_mode, ipcs_domain, ipcs_control 
+7 Choose the modules from IPCS, ipcs_mode, ipcs_domain, ipcs_control  
  
