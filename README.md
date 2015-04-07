@@ -10,3 +10,4 @@ How to import IPCS into Intellij Idea
 6 Go to next, follow the default instruction. 
 7 Choose the modules from IPCS, ipcs_mode, ipcs_domain, ipcs_control. 
   
+ 
