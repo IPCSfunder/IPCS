@@ -34,6 +34,7 @@ public class PersonTest extends DBUnitTest{
 		session.beginTransaction();
 		Criteria cr = session.createCriteria(Person.class).add(Restrictions.eq("objectId", 2l));
 		List<Person> list = cr.list(); 
+		System.out.println(list.size());
 		session.getTransaction().commit();
 		Assert.assertEquals("Person", list.get(0).getAccount_name());
 	}
