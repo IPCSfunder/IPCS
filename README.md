@@ -2,7 +2,7 @@
 This is a project which is called Integrated Preschool Connectivity System
 
 How to import IPCS into Intellij Idea  
-1.Please get the latest code from github https://github.com/IPCSfunder/IPCS.git.
+1.Please get the latest code from github https://github.com/IPCSfunder/IPCS.git. Use "git pull origin master" command.
 2.File->Project from existing resouces 
 3 Choose IPCS folder  
 4 Import project from existing module  
