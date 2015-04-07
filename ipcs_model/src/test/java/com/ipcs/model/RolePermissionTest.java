@@ -18,7 +18,7 @@ public class RolePermissionTest extends DBUnitTest
   	 
 		session.beginTransaction();
 		Role role = new Role();
-		role.setName("Student");
+		role.setName("TestStudent");
 		Permission permission = new Permission();
 		permission.setName("login");
 		role.addPermission(permission);

@@ -20,7 +20,7 @@ public class RoleTest extends DBUnitTest
 		Role role = new Role();
 
 //		user.setUserId(100);
-		role.setName("Student");
+		role.setName("TestStudent2");
 //		user.setCreatedDate(new Date());
 
 		session.save(role);
