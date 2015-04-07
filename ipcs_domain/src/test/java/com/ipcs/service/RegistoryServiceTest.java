@@ -40,7 +40,7 @@ public class RegistoryServiceTest {
 	
     }
     
-    @Test(dependsOnMethods = {"insertAdmin"})
+    @Test
     public void testFindAllStudents(){
 	
     }
