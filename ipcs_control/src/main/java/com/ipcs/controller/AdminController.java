@@ -48,12 +48,12 @@ public class AdminController {
 
     @RequestMapping(value = "/persistStudent", method = RequestMethod.POST)
     public String addStudent(@ModelAttribute Person student, ModelMap model) {
-	Role studentRole = adminservice.getRoleByName("student");
-	School school = adminservice.getSchoolByName("PUNGOL");
-	student.addRole(studentRole);
-	student.addSchool(school);
-	registoryService.registerNewPerson(student);
-	return "navigator";
+	        Role studentRole = adminservice.getRoleByName("student");
+	        School school = adminservice.getSchoolByName("PUNGOL");
+	        student.addRole(studentRole);
+	        student.addSchool(school);
+	        registoryService.registerNewPerson(student);
+	        return "navigator";
     }
     
     @RequestMapping(value = "/addTeacher", method = RequestMethod.GET)
@@ -63,18 +63,18 @@ public class AdminController {
     
     @RequestMapping(value = "/persistTeacher", method = RequestMethod.POST)
     public String addTeacher(@ModelAttribute Person teacher, ModelMap model) {
-	Role teacherRole = adminservice.getRoleByName("teacher");
-	School school = adminservice.getSchoolByName("PUNGOL");
-	teacher.addRole(teacherRole);
-	teacher.addSchool(school);
-	registoryService.registerNewPerson(teacher);
-	return "navigator";
+	        Role teacherRole = adminservice.getRoleByName("teacher");
+	        School school = adminservice.getSchoolByName("PUNGOL");
+	        teacher.addRole(teacherRole);
+	        teacher.addSchool(school);
+	        registoryService.registerNewPerson(teacher);
+	        return "navigator";
     }
     
     @RequestMapping(value = "/listStudent", method = RequestMethod.GET)
     public ModelAndView listStudent() {
-	List<Person> students = adminservice.listAllPersonByRoleName("PUNGOL", "student");
-	return new ModelAndView("listStudent", "command", students);
+	        List<Person> students = adminservice.listAllPersonByRoleName("PUNGOL", "student");
+	        return new ModelAndView("listStudent", "command", students);
     }
     
 }
