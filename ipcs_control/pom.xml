@@ -8,7 +8,8 @@
 	
 	
 	<modelVersion>4.0.0</modelVersion>
-	<artifactId>ipcs_control</artifactId>	
+	<artifactId>ipcs_control</artifactId>
+	<packaging>war</packaging>
 
 
 	<dependencies>
