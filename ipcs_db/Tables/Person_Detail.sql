@@ -1,5 +1,3 @@
-DROP TABLE `ipcs`.`person_detail`;
-
 CREATE TABLE IF NOT EXISTS `ipcs`.`person_detail` (
   `person_detail_objid` INT NOT NULL AUTO_INCREMENT,
   `last_name` VARCHAR(45) NULL,
