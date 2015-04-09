@@ -1,4 +1,3 @@
-drop table `ipcs`.`role_permission`
 
 CREATE TABLE IF NOT EXISTS `ipcs`.`role_permission` (
   `role_permission_objid` INT NOT NULL AUTO_INCREMENT,
