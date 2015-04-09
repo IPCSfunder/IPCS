@@ -26,6 +26,7 @@ public class LoginController {
 
     @RequestMapping(value = "/userlogin", method = RequestMethod.GET)
     public ModelAndView student() {
+
 	return new ModelAndView("login", "command", new Person());
     }
 
