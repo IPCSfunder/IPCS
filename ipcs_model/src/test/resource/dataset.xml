@@ -4,7 +4,6 @@
 	<role role_objid = "1" name = "admin"/>
 	<role role_objid = "2" name = "student"/>
 	<role role_objid = "3" name = "teacher"/>
-	<role role_objid = "4" name = "Test"/>
 	<person_role person_role_objid = "2" person_fk = "2" role_fk = "1"/>
 	<contact/>
 	<person_detail/>
