@@ -18,4 +18,7 @@
 	<role_permission role_permission_objid="1" ROLE_FK="1" PERMISSION_FK="1"/>
 	<role_permission role_permission_objid="2" ROLE_FK="1" PERMISSION_FK="2"/>
 	<role_permission role_permission_objid="3" ROLE_FK="1" PERMISSION_FK="3"/>
+	<message_type message_type_objid ="1" type_name="message" description="message"></message_type>
+	<message></message>
+	<user_message></user_message>
 </dataset>

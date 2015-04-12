@@ -1,43 +1,49 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
-"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
     <class name="com.ipcs.model.Person" table="PERSON">
         <id name="objectId" type="java.lang.Long">
-            <column name="person_objid" />
-            <generator class="native" />
+            <column name="person_objid"/>
+            <generator class="native"/>
         </id>
         <property name="account_name" type="string">
-            <column name="account_name" length="45" not-null="true" />
+            <column name="account_name" length="45" not-null="true"/>
         </property>
         <property name="password_hash" type="string">
             <column name="password_hash" length="45"/>
         </property>
-        
+
         <property name="createdTime" type="date">
             <column name="date_created"/>
         </property>
-        
+
         <property name="modifiedTime" type="date">
-            <column name="date_modified"/> 
+            <column name="date_modified"/>
         </property>
-        
-        
-        <set name="roles" table="person_role" lazy="true" >  
-            <key column="person_fk" />  
-            <many-to-many class="com.ipcs.model.Role" column="role_fk" />  
-        </set>  
-        
-        <set name="schools" table="person_school" lazy="true">  
-            <key column="person_fk" />  
-            <many-to-many class="com.ipcs.model.School" column="school_fk" />  
-        </set>  
-        
-        
-        <many-to-one name="contact" column="contact_fk" unique="true" cascade ="all-delete-orphan"
-        class="com.ipcs.model.Contact"/>
-        
-        <many-to-one name="personDetail" column="person_detail_fk" unique="true" cascade ="all-delete-orphan"
-        class="com.ipcs.model.PersonDetail"/>
+
+
+        <set name="roles" table="person_role" lazy="true">
+            <key column="person_fk"/>
+            <many-to-many class="com.ipcs.model.Role" column="role_fk"/>
+        </set>
+
+        <set name="messages" table="user_message" lazy="true" cascade="all-delete-orphan">
+            <key column="from_user"/>
+            <many-to-many class="com.ipcs.model.Message" column="message_fk"/>
+        </set>
+
+
+        <set name="schools" table="person_school" lazy="true" cascade="all-delete-orphan">
+            <key column="person_fk"/>
+            <many-to-many class="com.ipcs.model.School" column="school_fk"/>
+        </set>
+
+
+        <many-to-one name="contact" column="contact_fk" unique="true" cascade="all-delete-orphan"
+                     class="com.ipcs.model.Contact"/>
+
+        <many-to-one name="personDetail" column="person_detail_fk" unique="true" cascade="all-delete-orphan"
+                     class="com.ipcs.model.PersonDetail"/>
     </class>
 </hibernate-mapping>

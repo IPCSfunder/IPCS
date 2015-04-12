@@ -11,10 +11,8 @@ public class ContactTest extends DBUnitTest{
 	
 	public void testInsertPersonRole() {
 	Session session = HibernateUtil.getSessionFactory().openSession();
-	 
 	session.beginTransaction();
 	Contact contact = new Contact("Shenzhen","186232","test@email.com");
-//	session.save(role);
 	session.save(contact);
 	session.getTransaction().commit();
 }  
