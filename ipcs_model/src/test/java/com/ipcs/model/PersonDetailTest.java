@@ -18,8 +18,6 @@ public class PersonDetailTest extends DBUnitTest{
 	PersonDetail personDetail = new PersonDetail.PersonBuilder().withAge(23).withDob(new Date())
 			.withFirstName("James").withLastName("Chen").withMarketOption(Boolean.valueOf(false))
 			.withNationality("Chinese").withNickName("James").withSex(Sex.MALE).build();
-	
-//	session.save(role);
 	Person person = new Person("James4","111");
 	personDetail.setPerson(person);
 	session.save(personDetail);

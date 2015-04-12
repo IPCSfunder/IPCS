@@ -18,11 +18,7 @@ public class RoleTest extends DBUnitTest
   	 
 		session.beginTransaction();
 		Role role = new Role();
-
-//		user.setUserId(100);
 		role.setName("TestStudent2");
-//		user.setCreatedDate(new Date());
-
 		session.save(role);
 		session.getTransaction().commit();
 	}  
@@ -34,9 +30,5 @@ public class RoleTest extends DBUnitTest
 		Role role = (Role)session.load(Role.class, 5L);
 		System.out.println(role.getObjectId());
 		session.getTransaction().commit();
-//		session.clear();
-//		System.out.println(role.getName());
 	}
-
-
 }
