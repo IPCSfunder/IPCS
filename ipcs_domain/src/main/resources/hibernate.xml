@@ -29,6 +29,8 @@ http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
            <value>mapping/SchoolType.hbm.xml</value>
            <value>mapping/School.hbm.xml</value>
            <value>mapping/Permission.hbm.xml</value>
+           <value>mapping/MessageType.hbm.xml</value>
+           <value>mapping/Message.hbm.xml</value>
 	</list>
     </property>	
  

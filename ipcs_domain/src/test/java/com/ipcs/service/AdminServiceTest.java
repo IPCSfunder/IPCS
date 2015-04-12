@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package com.ipcs.service;
 
@@ -30,62 +30,61 @@ public class AdminServiceTest {
     @SuppressWarnings("unchecked")
     @BeforeClass
     public void setUp() {
-	ApplicationContext appContext = new ClassPathXmlApplicationContext(
-		"Services.xml");
-	adminService = (AdminService) appContext
-		.getBean("adminServiceImpl");
-	
+        ApplicationContext appContext = new ClassPathXmlApplicationContext(
+                "Services.xml");
+        adminService = (AdminService) appContext
+                .getBean("adminServiceImpl");
+
     }
 
-    @Test(groups="inserDummyData")
+    @Test(groups = "inserDummyData")
     public void insertAdmin() {
-	Role role = adminService.getRoleByName("admin");	
-	School school = adminService.getSchoolByName("PUNGOL");
-	Person person = DataFactory.preparePerson("admin", "password");
-	person.addRole(role);
-	person.addSchool(school);
-	adminService.addPerson(person);
-	adminAndStudents.add(person);
-    }
-    
-    
-    @Test(dependsOnMethods = {"insertAdmin"},groups="inserDummyData")
-    public void insertStudents() {
-	Role role = adminService.getRoleByName("student");	
-	School school = adminService.getSchoolByName("PUNGOL");
-	List<Person> persons = DataFactory.prepareStudent(3, "student", "passsword");
-	for(Person person: persons){
-	    person.addRole(role);
-	    person.addSchool(school);
-	}
-	adminService.addBatchSubodinates(persons);
-	adminAndStudents.addAll(persons);
-    }
-    
-    
-    
-    @Test(dependsOnMethods = {"insertStudents"},groups="inserDummyData")
-    public void testFindAllStudents(){
-	List<Person> students= adminService.listAllPersonByRoleName("PUNGOL", "student");
-	Assert.assertEquals(students.size(), 3);
+        Role role = adminService.getRoleByName("admin");
+        School school = adminService.getSchoolByName("PUNGOL");
+        Person person = DataFactory.preparePerson("admin", "password");
+        person.addRole(role);
+        person.addSchool(school);
+        adminService.addPerson(person);
+        adminAndStudents.add(person);
     }
 
-	@Test(dependsOnMethods = {"testFindAllStudents"},groups="inserDummyData")
-	public void testGetAdminInfo(){
-		Person admin= adminService.getAdminInfo("admin");
-		Assert.assertEquals(admin.getSchools().size(), 1);
-		Assert.assertEquals(admin.getSchools().iterator().next().getName(), "PUNGOL");
-	}
-    
+
+    @Test(dependsOnMethods = {"insertAdmin"}, groups = "inserDummyData")
+    public void insertStudents() {
+        Role role = adminService.getRoleByName("student");
+        School school = adminService.getSchoolByName("PUNGOL");
+        List<Person> persons = DataFactory.prepareStudent(3, "student", "passsword");
+        for (Person person : persons) {
+            person.addRole(role);
+            person.addSchool(school);
+        }
+        adminService.addBatchSubodinates(persons);
+        adminAndStudents.addAll(persons);
+    }
+
+
+    @Test(dependsOnMethods = {"insertStudents"}, groups = "inserDummyData")
+    public void testFindAllStudents() {
+        List<Person> students = adminService.listAllPersonByRoleName("PUNGOL", "student");
+        Assert.assertEquals(students.size(), 3);
+    }
+
+    @Test(dependsOnMethods = {"testFindAllStudents"}, groups = "inserDummyData")
+    public void testGetAdminInfo() {
+        Person admin = adminService.getAdminInfo("admin");
+        Assert.assertEquals(admin.getSchools().size(), 1);
+        Assert.assertEquals(admin.getSchools().iterator().next().getName(), "PUNGOL");
+    }
+
 //    @Test(dependsOnMethods = {"testGetAdminInfo"},groups="inserDummyData")
 //    public void removeDummyData(){
 //	adminService.deleteBatchSubodinates(adminAndStudents);
 //    }
 
-	@AfterClass
-	public void tearDown(){
-		adminService.deleteBatchSubodinates(adminAndStudents);
-	}
+    @AfterClass
+    public void tearDown() {
+        adminService.deleteBatchSubodinates(adminAndStudents);
+    }
 
 
 //    @Test(groups="inserPersonWithExistingRole")
@@ -102,6 +101,6 @@ public class AdminServiceTest {
 //    public void testRemovetPersonWithExistingRole(){
 //	adminService.removePerson(person);
 //    }
-  
+
 
 }
