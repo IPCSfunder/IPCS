@@ -17,25 +17,27 @@ import com.ipcs.model.School;
  */
 
 public interface AdminService {
-	public void addBatchSubodinates(List<Person> subodidates);
+	void addBatchSubodinates(List<Person> subodidates);
 	
-	public void deleteBatchSubodinates(List<Person> subodinates);
+	void deleteBatchSubodinates(List<Person> subodinates);
 	
-	public void addPerson(Person person);	
+	void addPerson(Person person);
 	
-	public void removePerson(Person person);
+	void removePerson(Person person);
 
-	public List<Person> listAllPersonByRoleName(String schoolName, String roleName);
+	List<Person> listAllPersonByRoleName(String schoolName, String roleName);
 	
-	public void updatePerson(Person person);
+	void updatePerson(Person person);
 	
-	public boolean broadcaseMessageTo(List<Person> subodidates);
+	boolean broadcaseMessageTo(List<Person> subodidates);
 	
-	public Role getRoleByName(String name);
+	Role getRoleByName(String name);
 	
-	public School getSchoolByName(String name);
+	School getSchoolByName(String name);
 	
-	public List<School> getSchoolByType(String type);
+	List<School> getSchoolByType(String type);
+
+	Person getAdminInfo(String adminName);
 	
 
 }

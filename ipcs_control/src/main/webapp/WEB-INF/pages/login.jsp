@@ -8,7 +8,8 @@
 <body>
 <div style="text-align: center;"> Integrated Preschool Connectivity System</div>
 <h2 style="text-align: center;">Admi1n Login</h2>
-<form:form method="POST" action="/ipcs/adminLogin" style="text-align: center;">
+<div align="center">
+<form:form method="POST" action="/ipcs/adminLogin">
    <table>
     <tr>
         <td><form:label path="account_name">Name</form:label></td>
@@ -19,11 +20,12 @@
         <td><form:input path="password_hash" /></td>
     </tr>    
     <tr>
-        <td colspan="2">
+        <td align="center" colspan="2">
             <input type="submit" value="Submit"/>
         </td>
     </tr>
 </table>  
 </form:form>
+</div>
 </body>
 </html>

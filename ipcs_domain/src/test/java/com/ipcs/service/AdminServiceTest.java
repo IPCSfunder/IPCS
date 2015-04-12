@@ -10,6 +10,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.Test;
 
 import com.ipcs.model.Person;
@@ -65,17 +66,28 @@ public class AdminServiceTest {
     
     @Test(dependsOnMethods = {"insertStudents"},groups="inserDummyData")
     public void testFindAllStudents(){
-	List<Person> students= adminService.listAllPersonByRoleName("PUNGOL","student");
+	List<Person> students= adminService.listAllPersonByRoleName("PUNGOL", "student");
 	Assert.assertEquals(students.size(), 3);
     }
+
+	@Test(dependsOnMethods = {"testFindAllStudents"},groups="inserDummyData")
+	public void testGetAdminInfo(){
+		Person admin= adminService.getAdminInfo("admin");
+		Assert.assertEquals(admin.getSchools().size(), 1);
+		Assert.assertEquals(admin.getSchools().iterator().next().getName(), "PUNGOL");
+	}
     
-    @Test(dependsOnMethods = {"testFindAllStudents"},groups="inserDummyData")
-    public void removeDummyData(){
-	adminService.deleteBatchSubodinates(adminAndStudents);
-    }
-    
-    
-    
+//    @Test(dependsOnMethods = {"testGetAdminInfo"},groups="inserDummyData")
+//    public void removeDummyData(){
+//	adminService.deleteBatchSubodinates(adminAndStudents);
+//    }
+
+	@AfterClass
+	public void tearDown(){
+		adminService.deleteBatchSubodinates(adminAndStudents);
+	}
+
+
 //    @Test(groups="inserPersonWithExistingRole")
 //    public void testInsertPersonWithExistingRole(){
 //	person = new Person();
