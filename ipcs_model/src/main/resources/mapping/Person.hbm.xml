@@ -34,7 +34,7 @@
         </set>
 
 
-        <set name="schools" table="person_school" lazy="true" cascade="all-delete-orphan">
+        <set name="schools" table="person_school" lazy="true">
             <key column="person_fk"/>
             <many-to-many class="com.ipcs.model.School" column="school_fk"/>
         </set>

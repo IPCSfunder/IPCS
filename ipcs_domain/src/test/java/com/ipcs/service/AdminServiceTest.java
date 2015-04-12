@@ -51,9 +51,9 @@ public class AdminServiceTest {
 
     @Test(dependsOnMethods = {"insertAdmin"}, groups = "inserDummyData")
     public void insertStudents() {
-        Role role = adminService.getRoleByName("student");
+        Role role = adminService.getRoleByName("children");
         School school = adminService.getSchoolByName("PUNGOL");
-        List<Person> persons = DataFactory.prepareStudent(3, "student", "passsword");
+        List<Person> persons = DataFactory.prepareStudent(3, "children", "passsword");
         for (Person person : persons) {
             person.addRole(role);
             person.addSchool(school);
@@ -65,7 +65,7 @@ public class AdminServiceTest {
 
     @Test(dependsOnMethods = {"insertStudents"}, groups = "inserDummyData")
     public void testFindAllStudents() {
-        List<Person> students = adminService.listAllPersonByRoleName("PUNGOL", "student");
+        List<Person> students = adminService.listAllPersonByRoleName("PUNGOL", "children");
         Assert.assertEquals(students.size(), 3);
     }
 
@@ -76,10 +76,6 @@ public class AdminServiceTest {
         Assert.assertEquals(admin.getSchools().iterator().next().getName(), "PUNGOL");
     }
 
-//    @Test(dependsOnMethods = {"testGetAdminInfo"},groups="inserDummyData")
-//    public void removeDummyData(){
-//	adminService.deleteBatchSubodinates(adminAndStudents);
-//    }
 
     @AfterClass
     public void tearDown() {
