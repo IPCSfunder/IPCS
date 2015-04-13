@@ -2,8 +2,8 @@
 <dataset>
 	<person person_objid="2" account_name="Person" password_hash="11"/>
 	<role role_objid = "1" name = "admin"/>
-	<role role_objid = "2" name = "student"/>
-	<role role_objid = "3" name = "teacher"/>
+	<role role_objid = "2" name = "children"/>
+	<role role_objid = "3" name = "staff"/>
 	<person_role person_role_objid = "2" person_fk = "2" role_fk = "1"/>
 	<contact/>
 	<person_detail/>
@@ -11,7 +11,7 @@
 	<school_type SCHOOL_TYPE_OBJID="2" name ="HIGH_SCHOOL"/>
 	<school_type SCHOOL_TYPE_OBJID="3" name ="UNIVERSITY"/>
 	<school SCHOOL_OBJID="1" name = "PUNGOL" ADDRESS="PUNGOL_PRIMARY_SCHOOL" SCHOOL_TYPE_FK="1"/>
-	<person_school/>
+	<person_school person_school_objid = "1" person_fk = "2" school_fk = "1"/>
 	<permission PERMISSION_OBJID="1" NAME = "LOGIN"/>
 	<permission PERMISSION_OBJID="2" NAME = "ADD_UPDATE_REMOVE_STUDENT"/>
 	<permission PERMISSION_OBJID="3" NAME = "ADD_UPDATE_REMOVE_TEACHER"/>

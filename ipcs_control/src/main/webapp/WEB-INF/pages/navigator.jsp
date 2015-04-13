@@ -11,10 +11,10 @@
 <body>
 <div align="center">
 <ul>
-    <li><a href="<c:url value='/listStudent' />">Children</a></li>
-    <li><a href="<c:url value='/addTeacher' />">Staff</a></li>
-    <li><a href="<c:url value='/listStudent' />">Message</a></li>
-    <li><a href="<c:url value='/listTeacher' />">Schedule</a></li>
+    <li><a href="<c:url value='/listChildren' />">Children</a></li>
+    <li><a href="<c:url value='/listTeacher' />">Staff</a></li>
+    <li><a href="<c:url value='/listMessage' />">Message</a></li>
+    <li><a href="<c:url value='/listSchedule' />">Schedule</a></li>
 </ul>
 </div>
 </body>

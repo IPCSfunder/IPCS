@@ -17,6 +17,8 @@ import com.ipcs.service.AdminService;
 import com.ipcs.service.RegistoryService;
 import com.ipcs.service.SecurityService;
 
+import javax.servlet.http.HttpSession;
+
 @Controller
 public class AdminController {
 
@@ -41,9 +43,9 @@ public class AdminController {
         this.registoryService = registoryService;
     }
 
-    @RequestMapping(value = "/addStudent", method = RequestMethod.GET)
+    @RequestMapping(value = "/addChildren", method = RequestMethod.GET)
     public ModelAndView student() {
-	return new ModelAndView("addStudent", "command", new Person());
+	return new ModelAndView("addChildren", "command", new Person());
     }
 
     @RequestMapping(value = "/persistStudent", method = RequestMethod.POST)
@@ -71,10 +73,19 @@ public class AdminController {
 	        return "navigator";
     }
     
-    @RequestMapping(value = "/listStudent", method = RequestMethod.GET)
-    public ModelAndView listStudent() {
-	        List<Person> students = adminservice.listAllPersonByRoleName("PUNGOL", "student");
-	        return new ModelAndView("listStudent", "command", students);
+    @RequestMapping(value = "/listChildren", method = RequestMethod.GET)
+    public ModelAndView listStudent(HttpSession session) {
+            School school = ((Person)session.getAttribute("authenticatedAdmin")).getSchools().iterator().next();
+	        List<Person> students = adminservice.listAllPersonByRoleName(school.getName(), "children");
+	        return new ModelAndView("listChildren", "command", students);
+    }
+
+
+    @RequestMapping(value = "/listStaff", method = RequestMethod.GET)
+    public ModelAndView listStaff(HttpSession session) {
+        School school = ((Person)session.getAttribute("authenticatedAdmin")).getSchools().iterator().next();
+        List<Person> students = adminservice.listAllPersonByRoleName(school.getName(), "staff");
+        return new ModelAndView("listStaff", "command", students);
     }
     
 }
