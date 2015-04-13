@@ -1,5 +1,6 @@
 package com.ipcs.controller;
 
+import com.ipcs.service.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -18,6 +19,13 @@ public class LoginController {
     @Autowired
     private SecurityService securityService;
 
+    @Autowired
+    private AdminService adminService;
+
+    public void setAdminService(AdminService adminService) {
+        this.adminService = adminService;
+    }
+
     public SecurityService getSecurityService() {
         return securityService;
     }
@@ -26,17 +34,18 @@ public class LoginController {
         this.securityService = securityService;
     }
 
-    @RequestMapping(value = "/userlogin", method = RequestMethod.GET)
+    @RequestMapping(value = "*", method = RequestMethod.GET)
     public ModelAndView student() {
-
         return new ModelAndView("login", "command", new Person());
     }
 
     @RequestMapping(value = "/adminLogin", method = RequestMethod.POST)
-    public String addStudent(HttpSession request, @ModelAttribute Person admin, ModelMap model) {
+    public String addStudent(HttpSession session, @ModelAttribute Person admin, ModelMap model) {
         boolean authenticated = securityService.authenticateLoginInfo(
                 admin.getAccount_name(), admin.getPassword_hash());
         if (authenticated) {
+            Person authenticatedAdmin = adminService.getAdminInfo( admin.getAccount_name());
+            session.setAttribute("authenticatedAdmin",authenticatedAdmin);
             return "navigator";
         } else
             return "error";
