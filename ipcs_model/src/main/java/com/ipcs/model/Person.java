@@ -4,8 +4,8 @@ package com.ipcs.model;
  * @author Chen Chao
  */
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Person extends BasicObject {
 
@@ -13,15 +13,15 @@ public class Person extends BasicObject {
 
     private String password_hash;
 
-    private Set<Role> roles = new HashSet<Role>();
+    private List<Role> roles = new ArrayList<Role>();
 
     private Contact contact;
 
     private PersonDetail personDetail;
 
-    private Set<School> schools = new HashSet<School>();
+    private List<School> schools = new ArrayList<School>();
 
-    private Set<Message> messages = new HashSet<Message>();
+    private List<Message> messages = new ArrayList<Message>();
 
 
 
@@ -46,14 +46,14 @@ public class Person extends BasicObject {
 
 
 
-    public void setMessages(Set<Message> messages) {
+    public void setMessages(List<Message> messages) {
         this.messages = messages;
     }
 
-    public Set<Message> getMessages() {
+    public List<Message> getMessages() {
         return messages;
     }
-    
+
     public String getPassword_hash() {
         return password_hash;
     }
@@ -62,29 +62,40 @@ public class Person extends BasicObject {
         this.password_hash = password_hash;
     }
 
-    public Set<Role> getRoles() {
+    public List<Role> getRoles() {
         return roles;
     }
 
-    public void setRoles(Set<Role> roles) {
+    public void setRoles(List<Role> roles) {
         this.roles = roles;
     }
 
-    public Set<School> getSchools() {
+    public List<School> getSchools() {
         return schools;
     }
 
-    public void setSchools(Set<School> schools) {
+    public void setSchools(List<School> schools) {
         this.schools = schools;
+    }
+
+    public void addSchool(School school) {
+        this.schools.add(school);
+    }
+
+    public void evictSchools(){
+        this.schools.clear();
+    }
+
+
+    public void evictRoles(){
+        this.roles.clear();
     }
 
     public void addRole(Role role) {
         this.roles.add(role);
     }
 
-    public void addSchool(School school) {
-        this.schools.add(school);
-    }
+
 
     public void addMessage(Message message){
         this.messages.add(message);
