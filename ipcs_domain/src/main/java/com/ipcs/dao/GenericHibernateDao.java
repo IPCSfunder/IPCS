@@ -94,6 +94,8 @@ public abstract class GenericHibernateDao<T extends BasicObject, PK extends Seri
 	getCurrentSession().delete(entity);
     }
 
+    public void merge(T entity){getCurrentSession().merge(entity);}
+
     public void deleteAll(Collection<T> entities) {
 	Iterator iterator = entities.iterator();
 	int i =0; 

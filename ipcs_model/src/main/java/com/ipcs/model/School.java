@@ -1,7 +1,7 @@
 package com.ipcs.model;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * @author Chen Chao
@@ -9,22 +9,21 @@ import java.util.List;
  */
 public class School extends BasicObject{
 	
-	private String name;
+	private String name = "";
 	
 	private String address;
 	
 	private SchoolType type;
 
+	private Set<Person> persons = new HashSet<Person>();
 	public School() {
 	}
-
 
 	public School(String name) {
 		this.name = name;
 	}
 
-	private List<Person> persons = new ArrayList<Person>();
-	
+
 
 	public String getName() {
 		return name;
@@ -54,11 +53,11 @@ public class School extends BasicObject{
 		persons.add(person);
 	}
 	
-	public List<Person> getPersons() {
+	public Set<Person> getPersons() {
 		return persons;
 	}
 
-	public void setPersons(List<Person> persons) {
+	public void setPersons(Set<Person> persons) {
 		this.persons = persons;
 	}
 

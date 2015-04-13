@@ -13,8 +13,11 @@ public class Contact extends BasicObject{
 	private String email_address;
 	
 	private Person person;
-	
-	
+
+	public Contact(){
+		super();
+	}
+
 	public Contact(String address, String mobile_number, String email_address) {
 		super();
 		this.address = address;

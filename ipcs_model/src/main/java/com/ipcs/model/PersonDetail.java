@@ -27,6 +27,10 @@ public class PersonDetail extends BasicObject {
 	private Boolean market_option;
 	
 	private Person person;
+
+	public PersonDetail(){
+		super();
+	}
 	
 	public PersonDetail(PersonBuilder builder){
 

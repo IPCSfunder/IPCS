@@ -1,7 +1,7 @@
 package com.ipcs.model;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * @author Chen Chao
@@ -9,11 +9,11 @@ import java.util.List;
  */
 public class Role extends BasicObject{
 	
-	private String name;
+	private String name = "";
 
-	private List<Person> persons = new ArrayList<Person>();
+	private Set<Person> persons = new HashSet<Person>();
 	
-	private List<Permission> permissions = new ArrayList<Permission>();
+	private Set<Permission> permissions = new HashSet<Permission>();
 	
 	public Role(String name){
 		super();
@@ -51,11 +51,11 @@ public class Role extends BasicObject{
 	}
 	
 
-	public List<Person> getPersons() {
+	public Set<Person> getPersons() {
 		return persons;
 	}
 
-	public void setPersons(List<Person> persons) {
+	public void setPersons(Set<Person> persons) {
 		this.persons = persons;
 	}
 
@@ -68,18 +68,18 @@ public class Role extends BasicObject{
 	}
 	
 	
-	public List<Permission> getPermissions() {
+	public Set<Permission> getPermissions() {
 		return permissions;
 	}
 
-	public void setPermissions(List<Permission> permissions) {
+	public void setPermissions(Set<Permission> permissions) {
 		this.permissions = permissions;
 	}
 
 	public int hashCode(){
 		return 31*17+name.hashCode();
 	}
-	
+
 	public boolean equals(Object obj){
 		if (null ==obj)
 			return false;

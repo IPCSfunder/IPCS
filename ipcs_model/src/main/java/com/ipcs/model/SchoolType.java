@@ -4,7 +4,8 @@ package com.ipcs.model;
  * @author Chen Chao
  *
  */
-public class SchoolType extends BasicObject{
+public class
+		SchoolType extends BasicObject{
 	
 	private String name;
 

@@ -8,7 +8,7 @@
     </style>
 </head>
 <body>
-<form:form method="POST" action="/ipcs/persistStudent">
+<form:form method="POST" action="/ipcs/persistChildren">
    <table align="center">
     <tr>
         <td><form:label path="account_name">Name</form:label></td>
@@ -18,8 +18,11 @@
         <td><form:input path="password_hash" /></td>
     </tr>
     <tr>
-        <td><form:label path="password_hash">Password</form:label></td>
-        <td><form:input path="password_hash" /></td>
+        <td><form:label path="roles[0].name">Role</form:label></td>
+        <td><form:input path="roles[0].name" /></td>
+
+        <td><form:label path="schools[0].name">School</form:label></td>
+        <td><form:input path="schools[0].name" /></td>
     </tr>    
     <tr>
         <td colspan="2">

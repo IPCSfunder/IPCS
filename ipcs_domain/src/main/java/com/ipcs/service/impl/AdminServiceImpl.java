@@ -3,7 +3,9 @@
  */
 package com.ipcs.service.impl;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -52,6 +54,25 @@ public class AdminServiceImpl implements AdminService {
 
     @Transactional
     public void addPerson(Person person) {
+        Set<Role> roles = new HashSet<Role>();
+        roles.addAll(person.getRoles());
+        Set<School> schools =  new HashSet<School>();
+        schools.addAll(person.getSchools());
+
+        person.evictRoles();
+        person.evictSchools();
+
+        for(Role role: roles){
+            role =getRoleByName(role.getName());
+            if(null != role)
+                person.addRole(role);
+        }
+
+        for(School school: schools){
+            school =getSchoolByName(school.getName());
+            if(null != school)
+                person.addSchool(school);
+        }
         personDao.save(person);
     }
 
@@ -85,6 +106,7 @@ public class AdminServiceImpl implements AdminService {
 
     @Transactional
     public Role getRoleByName(String name) {
+        System.out.print(name);
         return roleDao.find("select r from Role as r where  r.name = '" + name + "'").get(0);
     }
 
@@ -97,8 +119,9 @@ public class AdminServiceImpl implements AdminService {
     public List<School> getSchoolByType(String type) {
         return schoolDao.find("select s from School as s inner join s.type as t where  t.name = '" + type + "'");
     }
+
     @Transactional
-    public Person getAdminInfo(String adminName){
-        return personDao.find("select p from Person as p left join fetch p.schools left join fetch p.roles left join fetch p.contact left join fetch p.personDetail where p.account_name ='"+adminName+"'").get(0);
+    public Person getAdminInfo(String adminName) {
+        return personDao.find("select p from Person as p left join fetch p.schools left join fetch p.roles left join fetch p.contact left join fetch p.personDetail where p.account_name ='" + adminName + "'").get(0);
     }
 }

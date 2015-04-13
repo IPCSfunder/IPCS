@@ -4,8 +4,8 @@ package com.ipcs.model;
  * @author Chen Chao
  */
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 public class Person extends BasicObject {
 
@@ -13,15 +13,15 @@ public class Person extends BasicObject {
 
     private String password_hash;
 
-    private List<Role> roles = new ArrayList<Role>();
+    private Set<Role> roles = new HashSet<Role>();
 
     private Contact contact;
 
     private PersonDetail personDetail;
 
-    private List<School> schools = new ArrayList<School>();
+    private Set<School> schools = new HashSet<School>();
 
-    private List<Message> messages = new ArrayList<Message>();
+    private Set<Message> messages = new HashSet<Message>();
 
 
 
@@ -33,6 +33,8 @@ public class Person extends BasicObject {
 
     public Person() {
         super();
+        roles.add(new Role());
+        schools.add(new School());
     }
 
 
@@ -46,11 +48,11 @@ public class Person extends BasicObject {
 
 
 
-    public void setMessages(List<Message> messages) {
+    public void setMessages(Set<Message> messages) {
         this.messages = messages;
     }
 
-    public List<Message> getMessages() {
+    public Set<Message> getMessages() {
         return messages;
     }
 
@@ -62,19 +64,19 @@ public class Person extends BasicObject {
         this.password_hash = password_hash;
     }
 
-    public List<Role> getRoles() {
+    public Set<Role> getRoles() {
         return roles;
     }
 
-    public void setRoles(List<Role> roles) {
+    public void setRoles(Set<Role> roles) {
         this.roles = roles;
     }
 
-    public List<School> getSchools() {
+    public Set<School> getSchools() {
         return schools;
     }
 
-    public void setSchools(List<School> schools) {
+    public void setSchools(Set<School> schools) {
         this.schools = schools;
     }
 

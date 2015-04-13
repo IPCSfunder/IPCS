@@ -26,9 +26,9 @@
         <many-to-one name="type" column="school_type_fk" unique="true"  lazy="false"
         class="com.ipcs.model.SchoolType"/>
         
-        <bag name="persons" table="person_school" lazy="true">
+        <set name="persons" table="person_school" lazy="true">
             <key column="school_fk" />  
             <many-to-many class="com.ipcs.model.Person" column="person_fk" />  
-        </bag>
+        </set>
     </class>
 </hibernate-mapping>

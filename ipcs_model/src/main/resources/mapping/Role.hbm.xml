@@ -20,14 +20,14 @@
         </property>
         
         
-         <bag name="persons" table="person_role" lazy="true">
+         <set name="persons" table="person_role" lazy="true">
             <key column="role_fk" />  
             <many-to-many class="com.ipcs.model.Person" column="person_fk" />  
-        </bag>
+        </set>
         
-        <bag name="permissions" table="role_permission" lazy="true">
+        <set name="permissions" table="role_permission" lazy="true">
             <key column="role_fk" />  
             <many-to-many class="com.ipcs.model.Permission" column="permission_fk" />  
-        </bag>
+        </set>
     </class>
 </hibernate-mapping>
