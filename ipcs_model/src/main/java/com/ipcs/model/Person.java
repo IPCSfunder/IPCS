@@ -33,6 +33,8 @@ public class Person extends BasicObject {
 
     public Person() {
         super();
+        roles.add(new Role());
+        schools.add(new School());
     }
 
 
@@ -53,7 +55,7 @@ public class Person extends BasicObject {
     public Set<Message> getMessages() {
         return messages;
     }
-    
+
     public String getPassword_hash() {
         return password_hash;
     }
@@ -78,13 +80,24 @@ public class Person extends BasicObject {
         this.schools = schools;
     }
 
+    public void addSchool(School school) {
+        this.schools.add(school);
+    }
+
+    public void evictSchools(){
+        this.schools.clear();
+    }
+
+
+    public void evictRoles(){
+        this.roles.clear();
+    }
+
     public void addRole(Role role) {
         this.roles.add(role);
     }
 
-    public void addSchool(School school) {
-        this.schools.add(school);
-    }
+
 
     public void addMessage(Message message){
         this.messages.add(message);

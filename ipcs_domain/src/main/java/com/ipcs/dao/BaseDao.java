@@ -25,6 +25,8 @@ public interface BaseDao<T extends BasicObject, PK extends Serializable> {
 
     public void saveOrUpdate(T entity);
 
+    public void merge(T entity);
+
     public void delete(T entity);
 
     public void deleteAll(Collection<T> entities);
