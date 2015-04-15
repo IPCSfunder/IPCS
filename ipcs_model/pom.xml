@@ -21,6 +21,12 @@
 
 
 	<dependencies>
+		<dependency>
+			<groupId>com.ipcs</groupId>
+			<artifactId>ipcs_core</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+
 		<!-- Spring 3 dependencies -->
 		<dependency>
 			<groupId>org.springframework</groupId>

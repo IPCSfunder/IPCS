@@ -19,9 +19,9 @@
             <column name="date_modified"/> 
         </property>
         
-        <set name="roles" table="role_permission" lazy="true">  
+        <set name="roles" table="role_permission" lazy="true">
             <key column="permission_fk" />  
             <many-to-many class="com.ipcs.model.Role" column="role_fk" />  
-        </set>  
+        </set>
      </class>
 </hibernate-mapping>

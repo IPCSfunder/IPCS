@@ -48,13 +48,10 @@ public class AdminController {
 	return new ModelAndView("addChildren", "command", new Person());
     }
 
-    @RequestMapping(value = "/persistStudent", method = RequestMethod.POST)
-    public String addStudent(@ModelAttribute Person student, ModelMap model) {
-	        Role studentRole = adminservice.getRoleByName("student");
-	        School school = adminservice.getSchoolByName("PUNGOL");
-	        student.addRole(studentRole);
-	        student.addSchool(school);
-	        registoryService.registerNewPerson(student);
+    @RequestMapping(value = "/persistChildren", method = RequestMethod.POST)
+    public String addStudent(@ModelAttribute Person children, ModelMap model) {
+	       System.out.print(children.getRoles().size());
+        adminservice.addPerson(children);
 	        return "navigator";
     }
     

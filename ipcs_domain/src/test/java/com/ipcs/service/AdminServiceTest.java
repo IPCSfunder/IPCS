@@ -39,8 +39,8 @@ public class AdminServiceTest {
 
     @Test(groups = "inserDummyData")
     public void insertAdmin() {
-        Role role = adminService.getRoleByName("admin");
-        School school = adminService.getSchoolByName("PUNGOL");
+        Role role = new Role("admin");
+        School school = new School("PUNGOL");
         Person person = DataFactory.preparePerson("admin", "password");
         person.addRole(role);
         person.addSchool(school);
@@ -82,21 +82,6 @@ public class AdminServiceTest {
         adminService.deleteBatchSubodinates(adminAndStudents);
     }
 
-
-//    @Test(groups="inserPersonWithExistingRole")
-//    public void testInsertPersonWithExistingRole(){
-//	person = new Person();
-//	person.setAccount_name("James");
-//	person.setPassword_hash("Test");
-//	Role role = adminService.getRoleByName("student");
-//	person.addRole(role);
-//	adminService.addPerson(person);
-//    }
-//    
-//    @Test(dependsOnMethods = {"testInsertPersonWithExistingRole"}, groups="inserPersonWithExistingRole")
-//    public void testRemovetPersonWithExistingRole(){
-//	adminService.removePerson(person);
-//    }
 
 
 }

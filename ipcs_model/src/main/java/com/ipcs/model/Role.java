@@ -9,7 +9,7 @@ import java.util.Set;
  */
 public class Role extends BasicObject{
 	
-	private String name;
+	private String name = "";
 
 	private Set<Person> persons = new HashSet<Person>();
 	
@@ -79,7 +79,7 @@ public class Role extends BasicObject{
 	public int hashCode(){
 		return 31*17+name.hashCode();
 	}
-	
+
 	public boolean equals(Object obj){
 		if (null ==obj)
 			return false;

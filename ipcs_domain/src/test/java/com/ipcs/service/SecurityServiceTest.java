@@ -45,8 +45,8 @@ public class SecurityServiceTest {
 
     @Test
     public void insertAdmin() {
-	Role role = adminService.getRoleByName("admin");	
-	School school = adminService.getSchoolByName("PUNGOL");
+	Role role = new Role("admin");
+	School school = new School("PUNGOL");
 	Person person = DataFactory.preparePerson("admin", "password");
 	person.addRole(role);
 	person.addSchool(school);
