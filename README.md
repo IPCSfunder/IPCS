@@ -17,9 +17,17 @@ How to import IPCS into Intellij Idea
 
 7 Choose the modules from IPCS, ipcs_mode, ipcs_domain, ipcs_control. 
 
-Remote MySQL DB sourse:
+Remote MySQL DB source
+
 Host: 120.24.166.170 Port:3306
+
 Database:ipcs
+
 User:ipcs_admin
+
 Password(Secrect :-))
+
+Webserver access point:
+
+http://120.24.166.170:8080/ipcs/
  
