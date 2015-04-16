@@ -18,9 +18,9 @@ public abstract class DBUnitTest extends DBTestCase{
 	
     public DBUnitTest() {  
               System.setProperty(PropertiesBasedJdbcDatabaseTester.DBUNIT_DRIVER_CLASS, "com.mysql.jdbc.Driver");  
-              System.setProperty(PropertiesBasedJdbcDatabaseTester.DBUNIT_CONNECTION_URL, "jdbc:mysql://PC201311192237.lan:3306/IPCS");  
-              System.setProperty(PropertiesBasedJdbcDatabaseTester.DBUNIT_USERNAME, "ipcs_user");  
-              System.setProperty(PropertiesBasedJdbcDatabaseTester.DBUNIT_PASSWORD,  "");  
+              System.setProperty(PropertiesBasedJdbcDatabaseTester.DBUNIT_CONNECTION_URL, "jdbc:mysql://120.24.166.170:3306/ipcs");
+              System.setProperty(PropertiesBasedJdbcDatabaseTester.DBUNIT_USERNAME, "ipcs_admin");
+              System.setProperty(PropertiesBasedJdbcDatabaseTester.DBUNIT_PASSWORD,  "password");
     }  
 
     @Override  
