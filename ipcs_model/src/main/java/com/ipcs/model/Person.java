@@ -33,8 +33,8 @@ public class Person extends BasicObject {
 
     public Person() {
         super();
-        roles.add(new Role());
-        schools.add(new School());
+//        roles.add(new Role());
+//        schools.add(new School());
     }
 
 
