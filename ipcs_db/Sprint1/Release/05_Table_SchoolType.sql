@@ -1,5 +1,3 @@
-DROP TABLE IF EXISTS `ipcs`.`school_type`
-
 CREATE TABLE IF NOT EXISTS `ipcs`.`school_type` (
   `school_type_objid` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(45) NULL,
