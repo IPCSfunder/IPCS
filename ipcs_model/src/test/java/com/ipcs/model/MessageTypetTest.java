@@ -1,13 +1,13 @@
 package com.ipcs.model;
 
-
-import com.ipcs.util.HibernateUtil;
 import org.hibernate.Session;
+import org.junit.Test;
 
-public class MessageTypetTest extends DBUnitTest {
+public class MessageTypetTest extends SpringDBUnit {
 
+    @Test
     public void testInsertSchoolType() {
-        Session session = HibernateUtil.getSessionFactory().openSession();
+        Session session = sessionFactory.openSession();
 
         session.beginTransaction();
         MessageType messageType = new MessageType();

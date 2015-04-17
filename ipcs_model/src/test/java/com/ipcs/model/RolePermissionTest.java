@@ -2,19 +2,18 @@ package com.ipcs.model;
 
 
 import org.hibernate.Session;
-
-import com.ipcs.util.HibernateUtil;
+import org.junit.Test;
 
 /**
  * Hello world!
  *
  */
-public class RolePermissionTest extends DBUnitTest
+public class RolePermissionTest extends SpringDBUnit
 {
 	
-
+	@Test
 	public void testInsertRole() {
-    	Session session = HibernateUtil.getSessionFactory().openSession();
+    	Session session = sessionFactory.openSession();
   	 
 		session.beginTransaction();
 		Role role = new Role();

@@ -8,14 +8,13 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 import org.junit.Assert;
+import org.junit.Test;
 
-import com.ipcs.util.HibernateUtil;
+public class PersonTest extends SpringDBUnit{
 
-public class PersonTest extends DBUnitTest{
-
-
+	@Test
 	public void testInsertPersonRole() {
-		Session session = HibernateUtil.getSessionFactory().openSession();
+		Session session = sessionFactory.openSession();
 
 		session.beginTransaction();
 //		Role role = new Role("Merchant4");
@@ -27,9 +26,9 @@ public class PersonTest extends DBUnitTest{
 
 	}
 
-
+	@Test
 	public void testCriteria(){
-		Session session = HibernateUtil.getSessionFactory().openSession();
+		Session session = sessionFactory.openSession();
 		session.beginTransaction();
 		Criteria cr = session.createCriteria(Person.class).add(Restrictions.eq("objectId", 2l));
 		List<Person> list = cr.list();
@@ -38,8 +37,9 @@ public class PersonTest extends DBUnitTest{
 		Assert.assertEquals("Person", list.get(0).getAccount_name());
 	}
 
+	@Test
 	public void testCriteriaQuery(){
-		Session session = HibernateUtil.getSessionFactory().openSession();
+		Session session = sessionFactory.openSession();
 		session.beginTransaction();
 		Query cr = session.createQuery("from Person where objectId = 2 ");
 		List<Person> list = cr.list();

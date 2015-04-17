@@ -1,19 +1,14 @@
 package com.ipcs.model;
 
 
-import java.util.Date;
+import org.hibernate.Session;;
+import org.junit.Test;
 
-import org.hibernate.Session;
-
-import com.ipcs.model.Person;
-import com.ipcs.model.Role;
-import com.ipcs.util.HibernateUtil;
-
-public class PersonSchoolTest extends DBUnitTest{  
+public class PersonSchoolTest extends SpringDBUnit{
 	
-	
+	@Test
 	public void testInsertPersonRole() {
-		Session session = HibernateUtil.getSessionFactory().openSession();
+		Session session = sessionFactory.openSession();
 		 
 		session.beginTransaction();
 		Person person = new Person("James41","111");

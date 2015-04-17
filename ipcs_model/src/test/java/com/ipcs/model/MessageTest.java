@@ -1,17 +1,18 @@
 package com.ipcs.model;
 
-
-import com.ipcs.util.HibernateUtil;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
+import org.junit.Test;
 
 import java.util.Date;
 
-public class MessageTest extends DBUnitTest {
+public class MessageTest extends SpringDBUnit {
 
+
+    @Test
     public void testInsertMessage() {
-        Session session = HibernateUtil.getSessionFactory().openSession();
+        Session session = sessionFactory.openSession();
         session.beginTransaction();
         Criteria criteria =  session.createCriteria(MessageType.class).add(Restrictions.eq("objectId", 1l));
         MessageType messageType = (MessageType)criteria.list().get(0);
@@ -22,9 +23,9 @@ public class MessageTest extends DBUnitTest {
     }
 
 
-
+    @Test
     public void testInsertMessageWithPerson() {
-        Session session = HibernateUtil.getSessionFactory().openSession();
+        Session session = sessionFactory.openSession();
         session.beginTransaction();
         Criteria criteria =  session.createCriteria(MessageType.class).add(Restrictions.eq("objectId", 1l));
         Person person =(Person) session.get(Person.class, 2l);

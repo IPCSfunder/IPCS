@@ -6,13 +6,13 @@ import java.util.Date;
 import org.hibernate.Session;
 
 import com.ipcs.model.PersonDetail.Sex;
-import com.ipcs.util.HibernateUtil;
+import org.junit.Test;
 
-public class PersonDetailTest extends DBUnitTest{  
+public class PersonDetailTest extends SpringDBUnit{
 	
-	
+	@Test
 	public void testInsertPersonRole() {
-	Session session = HibernateUtil.getSessionFactory().openSession();
+	Session session = sessionFactory.openSession();
 	 
 	session.beginTransaction();
 	PersonDetail personDetail = new PersonDetail.PersonBuilder().withAge(23).withDob(new Date())
