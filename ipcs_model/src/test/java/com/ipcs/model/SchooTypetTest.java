@@ -2,15 +2,13 @@ package com.ipcs.model;
 
 
 import org.hibernate.Session;
+import org.junit.Test;
 
-import com.ipcs.model.Person;
-import com.ipcs.model.Role;
-import com.ipcs.util.HibernateUtil;
+public class SchooTypetTest extends SpringDBUnit{
 
-public class SchooTypetTest extends DBUnitTest{  
-	
+	@Test
 	public void testInsertSchoolType() {	
-	Session session = HibernateUtil.getSessionFactory().openSession();
+	Session session = sessionFactory.openSession();
 
 	session.beginTransaction();
 	SchoolType schoolType = new SchoolType();

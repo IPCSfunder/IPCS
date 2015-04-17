@@ -2,19 +2,14 @@ package com.ipcs.model;
 
 
 import org.hibernate.Session;
+import org.junit.Test;
 
-import com.ipcs.util.HibernateUtil;
-
-/**
- * Hello world!
- *
- */
-public class RoleTest extends DBUnitTest
+public class RoleTest extends SpringDBUnit
 {
 	
-
+	@Test
 	public void testInsertRole() {
-    	Session session = HibernateUtil.getSessionFactory().openSession();
+    	Session session = sessionFactory.openSession();
   	 
 		session.beginTransaction();
 		Role role = new Role();
@@ -22,9 +17,10 @@ public class RoleTest extends DBUnitTest
 		session.save(role);
 		session.getTransaction().commit();
 	}  
-	
+
+	@Test
 	public void testGetRole(){
-		Session session = HibernateUtil.getSessionFactory().openSession();
+		Session session = sessionFactory.openSession();
 	  	 
 		session.beginTransaction();
 		Role role = (Role)session.load(Role.class, 5L);

@@ -2,16 +2,14 @@ package com.ipcs.model;
 
 
 import org.hibernate.Session;
+import org.junit.Test;
 
-import com.ipcs.model.Person;
-import com.ipcs.model.Role;
-import com.ipcs.util.HibernateUtil;
+public class PersonContactTest extends SpringDBUnit{
+	
 
-public class PersonContactTest extends DBUnitTest{  
-	
-	
+	@Test
 	public void testInsertPersonRole() {
-	Session session = HibernateUtil.getSessionFactory().openSession();
+	Session session = sessionFactory.openSession();
 	 
 	session.beginTransaction();
 	Contact contact = new Contact("Shenzhen","186232","test@email.com");
