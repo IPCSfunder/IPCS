@@ -23,7 +23,7 @@
             <column name="date_modified"/> 
         </property>
         
-        <many-to-one name="type" column="school_type_fk" unique="true"  lazy="false"
+        <many-to-one name="type" column="school_type_fk" lazy="false"
         class="com.ipcs.model.SchoolType"/>
         
         <set name="persons" table="person_school" lazy="true">

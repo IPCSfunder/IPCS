@@ -16,6 +16,7 @@ public class School extends BasicObject{
 	private SchoolType type;
 
 	private Set<Person> persons = new HashSet<Person>();
+
 	public School() {
 	}
 

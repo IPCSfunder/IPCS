@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.ipcs.model.Class" table="class">
+        <id name="objectId" type="java.lang.Long">
+            <column name="class_objid" />
+            <generator class="native" />
+        </id>
+        
+        <property name="name" type="string">
+            <column name="name" length="45"/>
+        </property>
+        
+        <property name="createdTime" type="date">
+            <column name="date_created"/>
+        </property>
+        
+        <property name="modifiedTime" type="date">
+            <column name="date_modified"/> 
+        </property>
+
+        <many-to-one name="teacher" column="teacher" lazy="false"
+                     class="com.ipcs.model.Person"/>
+
+
+        <set name="childrens" table="children_class" lazy="true">
+            <key column="class_fk" />
+            <many-to-many class="com.ipcs.model.Person" column="children_fk" />
+        </set>
+
+    </class>
+</hibernate-mapping>
