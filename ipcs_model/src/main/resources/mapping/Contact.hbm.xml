@@ -10,12 +10,20 @@
         <property name="address" type="string">
             <column name="address" length="255"/>
         </property>
+
+        <property name="postcode" type="string">
+            <column name="postcode" length="45"/>
+        </property>
+
+        <property name="primary" type="boolean">
+            <column name="primary_contact"/>
+        </property>
         
-        <property name="mobile_number" type="string">
+        <property name="mobileNumber" type="string">
             <column name="mobile_number" length="45"/>
         </property>
         
-        <property name="email_address" type="string">
+        <property name="emailAddress" type="string">
             <column name="email_address" length="45"/>
         </property>
         
@@ -26,7 +34,11 @@
         <property name="modifiedTime" type="date">
             <column name="date_modified"/> 
         </property>
-        
-        <one-to-one name="person" property-ref="contact" cascade ="all-delete-orphan"/>
+
+        <many-to-one name="relationshipType" column="relationship_type_fk" lazy="false"
+                     class="com.ipcs.model.RelationshipType"/>
+
+        <many-to-one name="person" column="person_fk" lazy="false"
+                     class="com.ipcs.model.Person"/>
     </class>
 </hibernate-mapping>

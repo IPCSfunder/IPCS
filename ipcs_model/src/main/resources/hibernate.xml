@@ -30,6 +30,9 @@ http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
                 <value>mapping/Permission.hbm.xml</value>
                 <value>mapping/MessageType.hbm.xml</value>
                 <value>mapping/Message.hbm.xml</value>
+                <value>mapping/RelationshipType.hbm.xml</value>
+                <value>mapping/Relationship.hbm.xml</value>
+                <value>mapping/Class.hbm.xml</value>
             </list>
         </property>
 

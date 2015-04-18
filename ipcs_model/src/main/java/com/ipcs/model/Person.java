@@ -4,6 +4,7 @@ package com.ipcs.model;
  * @author Chen Chao
  */
 
+import javax.management.relation.Relation;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -15,13 +16,17 @@ public class Person extends BasicObject {
 
     private Set<Role> roles = new HashSet<Role>();
 
-    private Contact contact;
+    private Set<Class> schoolClasses = new HashSet<Class>();
+
+    private Set<Contact> contacts = new HashSet<Contact>();
 
     private PersonDetail personDetail;
 
     private Set<School> schools = new HashSet<School>();
 
     private Set<Message> messages = new HashSet<Message>();
+
+    private Set<Relationship> relationships = new HashSet<Relationship>();
 
 
 
@@ -95,18 +100,29 @@ public class Person extends BasicObject {
         this.roles.add(role);
     }
 
+    public Set<Class> getSchoolClasses() {
+        return schoolClasses;
+    }
 
+    public void setSchoolClasses(Set<Class> schoolClasses) {
+        this.schoolClasses = schoolClasses;
+    }
 
     public void addMessage(Message message){
         this.messages.add(message);
     }
 
-    public Contact getContact() {
-        return contact;
+
+    public Set<Contact> getContacts() {
+        return contacts;
     }
 
-    public void setContact(Contact contact) {
-        this.contact = contact;
+    public void setContacts(Set<Contact> contacts) {
+        this.contacts = contacts;
+    }
+
+    public void addContact(Contact contact){
+        this.contacts.add(contact);
     }
 
     public PersonDetail getPersonDetail() {
@@ -115,6 +131,18 @@ public class Person extends BasicObject {
 
     public void setPersonDetail(PersonDetail personDetail) {
         this.personDetail = personDetail;
+    }
+
+    public Set<Relationship> getRelationships() {
+        return relationships;
+    }
+
+    public void setRelationships(Set<Relationship> relationships) {
+        this.relationships = relationships;
+    }
+
+    public void addRelationship(Relationship relationship){
+        this.relationships.add(relationship);
     }
 
     public int hashCode() {

@@ -1,6 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <dataset>
 	<person person_objid="2" account_name="Person" password_hash="11"/>
+	<person person_objid="3" account_name="Child" password_hash="11"/>
 	<role role_objid = "1" name = "admin"/>
 	<role role_objid = "2" name = "children"/>
 	<role role_objid = "3" name = "staff"/>
@@ -21,4 +22,9 @@
 	<message_type message_type_objid ="1" type_name="message" description="message"></message_type>
 	<message></message>
 	<user_message></user_message>
+	<relationship_type relationship_type_objid="1" name="PARENT"></relationship_type>
+	<relationship_type relationship_type_objid="2" name="TEACHER"></relationship_type>
+	<relationship relationship_objid = "1" whose="3" iswho="2" relationship_type_fk="1"></relationship>
+	<class class_objid="1" name="Math"/>
+	<children_class children_class_objid = "1" children_fk="3" class_fk="1"></children_class>
 </dataset>

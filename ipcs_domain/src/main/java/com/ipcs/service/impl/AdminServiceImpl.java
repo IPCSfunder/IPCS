@@ -122,6 +122,6 @@ public class AdminServiceImpl implements AdminService {
 
     @Transactional
     public Person getAdminInfo(String adminName) {
-        return personDao.find("select p from Person as p left join fetch p.schools left join fetch p.roles left join fetch p.contact left join fetch p.personDetail where p.account_name ='" + adminName + "'").get(0);
+        return personDao.find("select p from Person as p left join fetch p.schools left join fetch p.roles left join fetch p.contacts left join fetch p.personDetail where p.account_name ='" + adminName + "'").get(0);
     }
 }

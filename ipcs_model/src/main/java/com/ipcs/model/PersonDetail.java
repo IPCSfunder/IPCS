@@ -8,9 +8,9 @@ import java.util.Date;
  */
 public class PersonDetail extends BasicObject {
 
-	private String last_name;
-
 	private String fist_name;
+
+	private String last_name;
 
 	private Integer age;
 

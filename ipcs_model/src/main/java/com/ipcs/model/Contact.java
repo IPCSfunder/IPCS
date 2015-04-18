@@ -7,10 +7,16 @@ package com.ipcs.model;
 public class Contact extends BasicObject{
 	
 	private String address;
+
+	private String postcode;
 	
-	private String mobile_number;
+	private String mobileNumber;
+
+	private boolean primary;
+
+	private RelationshipType relationshipType;
 	
-	private String email_address;
+	private String emailAddress;
 	
 	private Person person;
 
@@ -18,35 +24,19 @@ public class Contact extends BasicObject{
 		super();
 	}
 
-	public Contact(String address, String mobile_number, String email_address) {
+	public Contact(String address, String mobileNumber, String emailAddress) {
 		super();
 		this.address = address;
-		this.mobile_number = mobile_number;
-		this.email_address = email_address;
+		this.mobileNumber = mobileNumber;
+		this.emailAddress = emailAddress;
 	}
 
-	public String getAddress() {
-		return address;
+	public String getPostcode() {
+		return postcode;
 	}
 
-	public void setAddress(String address) {
-		this.address = address;
-	}
-
-	public String getMobile_number() {
-		return mobile_number;
-	}
-
-	public void setMobile_number(String mobile_number) {
-		this.mobile_number = mobile_number;
-	}
-
-	public String getEmail_address() {
-		return email_address;
-	}
-
-	public void setEmail_address(String email_address) {
-		this.email_address = email_address;
+	public void setPostcode(String postcode) {
+		this.postcode = postcode;
 	}
 
 	public Person getPerson() {
@@ -57,12 +47,56 @@ public class Contact extends BasicObject{
 		this.person = person;
 	}
 
+	public RelationshipType getRelationshipType() {
+		return relationshipType;
+	}
+
+
+
+	public void setRelationshipType(RelationshipType relationshipType) {
+		this.relationshipType = relationshipType;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public String getEmailAddress() {
+		return emailAddress;
+	}
+
+	public void setEmailAddress(String emailAddress) {
+		this.emailAddress = emailAddress;
+	}
+
+	public boolean isPrimary() {
+		return primary;
+	}
+
+	public void setPrimary(boolean primary) {
+		this.primary = primary;
+	}
+
+	public String getMobileNumber() {
+		return mobileNumber;
+	}
+
+	public void setMobileNumber(String mobileNumber) {
+		this.mobileNumber = mobileNumber;
+	}
+
+
+
 	public int hashCode(){
 		final int facter = 31;
 		int result =1;
 		result = facter*17+address.hashCode();
-		result = result*17+mobile_number.hashCode();
-		result = result*17+email_address.hashCode();
+		result = result*17+mobileNumber.hashCode();
+		result = result*17+emailAddress.hashCode();
 		return result;
 	}
 	
@@ -75,15 +109,15 @@ public class Contact extends BasicObject{
 			return false;
 		Contact contact = (Contact)obj;
 		return (contact.getAddress().equals(this.address))
-				&&(contact.getEmail_address().equals(this.email_address))
-				&&(contact.getMobile_number().equals(this.mobile_number));
+				&&(contact.getEmailAddress().equals(this.emailAddress))
+				&&(contact.getMobileNumber().equals(this.mobileNumber));
 	}
 	
 	public String toString(){
 		StringBuilder details = new StringBuilder();
 		details.append("Contact address is ").append(address);
-		details.append("mobile number is ").append(mobile_number);
-		details.append("email address is ").append(email_address);
+		details.append("mobile number is ").append(mobileNumber);
+		details.append("email address is ").append(emailAddress);
 		details.append(super.toString());
 		return details.toString();
 	}
