@@ -2,7 +2,6 @@ CREATE TABLE IF NOT EXISTS `ipcs`.`person` (
   `person_objid` INT NOT NULL AUTO_INCREMENT,
   `account_name` VARCHAR(45) NULL,
   `password_hash` VARCHAR(45) NULL,
-  `contact_fk` INT null,
   `person_detail_fk` INT null,
   `date_created` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `date_modified` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
