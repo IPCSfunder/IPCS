@@ -23,11 +23,11 @@ import javax.servlet.http.HttpSession;
 public class AdminController {
 
     @Autowired
-    private SecurityService securityService;   
-    
+    private SecurityService securityService;
+
     @Autowired
     private AdminService adminservice;
-    
+
     @Autowired
     private RegistoryService registoryService;
 
@@ -45,44 +45,39 @@ public class AdminController {
 
     @RequestMapping(value = "/addChildren", method = RequestMethod.GET)
     public ModelAndView student() {
-	return new ModelAndView("addChildren", "command", new Person());
+        return new ModelAndView("addChildren", "command", new Person());
     }
 
     @RequestMapping(value = "/persistChildren", method = RequestMethod.POST)
     public String addStudent(@ModelAttribute Person children, ModelMap model) {
-	       System.out.print(children.getRoles().size());
         adminservice.addPerson(children);
-	        return "navigator";
+        return "navigator";
     }
-    
+
     @RequestMapping(value = "/addTeacher", method = RequestMethod.GET)
     public ModelAndView teacher() {
-	return new ModelAndView("addTeacher", "command", new Person());
+        return new ModelAndView("addTeacher", "command", new Person());
     }
-    
-    @RequestMapping(value = "/persistTeacher", method = RequestMethod.POST)
-    public String addTeacher(@ModelAttribute Person teacher, ModelMap model) {
-	        Role teacherRole = adminservice.getRoleByName("teacher");
-	        School school = adminservice.getSchoolByName("PUNGOL");
-	        teacher.addRole(teacherRole);
-	        teacher.addSchool(school);
-	        registoryService.registerNewPerson(teacher);
-	        return "navigator";
+
+    @RequestMapping(value = "/persistStaff", method = RequestMethod.POST)
+    public String addTeacher(@ModelAttribute Person staff, ModelMap model) {
+        adminservice.addPerson(staff);
+        return "navigator";
     }
-    
+
     @RequestMapping(value = "/listChildren", method = RequestMethod.GET)
     public ModelAndView listStudent(HttpSession session) {
-            School school = ((Person)session.getAttribute("authenticatedAdmin")).getSchools().iterator().next();
-	        List<Person> students = adminservice.listAllPersonByRoleName(school.getName(), "children");
-	        return new ModelAndView("listChildren", "command", students);
+        School school = ((Person) session.getAttribute("authenticatedAdmin")).getSchools().iterator().next();
+        List<Person> students = adminservice.listAllPersonByRoleName(school.getName(), "children");
+        return new ModelAndView("listChildren", "command", students);
     }
 
 
     @RequestMapping(value = "/listStaff", method = RequestMethod.GET)
     public ModelAndView listStaff(HttpSession session) {
-        School school = ((Person)session.getAttribute("authenticatedAdmin")).getSchools().iterator().next();
+        School school = ((Person) session.getAttribute("authenticatedAdmin")).getSchools().iterator().next();
         List<Person> students = adminservice.listAllPersonByRoleName(school.getName(), "staff");
         return new ModelAndView("listStaff", "command", students);
     }
-    
+
 }
