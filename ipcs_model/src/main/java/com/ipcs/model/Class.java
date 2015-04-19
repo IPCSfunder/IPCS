@@ -1,14 +1,17 @@
 package com.ipcs.model;
 
+import com.ipcs.model.Base.BasicObject;
+
 import java.util.HashSet;
 import java.util.Set;
 
 /**
  * @author Chen Chao
  *
+ * Temporary not used. And may not be used any more.
  */
 public class
-		Class extends BasicObject{
+		Class extends BasicObject {
 
 	private String name;
 

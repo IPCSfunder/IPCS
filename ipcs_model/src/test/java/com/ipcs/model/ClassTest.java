@@ -7,9 +7,8 @@ import org.junit.Test;
 public class ClassTest extends SpringDBUnit {
 
     @Test
-    public void testInsertSchoolType() {
+    public void testInsertClass() {
         Session session = sessionFactory.openSession();
-
         session.beginTransaction();
         Class schooLClass = new Class();
         schooLClass.setName("English");

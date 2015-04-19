@@ -1,5 +1,7 @@
 package com.ipcs.model;
 
+import com.ipcs.model.Base.BasicObject;
+
 import java.util.Date;
 
 /**

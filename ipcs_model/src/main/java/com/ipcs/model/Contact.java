@@ -1,10 +1,12 @@
 package com.ipcs.model;
 
+import com.ipcs.model.Base.BasicObject;
+
 /**
  * @author Chen Chao
  *
  */
-public class Contact extends BasicObject{
+public class Contact extends BasicObject {
 	
 	private String address;
 
@@ -15,6 +17,8 @@ public class Contact extends BasicObject{
 	private boolean primary;
 
 	private RelationshipType relationshipType;
+
+	private String contacterName;
 	
 	private String emailAddress;
 	
@@ -89,7 +93,13 @@ public class Contact extends BasicObject{
 		this.mobileNumber = mobileNumber;
 	}
 
+	public String getContacterName() {
+		return contacterName;
+	}
 
+	public void setContacterName(String contacterName) {
+		this.contacterName = contacterName;
+	}
 
 	public int hashCode(){
 		final int facter = 31;

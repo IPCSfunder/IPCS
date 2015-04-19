@@ -15,6 +15,10 @@
             <column name="postcode" length="45"/>
         </property>
 
+        <property name="contacterName" type="string">
+            <column name="contact_name" length="45"/>
+        </property>
+
         <property name="primary" type="boolean">
             <column name="primary_contact"/>
         </property>

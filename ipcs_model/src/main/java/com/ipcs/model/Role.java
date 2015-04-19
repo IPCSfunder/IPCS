@@ -1,5 +1,7 @@
 package com.ipcs.model;
 
+import com.ipcs.model.Base.BasicObject;
+
 import java.util.HashSet;
 import java.util.Set;
 
@@ -7,7 +9,7 @@ import java.util.Set;
  * @author Chen Chao
  *
  */
-public class Role extends BasicObject{
+public class Role extends BasicObject {
 	
 	private String name = "";
 

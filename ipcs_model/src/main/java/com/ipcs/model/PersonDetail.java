@@ -1,5 +1,7 @@
 package com.ipcs.model;
 
+import com.ipcs.model.Base.BasicObject;
+
 import java.util.Date;
 
 /**
@@ -8,9 +10,9 @@ import java.util.Date;
  */
 public class PersonDetail extends BasicObject {
 
-	private String fist_name;
+	private String firstName;
 
-	private String last_name;
+	private String lastName;
 
 	private Integer age;
 
@@ -18,13 +20,13 @@ public class PersonDetail extends BasicObject {
 
 	private String nationality;
 
-	private Date date_of_birth;
+	private Date dateOfBirth;
 
 	private String nric;
 
-	private String nick_name;
+	private String nickName;
 
-	private Boolean market_option;
+	private Boolean marketOption;
 	
 	private Person person;
 
@@ -34,45 +36,125 @@ public class PersonDetail extends BasicObject {
 	
 	public PersonDetail(PersonBuilder builder){
 
-		this.last_name = builder.last_name;
-		this.fist_name = builder.first_name;
+		this.lastName = builder.lastName;
+		this.firstName = builder.firstName;
 		this.age = builder.age;
 		this.sex = builder.sex;
 		this.nationality = builder.nationality;
-		this.date_of_birth = builder.date_of_birth;
+		this.dateOfBirth = builder.dateOfBirth;
 		this.nric = builder.nric;
-		this.nick_name = builder.nick_name;
-		this.market_option = builder.market_option;
+		this.nickName = builder.nickName;
+		this.marketOption = builder.marketOption;
 	}
 	
 	public static enum Sex{
 		MALE,FEMALE
 	}
-	
+
+	public Integer getAge() {
+		return age;
+	}
+
+	public void setAge(Integer age) {
+		this.age = age;
+	}
+
+	public Date getDateOfBirth() {
+		return dateOfBirth;
+	}
+
+	public void setDateOfBirth(Date dateOfBirth) {
+		this.dateOfBirth = dateOfBirth;
+	}
+
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public Boolean isMarketOption() {
+		return marketOption;
+	}
+
+	public void setMarketOption(Boolean marketOption) {
+		this.marketOption = marketOption;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
+	public String getNationality() {
+		return nationality;
+	}
+
+	public void setNationality(String nationality) {
+		this.nationality = nationality;
+	}
+
+	public String getNickName() {
+		return nickName;
+	}
+
+	public void setNickName(String nickName) {
+		this.nickName = nickName;
+	}
+
+	public String getNric() {
+		return nric;
+	}
+
+	public void setNric(String nric) {
+		this.nric = nric;
+	}
+
+	public Person getPerson() {
+		return person;
+	}
+
+	public void setPerson(Person person) {
+		this.person = person;
+	}
+
+	public Sex getSex() {
+		return sex;
+	}
+
+	public void setSex(Sex sex) {
+		this.sex = sex;
+	}
+
 	public static class PersonBuilder{
-		private String last_name;
-		private String first_name;
+		private String lastName;
+		private String firstName;
 		private Integer age;
 		private Sex sex;
 		private String nationality;
-		private Date date_of_birth;
+		private Date dateOfBirth;
 		private String nric;
-		private String nick_name;
-		private Boolean market_option = false;
+		private String nickName;
+		private Boolean marketOption = false;
 		
-		public PersonBuilder withNickName(String nick_name){
-			this.nick_name = nick_name;
+		public PersonBuilder withNickName(String nickName){
+			this.nickName = nickName;
 			return this;
 		}
 		
 		
-		public PersonBuilder withLastName(String last_name){
-			this.last_name = last_name;
+		public PersonBuilder withLastName(String lastName){
+			this.lastName = lastName;
 			return this;
 		}
 		
-		public PersonBuilder withFirstName(String first_name){
-			this.first_name = first_name;
+		public PersonBuilder withFirstName(String firstName){
+			this.firstName = firstName;
 			return this;
 		}
 		
@@ -91,8 +173,8 @@ public class PersonDetail extends BasicObject {
 			return this;
 		}
 		
-		public PersonBuilder withDob(Date date_of_birth){
-			this.date_of_birth = date_of_birth;
+		public PersonBuilder withDob(Date dateOfBirth){
+			this.dateOfBirth = dateOfBirth;
 			return this;
 		}
 		
@@ -101,8 +183,8 @@ public class PersonDetail extends BasicObject {
 			return this;
 		}
 		
-		public PersonBuilder withMarketOption(Boolean market_option){
-			this.market_option = market_option;
+		public PersonBuilder withMarketOption(Boolean marketOption){
+			this.marketOption = marketOption;
 			return this;
 		}
 		
@@ -112,88 +194,8 @@ public class PersonDetail extends BasicObject {
 			return new PersonDetail(this);
 		}
 	}
-	
-	
-	public String getLast_name() {
-		return last_name;
-	}
 
-	public void setLast_name(String last_name) {
-		this.last_name = last_name;
-	}
 
-	public String getFist_name() {
-		return fist_name;
-	}
-
-	public void setFist_name(String fist_name) {
-		this.fist_name = fist_name;
-	}
-
-	public Integer getAge() {
-		return age;
-	}
-
-	public void setAge(Integer age) {
-		this.age = age;
-	}
-
-	public Sex getSex() {
-		return sex;
-	}
-
-	public void setSex(Sex sex) {
-		this.sex = sex;
-	}
-
-	public String getNationality() {
-		return nationality;
-	}
-
-	public void setNationality(String nationality) {
-		this.nationality = nationality;
-	}
-
-	public Date getDate_of_birth() {
-		return date_of_birth;
-	}
-
-	public void setDate_of_birth(Date date_of_birth) {
-		this.date_of_birth = date_of_birth;
-	}
-
-	public String getNric() {
-		return nric;
-	}
-
-	public void setNric(String nric) {
-		this.nric = nric;
-	}
-
-	public String getNick_name() {
-		return nick_name;
-	}
-
-	public void setNick_name(String nick_name) {
-		this.nick_name = nick_name;
-	}
-	
-
-	public Person getPerson() {
-		return person;
-	}
-
-	public void setPerson(Person person) {
-		this.person = person;
-	}
-
-	public Boolean getMarket_option() {
-		return market_option;
-	}
-
-	public void setMarket_option(Boolean market_option) {
-		this.market_option = market_option;
-	}
 
 	public int hashCode() {
 		final int facter = 31;
@@ -215,8 +217,8 @@ public class PersonDetail extends BasicObject {
 
 	public String toString() {
 		StringBuilder details = new StringBuilder();
-		details.append("First name is ").append(fist_name);
-		details.append("last name is ").append(last_name);
+		details.append("First name is ").append(firstName);
+		details.append("last name is ").append(lastName);
 		details.append(super.toString());
 		return details.toString();
 	}
