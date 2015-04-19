@@ -3,10 +3,9 @@
  */
 package com.ipcs.service.impl;
 
-import java.util.HashSet;
-import java.util.Iterator;
+
 import java.util.List;
-import java.util.Set;
+
 
 import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Restrictions;
@@ -66,7 +65,7 @@ public class SecurityServiceImpl implements SecurityService {
     public boolean authenticateLoginInfo(String userName, String password) {
 	Criterion[] criterion = { Restrictions.eq("account_name", userName) };
 	List<Person> persons = personDao.createCriteria(criterion);
-	if (null == persons || persons.size() > 1)
+	if (null == persons || persons.size() > 1 || persons.size() == 0)
 	    return false;
 	return persons.get(0).getPassword_hash().equals(password);
     }
