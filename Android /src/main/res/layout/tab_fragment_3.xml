@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+    <!-- Do the same for tab_fragment_2 and tab_fragment_3 -->
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Tab Fragment 3"
+        android:textSize="16sp"
+        android:padding="5dp"/>
+
+</LinearLayout>
+   
