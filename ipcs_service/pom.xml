@@ -59,6 +59,22 @@
             <version>1.2</version>
         </dependency>
 
+        <!-- Jackson JSON-->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-core</artifactId>
+            <version>2.5.2</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>2.5.2</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-annotations</artifactId>
+            <version>2.5.2</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -79,7 +95,7 @@
                 <version>2.2</version>
                 <configuration>
                     <url>http://localhost:8080/manager/text</url>
-                    <path>/ipcs</path>
+                    <path>/ipcs-service</path>
                     <username>admin</username>
                     <password>password</password>
                 </configuration>

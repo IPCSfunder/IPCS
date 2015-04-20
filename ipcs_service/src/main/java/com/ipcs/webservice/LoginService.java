@@ -1,5 +1,6 @@
-package com.ipcs.service;
+package com.ipcs.webservice;
 
+import com.ipcs.service.SecurityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -15,9 +16,14 @@ public class LoginService {
     @Autowired
     private SecurityService securityService;
 
-    @RequestMapping(value = "/loginService", method = RequestMethod.GET)
-    public boolean login(@RequestParam(value = "user" ) String userName,@RequestParam(value = "pwd" ) String passWord){
-       boolean authStatus = securityService.authenticateLoginInfo(userName,passWord);
+    @RequestMapping("*")
+    public String index(){
+        return "Hello World!";
+    }
+
+    @RequestMapping(value= "/loginService", method = RequestMethod.GET)
+    public boolean loginService(@RequestParam(value="name", defaultValue="Person") String userName,@RequestParam(value="pwd", defaultValue="11") String passWord){
+        boolean authStatus = securityService.authenticateLoginInfo(userName, passWord);
         return authStatus;
     }
 }
