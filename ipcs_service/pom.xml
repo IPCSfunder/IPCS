@@ -27,6 +27,7 @@
             <scope>test</scope>
         </dependency>
 
+
         <dependency>
             <groupId>com.ipcs</groupId>
             <artifactId>ipcs_model</artifactId>
@@ -38,7 +39,6 @@
             <artifactId>ipcs_domain</artifactId>
             <version>${project.version}</version>
         </dependency>
-
 
         <!-- Servlet -->
         <dependency>
@@ -78,7 +78,7 @@
     </dependencies>
 
     <build>
-        <finalName>ipcs</finalName>
+        <finalName>ipcs_service</finalName>
         <plugins>
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>

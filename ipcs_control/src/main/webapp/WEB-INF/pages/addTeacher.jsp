@@ -6,7 +6,7 @@
 
 </head>
 <body>
-<form:form method="POST" action="/ipcs/persistTeacher">
+<form:form method="POST" action="/ipcs_control/persistTeacher">
    <table>
     <tr>
         <td><form:label path="account_name">Name</form:label></td>

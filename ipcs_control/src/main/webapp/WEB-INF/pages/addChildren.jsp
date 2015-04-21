@@ -10,7 +10,7 @@
 <body>
 <h2 style="text-align: center;">Add Child Details</h2>
 
-<form name="htmlform" method="post" action="/ipcs/persistChildren">
+<form name="htmlform" method="post" action="/ipcs_control/persistChildren">
     <table align="center">
         <tr>
             <td><label for="fist_name">First Name</label></td>
