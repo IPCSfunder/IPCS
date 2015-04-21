@@ -63,7 +63,7 @@
 
 
 	<build>
-		<finalName>ipcs</finalName>
+		<finalName>ipcs_control</finalName>
 		<plugins>
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
@@ -80,7 +80,7 @@
 				<version>2.2</version>
 				<configuration>
 					<url>http://localhost:8080/manager/text</url>
-					<path>/ipcs</path>
+					<path>/ipcs_control</path>
 					<username>admin</username>
 					<password>password</password>
 				</configuration>

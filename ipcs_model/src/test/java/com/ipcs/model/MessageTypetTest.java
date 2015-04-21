@@ -6,7 +6,7 @@ import org.junit.Test;
 public class MessageTypetTest extends SpringDBUnit {
 
     @Test
-    public void testInsertSchoolType() {
+    public void testInsertMessageType() {
         Session session = sessionFactory.openSession();
 
         session.beginTransaction();

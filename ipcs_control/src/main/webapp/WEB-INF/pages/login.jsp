@@ -9,7 +9,7 @@
 <div style="text-align: center;"> Integrated Preschool Connectivity System</div>
 <h2 style="text-align: center;">Admi1n Login</h2>
 <div align="center">
-<form:form method="POST" action="/ipcs/adminLogin">
+<form:form method="POST" action="/ipcs_control/adminLogin">
    <table>
     <tr>
         <td><form:label path="account_name">Name</form:label></td>

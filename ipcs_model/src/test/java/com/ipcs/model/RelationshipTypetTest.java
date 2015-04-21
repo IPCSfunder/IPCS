@@ -7,7 +7,7 @@ import org.junit.Test;
 public class RelationshipTypetTest extends SpringDBUnit {
 
     @Test
-    public void testInsertSchoolType() {
+    public void testInsertRelationshipType() {
         Session session = sessionFactory.openSession();
 
         session.beginTransaction();
