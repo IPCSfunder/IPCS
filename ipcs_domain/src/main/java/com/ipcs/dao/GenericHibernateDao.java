@@ -13,7 +13,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Criterion;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.ipcs.model.BasicObject;
+import com.ipcs.model.Base.BasicObject;
 
 /**
  * @author Chen Chao
