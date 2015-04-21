@@ -3,6 +3,7 @@ CREATE TABLE IF NOT EXISTS `ipcs`.`contact` (
   `address` VARCHAR(255) NULL,
   `postcode` VARCHAR(45) NULL,
   `mobile_number` VARCHAR(45) NULL,
+  `contact_name` VARCHAR(45) NULL,
   `relationship_type_fk` INT NULL,
   `primary_contact` TINYINT(1) NULL,
   `person_fk` INT NULL,
