@@ -8,25 +8,37 @@
     </style>
 </head>
 <body>
-<form:form method="POST" action="/ipcs/persistChildren">
+<h2 style="text-align: center;">Add Child Details</h2>
+
+<form name="htmlform" method="post" action="/ipcs/persistChildren">
     <table align="center">
         <tr>
-            <td><form:label path="account_name">Name</form:label></td>
-            <td><form:input path="account_name" /></td>
-
-            <td><form:label path="password_hash">Passw2ord</form:label></td>
-            <td><form:input path="password_hash" /></td>
+            <td><label for="fist_name">First Name</label></td>
+            <td><input  type="text" name="fist_name"/></td>
+            <td width="150px"></td>
+            <td><label for="last_name">Last Name</label></td>
+            <td><input  type="text" name="last_name"/></td>
         </tr>
-        <tr>
-            <td><form:label path="roles[].name">Role</form:label></td>
-            <td><form:input path="roles[].name" /></td>
 
-        </tr>
         <tr>
-            <td colspan="2">
+            <td><label for="date_of_birth">Date of Birth </label></td>
+            <td><input  type="text" name="date_of_birth"/> </td>
+            <td width="150px"></td>
+            <td><label for="sex">Gender</label></td>
+            <td><input  type="text" name="sex"/></td>
+        </tr>
+
+
+        <tr>
+            <td><label for="address">Home Address </label></td>
+            <td colspan="4"><input  type="text" name="address"/> </td>
+        </tr>
+
+        <tr>
+            <td colspan="5" align="center">
                 <input type="submit" value="Submit"/>
             </td>
         </tr>
     </table>
-</form:form>
+</form>
 </body>
