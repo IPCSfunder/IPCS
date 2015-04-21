@@ -1,6 +1,7 @@
 package com.ipcs.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -8,6 +9,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.ipcs.model.Person;
@@ -44,13 +46,23 @@ public class AdminController {
     }
 
     @RequestMapping(value = "/addChildren", method = RequestMethod.GET)
-    public ModelAndView student() {
-        return new ModelAndView("addChildren", "command", new Person());
+    public String student() {
+        return "addChildren";
     }
 
+
+
+
     @RequestMapping(value = "/persistChildren", method = RequestMethod.POST)
-    public String addStudent(@ModelAttribute Person children, ModelMap model) {
-        adminservice.addPerson(children);
+    public String addStudent(@RequestParam Map<String,String> requestParams) {
+        System.out.print(requestParams.get("accountName"));
+
+//        Person children = new Person();
+//        children.setAccount_name(requestParams.get("accountName"));
+//        children.setPassword_hash(requestParams.get("password_hash"));
+//        Role role = new Role(requestParams.get("roleName"));
+//        children.addRole(role);
+//        adminservice.addPerson(children);
         return "navigator";
     }
 
