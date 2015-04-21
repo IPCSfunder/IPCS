@@ -6,6 +6,7 @@
 	<packaging>pom</packaging>
 	<version>1.0-SNAPSHOT</version>
 	<modules>
+		<module>ipcs_service</module>
 		<module>ipcs_core</module>
 		<module>ipcs_model</module>
 		<module>ipcs_domain</module>
@@ -15,7 +16,7 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<slf4jVersion>1.5.11</slf4jVersion>
-		<spring.version>3.2.3.RELEASE</spring.version>
+		<spring.version>4.1.6.RELEASE</spring.version>
 	</properties>
 
 	<dependencies>
