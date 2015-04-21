@@ -17,13 +17,13 @@ public class ActivityTest extends SpringDBUnit {
         testInsertActivity();
         testUpdateActivity();
         testQueryActivity();
+        testDelete();
     }
 
 
     public void testInsertActivity() {
         Session session = sessionFactory.openSession();
         session.beginTransaction();
-
         Person person = (Person) session.get(Person.class, 3l);
         Activity activity = new Activity.ActivityBuilder().withName("Language").withDescription("Language").withHost(person).withLocation("PUNGGOL").withStartDate(new Date()).builder();
         Person child = (Person) session.get(Person.class, 2l);
@@ -54,12 +54,18 @@ public class ActivityTest extends SpringDBUnit {
     public void testQueryActivity() {
         Session session = sessionFactory.openSession();
         session.beginTransaction();
-        Query cr = session.createQuery("select p from Activity a inner join a.persons p where a.name = 'Chemical' ");
+        Query cr = session.createQuery("select p from Activity a left join a.persons p where a.name = 'Chemical' ");
         Person person = (Person)cr.list().get(0);
         session.getTransaction().commit();
         Assert.assertEquals("Person", person.getAccount_name());
-
     }
 
-
+    public void testDelete(){
+        Session session = sessionFactory.openSession();
+        session.beginTransaction();
+        Query cr = session.createQuery("select a from Activity a where a.name = 'Chemical' ");
+        Activity activity = (Activity)cr.list().get(0);
+        session.delete(activity);
+        session.getTransaction().commit();
+    }
 }  

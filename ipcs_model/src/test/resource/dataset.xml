@@ -43,8 +43,6 @@
 
 	<message message_objid="1" header="hello" content="hello ipcs!" message_type_fk="1"></message>
 
-	<user_message user_messages_objid="1" from_user="1" to_user="2" message_fk="1"></user_message>
-	<user_message user_messages_objid="2" from_user="1" to_user="3" message_fk="1"></user_message>
 
 	<relationship_type relationship_type_objid="1" name="PARENT"></relationship_type>
 	<relationship_type relationship_type_objid="2" name="TEACHER"></relationship_type>
@@ -52,10 +50,6 @@
 	<relationship relationship_objid = "1" whose="2" iswho="3" relationship_type_fk="2"></relationship>
 
 	<contact contact_objid="1" address="Punggol Streee" postcode="1234223" mobile_number="198767654" relationship_type_fk="1" primary_contact="1" person_fk="3" contact_name="Child_Parent"/>
-
-	<class class_objid="1" name="Math" teacher="3"/>
-
-	<children_class children_class_objid = "1" children_fk="2" class_fk="1"></children_class>
 
 	<activity activity_objid="1" name="Math" location="PUNGGOL" description="math" start_time="2015-05-20" host="3"></activity>
 

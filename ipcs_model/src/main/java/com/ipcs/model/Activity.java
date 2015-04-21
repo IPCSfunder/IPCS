@@ -147,6 +147,4 @@ public class Activity extends BasicObject {
     public String toString() {
         return "Activity start time is " + startTime + "and  name is " + name + " and location is " + location + super.toString();
     }
-
-
 }

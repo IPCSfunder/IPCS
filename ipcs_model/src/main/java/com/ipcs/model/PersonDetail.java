@@ -123,6 +123,7 @@ public class PersonDetail extends BasicObject {
 		this.person = person;
 	}
 
+
 	public Sex getSex() {
 		return sex;
 	}

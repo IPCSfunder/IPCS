@@ -54,6 +54,6 @@
             <column name="date_modified"/>
         </property>
 
-        <one-to-one name="person" property-ref="personDetail" cascade ="all-delete-orphan"/>
+        <one-to-one name="person" property-ref="personDetail"/>
     </class>
 </hibernate-mapping>

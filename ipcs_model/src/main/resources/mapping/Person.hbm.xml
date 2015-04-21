@@ -33,12 +33,6 @@
             <many-to-many class="com.ipcs.model.Activity" column="activity_fk"/>
         </set>
 
-        <set name="messages" table="user_message" lazy="true" cascade="all-delete-orphan">
-            <key column="from_user"/>
-            <many-to-many class="com.ipcs.model.Message" column="message_fk"/>
-        </set>
-
-
         <set name="relationships" cascade="all-delete-orphan" lazy="true" inverse="true">
             <key column="whose"/>
             <one-to-many class="com.ipcs.model.Relationship"/>
@@ -49,11 +43,6 @@
             <key column="person_fk"/>
             <many-to-many class="com.ipcs.model.School" column="school_fk"/>
         </set>
-
-        <!--<set name="schoolClasses" table="children_class" lazy="true">
-            <key column="children_fk"/>
-            <many-to-many class="com.ipcs.model.Class" column="class_fk"/>
-        </set>-->
 
         <set name="contacts" cascade="all-delete-orphan" lazy="true">
             <key column="person_fk"/>

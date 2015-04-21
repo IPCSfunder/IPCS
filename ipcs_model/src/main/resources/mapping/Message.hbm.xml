@@ -37,11 +37,8 @@
         class="com.ipcs.model.MessageType"/>
 
 
-        <join table="user_message" optional="true">
-            <key column="message_fk"/>
-            <many-to-one name="fromUser" column="from_user"></many-to-one>
-            <many-to-one name="toUser" column="to_user"></many-to-one>
-        </join>
+        <many-to-one name="fromUser" column="from_user" lazy="false"
+                     class="com.ipcs.model.Person"/>
 
     </class>
 </hibernate-mapping>
