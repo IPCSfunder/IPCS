@@ -1,13 +1,12 @@
 package com.ipcs.model;
 
-import java.util.HashSet;
-import java.util.Set;
+import com.ipcs.model.Base.BasicObject;
 
 /**
  * @author Chen Chao
  *
  */
-public class Relationship extends BasicObject{
+public class Relationship extends BasicObject {
 
 	private Person whose;
 

@@ -66,7 +66,7 @@ public class AdminServiceTest {
     @Test(dependsOnMethods = {"insertStudents"}, groups = "inserDummyData")
     public void testFindAllStudents() {
         List<Person> students = adminService.listAllPersonByRoleName("PUNGOL", "children");
-        Assert.assertEquals(students.size(), 3);
+        Assert.assertEquals(students.size(), 4);
     }
 
     @Test(dependsOnMethods = {"testFindAllStudents"}, groups = "inserDummyData")

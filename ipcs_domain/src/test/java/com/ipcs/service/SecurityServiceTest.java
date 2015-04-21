@@ -63,15 +63,15 @@ public class SecurityServiceTest {
     @Test(enabled=true, dependsOnMethods = {"testAuthenticateLoginInfo"})
     public void testListPermission(){
 	List<Permission> permissions= securityService.listPermission("admin");
-	Assert.assertEquals(permissions.size(), 3);
+	Assert.assertEquals(permissions.size(), 4);
     }
     
     
     @Test(dependsOnMethods = {"testListPermission"})
     public void testListRoles(){
-	List<Role> roles= securityService.listRole("admin");
+	List<Role> roles= securityService.listRole("ADMIN");
 	Assert.assertEquals(roles.size(), 1);
-	Assert.assertEquals(roles.get(0).getName(), "admin");
+	Assert.assertEquals(roles.get(0).getName(), "ADMIN");
     }
     
     @AfterClass

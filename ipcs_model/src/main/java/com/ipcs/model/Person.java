@@ -4,7 +4,8 @@ package com.ipcs.model;
  * @author Chen Chao
  */
 
-import javax.management.relation.Relation;
+import com.ipcs.model.Base.BasicObject;
+
 import java.util.HashSet;
 import java.util.Set;
 
@@ -16,19 +17,15 @@ public class Person extends BasicObject {
 
     private Set<Role> roles = new HashSet<Role>();
 
-    private Set<Class> schoolClasses = new HashSet<Class>();
-
     private Set<Contact> contacts = new HashSet<Contact>();
 
     private PersonDetail personDetail;
 
     private Set<School> schools = new HashSet<School>();
 
-    private Set<Message> messages = new HashSet<Message>();
-
     private Set<Relationship> relationships = new HashSet<Relationship>();
 
-
+    private Set<Activity> activities = new HashSet<Activity>();
 
     public Person(String name, String password) {
         super();
@@ -50,14 +47,6 @@ public class Person extends BasicObject {
     }
 
 
-
-    public void setMessages(Set<Message> messages) {
-        this.messages = messages;
-    }
-
-    public Set<Message> getMessages() {
-        return messages;
-    }
 
     public String getPassword_hash() {
         return password_hash;
@@ -100,17 +89,14 @@ public class Person extends BasicObject {
         this.roles.add(role);
     }
 
-    public Set<Class> getSchoolClasses() {
-        return schoolClasses;
+    public Set<Activity> getActivities() {
+        return activities;
     }
 
-    public void setSchoolClasses(Set<Class> schoolClasses) {
-        this.schoolClasses = schoolClasses;
+    public void setActivities(Set<Activity> activities) {
+        this.activities = activities;
     }
 
-    public void addMessage(Message message){
-        this.messages.add(message);
-    }
 
 
     public Set<Contact> getContacts() {

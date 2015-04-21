@@ -1,10 +1,12 @@
 package com.ipcs.model;
 
+import com.ipcs.model.Base.BasicObject;
+
 /**
  * @author Chen Chao
  *
  */
-public class MessageType extends BasicObject{
+public class MessageType extends BasicObject {
 
 	private String typeName;
 

@@ -1,9 +1,9 @@
 CREATE TABLE IF NOT EXISTS `ipcs`.`person_detail` (
   `person_detail_objid` INT NOT NULL AUTO_INCREMENT,
   `last_name` VARCHAR(45) NULL,
-  `fist_name` VARCHAR(45) NULL,
+  `first_name` VARCHAR(45) NULL,
   `age` INT NULL,
-  `sex` VARCHAR(1) NULL,
+  `sex` VARCHAR(10) NULL,
   `nationality` VARCHAR(45) NULL,
   `dob` DATETIME NULL,
   `nric` VARCHAR(45) NULL,

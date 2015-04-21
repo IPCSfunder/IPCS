@@ -18,8 +18,9 @@ public class RelationshipTest extends SpringDBUnit{
 		RelationshipType relationshipType = (RelationshipType)session.get(RelationshipType.class,1l);
 		relationship.setType(relationshipType);
 		Person whose = (Person)session.get(Person.class,2l);
+		Person iswho = (Person)session.get(Person.class,4l);
 		relationship.setWhose(whose);
-		relationship.setIswho(whose);
+		relationship.setIswho(iswho);
 		session.save(relationship);
 		session.getTransaction().commit();
 	}

@@ -4,10 +4,9 @@ import java.io.Serializable;
 import java.util.Collection;
 import java.util.List;
 
-import org.hibernate.Session;
 import org.hibernate.criterion.Criterion;
 
-import com.ipcs.model.BasicObject;
+import com.ipcs.model.Base.BasicObject;
 
 /**
  * @author Chen Chao

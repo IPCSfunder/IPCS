@@ -13,17 +13,19 @@ import org.junit.Test;
 
 public class PersonTest extends SpringDBUnit{
 
+
+
+
 	@Test
 	public void testInsertPersonRole() {
 		Session session = sessionFactory.openSession();
 		session.beginTransaction();
 //		Role role = new Role("Merchant4");
-		Person person = new Person("James4", "111");
+		Person person = new Person("James45", "111");
 		Role role = (Role)session.get(Role.class,1l);
 		person.addRole(role);
 		session.save(person);
 		session.getTransaction().commit();
-
 	}
 
 
@@ -36,7 +38,7 @@ public class PersonTest extends SpringDBUnit{
 		Criteria cr = session.createCriteria(Person.class).add(Restrictions.eq("objectId", 2l));
 		List<Person> list = cr.list();
 		session.getTransaction().commit();
-		Assert.assertEquals("Person", list.get(0).getAccount_name());
+		Assert.assertEquals("Child", list.get(0).getAccount_name());
 	}
 
 	@Test
@@ -46,7 +48,7 @@ public class PersonTest extends SpringDBUnit{
 		Query cr = session.createQuery("from Person where objectId = 2 ");
 		List<Person> list = cr.list();
 		session.getTransaction().commit();
-		Assert.assertEquals("Person", list.get(0).getAccount_name());
+		Assert.assertEquals("Child", list.get(0).getAccount_name());
 	}
 
 
@@ -54,9 +56,19 @@ public class PersonTest extends SpringDBUnit{
 	public void testGetRelationship() {
 		Session session = sessionFactory.openSession();
 		session.beginTransaction();
-		Person person = (Person)session.get(Person.class,3l);
+		Person person = (Person)session.get(Person.class,2l);
 		Set<Relationship> relationshipSet = person.getRelationships();
-		Assert.assertEquals(relationshipSet.iterator().next().getIswho().getAccount_name(),"Person");
+		Assert.assertEquals(relationshipSet.iterator().next().getIswho().getAccount_name(), "Teacher");
+		session.getTransaction().commit();
+
+	}
+
+	@Test
+	public void testGetMessage(){
+		Session session = sessionFactory.openSession();
+		session.beginTransaction();
+		Person person = (Person)session.get(Person.class, 1l);
+//		Assert.assertEquals(relationshipSet.iterator().next().getIswho().getAccount_name(),"Teacher");
 		session.getTransaction().commit();
 
 	}

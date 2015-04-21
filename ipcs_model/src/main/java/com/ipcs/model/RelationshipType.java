@@ -1,11 +1,13 @@
 package com.ipcs.model;
 
+import com.ipcs.model.Base.BasicObject;
+
 /**
  * @author Chen Chao
  *
  */
 public class
-		RelationshipType extends BasicObject{
+		RelationshipType extends BasicObject {
 
 	private String name;
 

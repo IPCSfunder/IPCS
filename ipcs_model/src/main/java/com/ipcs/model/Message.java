@@ -1,5 +1,7 @@
 package com.ipcs.model;
 
+import com.ipcs.model.Base.BasicObject;
+
 import java.util.Date;
 
 /**
@@ -19,8 +21,6 @@ public class Message extends BasicObject {
 
     private Person fromUser;
 
-    private Person toUser;
-
     public Message() {
     }
 
@@ -30,7 +30,6 @@ public class Message extends BasicObject {
         this.attachmentAddress = messageBuilder.attachmentAddress;
         this.messageType = messageBuilder.messageType;
         this.fromUser = messageBuilder.fromUser;
-        this.toUser = messageBuilder.toUser;
     }
 
 
@@ -41,7 +40,6 @@ public class Message extends BasicObject {
         private Date sentTime;
         private MessageType messageType;
         private Person fromUser;
-        private Person toUser;
 
         public MessageBuilder withHeader(String header){
             this.header = header;
@@ -70,11 +68,6 @@ public class Message extends BasicObject {
 
         public MessageBuilder withFromUser(Person fromUser){
             this.fromUser = fromUser;
-            return this;
-        }
-
-        public MessageBuilder withToUser(Person toUser){
-            this.toUser = toUser;
             return this;
         }
 
@@ -122,14 +115,6 @@ public class Message extends BasicObject {
 
     public void setMessageType(MessageType messageType) {
         this.messageType = messageType;
-    }
-
-    public Person getToUser() {
-        return toUser;
-    }
-
-    public void setToUser(Person toUser) {
-        this.toUser = toUser;
     }
 
     public Person getFromUser() {

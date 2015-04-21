@@ -18,7 +18,7 @@ public class PersonDetailTest extends SpringDBUnit{
 	PersonDetail personDetail = new PersonDetail.PersonBuilder().withAge(23).withDob(new Date())
 			.withFirstName("James").withLastName("Chen").withMarketOption(Boolean.valueOf(false))
 			.withNationality("Chinese").withNickName("James").withSex(Sex.MALE).build();
-	Person person = new Person("James4","111");
+	Person person = (Person) session.get(Person.class,2l);
 	personDetail.setPerson(person);
 	session.save(personDetail);
 	session.getTransaction().commit();

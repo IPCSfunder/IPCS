@@ -1,11 +1,13 @@
 package com.ipcs.model;
 
+import com.ipcs.model.Base.BasicObject;
+
 /**
  * @author Chen Chao
  *
  */
 public class
-		SchoolType extends BasicObject{
+		SchoolType extends BasicObject {
 	
 	private String name;
 
