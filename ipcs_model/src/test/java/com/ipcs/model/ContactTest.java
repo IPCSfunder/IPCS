@@ -33,8 +33,12 @@ public class ContactTest extends SpringDBUnit {
 
         Query cr = session.createQuery("from Contact where mobileNumber = '186232'");
         Contact contact = (Contact)cr.list().get(0);
+        Query cr2 = session.createQuery("select p from Contact c inner join c.person p where p.account_name = 'Person'");
+        Person person = (Person)cr2.list().get(0);
+
         session.getTransaction().commit();
         Assert.assertEquals(contact.getPerson().getAccount_name(), "Person");
+        Assert.assertEquals(person.getAccount_name(), "Person");
 
     }
 

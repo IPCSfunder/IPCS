@@ -24,10 +24,12 @@ public class ActivityTest extends SpringDBUnit {
     public void testInsertActivity() {
         Session session = sessionFactory.openSession();
         session.beginTransaction();
-        Person person = (Person) session.get(Person.class, 3l);
-        Activity activity = new Activity.ActivityBuilder().withName("Language").withDescription("Language").withHost(person).withLocation("PUNGGOL").withStartDate(new Date()).builder();
+        Person host = (Person) session.get(Person.class, 3l);
+        Activity activity = new Activity.ActivityBuilder().withName("Language").withDescription("Language").withHost(host).withLocation("PUNGGOL").withStartDate(new Date()).builder();
         Person child = (Person) session.get(Person.class, 2l);
+        Person parent = (Person) session.get(Person.class, 4l);
         activity.addPerson(child);
+        activity.addPerson(parent);
         session.save(activity);
         session.getTransaction().commit();
 
@@ -43,9 +45,7 @@ public class ActivityTest extends SpringDBUnit {
         activity.setName("Chemical");
         Person admin = (Person) session.get(Person.class, 1l);
         activity.setHost(admin);
-        HashSet<Person> persons = new HashSet<Person>();
-        persons.add(admin);
-        activity.setPersons(persons);
+        activity.addPerson(admin);
         session.update(activity);
         session.getTransaction().commit();
     }
@@ -54,10 +54,11 @@ public class ActivityTest extends SpringDBUnit {
     public void testQueryActivity() {
         Session session = sessionFactory.openSession();
         session.beginTransaction();
-        Query cr = session.createQuery("select p from Activity a left join a.persons p where a.name = 'Chemical' ");
-        Person person = (Person)cr.list().get(0);
+        Query cr = session.createQuery("select p from Activity a inner join a.persons p where a.name = 'Chemical' ");
+        Assert.assertEquals(3, cr.list().size());
+        Query cr2 = session.createQuery("select p from Activity a inner join a.host h inner join a.persons p where h.account_name = 'admin' ");
+        Assert.assertEquals(3, cr.list().size());
         session.getTransaction().commit();
-        Assert.assertEquals("Person", person.getAccount_name());
     }
 
     public void testDelete(){

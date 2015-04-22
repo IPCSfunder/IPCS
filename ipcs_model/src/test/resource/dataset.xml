@@ -54,4 +54,6 @@
 	<activity activity_objid="1" name="Math" location="PUNGGOL" description="math" start_time="2015-05-20" host="3"></activity>
 
 	<schedule></schedule>
+
+	<user_group></user_group>
 </dataset>
