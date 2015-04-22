@@ -1,6 +1,6 @@
 CREATE TABLE IF NOT EXISTS `ipcs`.`user_group` (
   `user_group_objid` INT NOT NULL AUTO_INCREMENT,
-  `name` INT NOT NULL,
+  `name` VARCHAR(255) NOT NULL,
   `orginizer` INT,
   `group_member` INT NOT NULL,
   `date_created` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
