@@ -33,6 +33,7 @@ http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
                 <value>mapping/RelationshipType.hbm.xml</value>
                 <value>mapping/Relationship.hbm.xml</value>
                 <value>mapping/Activity.hbm.xml</value>
+                <value>mapping/UserGroup.hbm.xml</value>
             </list>
         </property>
 

@@ -1,5 +1,6 @@
 package com.ipcs.model;
 
+import junit.framework.Assert;
 import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -15,6 +16,7 @@ public class MessageTest extends SpringDBUnit {
         testInsertMessage();
         testInsertMessageWithPerson();
         testUpdateMessageUser();
+        testQueryMessageUser();
         testDeleteMessage();
     }
 
@@ -54,6 +56,15 @@ public class MessageTest extends SpringDBUnit {
         session.getTransaction().commit();
     }
 
+    public void testQueryMessageUser(){
+        Session session = sessionFactory.openSession();
+        session.beginTransaction();
+        Query query =  session.createQuery("from Message m left join  fetch  m.fromUser p where p.account_name = 'Child'");
+        Assert.assertEquals("TestHeader",((Message) query.list().get(0)).getHeader());
+        session.getTransaction().commit();
+
+    }
+
     public void testDeleteMessage(){
         Session session = sessionFactory.openSession();
         session.beginTransaction();
@@ -67,4 +78,4 @@ public class MessageTest extends SpringDBUnit {
 
 
 
-}  
+}
