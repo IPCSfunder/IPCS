@@ -5,6 +5,7 @@ package com.ipcs.service;
 
 import java.util.List;
 
+import com.ipcs.model.Message;
 import org.springframework.stereotype.Service;
 
 import com.ipcs.model.Person;
@@ -39,5 +40,5 @@ public interface AdminService {
 
 	Person getAdminInfo(String adminName);
 	
-
+	List<Message> listAllMessages(String adminName);
 }
