@@ -7,6 +7,12 @@ import java.util.List;
  */
 public class LoginMsg {
 
+     /*
+       This is the message model Class for Login Webservice
+     */
+
+     // TODO add status code for login service
+
      private boolean authStatus;
      private String account;
 

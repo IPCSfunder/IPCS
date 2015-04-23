@@ -21,7 +21,7 @@ public class LoginService {
 
     @RequestMapping("*")
     public String index(){
-        return "Hello World!";
+        return "This is the index page!";
     }
 
     @RequestMapping(value= "/loginService", method = RequestMethod.GET)
