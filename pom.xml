@@ -6,11 +6,11 @@
 	<packaging>pom</packaging>
 	<version>1.0-SNAPSHOT</version>
 	<modules>
-		<module>ipcs_service</module>
 		<module>ipcs_core</module>
 		<module>ipcs_model</module>
 		<module>ipcs_domain</module>
 		<module>ipcs_control</module>
+		<module>ipcs_service</module>
 	</modules>
 
 	<properties>

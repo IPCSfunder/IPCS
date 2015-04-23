@@ -7,6 +7,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import com.ipcs.dao.MessageDao;
+import com.ipcs.model.Message;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -33,6 +35,9 @@ public class AdminServiceImpl implements AdminService {
     private RoleDao roleDao;
 
     @Autowired
+    private MessageDao MessageDao;
+
+    @Autowired
     private SchoolDao schoolDao;
 
     public void setPersonDao(PersonDao personDao) {
@@ -45,6 +50,10 @@ public class AdminServiceImpl implements AdminService {
 
     public void setSchoolDao(SchoolDao schoolDao) {
         this.schoolDao = schoolDao;
+    }
+
+    public void setMessageDao(com.ipcs.dao.MessageDao messageDao) {
+        MessageDao = messageDao;
     }
 
     @Transactional
@@ -122,6 +131,11 @@ public class AdminServiceImpl implements AdminService {
 
     @Transactional
     public Person getAdminInfo(String adminName) {
-        return personDao.find("select p from Person as p left join fetch p.schools left join fetch p.roles left join fetch p.contacts left join fetch p.personDetail where p.account_name ='" + adminName + "'").get(0);
+        return personDao.find("from Person as p left join fetch p.schools left join fetch p.roles left join fetch p.contacts left join fetch p.personDetail where p.account_name ='" + adminName + "'").get(0);
+    }
+
+    @Transactional
+    public List<Message> listAllMessages(String adminName){
+        return MessageDao.find("select s from Message m inner join m.fromUser p where p.account_name = '" + adminName + "'");
     }
 }
