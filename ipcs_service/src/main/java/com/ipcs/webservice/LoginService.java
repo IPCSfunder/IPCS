@@ -1,11 +1,14 @@
 package com.ipcs.webservice;
 
+import com.ipcs.message.LoginMsg;
 import com.ipcs.service.SecurityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 /**
  * Created by michael on 20/04/15.
@@ -22,8 +25,8 @@ public class LoginService {
     }
 
     @RequestMapping(value= "/loginService", method = RequestMethod.GET)
-    public boolean loginService(@RequestParam(value="name", defaultValue="Person") String userName,@RequestParam(value="pwd", defaultValue="11") String passWord){
+    public LoginMsg loginService(@RequestParam(value="name", defaultValue="Person") String userName,@RequestParam(value="pwd", defaultValue="11") String passWord){
         boolean authStatus = securityService.authenticateLoginInfo(userName, passWord);
-        return authStatus;
+        return new LoginMsg(authStatus,userName);
     }
 }
