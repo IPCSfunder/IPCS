@@ -28,14 +28,54 @@
             <td><input  type="text" name="sex"/></td>
         </tr>
 
+        <tr>
+            <td><label for="age">Age</label></td>
+            <td><input  type="text" name="age"/> </td>
+            <td width="150px"></td>
+            <td><label for="nationality">Nationality</label></td>
+            <td><input  type="text" name="nationality"/></td>
+        </tr>
+
 
         <tr>
+
             <td><label for="address">Home Address </label></td>
             <td colspan="4"><input  type="text" name="address"/> </td>
         </tr>
+    </table>
+    <hr />
+    <table align="center">
+        <tr>
+            <td></td>
+            <td>Name</td>
+            <td>Relationship</td>
+            <td>Mobile</td>
+        </tr>
 
         <tr>
-            <td colspan="5" align="center">
+            <td><label for="primary_contact">Primary Contact</label></td>
+            <td><input  type="text" name="primary_contact"/> </td>
+            <td><input  type="text" name="primary_relationship"/> </td>
+            <td><input  type="text" name="primary_mobile_number"/> </td>
+        </tr>
+
+        <tr>
+            <td><label for="secondary_contact">Second Contact</label></td>
+            <td><input  type="text" name="secondary_contact"/> </td>
+            <td><input  type="text" name="secondary_relationship"/> </td>
+            <td><input  type="text" name="secondary_mobile_number"/> </td>
+        </tr>
+
+
+        <tr>
+            <td><label for="teacher">Teacher</label></td>
+            <td><input  type="text" name="teacher"/> </td>
+            <td></td>
+            <td></td>
+        </tr>
+
+        <tr>
+            <td colspan="4" align="center">
                 <input type="submit" value="Submit"/>
             </td>
         </tr>

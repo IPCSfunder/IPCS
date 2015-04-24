@@ -1,8 +1,12 @@
 package com.ipcs.controller;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+import com.ipcs.model.PersonDetail;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -54,15 +58,21 @@ public class AdminController {
 
 
     @RequestMapping(value = "/persistChildren", method = RequestMethod.POST)
-    public String addStudent(@RequestParam Map<String,String> requestParams) {
-        System.out.print(requestParams.get("accountName"));
+    public String addStudent(@RequestParam Map<String,String> requestParams) throws ParseException {
+        String firstName = requestParams.get("fist_name");
+        String lastName = requestParams.get("last_name");
+        Date dateOfBirth = (new SimpleDateFormat("yyyy-mm-dd")).parse(requestParams.get("date_of_birth"));
+        PersonDetail.Sex sex = PersonDetail.Sex.MALE;
+        Integer age = Integer.valueOf(requestParams.get("age"));
+        String nationality = requestParams.get("nationality");
 
-//        Person children = new Person();
-//        children.setAccount_name(requestParams.get("accountName"));
-//        children.setPassword_hash(requestParams.get("password_hash"));
-//        Role role = new Role(requestParams.get("roleName"));
-//        children.addRole(role);
-//        adminservice.addPerson(children);
+        PersonDetail personDetail = new PersonDetail.PersonBuilder().withFirstName(firstName).withLastName(lastName).withAge(age).withDob(dateOfBirth)
+                .withSex(sex).withNationality(nationality).build();
+        Person person  = new Person();
+        person.setAccount_name(firstName+lastName);
+        person.setPassword_hash("11");
+        person.setPersonDetail(personDetail);
+        adminservice.addPerson(person);
         return "navigator";
     }
 
