@@ -58,20 +58,23 @@ public class AdminController {
 
 
     @RequestMapping(value = "/persistChildren", method = RequestMethod.POST)
-    public String addStudent(@RequestParam Map<String,String> requestParams) throws ParseException {
+    public String addStudent(@RequestParam Map<String,String> requestParams,HttpSession session) throws ParseException {
+        School school = ((Person) session.getAttribute("authenticatedAdmin")).getSchools().iterator().next();
         String firstName = requestParams.get("fist_name");
         String lastName = requestParams.get("last_name");
         Date dateOfBirth = (new SimpleDateFormat("yyyy-mm-dd")).parse(requestParams.get("date_of_birth"));
-        PersonDetail.Sex sex = PersonDetail.Sex.MALE;
+        PersonDetail.Sex sex = requestParams.get("sex")=="FEMALE"?PersonDetail.Sex.FEMALE:PersonDetail.Sex.MALE;
         Integer age = Integer.valueOf(requestParams.get("age"));
         String nationality = requestParams.get("nationality");
-
         PersonDetail personDetail = new PersonDetail.PersonBuilder().withFirstName(firstName).withLastName(lastName).withAge(age).withDob(dateOfBirth)
                 .withSex(sex).withNationality(nationality).build();
         Person person  = new Person();
-        person.setAccount_name(firstName+lastName);
+        Role role = adminservice.getRoleByName("CHILDREN");
+        person.setAccount_name(firstName + lastName);
         person.setPassword_hash("11");
         person.setPersonDetail(personDetail);
+        person.getRoles().add(role);
+        person.addSchool(school);
         adminservice.addPerson(person);
         return "navigator";
     }
@@ -90,7 +93,7 @@ public class AdminController {
     @RequestMapping(value = "/listChildren", method = RequestMethod.GET)
     public ModelAndView listStudent(HttpSession session) {
         School school = ((Person) session.getAttribute("authenticatedAdmin")).getSchools().iterator().next();
-        List<Person> students = adminservice.listAllPersonByRoleName(school.getName(), "children");
+        List<Person> students = adminservice.listAllPersonByRoleName(school.getName(), "CHILDREN");
         return new ModelAndView("listChildren", "command", students);
     }
 

@@ -22,10 +22,14 @@
 
         <tr>
             <td><label for="date_of_birth">Date of Birth </label></td>
-            <td><input  type="text" name="date_of_birth"/> </td>
+            <td><input name="date_of_birth" min="1980-01-01" max="2013-01-01" type="date">
+            </td>
             <td width="150px"></td>
             <td><label for="sex">Gender</label></td>
-            <td><input  type="text" name="sex"/></td>
+            <td><input type="radio" name="sex" value="MALE"> Male
+                <input type="radio" name="sex" value="FEMALE"> Female</td>
+
+
         </tr>
 
         <tr>
@@ -33,17 +37,26 @@
             <td><input  type="text" name="age"/> </td>
             <td width="150px"></td>
             <td><label for="nationality">Nationality</label></td>
-            <td><input  type="text" name="nationality"/></td>
+            <td>
+                <select name="nationality">
+                    <option value="Singapore" selected>Singapore</option>
+                    <option value="China">China</option>
+                    <option value="America">America</option>
+                </select>
+
+            </td>
         </tr>
 
 
         <tr>
-
             <td><label for="address">Home Address </label></td>
-            <td colspan="4"><input  type="text" name="address"/> </td>
+            <td colspan="4"><input size="50%" type="text" name="address"/> </td>
         </tr>
     </table>
     <hr />
+    <br/>
+    <br/>
+    <br/>
     <table align="center">
         <tr>
             <td></td>
