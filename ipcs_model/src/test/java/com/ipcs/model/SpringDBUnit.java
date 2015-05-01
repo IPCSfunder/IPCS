@@ -43,8 +43,11 @@ public abstract class SpringDBUnit{
     @Before
     public void setUp() throws Exception {
         IDataSet dataSet = new FlatXmlDataSetBuilder().build(new File(
-                "src/test/resource/dataset.xml"
+                "ipcs_model/src/test/resource/dataset.xml"
         ));
+//        IDataSet dataSet = new FlatXmlDataSetBuilder().build(this.getClass().getClassLoader().getResourceAsStream("dataset.xml"));
+
+
         IDatabaseConnection dbConn = new DatabaseDataSourceConnection(dataSource);
         DatabaseOperation.REFRESH.execute(dbConn, dataSet);
     }

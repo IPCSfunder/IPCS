@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+import com.ipcs.controller.wrapper.AdminWrapper;
 import com.ipcs.model.PersonDetail;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -60,17 +61,10 @@ public class AdminController {
     @RequestMapping(value = "/persistChildren", method = RequestMethod.POST)
     public String addStudent(@RequestParam Map<String,String> requestParams,HttpSession session) throws ParseException {
         School school = ((Person) session.getAttribute("authenticatedAdmin")).getSchools().iterator().next();
-        String firstName = requestParams.get("fist_name");
-        String lastName = requestParams.get("last_name");
-        Date dateOfBirth = (new SimpleDateFormat("yyyy-mm-dd")).parse(requestParams.get("date_of_birth"));
-        PersonDetail.Sex sex = requestParams.get("sex")=="FEMALE"?PersonDetail.Sex.FEMALE:PersonDetail.Sex.MALE;
-        Integer age = Integer.valueOf(requestParams.get("age"));
-        String nationality = requestParams.get("nationality");
-        PersonDetail personDetail = new PersonDetail.PersonBuilder().withFirstName(firstName).withLastName(lastName).withAge(age).withDob(dateOfBirth)
-                .withSex(sex).withNationality(nationality).build();
+        PersonDetail personDetail = AdminWrapper.personDetailWrapper(requestParams);
         Person person  = new Person();
         Role role = adminservice.getRoleByName("CHILDREN");
-        person.setAccount_name(firstName + lastName);
+        person.setAccount_name(personDetail.getFirstName()+personDetail.getLastName());
         person.setPassword_hash("11");
         person.setPersonDetail(personDetail);
         person.getRoles().add(role);

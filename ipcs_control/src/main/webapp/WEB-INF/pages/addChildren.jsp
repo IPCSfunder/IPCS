@@ -68,17 +68,40 @@
         <tr>
             <td><label for="primary_contact">Primary Contact</label></td>
             <td><input  type="text" name="primary_contact"/> </td>
-            <td><input  type="text" name="primary_relationship"/> </td>
+            <td><
+                <select name="primary_relationship">
+                    <option value="TEACHER" selected>Physics</option>
+                    <option value="MOTHER" >Mother</option>
+                    <option value="FATHER" >Fatyher</option>
+                    <option value="GRANDMOTHER" >Grandmother</option>
+                    <option value="GRANDFATHER" >Grandfather</option>
+                </select>
+
+            </td>
             <td><input  type="text" name="primary_mobile_number"/> </td>
         </tr>
 
         <tr>
             <td><label for="secondary_contact">Second Contact</label></td>
             <td><input  type="text" name="secondary_contact"/> </td>
-            <td><input  type="text" name="secondary_relationship"/> </td>
+            <td>
+                <select name="secondary_relationship">
+                    <option value="TEACHER" selected>Physics</option>
+                    <option value="MOTHER" >Mother</option>
+                    <option value="FATHER" >Fatyher</option>
+                    <option value="GRANDMOTHER" >Grandmother</option>
+                    <option value="GRANDFATHER" >Grandfather</option>
+                </select>
+
+            </td>
             <td><input  type="text" name="secondary_mobile_number"/> </td>
         </tr>
 
+
+        <hr />
+        <br/>
+        <br/>
+        <br/>
 
         <tr>
             <td><label for="teacher">Teacher</label></td>

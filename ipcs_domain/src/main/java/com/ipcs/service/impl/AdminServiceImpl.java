@@ -7,18 +7,12 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import com.ipcs.dao.MessageDao;
-import com.ipcs.model.Message;
+import com.ipcs.dao.*;
+import com.ipcs.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.ipcs.dao.PersonDao;
-import com.ipcs.dao.RoleDao;
-import com.ipcs.dao.SchoolDao;
-import com.ipcs.model.Person;
-import com.ipcs.model.Role;
-import com.ipcs.model.School;
 import com.ipcs.service.AdminService;
 
 /**
@@ -30,6 +24,8 @@ public class AdminServiceImpl implements AdminService {
     @Autowired
     private PersonDao personDao;
 
+    @Autowired
+    private ActivityDao activityDao;
 
     @Autowired
     private RoleDao roleDao;
@@ -39,6 +35,10 @@ public class AdminServiceImpl implements AdminService {
 
     @Autowired
     private SchoolDao schoolDao;
+
+    public void setActivityDao(ActivityDao activityDao) {
+        this.activityDao = activityDao;
+    }
 
     public void setPersonDao(PersonDao personDao) {
         this.personDao = personDao;
@@ -138,4 +138,15 @@ public class AdminServiceImpl implements AdminService {
     public List<Message> listAllMessages(String adminName){
         return MessageDao.find("select s from Message m inner join m.fromUser p where p.account_name = '" + adminName + "'");
     }
+
+    @Transactional
+    public List<Activity> listAllActivities(Long studentId){
+        return activityDao.find("from Activity m inner join fetch m.persons p where p.objectId = '" + studentId + "'");
+    }
+
+    @Transactional
+    public List<Person> listAllChild(Long parentId){
+        return activityDao.find("from Activity m inner join fetch m.persons p where p.objectId = '" + studentId + "'");
+    }
+
 }

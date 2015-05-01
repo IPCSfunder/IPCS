@@ -6,6 +6,7 @@ package com.ipcs.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.ipcs.model.Activity;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.testng.Assert;
@@ -74,6 +75,14 @@ public class AdminServiceTest {
         Person admin = adminService.getAdminInfo("admin");
         Assert.assertEquals(admin.getSchools().size(), 1);
         Assert.assertEquals(admin.getSchools().iterator().next().getName(), "PUNGOL");
+    }
+
+
+    @Test(groups = "queryActivities")
+    public void testQueryActivies() {
+        List<Activity> activities = adminService.listAllActivities(2l);
+        Assert.assertEquals(activities.size(), 1);
+        Assert.assertEquals(activities.iterator().next().getName(), "Math");
     }
 
 
