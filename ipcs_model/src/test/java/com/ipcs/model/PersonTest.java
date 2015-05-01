@@ -58,7 +58,13 @@ public class PersonTest extends SpringDBUnit{
 		session.beginTransaction();
 		Person person = (Person)session.get(Person.class,2l);
 		Set<Relationship> relationshipSet = person.getRelationships();
-		Assert.assertEquals(relationshipSet.iterator().next().getIswho().getAccount_name(), "Teacher");
+		Relationship teacherRelationship =null;
+		for(Relationship relationship:relationshipSet){
+			if(relationship.getType().getName().equals("TEACHER"))
+				teacherRelationship = relationship;
+		}
+
+		Assert.assertEquals(teacherRelationship.getIswho().getAccount_name(), "Teacher");
 		session.getTransaction().commit();
 
 	}

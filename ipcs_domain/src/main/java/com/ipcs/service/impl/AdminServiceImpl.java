@@ -7,18 +7,12 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import com.ipcs.dao.MessageDao;
-import com.ipcs.model.Message;
+import com.ipcs.dao.*;
+import com.ipcs.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.ipcs.dao.PersonDao;
-import com.ipcs.dao.RoleDao;
-import com.ipcs.dao.SchoolDao;
-import com.ipcs.model.Person;
-import com.ipcs.model.Role;
-import com.ipcs.model.School;
 import com.ipcs.service.AdminService;
 
 /**
@@ -30,6 +24,11 @@ public class AdminServiceImpl implements AdminService {
     @Autowired
     private PersonDao personDao;
 
+    @Autowired
+    private RelationshipTypeDao relationshipTypeDao;
+
+    @Autowired
+    private ActivityDao activityDao;
 
     @Autowired
     private RoleDao roleDao;
@@ -39,6 +38,10 @@ public class AdminServiceImpl implements AdminService {
 
     @Autowired
     private SchoolDao schoolDao;
+
+    public void setActivityDao(ActivityDao activityDao) {
+        this.activityDao = activityDao;
+    }
 
     public void setPersonDao(PersonDao personDao) {
         this.personDao = personDao;
@@ -54,6 +57,10 @@ public class AdminServiceImpl implements AdminService {
 
     public void setMessageDao(com.ipcs.dao.MessageDao messageDao) {
         MessageDao = messageDao;
+    }
+
+    public void setRelationshipTypeDao(RelationshipTypeDao relationshipTypeDao) {
+        this.relationshipTypeDao = relationshipTypeDao;
     }
 
     @Transactional
@@ -115,9 +122,14 @@ public class AdminServiceImpl implements AdminService {
 
     @Transactional
     public Role getRoleByName(String name) {
-        System.out.print(name);
         return roleDao.find("select r from Role as r where  r.name = '" + name + "'").get(0);
     }
+
+    @Transactional
+    public RelationshipType getRelationshipTypeByName(String name) {
+        return relationshipTypeDao.find("select r from RelationshipType as r where  r.name = '" + name + "'").get(0);
+    }
+
 
     @Transactional
     public School getSchoolByName(String name) {
@@ -136,6 +148,17 @@ public class AdminServiceImpl implements AdminService {
 
     @Transactional
     public List<Message> listAllMessages(String adminName){
-        return MessageDao.find("select s from Message m inner join m.fromUser p where p.account_name = '" + adminName + "'");
+        return MessageDao.find("select m from Message m inner join m.fromUser p where p.account_name = '" + adminName + "'");
     }
+
+    @Transactional
+    public List<Activity> listAllActivities(Long studentId){
+        return activityDao.find("from Activity m inner join fetch m.persons p where p.objectId = '" + studentId + "'");
+    }
+
+    @Transactional
+    public List<Person> listAllChild(Long parentId){
+        return personDao.find("select w from Relationship r inner join r.whose w inner join r.type t inner join r.iswho i where t.name = 'PARENT' and i.objectId = '"+parentId+"'");
+    }
+
 }
