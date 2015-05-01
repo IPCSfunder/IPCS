@@ -104,9 +104,7 @@ public class Contact extends BasicObject {
 	public int hashCode(){
 		final int facter = 31;
 		int result =1;
-		result = facter*17+address.hashCode();
 		result = result*17+mobileNumber.hashCode();
-		result = result*17+emailAddress.hashCode();
 		return result;
 	}
 	
@@ -118,9 +116,7 @@ public class Contact extends BasicObject {
 		if(obj.getClass() != Person.class)
 			return false;
 		Contact contact = (Contact)obj;
-		return (contact.getAddress().equals(this.address))
-				&&(contact.getEmailAddress().equals(this.emailAddress))
-				&&(contact.getMobileNumber().equals(this.mobileNumber));
+		return (contact.getMobileNumber().equals(this.mobileNumber));
 	}
 	
 	public String toString(){

@@ -25,6 +25,9 @@ public class AdminServiceImpl implements AdminService {
     private PersonDao personDao;
 
     @Autowired
+    private RelationshipTypeDao relationshipTypeDao;
+
+    @Autowired
     private ActivityDao activityDao;
 
     @Autowired
@@ -54,6 +57,10 @@ public class AdminServiceImpl implements AdminService {
 
     public void setMessageDao(com.ipcs.dao.MessageDao messageDao) {
         MessageDao = messageDao;
+    }
+
+    public void setRelationshipTypeDao(RelationshipTypeDao relationshipTypeDao) {
+        this.relationshipTypeDao = relationshipTypeDao;
     }
 
     @Transactional
@@ -115,9 +122,14 @@ public class AdminServiceImpl implements AdminService {
 
     @Transactional
     public Role getRoleByName(String name) {
-        System.out.print(name);
         return roleDao.find("select r from Role as r where  r.name = '" + name + "'").get(0);
     }
+
+    @Transactional
+    public RelationshipType getRelationshipTypeByName(String name) {
+        return relationshipTypeDao.find("select r from RelationshipType as r where  r.name = '" + name + "'").get(0);
+    }
+
 
     @Transactional
     public School getSchoolByName(String name) {

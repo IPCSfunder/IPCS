@@ -1,13 +1,10 @@
 package com.ipcs.controller;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
-
 import com.ipcs.controller.wrapper.AdminWrapper;
-import com.ipcs.model.PersonDetail;
+import com.ipcs.model.*;
+import com.ipcs.service.AdminService;
+import com.ipcs.service.RegistoryService;
+import com.ipcs.service.SecurityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -17,14 +14,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.ipcs.model.Person;
-import com.ipcs.model.Role;
-import com.ipcs.model.School;
-import com.ipcs.service.AdminService;
-import com.ipcs.service.RegistoryService;
-import com.ipcs.service.SecurityService;
-
 import javax.servlet.http.HttpSession;
+import java.text.ParseException;
+import java.util.List;
+import java.util.Map;
 
 @Controller
 public class AdminController {
@@ -56,19 +49,23 @@ public class AdminController {
     }
 
 
-
-
     @RequestMapping(value = "/persistChildren", method = RequestMethod.POST)
-    public String addStudent(@RequestParam Map<String,String> requestParams,HttpSession session) throws ParseException {
+    public String addStudent(@RequestParam Map<String, String> requestParams, HttpSession session) throws ParseException {
         School school = ((Person) session.getAttribute("authenticatedAdmin")).getSchools().iterator().next();
         PersonDetail personDetail = AdminWrapper.personDetailWrapper(requestParams);
-        Person person  = new Person();
+        Person person = new Person();
         Role role = adminservice.getRoleByName("CHILDREN");
-        person.setAccount_name(personDetail.getFirstName()+personDetail.getLastName());
+        person.setAccount_name(personDetail.getFirstName() + personDetail.getLastName());
         person.setPassword_hash("11");
         person.setPersonDetail(personDetail);
         person.getRoles().add(role);
         person.addSchool(school);
+        Contact primaryContact = AdminWrapper.primaryContactWrapper(requestParams, adminservice);
+        Contact secondaryContact = AdminWrapper.secondaryContactWrapper(requestParams, adminservice);
+        if (null != primaryContact)
+            person.addContact(primaryContact);
+        if (null != secondaryContact)
+            person.addContact(secondaryContact);
         adminservice.addPerson(person);
         return "navigator";
     }

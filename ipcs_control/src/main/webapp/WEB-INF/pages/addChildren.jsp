@@ -53,24 +53,27 @@
             <td colspan="4"><input size="50%" type="text" name="address"/> </td>
         </tr>
     </table>
+    <br/>
     <hr />
-    <br/>
-    <br/>
     <br/>
     <table align="center">
         <tr>
             <td></td>
+
             <td>Name</td>
+            <td width="150px"></td>
             <td>Relationship</td>
             <td>Mobile</td>
+
         </tr>
 
         <tr>
             <td><label for="primary_contact">Primary Contact</label></td>
-            <td><input  type="text" name="primary_contact"/> </td>
-            <td><
+            <td><input  type="text" name="primary_contact_name"/> </td>
+            <td width="150px"></td>
+            <td>
                 <select name="primary_relationship">
-                    <option value="TEACHER" selected>Physics</option>
+                    <option value="TEACHER" selected>Teacher</option>
                     <option value="MOTHER" >Mother</option>
                     <option value="FATHER" >Fatyher</option>
                     <option value="GRANDMOTHER" >Grandmother</option>
@@ -83,10 +86,11 @@
 
         <tr>
             <td><label for="secondary_contact">Second Contact</label></td>
-            <td><input  type="text" name="secondary_contact"/> </td>
+            <td><input  type="text" name="secondary_contact_name"/> </td>
+            <td width="150px"></td>
             <td>
                 <select name="secondary_relationship">
-                    <option value="TEACHER" selected>Physics</option>
+                    <option value="TEACHER" selected>Teacher</option>
                     <option value="MOTHER" >Mother</option>
                     <option value="FATHER" >Fatyher</option>
                     <option value="GRANDMOTHER" >Grandmother</option>
@@ -97,21 +101,16 @@
             <td><input  type="text" name="secondary_mobile_number"/> </td>
         </tr>
 
-
-        <hr />
-        <br/>
-        <br/>
-        <br/>
-
         <tr>
             <td><label for="teacher">Teacher</label></td>
             <td><input  type="text" name="teacher"/> </td>
+            <td width="150px"></td>
             <td></td>
             <td></td>
         </tr>
 
         <tr>
-            <td colspan="4" align="center">
+            <td colspan="5" align="center">
                 <input type="submit" value="Submit"/>
             </td>
         </tr>

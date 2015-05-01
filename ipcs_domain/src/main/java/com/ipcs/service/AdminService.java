@@ -41,4 +41,6 @@ public interface AdminService {
 	List<Activity> listAllActivities(Long studentId);
 
 	List<Person> listAllChild(Long parentId);
+
+	RelationshipType getRelationshipTypeByName(String name);
 }
