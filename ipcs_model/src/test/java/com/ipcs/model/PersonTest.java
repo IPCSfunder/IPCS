@@ -60,7 +60,7 @@ public class PersonTest extends SpringDBUnit{
 		Set<Relationship> relationshipSet = person.getRelationships();
 		Relationship teacherRelationship =null;
 		for(Relationship relationship:relationshipSet){
-			if(relationship.getType().equals("TEACHER"))
+			if(relationship.getType().getName().equals("TEACHER"))
 				teacherRelationship = relationship;
 		}
 

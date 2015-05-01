@@ -78,12 +78,19 @@ public class AdminServiceTest {
     }
 
 
-    @Test(groups = "queryActivities")
+      @Test(groups = "queryActivities")
     public void testQueryActivies() {
         List<Activity> activities = adminService.listAllActivities(2l);
         Assert.assertEquals(activities.size(), 1);
         Assert.assertEquals(activities.iterator().next().getName(), "Math");
     }
+
+    @Test(groups = "listAllChild")
+    public void tesListAllChild() {
+        List<Person> activities = adminService.listAllChild(4l);
+        Assert.assertEquals(activities.size(), 2);
+    }
+
 
 
     @AfterClass

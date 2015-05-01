@@ -136,7 +136,7 @@ public class AdminServiceImpl implements AdminService {
 
     @Transactional
     public List<Message> listAllMessages(String adminName){
-        return MessageDao.find("select s from Message m inner join m.fromUser p where p.account_name = '" + adminName + "'");
+        return MessageDao.find("select m from Message m inner join m.fromUser p where p.account_name = '" + adminName + "'");
     }
 
     @Transactional
@@ -146,7 +146,7 @@ public class AdminServiceImpl implements AdminService {
 
     @Transactional
     public List<Person> listAllChild(Long parentId){
-        return activityDao.find("from Activity m inner join fetch m.persons p where p.objectId = '" + studentId + "'");
+        return personDao.find("select w from Relationship r inner join r.whose w inner join r.type t inner join r.iswho i where t.name = 'PARENT' and i.objectId = '"+parentId+"'");
     }
 
 }
