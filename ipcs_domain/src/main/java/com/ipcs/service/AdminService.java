@@ -5,12 +5,8 @@ package com.ipcs.service;
 
 import java.util.List;
 
-import com.ipcs.model.Message;
+import com.ipcs.model.*;
 import org.springframework.stereotype.Service;
-
-import com.ipcs.model.Person;
-import com.ipcs.model.Role;
-import com.ipcs.model.School;
 
 /**
  * @author Chen Chao
@@ -41,4 +37,10 @@ public interface AdminService {
 	Person getAdminInfo(String adminName);
 	
 	List<Message> listAllMessages(String adminName);
+
+	List<Activity> listAllActivities(Long studentId);
+
+	List<Person> listAllChild(Long parentId);
+
+	RelationshipType getRelationshipTypeByName(String name);
 }
