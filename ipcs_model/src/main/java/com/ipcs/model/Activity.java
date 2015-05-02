@@ -2,9 +2,7 @@ package com.ipcs.model;
 
 import com.ipcs.model.Base.BasicObject;
 
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 /**
  * @author Chen Chao
@@ -21,7 +19,7 @@ public class Activity extends BasicObject {
 
     private Person host;
 
-    private Set<Person> persons = new HashSet<Person>();
+    private List<Person> persons = new ArrayList<Person>();
 
     public Activity() {
     }
@@ -112,7 +110,7 @@ public class Activity extends BasicObject {
         this.startTime = startTime;
     }
 
-    public Set<Person> getPersons() {
+    public List<Person> getPersons() {
         return persons;
     }
 
@@ -120,7 +118,7 @@ public class Activity extends BasicObject {
         this.persons.add(person);
     }
 
-    public void setPersons(Set<Person> persons) {
+    public void setPersons(List<Person> persons) {
         this.persons = persons;
     }
 

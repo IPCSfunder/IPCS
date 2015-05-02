@@ -129,6 +129,12 @@
 			<version>4.1.9.Final</version>
 		</dependency>
 
+		<!-- Hibernate Validator -->
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-validator</artifactId>
+			<version>4.2.0.Final</version>
+		</dependency>
 
 		<!-- Hibernate library dependecy start -->
 		<dependency>

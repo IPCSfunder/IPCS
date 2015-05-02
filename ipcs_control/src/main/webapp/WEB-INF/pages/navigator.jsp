@@ -12,7 +12,7 @@
 <div align="center">
 <ul>
     <li><a href="<c:url value='/listChildren' />">Children</a></li>
-    <li><a href="<c:url value='/listTeacher' />">Staff</a></li>
+    <li><a href="<c:url value='/listStaff' />">Staff</a></li>
     <li><a href="<c:url value='/listMessage' />">Message</a></li>
     <li><a href="<c:url value='/listSchedule' />">Schedule</a></li>
 </ul>

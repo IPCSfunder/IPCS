@@ -3,24 +3,22 @@
  */
 package com.ipcs.service;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.ipcs.model.Activity;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
-import org.testng.Assert;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.Test;
-
 import com.ipcs.model.Person;
 import com.ipcs.model.Role;
 import com.ipcs.model.School;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.testng.Assert;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Test;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author Chen Chao
- *
  */
 public class AdminServiceTest {
 
@@ -78,11 +76,18 @@ public class AdminServiceTest {
     }
 
 
-      @Test(groups = "queryActivities")
+    @Test(groups = "queryActivities")
     public void testQueryActivies() {
         List<Activity> activities = adminService.listAllActivities(2l);
         Assert.assertEquals(activities.size(), 1);
         Assert.assertEquals(activities.iterator().next().getName(), "Math");
+    }
+
+    @Test(groups = "queryChildrenDetail")
+    public void testQueryChildrenDetail() {
+       Person person = adminService.getChildDetail("admin");
+        Assert.assertEquals(person.getPersonDetail().getFirstName(), "DetailFirst");
+//        Assert.assertEquals(activities.iterator().next().getName(), "Math");
     }
 
     @Test(groups = "listAllChild")
@@ -92,12 +97,10 @@ public class AdminServiceTest {
     }
 
 
-
     @AfterClass
     public void tearDown() {
         adminService.deleteBatchSubodinates(adminAndStudents);
     }
-
 
 
 }

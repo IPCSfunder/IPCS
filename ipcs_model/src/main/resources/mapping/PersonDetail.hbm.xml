@@ -19,10 +19,8 @@
             <column name="age" />
         </property>
 
-        <property name="sex">
-            <type name="org.hibernate.type.EnumType">
-                <param name="enumClass">com.ipcs.model.PersonDetail$Sex</param>
-            </type>
+        <property name="sex" type="string">
+            <column name="sex" />
         </property>
 
         <property name="nationality" type="string">

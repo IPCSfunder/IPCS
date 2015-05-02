@@ -57,7 +57,7 @@ public class PersonTest extends SpringDBUnit{
 		Session session = sessionFactory.openSession();
 		session.beginTransaction();
 		Person person = (Person)session.get(Person.class,2l);
-		Set<Relationship> relationshipSet = person.getRelationships();
+		List<Relationship> relationshipSet = person.getRelationships();
 		Relationship teacherRelationship =null;
 		for(Relationship relationship:relationshipSet){
 			if(relationship.getType().getName().equals("TEACHER"))

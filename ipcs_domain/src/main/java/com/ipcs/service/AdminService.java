@@ -43,4 +43,6 @@ public interface AdminService {
 	List<Person> listAllChild(Long parentId);
 
 	RelationshipType getRelationshipTypeByName(String name);
+
+	Person getChildDetail(String childName);
 }

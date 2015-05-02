@@ -16,7 +16,7 @@ public class PersonDetail extends BasicObject {
 
 	private Integer age;
 
-	private Sex sex;
+	private String sex;
 
 	private String nationality;
 
@@ -45,10 +45,6 @@ public class PersonDetail extends BasicObject {
 		this.nric = builder.nric;
 		this.nickName = builder.nickName;
 		this.marketOption = builder.marketOption;
-	}
-	
-	public static enum Sex{
-		MALE,FEMALE
 	}
 
 	public Integer getAge() {
@@ -124,11 +120,11 @@ public class PersonDetail extends BasicObject {
 	}
 
 
-	public Sex getSex() {
+	public String getSex() {
 		return sex;
 	}
 
-	public void setSex(Sex sex) {
+	public void setSex(String sex) {
 		this.sex = sex;
 	}
 
@@ -136,7 +132,7 @@ public class PersonDetail extends BasicObject {
 		private String lastName;
 		private String firstName;
 		private Integer age;
-		private Sex sex;
+		private String sex;
 		private String nationality;
 		private Date dateOfBirth;
 		private String nric;
@@ -164,7 +160,7 @@ public class PersonDetail extends BasicObject {
 			return this;
 		}
 		
-		public PersonBuilder withSex(Sex sex){
+		public PersonBuilder withSex(String sex){
 			this.sex = sex;
 			return this;
 		}
