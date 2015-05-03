@@ -13,7 +13,6 @@ import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -65,7 +64,7 @@ public class AdminServiceTest {
     @Test(dependsOnMethods = {"insertStudents"}, groups = "inserDummyData")
     public void testFindAllStudents() {
         List<Person> students = adminService.listAllPersonByRoleName("PUNGOL", "children");
-        Assert.assertEquals(students.size(), 4);
+        Assert.assertTrue(students.size() >= 4);
     }
 
     @Test(dependsOnMethods = {"testFindAllStudents"}, groups = "inserDummyData")
@@ -76,19 +75,31 @@ public class AdminServiceTest {
     }
 
 
-    @Test(groups = "queryActivities")
+    @Test(dependsOnMethods = {"testGetAdminInfo"}, groups = "query")
     public void testQueryActivies() {
         List<Activity> activities = adminService.listAllActivities(2l);
         Assert.assertEquals(activities.size(), 1);
         Assert.assertEquals(activities.iterator().next().getName(), "Math");
     }
 
-    @Test(groups = "queryChildrenDetail")
+
+
+
+    @Test(dependsOnMethods = {"testGetAdminInfo"},groups = "query")
     public void testQueryChildrenDetail() {
-       Person person = adminService.getChildDetail("admin");
+        Person person = adminService.getChildDetail("admin");
         Assert.assertEquals(person.getPersonDetail().getFirstName(), "DetailFirst");
-//        Assert.assertEquals(activities.iterator().next().getName(), "Math");
     }
+
+
+    @Test(dependsOnGroups = {"query"},groups = "update")
+    public void testUpdateUser() {
+        Person person = adminAndStudents.get(0);
+        person.setAccount_name("admin3");
+        adminService.updatePerson(person);
+
+    }
+
 
     @Test(groups = "listAllChild")
     public void tesListAllChild() {

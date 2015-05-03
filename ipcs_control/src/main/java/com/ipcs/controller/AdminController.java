@@ -60,17 +60,21 @@ public class AdminController {
         String account_name = requestParams.get("account_name");
         if(null!=account_name){
             Person child = adminservice.getChildDetail(account_name);
-            return new ModelAndView("addChildren", "command", child);
+            return new ModelAndView("addChildren", "command", child).addObject("operation","update");
         }
         else
-            return new ModelAndView("addChildren", "command", new Person());
+            return new ModelAndView("addChildren", "command", new Person()).addObject("operation","add");
     }
 
 
     @RequestMapping(value = "/persistChild", method = RequestMethod.POST)
-    public String persistStudent(@ModelAttribute("command") @Validated Person child, BindingResult bindingResult, HttpSession session,ModelMap model) throws ParseException {
+    public String persistStudent(@ModelAttribute("command") @Validated Person child, BindingResult bindingResult, HttpSession session,@RequestParam Map<String,String> requestParamsl) throws ParseException {
         if(bindingResult.hasErrors())
             return "addChildren";
+        if("update".equals(requestParamsl.get("operation"))) {
+            adminservice.updatePerson(child);
+            return "navigator";
+        }
         School school = ((Person) session.getAttribute("authenticatedAdmin")).getSchools().iterator().next();
         child.setAccount_name(child.getPersonDetail().getFirstName()+child.getPersonDetail().getLastName());
         child.setPassword_hash("11");

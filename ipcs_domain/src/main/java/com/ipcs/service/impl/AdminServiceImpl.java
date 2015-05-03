@@ -112,7 +112,12 @@ public class AdminServiceImpl implements AdminService {
 
     @Transactional
     public void updatePerson(Person person) {
-        personDao.update(person);
+        Person persistPerson = personDao.load(person.getObjectId());
+        persistPerson.getPersonDetail().setFirstName(person.getPersonDetail().getFirstName());
+        persistPerson.getPersonDetail().setLastName(person.getPersonDetail().getLastName());
+        persistPerson.getPersonDetail().setAge(person.getPersonDetail().getAge());
+        persistPerson.getPersonDetail().setDateOfBirth(person.getPersonDetail().getDateOfBirth());
+        personDao.update(persistPerson);
     }
 
     @Transactional
