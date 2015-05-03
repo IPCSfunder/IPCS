@@ -3,17 +3,15 @@
  */
 package com.ipcs.service.impl;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
 import com.ipcs.dao.*;
 import com.ipcs.model.*;
+import com.ipcs.service.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.ipcs.service.AdminService;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author Chen Chao
@@ -70,25 +68,34 @@ public class AdminServiceImpl implements AdminService {
 
     @Transactional
     public void addPerson(Person person) {
-        Set<Role> roles = new HashSet<Role>();
+        List<Role> roles = new ArrayList<Role>();
         roles.addAll(person.getRoles());
-        Set<School> schools =  new HashSet<School>();
+        List<School> schools = new ArrayList<School>();
         schools.addAll(person.getSchools());
 
         person.evictRoles();
         person.evictSchools();
 
-        for(Role role: roles){
-            role =getRoleByName(role.getName());
-            if(null != role)
+        for (Role role : roles) {
+            role = getRoleByName(role.getName());
+            if (null != role)
                 person.addRole(role);
         }
 
-        for(School school: schools){
-            school =getSchoolByName(school.getName());
-            if(null != school)
+        for (School school : schools) {
+            school = getSchoolByName(school.getName());
+            if (null != school)
                 person.addSchool(school);
         }
+
+        List<Contact> contacts = new ArrayList<Contact>();
+        contacts = person.getContacts();
+        for (Contact contact : contacts) {
+            System.out.print("Contact"+contact);
+            RelationshipType type = getRelationshipTypeByName(contact.getRelationshipType().getName());
+            contact.setRelationshipType(type);
+        }
+
         personDao.save(person);
     }
 
@@ -143,22 +150,27 @@ public class AdminServiceImpl implements AdminService {
 
     @Transactional
     public Person getAdminInfo(String adminName) {
-        return personDao.find("from Person as p left join fetch p.schools left join fetch p.roles left join fetch p.contacts left join fetch p.personDetail where p.account_name ='" + adminName + "'").get(0);
+        return personDao.find("select p from Person as p left join p.schools left join  p.roles left join p.contacts left join p.personDetail where p.account_name ='" + adminName + "'").get(0);
     }
 
     @Transactional
-    public List<Message> listAllMessages(String adminName){
+    public List<Message> listAllMessages(String adminName) {
         return MessageDao.find("select m from Message m inner join m.fromUser p where p.account_name = '" + adminName + "'");
     }
 
     @Transactional
-    public List<Activity> listAllActivities(Long studentId){
+    public List<Activity> listAllActivities(Long studentId) {
         return activityDao.find("from Activity m inner join fetch m.persons p where p.objectId = '" + studentId + "'");
     }
 
     @Transactional
-    public List<Person> listAllChild(Long parentId){
-        return personDao.find("select w from Relationship r inner join r.whose w inner join r.type t inner join r.iswho i where t.name = 'PARENT' and i.objectId = '"+parentId+"'");
+    public List<Person> listAllChild(Long parentId) {
+        return personDao.find("select w from Relationship r inner join r.whose w inner join r.type t inner join r.iswho i where t.name = 'PARENT' and i.objectId = '" + parentId + "'");
+    }
+
+    @Transactional
+    public Person getChildDetail(String childName){
+        return personDao.find("select p from Person as p left join p.schools left join  p.roles left join p.contacts left join p.personDetail where p.account_name ='" + childName + "'").get(0);
     }
 
 }

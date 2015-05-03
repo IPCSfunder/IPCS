@@ -47,7 +47,7 @@ public class SecurityServiceTest {
     public void insertAdmin() {
 	Role role = new Role("admin");
 	School school = new School("PUNGOL");
-	Person person = DataFactory.preparePerson("admin", "password");
+	Person person = DataFactory.preparePerson("admin3", "password");
 	person.addRole(role);
 	person.addSchool(school);
 	adminService.addPerson(person);
@@ -56,20 +56,20 @@ public class SecurityServiceTest {
     
     @Test(dependsOnMethods = {"insertAdmin"})
     public void testAuthenticateLoginInfo(){
-	boolean flag= securityService.authenticateLoginInfo("admin","password");
+	boolean flag= securityService.authenticateLoginInfo("admin3","password");
 	Assert.assertTrue(flag);
     }
     
     @Test(enabled=true, dependsOnMethods = {"testAuthenticateLoginInfo"})
     public void testListPermission(){
-	List<Permission> permissions= securityService.listPermission("admin");
+	List<Permission> permissions= securityService.listPermission("admin3");
 	Assert.assertEquals(permissions.size(), 4);
     }
     
     
     @Test(dependsOnMethods = {"testListPermission"})
     public void testListRoles(){
-	List<Role> roles= securityService.listRole("ADMIN");
+	List<Role> roles= securityService.listRole("admin3");
 	Assert.assertEquals(roles.size(), 1);
 	Assert.assertEquals(roles.get(0).getName(), "ADMIN");
     }

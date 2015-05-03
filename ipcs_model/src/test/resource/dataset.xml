@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <dataset>
 	<person person_objid="1" account_name="Person" password_hash="11"/>
-	<person person_objid="2" account_name="Child" password_hash="11"/>
+	<person person_objid="2" account_name="Child"  password_hash="11"/>
 	<person person_objid="3" account_name="Teacher" password_hash="11"/>
 	<person person_objid="4" account_name="Parent" password_hash="11"/>
 
@@ -16,7 +16,7 @@
 	<person_role person_role_objid = "4" person_fk = "4" role_fk = "4"/>
 
 
-	<person_detail person_detail_objid="1" last_name="Michael" first_Name="Jackson" age="35" sex="F" nationality="Chinese" dob="1987-08-25" nick_name="JJ" nric="8767656788" market_option="1"/>
+	<person_detail person_detail_objid="1" last_name="Michael" first_Name="Jackson" age="35" sex="MALE" nationality="Chinese" dob="1987-08-25" nick_name="JJ" nric="8767656788" market_option="1"/>
 
 	<school_type SCHOOL_TYPE_OBJID="1" name ="PRIMARY_SCHOOL"/>
 	<school_type SCHOOL_TYPE_OBJID="2" name ="HIGH_SCHOOL"/>

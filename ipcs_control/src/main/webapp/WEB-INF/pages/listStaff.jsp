@@ -17,7 +17,7 @@
 <br/>
 <br/>
 
-<div align="center"><a href="<c:url value='/addChildren' />"><button>Add</button></a></div>
+<div align="center"><a href="<c:url value='/addStaff' />"><button>Add</button></a></div>
 
 <br/>
 <br/>
@@ -25,7 +25,7 @@
 
    <table align="center" class="tg">
    <tr>
-		<th width="200">Children Name</th>
+		<th width="200">Staff Name</th>
 		<th width="200">Class</th>
 	    <th width="200">Operation</th>
 	</tr>
@@ -34,7 +34,7 @@
 		<tr>
 			<td>${person.account_name}</td>
 			<td>${person.account_name}</td>
-			<td><a href="<c:url value='/addChildren?account_name=${person.account_name}'/>">View Details</a></td>
+			<td><a href="<c:url value='/addStaff?account_name=${person.account_name}'/>">View Details</a></td>
 		</tr>
 	</c:forEach>
 
