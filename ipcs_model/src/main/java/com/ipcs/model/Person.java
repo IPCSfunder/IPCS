@@ -6,26 +6,27 @@ package com.ipcs.model;
 
 import com.ipcs.model.Base.BasicObject;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class Person extends BasicObject {
-
     private String account_name;
 
     private String password_hash;
 
-    private Set<Role> roles = new HashSet<Role>();
+    private List<Role> roles = new ArrayList<Role>();
 
-    private Set<Contact> contacts = new HashSet<Contact>();
+    private List<Contact> contacts = new ArrayList<Contact>();
 
     private PersonDetail personDetail;
 
-    private Set<School> schools = new HashSet<School>();
+    private List<School> schools = new ArrayList<School>();
 
-    private Set<Relationship> relationships = new HashSet<Relationship>();
+    private List<Relationship> relationships = new ArrayList<Relationship>();
 
-    private Set<Activity> activities = new HashSet<Activity>();
+    private List<Activity> activities = new ArrayList<Activity>();
 
     public Person(String name, String password) {
         super();
@@ -56,19 +57,19 @@ public class Person extends BasicObject {
         this.password_hash = password_hash;
     }
 
-    public Set<Role> getRoles() {
+    public List<Role> getRoles() {
         return roles;
     }
 
-    public void setRoles(Set<Role> roles) {
+    public void setRoles(List<Role> roles) {
         this.roles = roles;
     }
 
-    public Set<School> getSchools() {
+    public List<School> getSchools() {
         return schools;
     }
 
-    public void setSchools(Set<School> schools) {
+    public void setSchools(List<School> schools) {
         this.schools = schools;
     }
 
@@ -89,21 +90,21 @@ public class Person extends BasicObject {
         this.roles.add(role);
     }
 
-    public Set<Activity> getActivities() {
+    public List<Activity> getActivities() {
         return activities;
     }
 
-    public void setActivities(Set<Activity> activities) {
+    public void setActivities(List<Activity> activities) {
         this.activities = activities;
     }
 
 
 
-    public Set<Contact> getContacts() {
+    public List<Contact> getContacts() {
         return contacts;
     }
 
-    public void setContacts(Set<Contact> contacts) {
+    public void setContacts(List<Contact> contacts) {
         this.contacts = contacts;
     }
 
@@ -119,11 +120,11 @@ public class Person extends BasicObject {
         this.personDetail = personDetail;
     }
 
-    public Set<Relationship> getRelationships() {
+    public List<Relationship> getRelationships() {
         return relationships;
     }
 
-    public void setRelationships(Set<Relationship> relationships) {
+    public void setRelationships(List<Relationship> relationships) {
         this.relationships = relationships;
     }
 

@@ -37,10 +37,10 @@
                      class="com.ipcs.model.Person"/>
 
 
-        <set name="persons" table="schedule" lazy="true">
+        <bag name="persons" table="schedule" lazy="true">
             <key column="activity_fk" />
             <many-to-many class="com.ipcs.model.Person" column="person_fk" />
-        </set>
+        </bag>
 
     </class>
 </hibernate-mapping>

@@ -17,14 +17,14 @@
     </script>
 </head>
 <body>
-<h2 style="text-align: center;">Add Child Details</h2>
+<h2 style="text-align: center;">Add Staff Details</h2>
 
-<form:form name="htmlform" method="POST" action="/ipcs_control/persistChild">
+<form:form name="htmlform" method="POST" action="/ipcs_control/persistStaff">
     <table align="center" width="50%">
         <tr>
             <td><form:label path="personDetail.firstName">First Name</form:label></td>
             <td><form:input path="personDetail.firstName"/></td>
-            <td width="150px"><form:hidden path="roles[0].name" value="CHILDREN"></form:hidden></td>
+            <td width="150px"><form:hidden path="roles[0].name" value="STAFF"></form:hidden></td>
             <td><form:label path="personDetail.lastName">Last Name</form:label></td>
             <td><form:input path="personDetail.lastName"/></td>
         </tr>

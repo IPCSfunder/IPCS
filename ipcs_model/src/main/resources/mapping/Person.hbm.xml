@@ -23,34 +23,34 @@
         </property>
 
 
-        <set name="roles" table="person_role" lazy="true">
+        <bag name="roles" table="person_role" lazy="false">
             <key column="person_fk"/>
             <many-to-many class="com.ipcs.model.Role" column="role_fk"/>
-        </set>
+        </bag>
 
-        <set name="activities" table="schedule" lazy="true">
+        <bag name="activities" table="schedule" lazy="true">
             <key column="person_fk"/>
             <many-to-many class="com.ipcs.model.Activity" column="activity_fk"/>
-        </set>
+        </bag>
 
-        <set name="relationships" cascade="all-delete-orphan" lazy="true" inverse="true">
+        <bag name="relationships" cascade="all-delete-orphan" lazy="true" inverse="true">
             <key column="whose"/>
             <one-to-many class="com.ipcs.model.Relationship"/>
-        </set>
+        </bag>
 
 
-        <set name="schools" table="person_school" lazy="true">
+        <bag name="schools" table="person_school" lazy="false">
             <key column="person_fk"/>
             <many-to-many class="com.ipcs.model.School" column="school_fk"/>
-        </set>
+        </bag>
 
-        <set name="contacts" cascade="all-delete-orphan" lazy="true">
+        <bag name="contacts" cascade="all-delete-orphan" lazy="false">
             <key column="person_fk"/>
             <one-to-many class="com.ipcs.model.Contact"/>
-        </set>
+        </bag>
 
 
-        <many-to-one name="personDetail" column="person_detail_fk" unique="true" cascade="all-delete-orphan"
+        <many-to-one name="personDetail" column="person_detail_fk" lazy="false" unique="true" cascade="all-delete-orphan"
                      class="com.ipcs.model.PersonDetail"/>
     </class>
 </hibernate-mapping>
