@@ -45,4 +45,6 @@ public interface AdminService {
 	RelationshipType getRelationshipTypeByName(String name);
 
 	Person getChildDetail(String childName);
+
+	List<Activity> listAllActivitiesFromAdmin(String adminName);
 }

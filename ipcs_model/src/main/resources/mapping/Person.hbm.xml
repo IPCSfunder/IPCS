@@ -23,7 +23,7 @@
         </property>
 
 
-        <bag name="roles" table="person_role" lazy="false">
+        <bag name="roles" table="person_role" lazy="true">
             <key column="person_fk"/>
             <many-to-many class="com.ipcs.model.Role" column="role_fk"/>
         </bag>
@@ -33,13 +33,13 @@
             <many-to-many class="com.ipcs.model.Activity" column="activity_fk"/>
         </bag>
 
-        <bag name="relationships" cascade="all-delete-orphan" lazy="true" inverse="true">
+        <bag name="relationships" cascade="all-delete-orphan" lazy="false" inverse="true">
             <key column="whose"/>
             <one-to-many class="com.ipcs.model.Relationship"/>
         </bag>
 
 
-        <bag name="schools" table="person_school" lazy="false">
+        <bag name="schools" table="person_school" lazy="true">
             <key column="person_fk"/>
             <many-to-many class="com.ipcs.model.School" column="school_fk"/>
         </bag>

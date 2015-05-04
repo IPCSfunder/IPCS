@@ -112,12 +112,34 @@ public class AdminServiceImpl implements AdminService {
 
     @Transactional
     public void updatePerson(Person person) {
-        personDao.update(person);
+        Person persistPerson = personDao.load(person.getObjectId());
+        persistPerson.getPersonDetail().setFirstName(person.getPersonDetail().getFirstName());
+        persistPerson.getPersonDetail().setLastName(person.getPersonDetail().getLastName());
+        persistPerson.getPersonDetail().setAge(person.getPersonDetail().getAge());
+        persistPerson.getPersonDetail().setDateOfBirth(person.getPersonDetail().getDateOfBirth());
+        persistPerson.getPersonDetail().setNationality(person.getPersonDetail().getNationality());
+        persistPerson.getPersonDetail().setNric(person.getPersonDetail().getNric());
+
+
+
+        List<Contact> persistContacts =  persistPerson.getContacts();
+        for(Contact persistContact:persistContacts ){
+            for(Contact transientContact: person.getContacts()){
+                if(persistContact.getObjectId() == transientContact.getObjectId())
+                {
+                    persistContact.setMobileNumber(transientContact.getMobileNumber());
+                    persistContact.setContacterName(transientContact.getContacterName());
+                    persistContact.setAddress(transientContact.getAddress());
+                    persistContact.getRelationshipType().setName(transientContact.getRelationshipType().getName());
+                }
+            }
+        }
+
+        personDao.update(persistPerson);
     }
 
     @Transactional
     public boolean broadcaseMessageTo(List<Person> subodidates) {
-        // TODO Auto-generated method stub
         return false;
     }
 
@@ -150,7 +172,7 @@ public class AdminServiceImpl implements AdminService {
 
     @Transactional
     public Person getAdminInfo(String adminName) {
-        return personDao.find("select p from Person as p left join p.schools left join  p.roles left join p.contacts left join p.personDetail where p.account_name ='" + adminName + "'").get(0);
+        return personDao.find("select p from Person as p left join fetch p.schools left join  p.roles left join p.contacts left join p.personDetail where p.account_name ='" + adminName + "'").get(0);
     }
 
     @Transactional
@@ -170,7 +192,13 @@ public class AdminServiceImpl implements AdminService {
 
     @Transactional
     public Person getChildDetail(String childName){
-        return personDao.find("select p from Person as p left join p.schools left join  p.roles left join p.contacts left join p.personDetail where p.account_name ='" + childName + "'").get(0);
+        return personDao.find("select p from Person as p left join p.schools left join fetch p.roles left join p.contacts left join p.personDetail where p.account_name ='" + childName + "'").get(0);
     }
+
+    @Transactional
+    public List<Activity> listAllActivitiesFromAdmin(String adminName){
+        return activityDao.find("select ac from Person as p inner join p.schools s inner join s.persons pp  inner join pp.roles r inner join pp.activities ac where p.account_name='" + adminName + "' and r.name= 'CHILDREN'");
+    }
+
 
 }
