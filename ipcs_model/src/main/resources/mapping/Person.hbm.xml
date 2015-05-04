@@ -23,7 +23,7 @@
         </property>
 
 
-        <bag name="roles" table="person_role" lazy="false">
+        <bag name="roles" table="person_role" lazy="true">
             <key column="person_fk"/>
             <many-to-many class="com.ipcs.model.Role" column="role_fk"/>
         </bag>
@@ -39,7 +39,7 @@
         </bag>
 
 
-        <bag name="schools" table="person_school" lazy="false">
+        <bag name="schools" table="person_school" lazy="true">
             <key column="person_fk"/>
             <many-to-many class="com.ipcs.model.School" column="school_fk"/>
         </bag>
