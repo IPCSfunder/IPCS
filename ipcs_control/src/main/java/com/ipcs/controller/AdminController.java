@@ -68,10 +68,10 @@ public class AdminController {
 
 
     @RequestMapping(value = "/persistChild", method = RequestMethod.POST)
-    public String persistStudent(@ModelAttribute("command") @Validated Person child, BindingResult bindingResult, HttpSession session,@RequestParam Map<String,String> requestParamsl) throws ParseException {
+    public String persistStudent(@ModelAttribute("command") @Validated Person child, BindingResult bindingResult, HttpSession session,@RequestParam Map<String,String> requestParams) throws ParseException {
         if(bindingResult.hasErrors())
             return "addChildren";
-        if("update".equals(requestParamsl.get("operation"))) {
+        if("update".equals(requestParams.get("operation"))) {
             adminservice.updatePerson(child);
             return "navigator";
         }
@@ -92,17 +92,21 @@ public class AdminController {
         String account_name = requestParams.get("account_name");
         if(null!=account_name){
             Person staff = adminservice.getChildDetail(account_name);
-            return new ModelAndView("addStaff", "command", staff);
+            return new ModelAndView("addStaff", "command", staff).addObject("operation","update");
         }
         else
-            return new ModelAndView("addStaff", "command", new Person());
+            return new ModelAndView("addStaff", "command", new Person()).addObject("operation","add");
     }
 
 
     @RequestMapping(value = "/persistStaff", method = RequestMethod.POST)
-    public String persistStaff(@ModelAttribute("command") @Validated Person staff, BindingResult bindingResult, HttpSession session,ModelMap model) throws ParseException {
+    public String persistStaff(@ModelAttribute("command") @Validated Person staff, BindingResult bindingResult, HttpSession session,ModelMap model,@RequestParam Map<String,String> requestParams) throws ParseException {
         if(bindingResult.hasErrors())
             return "addStaff";
+        if("update".equals(requestParams.get("operation"))) {
+            adminservice.updatePerson(staff);
+            return "navigator";
+        }
         School school = ((Person) session.getAttribute("authenticatedAdmin")).getSchools().iterator().next();
         staff.setAccount_name(staff.getPersonDetail().getFirstName()+staff.getPersonDetail().getLastName());
         staff.setPassword_hash("11");
@@ -125,5 +129,13 @@ public class AdminController {
         List<Person> staffs = adminservice.listAllPersonByRoleName(school.getName(), "STAFF");
         return new ModelAndView("listStaff", "command", staffs);
     }
+
+    @RequestMapping(value = "/listActivity", method = RequestMethod.GET)
+    public ModelAndView listActivity(HttpSession session) {
+        Person person = (Person) session.getAttribute("authenticatedAdmin");
+        List<Activity> activities =adminservice.listAllActivitiesFromAdmin(person.getAccount_name());
+        return new ModelAndView("listActivities", "command", activities);
+    }
+
 
 }

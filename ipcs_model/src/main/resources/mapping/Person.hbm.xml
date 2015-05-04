@@ -33,7 +33,7 @@
             <many-to-many class="com.ipcs.model.Activity" column="activity_fk"/>
         </bag>
 
-        <bag name="relationships" cascade="all-delete-orphan" lazy="true" inverse="true">
+        <bag name="relationships" cascade="all-delete-orphan" lazy="false" inverse="true">
             <key column="whose"/>
             <one-to-many class="com.ipcs.model.Relationship"/>
         </bag>

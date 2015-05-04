@@ -17,14 +17,17 @@
     </script>
 </head>
 <body>
-<h2 style="text-align: center;">Add Staff Details</h2>
+<h2 style="text-align: center;">
+    <c:if test="${operation == 'add'}">Add Staff Details</c:if>
+    <c:if test="${operation == 'update'}">Update Staff Details</c:if>
+</h2>
 
-<form:form name="htmlform" method="POST" action="/ipcs_control/persistStaff">
+<form:form name="htmlform" method="POST" action="/ipcs_control/persistStaff?operation=${operation}">
     <table align="center" width="50%">
         <tr>
             <td><form:label path="personDetail.firstName">First Name</form:label></td>
             <td><form:input path="personDetail.firstName"/></td>
-            <td width="150px"><form:hidden path="roles[0].name" value="STAFF"></form:hidden></td>
+            <td width="150px"><form:hidden path="roles[0].name" value="STAFF"></form:hidden><form:hidden path="objectId"></form:hidden></td>
             <td><form:label path="personDetail.lastName">Last Name</form:label></td>
             <td><form:input path="personDetail.lastName"/></td>
         </tr>
@@ -91,7 +94,7 @@
         </tr>
 
         <tr>
-            <td><form:label path="contacts[0].contacterName">Primary Contact</form:label></td>
+            <td><form:label path="contacts[0].contacterName">Primary Contact</form:label><form:hidden path="contacts[0].objectId"></form:hidden></td>
             <td><form:input path="contacts[0].contacterName"/></td>
             <td>
                 <form:select path="contacts[0].relationshipType.name">
@@ -108,7 +111,7 @@
 
 
         <tr>
-            <td><form:label path="contacts[1].contacterName">Secondary Contact</form:label></td>
+            <td><form:label path="contacts[1].contacterName">Secondary Contact</form:label><form:hidden path="contacts[1].objectId"></form:hidden></td>
             <td><form:input path="contacts[1].contacterName"/></td>
             <td>
                 <form:select path="contacts[1].relationshipType.name">

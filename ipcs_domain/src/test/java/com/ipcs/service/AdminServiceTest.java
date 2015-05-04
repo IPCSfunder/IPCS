@@ -81,6 +81,11 @@ public class AdminServiceTest {
         Assert.assertEquals(activities.size(), 1);
         Assert.assertEquals(activities.iterator().next().getName(), "Math");
     }
+    @Test(dependsOnMethods = {"testGetAdminInfo"}, groups = "query")
+    public void testQueryActiviesUnderAdmin() {
+        List<Activity> activities = adminService.listAllActivitiesFromAdmin("Person");
+        Assert.assertTrue(activities.size()==1);
+    }
 
 
 

@@ -117,12 +117,29 @@ public class AdminServiceImpl implements AdminService {
         persistPerson.getPersonDetail().setLastName(person.getPersonDetail().getLastName());
         persistPerson.getPersonDetail().setAge(person.getPersonDetail().getAge());
         persistPerson.getPersonDetail().setDateOfBirth(person.getPersonDetail().getDateOfBirth());
+        persistPerson.getPersonDetail().setNationality(person.getPersonDetail().getNationality());
+        persistPerson.getPersonDetail().setNric(person.getPersonDetail().getNric());
+
+
+
+        List<Contact> persistContacts =  persistPerson.getContacts();
+        for(Contact persistContact:persistContacts ){
+            for(Contact transientContact: person.getContacts()){
+                if(persistContact.getObjectId() == transientContact.getObjectId())
+                {
+                    persistContact.setMobileNumber(transientContact.getMobileNumber());
+                    persistContact.setContacterName(transientContact.getContacterName());
+                    persistContact.setAddress(transientContact.getAddress());
+                    persistContact.getRelationshipType().setName(transientContact.getRelationshipType().getName());
+                }
+            }
+        }
+
         personDao.update(persistPerson);
     }
 
     @Transactional
     public boolean broadcaseMessageTo(List<Person> subodidates) {
-        // TODO Auto-generated method stub
         return false;
     }
 
@@ -177,5 +194,11 @@ public class AdminServiceImpl implements AdminService {
     public Person getChildDetail(String childName){
         return personDao.find("select p from Person as p left join p.schools left join  p.roles left join p.contacts left join p.personDetail where p.account_name ='" + childName + "'").get(0);
     }
+
+    @Transactional
+    public List<Activity> listAllActivitiesFromAdmin(String adminName){
+        return activityDao.find("select ac from Person as p inner join p.schools s inner join s.persons pp  inner join pp.roles r inner join pp.activities ac where p.account_name='" + adminName + "' and r.name= 'CHILDREN'");
+    }
+
 
 }

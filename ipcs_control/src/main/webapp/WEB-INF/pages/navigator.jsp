@@ -14,7 +14,7 @@
     <li><a href="<c:url value='/listChildren' />">Children</a></li>
     <li><a href="<c:url value='/listStaff' />">Staff</a></li>
     <li><a href="<c:url value='/listMessage' />">Message</a></li>
-    <li><a href="<c:url value='/listSchedule' />">Schedule</a></li>
+    <li><a href="<c:url value='/listActivity' />">Schedule</a></li>
 </ul>
 </div>
 </body>

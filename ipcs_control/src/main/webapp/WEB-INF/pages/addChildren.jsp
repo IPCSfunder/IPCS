@@ -94,7 +94,7 @@
         </tr>
 
         <tr>
-            <td><form:label path="contacts[0].contacterName">Primary Contact</form:label></td>
+            <td><form:label path="contacts[0].contacterName">Primary Contact</form:label><form:hidden path="contacts[0].objectId"></form:hidden></td>
             <td><form:input path="contacts[0].contacterName"/></td>
             <td>
                 <form:select path="contacts[0].relationshipType.name">
@@ -111,7 +111,7 @@
 
 
         <tr>
-            <td><form:label path="contacts[1].contacterName">Secondary Contact</form:label></td>
+            <td><form:label path="contacts[1].contacterName">Secondary Contact</form:label><form:hidden path="contacts[1].objectId"></form:hidden></td>
             <td><form:input path="contacts[1].contacterName"/></td>
             <td>
                 <form:select path="contacts[1].relationshipType.name">
