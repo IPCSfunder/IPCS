@@ -25,8 +25,11 @@ public class LoginService {
     }
 
     @RequestMapping(value= "/loginService", method = RequestMethod.GET)
-    public LoginMsg loginService(@RequestParam(value="name", defaultValue="Person") String userName,@RequestParam(value="pwd", defaultValue="11") String passWord){
-        boolean authStatus = securityService.authenticateLoginInfo(userName, passWord);
-        return new LoginMsg(authStatus,userName);
+    public LoginMsg loginService(@RequestParam(value="name") String userName,@RequestParam(value="pwd") String passWord){
+        if(userName == null || passWord == null){
+            return new LoginMsg(false,-1,"Null",-1);
+        }
+        long id = securityService.authenticateLoginInfoWithID(userName, passWord);
+        return new LoginMsg(true,id,userName,1);
     }
 }

@@ -14,13 +14,24 @@ public class LoginMsg {
      // TODO add status code for login service
 
      private boolean authStatus;
+     private long id;
      private String account;
+     private int statusCode;
 
-     public LoginMsg(boolean authStatus, String account) {
+     public LoginMsg(boolean authStatus, long id, String account, int statusCode) {
           this.authStatus = authStatus;
+          this.id = id;
           this.account = account;
+          this.statusCode = statusCode;
      }
 
+     public long getId() {
+          return id;
+     }
+
+     public int getStatusCode() {
+          return statusCode;
+     }
 
      public boolean isAuthStatus() {
           return authStatus;

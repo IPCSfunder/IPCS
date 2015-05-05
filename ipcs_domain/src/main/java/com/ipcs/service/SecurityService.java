@@ -17,6 +17,8 @@ import com.ipcs.model.Role;
  */
 public interface SecurityService {
 
+    public long authenticateLoginInfoWithID(String userName, String password);
+
     public boolean authenticateLoginInfo(String userName, String password);
 
     public List<Permission> listPermission(String userName);

@@ -61,6 +61,15 @@ public class SecurityServiceImpl implements SecurityService {
         this.roleDao = roleDao;
     }
 
+
+    @Transactional
+    public long authenticateLoginInfoWithID(String userName, String password) {
+        Criterion[] criterion = { Restrictions.eq("account_name", userName) };
+        List<Person> persons = personDao.createCriteria(criterion);
+        if (null == persons || persons.size() > 1 || persons.size() == 0)
+            return -1;
+        return persons.get(0).getObjectId();
+    }
     @Transactional
     public boolean authenticateLoginInfo(String userName, String password) {
 	Criterion[] criterion = { Restrictions.eq("account_name", userName) };
