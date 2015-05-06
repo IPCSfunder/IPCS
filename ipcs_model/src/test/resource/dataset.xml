@@ -53,7 +53,7 @@
 
 	<contact contact_objid="1" address="Punggol Streee" postcode="1234223" mobile_number="198767654" relationship_type_fk="1" primary_contact="1" person_fk="3" contact_name="Child_Parent"/>
 
-	<activity activity_objid="1" name="Math" location="PUNGGOL" description="math" start_time="2015-05-20" host="3"></activity>
+	<activity activity_objid="1" school_fk = "1" name="Math" location="PUNGGOL" description="math" start_time="2015-05-20" host="3"></activity>
 
 	<schedule schedule_objid="1" activity_fk="1" person_fk="2"></schedule>
 

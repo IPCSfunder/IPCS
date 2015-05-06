@@ -14,6 +14,7 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -110,6 +111,12 @@ public class AdminServiceTest {
     public void tesListAllChild() {
         List<Person> activities = adminService.listAllChild(4l);
         Assert.assertEquals(activities.size(), 2);
+    }
+
+    @Test(dependsOnGroups = {"query"})
+    public void testAddActivityWithHost(){
+        Activity activity = new Activity.ActivityBuilder().withDescription("Physical").withStartDate(new Date()).withLocation("Shanghai").withHost(new Person("Person")).withName("Physical").withSchool(new School("PUNGOL")).builder();
+        adminService.addActivity(activity);
     }
 
 

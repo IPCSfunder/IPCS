@@ -42,5 +42,8 @@
             <many-to-many class="com.ipcs.model.Person" column="person_fk" />
         </bag>
 
+        <many-to-one name="school" column="school_fk" lazy="false"
+                     class="com.ipcs.model.School"/>
+
     </class>
 </hibernate-mapping>

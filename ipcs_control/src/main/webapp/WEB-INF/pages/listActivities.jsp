@@ -17,7 +17,7 @@
 <br/>
 <br/>
 
-<div align="center"><a href="<c:url value='/addChildren' />"><button>Add</button></a></div>
+<div align="center"><a href="<c:url value='/addActivity' />"><button>Add</button></a></div>
 
 <br/>
 <br/>
@@ -34,7 +34,7 @@
 		<tr>
 			<td>${activity.name}</td>
 			<td>${activity.host.account_name}</td>
-			<td><a href="<c:url value='/addChildren?activityId=${activity.objectId}'/>">View Details</a></td>
+			<td><a href="<c:url value='/addActivity?activityId=${activity.objectId}'/>">View Details</a></td>
 		</tr>
 	</c:forEach>
 

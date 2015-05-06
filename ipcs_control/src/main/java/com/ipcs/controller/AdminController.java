@@ -1,5 +1,6 @@
 package com.ipcs.controller;
 
+import com.ipcs.controller.validator.ActivityValidator;
 import com.ipcs.controller.validator.PersonValidator;
 import com.ipcs.model.*;
 import com.ipcs.service.AdminService;
@@ -47,13 +48,22 @@ public class AdminController {
     }
 
 
-    @InitBinder
-    public void initBinder(WebDataBinder binder) {
+    @InitBinder("command")
+    public void initBinderForChild(WebDataBinder binder) {
         SimpleDateFormat sdf = new SimpleDateFormat("mm/dd/yyyy");
         sdf.setLenient(false);
         binder.registerCustomEditor(Date.class, new CustomDateEditor(sdf, true));
         binder.setValidator(new PersonValidator());
     }
+
+    @InitBinder("activity")
+    public void initBinderForActivity(WebDataBinder binder) {
+        SimpleDateFormat sdf = new SimpleDateFormat("mm/dd/yyyy");
+        sdf.setLenient(false);
+        binder.registerCustomEditor(Date.class, new CustomDateEditor(sdf, true));
+        binder.setValidator(new ActivityValidator());
+    }
+
 
     @RequestMapping(value = "/addChildren", method = RequestMethod.GET)
     public ModelAndView student(@RequestParam Map<String,String> requestParams) {
@@ -135,6 +145,31 @@ public class AdminController {
         Person person = (Person) session.getAttribute("authenticatedAdmin");
         List<Activity> activities =adminservice.listAllActivitiesFromAdmin(person.getAccount_name());
         return new ModelAndView("listActivities", "command", activities);
+    }
+
+    @RequestMapping(value = "/addActivity", method = RequestMethod.GET)
+    public ModelAndView addActivity(@RequestParam Map<String,String> requestParams) {
+        String activityId = requestParams.get("activityId");
+        if(null!=activityId){
+            Activity activity = adminservice.getActivityDetail(Long.parseLong(activityId));
+            return new ModelAndView("addActivity", "activity", activity).addObject("operation","update");
+        }
+        else
+            return new ModelAndView("addActivity", "activity", new Activity()).addObject("operation","add");
+    }
+
+    @RequestMapping(value = "/persistActivity", method = RequestMethod.POST)
+    public ModelAndView persistActivity(@ModelAttribute("activity")  @Validated Activity activity, BindingResult bindingResult, HttpSession session,ModelMap model,@RequestParam Map<String,String> requestParams) throws ParseException {
+        School school = ((Person) session.getAttribute("authenticatedAdmin")).getSchools().iterator().next();
+        if(bindingResult.hasErrors())
+            return  new ModelAndView("addActivity", "operation", "add");
+        activity.setSchool(school);
+        if("update".equals(requestParams.get("operation"))) {
+//            adminservice.
+            return new ModelAndView("navigator");
+        }
+        adminservice.addActivity(activity);
+        return new ModelAndView("navigator");
     }
 
 

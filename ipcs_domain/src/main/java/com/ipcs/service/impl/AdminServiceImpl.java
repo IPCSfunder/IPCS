@@ -197,8 +197,26 @@ public class AdminServiceImpl implements AdminService {
 
     @Transactional
     public List<Activity> listAllActivitiesFromAdmin(String adminName){
-        return activityDao.find("select ac from Person as p inner join p.schools s inner join s.persons pp  inner join pp.roles r inner join pp.activities ac where p.account_name='" + adminName + "' and r.name= 'CHILDREN'");
+        return activityDao.find("select ac from Person as p inner join p.schools s inner join s.activities ac where p.account_name='" + adminName + "'");
+    }
+
+    @Transactional
+    public Person findPersonByName(String accountName){
+        return personDao.find("from Person p inner join fetch p.schools where p.account_name = '"+accountName+"'").get(0);
+    }
+
+    @Transactional
+    public void addActivity(Activity activity){
+        Person host = findPersonByName(activity.getHost().getAccount_name());
+        activity.setHost(host);
+        School school = getSchoolByName(activity.getSchool().getName());
+        activity.setSchool(school);
+        activityDao.save(activity);
     }
 
 
+    @Transactional
+    public Activity getActivityDetail(Long activityId){
+        return activityDao.find("from Activity ac inner join fetch ac.host where ac.objectId = '"+activityId+"'").get(0);
+    }
 }

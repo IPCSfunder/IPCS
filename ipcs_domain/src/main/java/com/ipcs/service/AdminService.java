@@ -7,6 +7,7 @@ import java.util.List;
 
 import com.ipcs.model.*;
 import org.springframework.stereotype.Service;
+import sun.plugin2.message.SetChildWindowHandleMessage;
 
 /**
  * @author Chen Chao
@@ -21,6 +22,8 @@ public interface AdminService {
 	void addPerson(Person person);
 	
 	void removePerson(Person person);
+
+	Person findPersonByName(String accountName);
 
 	List<Person> listAllPersonByRoleName(String schoolName, String roleName);
 	
@@ -47,4 +50,8 @@ public interface AdminService {
 	Person getChildDetail(String childName);
 
 	List<Activity> listAllActivitiesFromAdmin(String adminName);
+
+	void addActivity(Activity activity);
+
+	Activity getActivityDetail(Long activityId);
 }
