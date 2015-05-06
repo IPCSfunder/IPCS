@@ -63,7 +63,7 @@ public class SecurityServiceImpl implements SecurityService {
 
 
     @Transactional
-    public long authenticateLoginInfoWithID(String userName, String password) {
+    public long getAuthenticatedUserID(String userName, String password) {
         Criterion[] criterion = { Restrictions.eq("account_name", userName) };
         List<Person> persons = personDao.createCriteria(criterion);
         if (null == persons || persons.size() > 1 || persons.size() == 0)

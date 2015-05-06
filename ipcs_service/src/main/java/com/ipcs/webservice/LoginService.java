@@ -8,8 +8,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
-
 /**
  * Created by michael on 20/04/15.
  */
@@ -29,7 +27,7 @@ public class LoginService {
         if(userName == null || passWord == null){
             return new LoginMsg(false,-1,"Null",-1);
         }
-        long id = securityService.authenticateLoginInfoWithID(userName, passWord);
+        long id = securityService.getAuthenticatedUserID(userName, passWord);
         return new LoginMsg(true,id,userName,1);
     }
 }
