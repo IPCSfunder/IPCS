@@ -34,6 +34,11 @@ public class Person extends BasicObject {
         this.password_hash = password;
     }
 
+    public Person(String name) {
+        super();
+        this.account_name = name;
+    }
+
     public Person() {
         super();
     }

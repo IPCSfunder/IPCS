@@ -21,6 +21,8 @@ public class School extends BasicObject {
 
 	private List<Person> persons = new ArrayList<Person>();
 
+	private List<Activity> activities = new ArrayList<Activity>();
+
 	public School() {
 	}
 
@@ -64,6 +66,15 @@ public class School extends BasicObject {
 
 	public void setPersons(List<Person> persons) {
 		this.persons = persons;
+	}
+
+
+	public void setActivities(List<Activity> activities) {
+		this.activities = activities;
+	}
+
+	public List<Activity> getActivities() {
+		return activities;
 	}
 
 	public int hashCode(){

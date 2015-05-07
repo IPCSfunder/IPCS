@@ -30,5 +30,12 @@
             <key column="school_fk" />  
             <many-to-many class="com.ipcs.model.Person" column="person_fk" />  
         </bag>
+
+
+        <bag name="activities" cascade="all-delete-orphan" lazy="false">
+            <key column="school_fk"/>
+            <one-to-many class="com.ipcs.model.Activity"/>
+        </bag>
+
     </class>
 </hibernate-mapping>

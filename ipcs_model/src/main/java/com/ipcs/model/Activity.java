@@ -19,6 +19,8 @@ public class Activity extends BasicObject {
 
     private Person host;
 
+    private School school;
+
     private List<Person> persons = new ArrayList<Person>();
 
     public Activity() {
@@ -30,6 +32,7 @@ public class Activity extends BasicObject {
         this.description = activityBuilder.description;
         this.startTime = activityBuilder.startTime;
         this.host = activityBuilder.host;
+        this.school = activityBuilder.school;
     }
 
 
@@ -39,6 +42,7 @@ public class Activity extends BasicObject {
         private String description;
         private Date startTime;
         private Person host;
+        private School school;
 
         public ActivityBuilder withName(String name){
             this.name = name;
@@ -61,6 +65,11 @@ public class Activity extends BasicObject {
         }
         public ActivityBuilder withHost (Person host){
             this.host = host;
+            return this;
+        }
+
+        public ActivityBuilder withSchool (School school){
+            this.school = school;
             return this;
         }
 
@@ -120,6 +129,15 @@ public class Activity extends BasicObject {
 
     public void setPersons(List<Person> persons) {
         this.persons = persons;
+    }
+
+
+    public School getSchool() {
+        return school;
+    }
+
+    public void setSchool(School school) {
+        this.school = school;
     }
 
     public int hashCode() {
