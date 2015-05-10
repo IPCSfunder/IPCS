@@ -68,6 +68,9 @@ public class SecurityServiceImpl implements SecurityService {
         List<Person> persons = personDao.createCriteria(criterion);
         if (null == persons || persons.size() > 1 || persons.size() == 0)
             return -1;
+        if (!persons.get(0).getPassword_hash().equals(password)){
+            return -1;
+        }
         return persons.get(0).getObjectId();
     }
     @Transactional
