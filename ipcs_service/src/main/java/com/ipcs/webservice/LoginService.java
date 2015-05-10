@@ -28,6 +28,9 @@ public class LoginService {
             return new LoginMsg(false,-1,"Null",-1);
         }
         long id = securityService.getAuthenticatedUserID(userName, passWord);
+        if(id == -1){
+            return new LoginMsg(false,-1,"Null",-1);
+        }
         return new LoginMsg(true,id,userName,1);
     }
 }
