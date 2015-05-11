@@ -23,7 +23,7 @@
             <column name="date_modified"/> 
         </property>
         
-        <many-to-one name="type" column="school_type_fk" lazy="false"
+        <many-to-one name="type" column="school_type_fk"
         class="com.ipcs.model.SchoolType"/>
         
         <bag name="persons" table="person_school" lazy="true">
@@ -32,7 +32,7 @@
         </bag>
 
 
-        <bag name="activities" cascade="all-delete-orphan" lazy="false">
+        <bag name="activities" cascade="all-delete-orphan">
             <key column="school_fk"/>
             <one-to-many class="com.ipcs.model.Activity"/>
         </bag>

@@ -28,10 +28,6 @@ public abstract class GenericHibernateDao<T extends BasicObject, PK extends Seri
     @Autowired
     private SessionFactory sessionFactory = null;
 
-    public Session getNewSession() {
-	return getSessionFactory().openSession();
-    }
-
     public Session getCurrentSession() {
 	return getSessionFactory().getCurrentSession();
     }
@@ -40,9 +36,6 @@ public abstract class GenericHibernateDao<T extends BasicObject, PK extends Seri
 	return sessionFactory;
     }
 
-    public void setSessionFactory(SessionFactory sessionFactory) {
-	this.sessionFactory = sessionFactory;
-    }
 
     @SuppressWarnings("unchecked")
     public GenericHibernateDao() {
@@ -125,6 +118,7 @@ public abstract class GenericHibernateDao<T extends BasicObject, PK extends Seri
 	return (List<T>) cr.list();
     }
 
+    @SuppressWarnings("unchecked")
     public List<T> findAll() {
 	return (List<T>) getCurrentSession().createCriteria(entityClass).list();
     }

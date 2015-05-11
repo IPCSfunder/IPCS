@@ -33,11 +33,11 @@
             <column name="date_modified"/> 
         </property>
         
-        <many-to-one name="messageType" column="message_type_fk" lazy="false"
+        <many-to-one name="messageType" column="message_type_fk"
         class="com.ipcs.model.MessageType"/>
 
 
-        <many-to-one name="fromUser" column="from_user" lazy="false"
+        <many-to-one name="fromUser" column="from_user"
                      class="com.ipcs.model.Person"/>
 
     </class>

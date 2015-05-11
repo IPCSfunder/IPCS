@@ -85,7 +85,7 @@ public class AdminServiceTest {
     @Test(dependsOnMethods = {"testGetAdminInfo"}, groups = "query")
     public void testQueryActiviesUnderAdmin() {
         List<Activity> activities = adminService.listAllActivitiesFromAdmin("Person");
-        Assert.assertTrue(activities.size()==1);
+        Assert.assertTrue(activities.size()>=1);
     }
 
 
