@@ -2,10 +2,14 @@ package com.ipcs.model;
 
 
 import com.github.springtestdbunit.TransactionDbUnitTestExecutionListener;
+import org.dbunit.database.DatabaseConfig;
+import org.dbunit.database.DatabaseConnection;
 import org.dbunit.database.DatabaseDataSourceConnection;
 import org.dbunit.database.IDatabaseConnection;
 import org.dbunit.dataset.IDataSet;
 import org.dbunit.dataset.xml.FlatXmlDataSetBuilder;
+import org.dbunit.ext.mssql.MsSqlDataTypeFactory;
+import org.dbunit.ext.mysql.MySqlDataTypeFactory;
 import org.dbunit.operation.DatabaseOperation;
 import org.hibernate.Session;
 
@@ -21,6 +25,7 @@ import org.springframework.test.context.transaction.TransactionalTestExecutionLi
 import javax.annotation.Resource;
 import javax.sql.DataSource;
 import java.io.File;
+import java.sql.Connection;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:/Services.xml" })
@@ -46,9 +51,9 @@ public abstract class SpringDBUnit{
                 "src/test/resource/dataset.xml"
         ));
         IDatabaseConnection dbConn = new DatabaseDataSourceConnection(dataSource);
+        dbConn.getConfig().setProperty(DatabaseConfig.PROPERTY_DATATYPE_FACTORY, new MySqlDataTypeFactory());
         DatabaseOperation.REFRESH.execute(dbConn, dataSet);
     }
-
 
     @After
     public void tearSown() throws Exception {
@@ -56,6 +61,7 @@ public abstract class SpringDBUnit{
                 "src/test/resource/dataset.xml"
         ));
         IDatabaseConnection dbConn = new DatabaseDataSourceConnection(dataSource);
+        dbConn.getConfig().setProperty(DatabaseConfig.PROPERTY_DATATYPE_FACTORY, new MySqlDataTypeFactory());
         DatabaseOperation.CLEAN_INSERT.execute(dbConn, dataSet);
     }
 
