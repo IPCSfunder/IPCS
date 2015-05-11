@@ -39,10 +39,10 @@
             <column name="date_modified"/> 
         </property>
 
-        <many-to-one name="relationshipType" column="relationship_type_fk" lazy="false"
+        <many-to-one name="relationshipType" column="relationship_type_fk"
                      class="com.ipcs.model.RelationshipType"/>
 
-        <many-to-one name="person" column="person_fk" lazy="false"
+        <many-to-one name="person" column="person_fk"
                      class="com.ipcs.model.Person"/>
     </class>
 </hibernate-mapping>

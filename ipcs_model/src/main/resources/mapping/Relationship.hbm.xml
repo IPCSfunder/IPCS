@@ -9,14 +9,14 @@
         </id>
 
 
-        <many-to-one name="iswho" column="iswho" lazy="false"
+        <many-to-one name="iswho" column="iswho"
                      class="com.ipcs.model.Person"/>
 
-        <many-to-one name="whose" column="whose" lazy="false"
+        <many-to-one name="whose" column="whose"
                      class="com.ipcs.model.Person"/>
 
         
-        <many-to-one name="type" column="relationship_type_fk" lazy="false"
+        <many-to-one name="type" column="relationship_type_fk"
         class="com.ipcs.model.RelationshipType"/>
 
     </class>

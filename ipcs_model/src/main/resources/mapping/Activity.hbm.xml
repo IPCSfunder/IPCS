@@ -33,7 +33,7 @@
             <column name="date_modified"/> 
         </property>
 
-        <many-to-one name="host" column="host" lazy="false"
+        <many-to-one name="host" column="host"
                      class="com.ipcs.model.Person"/>
 
 
@@ -42,7 +42,7 @@
             <many-to-many class="com.ipcs.model.Person" column="person_fk" />
         </bag>
 
-        <many-to-one name="school" column="school_fk" lazy="false"
+        <many-to-one name="school" column="school_fk"
                      class="com.ipcs.model.School"/>
 
     </class>

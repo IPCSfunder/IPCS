@@ -20,11 +20,11 @@
             <column name="date_modified"/> 
         </property>
         
-        <many-to-one name="orginizer" column="orginizer" lazy="false"
+        <many-to-one name="orginizer" column="orginizer"
         class="com.ipcs.model.Person"/>
 
 
-        <many-to-one name="groupMember" column="group_member" lazy="false"
+        <many-to-one name="groupMember" column="group_member"
                      class="com.ipcs.model.Person"/>
 
     </class>
