@@ -30,4 +30,9 @@ Password(Secrect :-))
 Webserver access point:
 
 http://120.24.166.170:8080/ipcs/
- 
+
+How to do remteo deploy?
+1) First undeploy
+mvn tomcat7:undeploy
+2) Then deploy
+mvn tomcat7:deploy 
