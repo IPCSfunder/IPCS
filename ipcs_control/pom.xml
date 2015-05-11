@@ -79,10 +79,10 @@
 				<artifactId>tomcat7-maven-plugin</artifactId>
 				<version>2.2</version>
 				<configuration>
-					<url>http://localhost:8080/manager/text</url>
+					<!--<url>http://localhost:8080/manager/text</url>-->
+					<url>http://120.24.166.170:8080/manager/text</url>
 					<path>/ipcs_control</path>
-					<username>admin</username>
-					<password>password</password>
+					<server>TomcatServer</server>
 				</configuration>
 			</plugin>
 		</plugins>
