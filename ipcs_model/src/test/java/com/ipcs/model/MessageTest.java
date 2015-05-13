@@ -1,10 +1,10 @@
 package com.ipcs.model;
 
-import junit.framework.Assert;
 import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
+import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.Date;

@@ -123,6 +123,10 @@ public class Activity extends BasicObject {
         return persons;
     }
 
+    public void addPersonToList(Person person) {
+        persons.add(person);
+    }
+
     public void addPerson(Person person){
         this.persons.add(person);
     }

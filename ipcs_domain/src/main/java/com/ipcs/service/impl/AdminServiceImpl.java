@@ -207,6 +207,16 @@ public class AdminServiceImpl implements AdminService {
 
     @Transactional
     public void addActivity(Activity activity){
+        List<Person> trainsientPersons = new ArrayList<Person>();
+        trainsientPersons.addAll(activity.getPersons());
+        activity.getPersons().clear();;
+        for (Person person : trainsientPersons) {
+            person = findPersonByName(person.getAccount_name());
+            if (null != person)
+                activity.addPersonToList(person);
+        }
+
+
         Person host = findPersonByName(activity.getHost().getAccount_name());
         activity.setHost(host);
         School school = getSchoolByName(activity.getSchool().getName());

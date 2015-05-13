@@ -29,7 +29,11 @@
             <td><form:input path="name"/></td>
             <td width="150px"><form:hidden path="objectId"></form:hidden></td>
             <td><form:label path="host.account_name">Teacher</form:label></td>
-            <td><form:input path="host.account_name"/></td>
+            <td>
+                <form:select path="host.account_name" selected="host.account_name" items="${teachers}" itemLabel="account_name" itemValue="account_name">
+
+                </form:select>
+                <!--<form:input path="host.account_name"/>--></td>
         </tr>
 
         <tr>
@@ -39,10 +43,15 @@
         </tr>
 
         <tr>
-            <td colspan="1"><form:label path="location">Location</form:label></td>
-            <td colspan="4"  with="50%">
+            <td><form:label path="location">Location</form:label></td>
+            <td>
                 <form:input path="location"/>
 
+            </td>
+            <td width="150px"></td>
+            <td><form:label path="persons">Students</form:label></td>
+            <td>
+            <form:select multiple="true" path="persons" items="${students}" itemLabel="account_name" itemValue="account_name" />
             </td>
         </tr>
 

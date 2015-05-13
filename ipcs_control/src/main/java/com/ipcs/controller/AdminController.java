@@ -19,9 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpSession;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Controller
 public class AdminController {
@@ -148,14 +146,19 @@ public class AdminController {
     }
 
     @RequestMapping(value = "/addActivity", method = RequestMethod.GET)
-    public ModelAndView addActivity(@RequestParam Map<String,String> requestParams) {
+    public ModelAndView addActivity(@RequestParam Map<String,String> requestParams, HttpSession session) {
+        School school = ((Person) session.getAttribute("authenticatedAdmin")).getSchools().iterator().next();
+        List<Person> teachers = adminservice.listAllPersonByRoleName(school.getName(), "STAFF");
+        List<Person> students = adminservice.listAllPersonByRoleName(school.getName(), "CHILDREN");
+
+
         String activityId = requestParams.get("activityId");
         if(null!=activityId){
             Activity activity = adminservice.getActivityDetail(Long.parseLong(activityId));
-            return new ModelAndView("addActivity", "activity", activity).addObject("operation","update");
+            return new ModelAndView("addActivity", "activity", activity).addObject("operation","update").addObject("teachers", teachers).addObject("students",students);
         }
         else
-            return new ModelAndView("addActivity", "activity", new Activity()).addObject("operation","add");
+            return new ModelAndView("addActivity", "activity", new Activity()).addObject("operation","add").addObject("teachers", teachers).addObject("students",students);
     }
 
     @RequestMapping(value = "/persistActivity", method = RequestMethod.POST)
