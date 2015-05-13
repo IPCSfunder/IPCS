@@ -1,0 +1,27 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+ 
+<!-- <bean 
+class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+	<property name="location">
+		<value>/database.properties</value>
+	</property>
+</bean> -->
+ 
+<bean id="dataSource" 
+         class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+
+	<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+	<!-- <property name="url" value="jdbc:mysql://PC201311192237.lan:3306/IPCS" />
+	<property name="username" value="ipcs_user" />
+	<property name="password" value="" />-->
+
+
+	<property name="url" value="jdbc:mysql://120.24.166.170:3306/ipcs" />
+	<property name="username" value="ipcs_admin" />
+	<property name="password" value="password" />
+    </bean>
+
+    </beans>

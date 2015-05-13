@@ -97,7 +97,7 @@
                 <configuration>
                     <!--<url>http://localhost:8080/manager/text</url>-->
                     <url>http://120.24.166.170:8080/manager/text</url>
-                    <path>/ipcs-service</path>
+                    <path>/ipcs_service</path>
                     <server>TomcatServer</server>
                 </configuration>
             </plugin>

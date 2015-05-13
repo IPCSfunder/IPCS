@@ -14,14 +14,14 @@ class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
          class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 
 	<property name="driverClassName" value="com.mysql.jdbc.Driver" />
-	<property name="url" value="jdbc:mysql://PC201311192237.lan:3306/IPCS" />
+	 <property name="url" value="jdbc:mysql://PC201311192237.lan:3306/IPCS" />
 	<property name="username" value="ipcs_user" />
 	<property name="password" value="" />
 
 
-	<!-- <property name="url" value="jdbc:mysql://120.24.166.170:3306/ipcs" />
-        <property name="username" value="ipcs_admin" />
-        <property name="password" value="password" />-->
+	<!--<property name="url" value="jdbc:mysql://120.24.166.170:3306/ipcs" />
+	<property name="username" value="ipcs_admin" />
+	<property name="password" value="password" />-->
     </bean>
 
     </beans>
