@@ -10,7 +10,7 @@
     http://www.springframework.org/schema/tx/spring-tx.xsd">
 
 	<import resource="classpath:/hibernate.xml" />
-	<import resource="classpath:/datasource.xml" />
+	<import resource="classpath:/datasource-dev.xml" />
 
 
 	<tx:annotation-driven />
