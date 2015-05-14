@@ -48,7 +48,7 @@ public class AdminController {
 
     @InitBinder("command")
     public void initBinderForChild(WebDataBinder binder) {
-        SimpleDateFormat sdf = new SimpleDateFormat("mm/dd/yyyy");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         sdf.setLenient(false);
         binder.registerCustomEditor(Date.class, new CustomDateEditor(sdf, true));
         binder.setValidator(new PersonValidator());
@@ -56,7 +56,7 @@ public class AdminController {
 
     @InitBinder("activity")
     public void initBinderForActivity(WebDataBinder binder) {
-        SimpleDateFormat sdf = new SimpleDateFormat("mm/dd/yyyy");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         sdf.setLenient(false);
         binder.registerCustomEditor(Date.class, new CustomDateEditor(sdf, true));
         binder.setValidator(new ActivityValidator());
@@ -150,8 +150,6 @@ public class AdminController {
         School school = ((Person) session.getAttribute("authenticatedAdmin")).getSchools().iterator().next();
         List<Person> teachers = adminservice.listAllPersonByRoleName(school.getName(), "STAFF");
         List<Person> students = adminservice.listAllPersonByRoleName(school.getName(), "CHILDREN");
-
-
         String activityId = requestParams.get("activityId");
         if(null!=activityId){
             Activity activity = adminservice.getActivityDetail(Long.parseLong(activityId));
@@ -164,15 +162,29 @@ public class AdminController {
     @RequestMapping(value = "/persistActivity", method = RequestMethod.POST)
     public ModelAndView persistActivity(@ModelAttribute("activity")  @Validated Activity activity, BindingResult bindingResult, HttpSession session,ModelMap model,@RequestParam Map<String,String> requestParams) throws ParseException {
         School school = ((Person) session.getAttribute("authenticatedAdmin")).getSchools().iterator().next();
+        List<Person> teachers = adminservice.listAllPersonByRoleName(school.getName(), "STAFF");
+        List<Person> students = adminservice.listAllPersonByRoleName(school.getName(), "CHILDREN");
+
         if(bindingResult.hasErrors())
-            return  new ModelAndView("addActivity", "operation", "add");
+            return  new ModelAndView("addActivity", "operation", "add").addObject("teachers", teachers).addObject("students",students);
         activity.setSchool(school);
+
         if("update".equals(requestParams.get("operation"))) {
-//            adminservice.
-            return new ModelAndView("navigator");
+            adminservice.updateActivity(activity);
+            return new ModelAndView("navigator").addObject("teachers", teachers).addObject("students",students);
         }
         adminservice.addActivity(activity);
-        return new ModelAndView("navigator");
+        return new ModelAndView("navigator").addObject("teachers", teachers).addObject("students",students);
+    }
+
+
+    @RequestMapping(value = "/deleteActivity", method = RequestMethod.GET)
+    public ModelAndView deleteActivity(@RequestParam Map<String,String> requestParams, HttpSession session) {
+        Person person = (Person) session.getAttribute("authenticatedAdmin");
+        String activityId = requestParams.get("activityId");
+        adminservice.deleteActivity(Long.parseLong(activityId));
+        List<Activity> activities =adminservice.listAllActivitiesFromAdmin(person.getAccount_name());
+        return new ModelAndView("listActivities", "command", activities);
     }
 
 
