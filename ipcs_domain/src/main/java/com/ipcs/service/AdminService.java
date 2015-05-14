@@ -52,5 +52,9 @@ public interface AdminService {
 
 	void addActivity(Activity activity);
 
+	void updateActivity(Activity activty);
+
+	void deleteActivity(Long activtyId);
+
 	Activity getActivityDetail(Long activityId);
 }

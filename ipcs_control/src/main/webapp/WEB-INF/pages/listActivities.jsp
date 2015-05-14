@@ -34,7 +34,10 @@
 		<tr>
 			<td>${activity.name}</td>
 			<td>${activity.host.account_name}</td>
-			<td><a href="<c:url value='/addActivity?activityId=${activity.objectId}'/>">View Details</a></td>
+			<td><a href="<c:url value='/addActivity?activityId=${activity.objectId}'/>">View Details</a>
+				&nbsp; &nbsp; &nbsp;
+				<a href="<c:url value='/deleteActivity?activityId=${activity.objectId}'/>">Delete</a>
+			</td>
 		</tr>
 	</c:forEach>
 
