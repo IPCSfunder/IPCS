@@ -29,7 +29,8 @@ public abstract class GenericHibernateDao<T extends BasicObject, PK extends Seri
     private SessionFactory sessionFactory = null;
 
     public Session getCurrentSession() {
-	return getSessionFactory().getCurrentSession();
+        Session newsession = getSessionFactory().getCurrentSession();
+	return newsession  ==null? getSessionFactory().openSession():newsession;
     }
 
     public SessionFactory getSessionFactory() {
