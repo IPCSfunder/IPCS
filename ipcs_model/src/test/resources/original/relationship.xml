@@ -1,0 +1,13 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<dataset>
+	<person person_objid="1" account_name="JamesChen" password_hash="12345"/>
+	<person person_objid="2" account_name="WilliamWang"  password_hash="12345"/>
+	<person person_objid="3" account_name="JohnasonChen" password_hash="12345"/>
+
+	<relationship_type relationship_type_objid="1" name="PARENT"></relationship_type>
+	<relationship_type relationship_type_objid="2" name="TEACHER"></relationship_type>
+
+	<relationship relationship_objid = "1" whose="2" iswho="1" relationship_type_fk="2"></relationship>
+	<relationship relationship_objid = "2" whose="2" iswho="3" relationship_type_fk="1"></relationship>
+	<relationship relationship_objid = "3" whose="3" iswho="1" relationship_type_fk="1"></relationship>
+</dataset>

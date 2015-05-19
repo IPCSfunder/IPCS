@@ -2,20 +2,23 @@ package com.ipcs.model;
 
 import com.ipcs.model.Base.BasicObject;
 
+import javax.persistence.*;
 import java.util.Date;
 
 /**
  * @author Chen Chao
  */
+
+@Entity
+@Table(name = "MESSAGE")
 public class Message extends BasicObject {
+    private Long objectId;
 
     private String header;
 
     private String content;
 
     private String attachmentAddress;
-
-    private Date sentTime;
 
     private MessageType messageType;
 
@@ -37,7 +40,6 @@ public class Message extends BasicObject {
         private String header;
         private String content;
         private String attachmentAddress;
-        private Date sentTime;
         private MessageType messageType;
         private Person fromUser;
 
@@ -53,11 +55,6 @@ public class Message extends BasicObject {
 
         public MessageBuilder withAttachmentAddress(String attachmentAddress){
             this.attachmentAddress = attachmentAddress;
-            return this;
-        }
-
-        public MessageBuilder withDate(Date sentTime){
-            this.sentTime= sentTime;
             return this;
         }
 
@@ -77,6 +74,18 @@ public class Message extends BasicObject {
 
     }
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "MESSAGE_OBJID", unique = true, nullable = false)
+    public Long getObjectId() {
+        return objectId;
+    }
+
+    public void setObjectId(Long objectId) {
+        this.objectId = objectId;
+    }
+
+    @Column
     public String getContent() {
         return content;
     }
@@ -85,6 +94,7 @@ public class Message extends BasicObject {
         this.content = content;
     }
 
+    @Column
     public String getHeader() {
         return header;
     }
@@ -93,14 +103,8 @@ public class Message extends BasicObject {
         this.header = header;
     }
 
-    public Date getSentTime() {
-        return sentTime;
-    }
 
-    public void setSentTime(Date sentTime) {
-        this.sentTime = sentTime;
-    }
-
+    @Column(name="ATTACHMENT_ADDRESS")
     public String getAttachmentAddress() {
         return attachmentAddress;
     }
@@ -109,6 +113,8 @@ public class Message extends BasicObject {
         this.attachmentAddress = attachmentAddress;
     }
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "MESSAGE_TYPE_FK")
     public MessageType getMessageType() {
         return messageType;
     }
@@ -117,6 +123,8 @@ public class Message extends BasicObject {
         this.messageType = messageType;
     }
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "FROM_USER")
     public Person getFromUser() {
         return fromUser;
     }
@@ -129,7 +137,6 @@ public class Message extends BasicObject {
         int factor = 31;
         int result = 17 * factor + header.hashCode();
         result = 17 * result + content.hashCode();
-        result = 17 * result + sentTime.hashCode();
         return result;
     }
 
@@ -141,12 +148,12 @@ public class Message extends BasicObject {
         if (obj.getClass() != Permission.class)
             return false;
         Message message = (Message) obj;
-        return this.header.equals(message.getHeader()) && this.content.equals(message.getContent()) && this.equals((message.getSentTime()));
+        return this.header.equals(message.getHeader()) && this.content.equals(message.getContent());
 
     }
 
     public String toString() {
-        return "Message sent time is " + sentTime + "and  header is " + header + " and content is " + content + super.toString();
+        return "Message header is " + header + " and content is " + content + super.toString();
     }
 
 

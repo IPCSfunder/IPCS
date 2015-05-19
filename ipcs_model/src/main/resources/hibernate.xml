@@ -19,7 +19,13 @@ http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
             </props>
         </property>
 
-        <property name="mappingResources">
+        <property name="packagesToScan">
+            <list>
+                <value>com.ipcs.model</value>
+            </list>
+        </property>
+
+        <!--<property name="mappingResources">
             <list>
                 <value>mapping/Person.hbm.xml</value>
                 <value>mapping/Role.hbm.xml</value>
@@ -35,7 +41,7 @@ http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
                 <value>mapping/Activity.hbm.xml</value>
                 <value>mapping/UserGroup.hbm.xml</value>
             </list>
-        </property>
+        </property>-->
 
     </bean>
 </beans>

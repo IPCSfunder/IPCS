@@ -1,0 +1,6 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<dataset>
+	<message_type type_name="MESSAGE" description="message"></message_type>
+	<message_type type_name="VIDEO" description="video"></message_type>
+	<message_type type_name="IMAGE" description="image"></message_type>
+</dataset>

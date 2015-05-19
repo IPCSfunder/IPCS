@@ -9,19 +9,25 @@ class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
 		<value>/database.properties</value>
 	</property>
 </bean> -->
- 
-<bean id="dataSource" 
-         class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+
+	<bean id="dataSource"
+		  class="org.apache.commons.dbcp.BasicDataSource"
+		  destroy-method="close" scope="singleton">
 
 	<property name="driverClassName" value="com.mysql.jdbc.Driver" />
-	 <property name="url" value="jdbc:mysql://PC201311192237.lan:3306/IPCS" />
-	<property name="username" value="ipcs_user" />
-	<property name="password" value="" />
-
+	<property name="url" value="jdbc:mysql://rdsjh5yddsy2ug4mb5baepublic.mysql.rds.aliyuncs.com:3306/ipcs" />
+	<property name="username" value="ipcs_admin" />
+	<property name="password" value="password" />
+	<property name="maxActive" value="15"/>
+	<property name="minIdle" value="5"/>
+	<property name="maxIdle" value="8"/>
+	<property name="initialSize" value="2"/>
 
 	<!--<property name="url" value="jdbc:mysql://120.24.166.170:3306/ipcs" />
 	<property name="username" value="ipcs_admin" />
 	<property name="password" value="password" />-->
     </bean>
+
+
 
     </beans>

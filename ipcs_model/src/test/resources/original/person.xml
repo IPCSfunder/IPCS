@@ -1,0 +1,9 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<dataset>
+	<school_type SCHOOL_TYPE_OBJID="1" NAME ="HIGH_SCHOOL"/>
+	<school SCHOOL_OBJID="1" name = "PUNGOL_PRIMARY_SCHOOL" ADDRESS="PUNGOL" SCHOOL_TYPE_FK="1"/>-
+	<role role_objid = "1" name = "ADMIN"/>
+	<person person_objid="1" account_name="JamesChen" password_hash="12345" SCHOOL_FK="1"/>
+	<person person_objid="2" account_name="WilliamWang"  password_hash="12345" SCHOOL_FK="1"/>
+	<person_role></person_role>
+</dataset>

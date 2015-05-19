@@ -1,0 +1,130 @@
+package com.ipcs.controller.util;
+
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * @author Chen Chao
+ */
+public class Nationality {
+    private static List<String> nationalityList = new ArrayList<String>();
+
+    private static String[] nationalities= new String[]{
+            "Afghanistan",
+            "Algeria",
+            "Angola",
+            "Argentina",
+            "Austria",
+            "Autralia",
+            "Bangladesh",
+            "Belarus",
+            "Belgium",
+            "Bolivia",
+            "Bosnia and Herzegovina",
+            "Brazil",
+            "Britain",
+            "Bulgaria",
+            "Cambodia",
+            "Cameroon",
+            "Canada",
+            "Central African Republic",
+            "Chad",
+            "China",
+            "Colombia",
+            "Costa Rica",
+            "Croatia",
+            "the Czech Republic",
+            "Democratic Republic of the Congo",
+            "Denmark",
+            "Ecuador",
+            "Egypt",
+            "El Salvador",
+            "England",
+            "Estonia",
+            "Ethiopia",
+            "Finland",
+            "France",
+            "Germany",
+            "Ghana",
+            "Greece",
+            "Guatemala",
+            "Holland",
+            "Honduras",
+            "Hungary",
+            "Iceland",
+            "India",
+            "Indonesia",
+            "Iran",
+            "Iraq",
+            "Ireland",
+            "Israel",
+            "Italy",
+            "Ivory Coast",
+            "Jamaica",
+            "Japan",
+            "Jordan",
+            "Kazakhstan",
+            "Kenya",
+            "Laos",
+            "Latvia",
+            "Libya",
+            "Lithuania",
+            "Madagascar",
+            "Malaysia",
+            "Mali",
+            "Mauritania",
+            "Mexico",
+            "Morocco",
+            "Namibia",
+            "Nicaragua",
+            "Niger",
+            "Nigeria",
+            "Norway",
+            "Oman",
+            "Pakistan",
+            "Panama",
+            "Paraguay",
+            "Peru",
+            "The Philippines",
+            "Poland",
+            "Portugal",
+            "Republic of the Congo",
+            "Romania",
+            "Russia",
+            "Saudi Arabia",
+            "Scotland",
+            "Senegal",
+            "Serbia",
+            "Singapore",
+            "Slovakia",
+            "Somalia",
+            "South Africa",
+            "Spain",
+            "Sudan",
+            "Sweden",
+            "Switzerland",
+            "Syria",
+            "Thailand",
+            "Tunisia",
+            "Turkey",
+            "Turkmenistan",
+            "Ukraine",
+            "The United Arab Emirates",
+            "The United States",
+            "Uruguay",
+            "Vietnam",
+            "Wales",
+            "Zambia",
+            "Zimbabwe"
+    };
+
+    private Nationality(){}
+
+    public static List<String> getNationalityList(){
+        if(nationalityList.isEmpty())
+           for(int i =0;i<nationalities.length;i++)
+               nationalityList.add(nationalities[i]);
+        return nationalityList;
+    }
+
+}

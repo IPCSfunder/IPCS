@@ -1,27 +1,25 @@
 package com.ipcs.model.Base;
 
+import javax.persistence.Column;
+import javax.persistence.MappedSuperclass;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import java.util.Date;
 
 /**
  * @author Chen Chao
  *
  */
-public abstract class BasicObject {
-	
-	private Long objectId;
+
+@MappedSuperclass
+public class BasicObject implements java.io.Serializable{
 	
 	private Date createdTime;
 	
 	private Date modifiedTime;
 
-	public Long getObjectId() {
-		return objectId;
-	}
-
-	public void setObjectId(Long objectId) {
-		this.objectId = objectId;
-	}
-
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "DATE_CREATED")
 	public Date getCreatedTime() {
 		return createdTime;
 	}
@@ -30,6 +28,8 @@ public abstract class BasicObject {
 		this.createdTime = createdTime;
 	}
 
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "DATE_MODIFIED")
 	public Date getModifiedTime() {
 		return modifiedTime;
 	}
@@ -39,8 +39,7 @@ public abstract class BasicObject {
 	}
 	
 	public String toString(){
-		return "Object id is "+objectId
-		+" ,created at "+createdTime
-		+" modifed at "+modifiedTime;
+		return "Object created at "+createdTime
+		+" and modifed at "+modifiedTime;
 	}
 }

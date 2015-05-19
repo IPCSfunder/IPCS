@@ -2,12 +2,19 @@ package com.ipcs.model;
 
 import com.ipcs.model.Base.BasicObject;
 
-import java.util.*;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 /**
  * @author Chen Chao
  */
+
+@Entity
+@Table(name = "ACTIVITY")
 public class Activity extends BasicObject {
+    private Long objectId;
 
     private String name;
 
@@ -24,9 +31,10 @@ public class Activity extends BasicObject {
     private List<Person> persons = new ArrayList<Person>();
 
     public Activity() {
+        super();
     }
 
-    public Activity(ActivityBuilder activityBuilder){
+    public Activity(ActivityBuilder activityBuilder) {
         this.name = activityBuilder.name;
         this.location = activityBuilder.location;
         this.description = activityBuilder.description;
@@ -35,50 +43,18 @@ public class Activity extends BasicObject {
         this.school = activityBuilder.school;
     }
 
-
-    public static class ActivityBuilder{
-        private String name;
-        private String location;
-        private String description;
-        private Date startTime;
-        private Person host;
-        private School school;
-
-        public ActivityBuilder withName(String name){
-            this.name = name;
-            return this;
-        }
-
-        public ActivityBuilder withLocation(String location){
-            this.location = location;
-            return this;
-        }
-
-        public ActivityBuilder withDescription(String description){
-            this.description = description;
-            return this;
-        }
-
-        public ActivityBuilder withStartDate(Date startTime){
-            this.startTime= startTime;
-            return this;
-        }
-        public ActivityBuilder withHost (Person host){
-            this.host = host;
-            return this;
-        }
-
-        public ActivityBuilder withSchool (School school){
-            this.school = school;
-            return this;
-        }
-
-        public Activity builder(){
-            return new Activity(this);
-        }
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "ACTIVITY_OBJID", unique = true, nullable = false)
+    public Long getObjectId() {
+        return objectId;
     }
 
+    public void setObjectId(Long objectId) {
+        this.objectId = objectId;
+    }
+
+    @Column(name = "DESCRIPTION")
     public String getDescription() {
         return description;
     }
@@ -87,6 +63,8 @@ public class Activity extends BasicObject {
         this.description = description;
     }
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "HOST")
     public Person getHost() {
         return host;
     }
@@ -95,6 +73,7 @@ public class Activity extends BasicObject {
         this.host = host;
     }
 
+    @Column(name = "LOCATION")
     public String getLocation() {
         return location;
     }
@@ -103,6 +82,7 @@ public class Activity extends BasicObject {
         this.location = location;
     }
 
+    @Column(name = "NAME")
     public String getName() {
         return name;
     }
@@ -111,6 +91,8 @@ public class Activity extends BasicObject {
         this.name = name;
     }
 
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "START_TIME")
     public Date getStartTime() {
         return startTime;
     }
@@ -119,15 +101,16 @@ public class Activity extends BasicObject {
         this.startTime = startTime;
     }
 
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "SCHEDULE", joinColumns = {
+            @JoinColumn(name = "ACTIVITY_FK", nullable = false)},
+            inverseJoinColumns = {@JoinColumn(name = "PERSON_FK")})
     public List<Person> getPersons() {
         return persons;
     }
 
-    public void addPersonToList(Person person) {
-        persons.add(person);
-    }
-
-    public void addPerson(Person person){
+    public void addPerson(Person person) {
         this.persons.add(person);
     }
 
@@ -135,7 +118,8 @@ public class Activity extends BasicObject {
         this.persons = persons;
     }
 
-
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "SCHOOL_FK")
     public School getSchool() {
         return school;
     }
@@ -165,6 +149,50 @@ public class Activity extends BasicObject {
     }
 
     public String toString() {
-        return "Activity start time is " + startTime + "and  name is " + name + " and location is " + location + super.toString();
+        return "Activity name is " + name + " and location is " + location + super.toString();
+    }
+
+    public static class ActivityBuilder {
+        private String name;
+        private String location;
+        private String description;
+        private Date startTime;
+        private Person host;
+        private School school;
+
+        public ActivityBuilder withName(String name) {
+            this.name = name;
+            return this;
+        }
+
+        public ActivityBuilder withLocation(String location) {
+            this.location = location;
+            return this;
+        }
+
+        public ActivityBuilder withDescription(String description) {
+            this.description = description;
+            return this;
+        }
+
+        public ActivityBuilder withStartDate(Date startTime) {
+            this.startTime = startTime;
+            return this;
+        }
+
+        public ActivityBuilder withHost(Person host) {
+            this.host = host;
+            return this;
+        }
+
+        public ActivityBuilder withSchool(School school) {
+            this.school = school;
+            return this;
+        }
+
+        public Activity builder() {
+            return new Activity(this);
+        }
+
     }
 }

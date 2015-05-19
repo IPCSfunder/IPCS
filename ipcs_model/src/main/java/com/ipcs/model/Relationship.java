@@ -2,11 +2,17 @@ package com.ipcs.model;
 
 import com.ipcs.model.Base.BasicObject;
 
+import javax.persistence.*;
+
 /**
  * @author Chen Chao
  *
  */
+
+@Entity
+@Table(name = "RELATIONSHIP")
 public class Relationship extends BasicObject {
+	private Long objectId;
 
 	private Person whose;
 
@@ -19,6 +25,19 @@ public class Relationship extends BasicObject {
 		super();
 	}
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "RELATIONSHIP_OBJID", unique = true, nullable = false)
+	public Long getObjectId() {
+		return objectId;
+	}
+
+	public void setObjectId(Long objectId) {
+		this.objectId = objectId;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "RELATIONSHIP_TYPE_FK")
 	public RelationshipType getType() {
 		return type;
 	}
@@ -27,6 +46,8 @@ public class Relationship extends BasicObject {
 		this.type = type;
 	}
 
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "ISWHO")
 	public Person getIswho() {
 		return iswho;
 	}
@@ -35,7 +56,8 @@ public class Relationship extends BasicObject {
 		this.iswho = iswho;
 	}
 
-
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "WHOSE")
 	public Person getWhose() {
 		return whose;
 	}
@@ -43,8 +65,6 @@ public class Relationship extends BasicObject {
 	public void setWhose(Person whose) {
 		this.whose = whose;
 	}
-
-
 
 	public int hashCode(){
 		int factor = 31;

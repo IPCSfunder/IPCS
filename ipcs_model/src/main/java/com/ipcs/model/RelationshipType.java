@@ -1,16 +1,45 @@
 package com.ipcs.model;
 
 import com.ipcs.model.Base.BasicObject;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author Chen Chao
  *
  */
+
+@Entity
+@Table(name = "RELATIONSHIP_TYPE")
 public class
 		RelationshipType extends BasicObject {
+	private Long objectId;
 
 	private String name;
 
+	private List<Relationship> relationships= new ArrayList<Relationship>();
+
+	public RelationshipType(){
+		super();
+	}
+
+	public RelationshipType(String name){
+		this.name = name;
+	}
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "RELATIONSHIP_TYPE_OBJID", unique = true, nullable = false)
+	public Long getObjectId() {
+		return objectId;
+	}
+
+	public void setObjectId(Long objectId) {
+		this.objectId = objectId;
+	}
+
+	@Column(name="NAME")
 	public String getName() {
 		return name;
 	}
@@ -19,14 +48,14 @@ public class
 		this.name = name;
 	}
 
-	public RelationshipType(){
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "type", cascade =CascadeType.ALL)
+	public List<Relationship> getRelationships() {
+		return relationships;
 	}
 
-	public RelationshipType(String name){
-	    this.name = name;
+	public void setRelationships(List<Relationship> relationships) {
+		this.relationships = relationships;
 	}
-	
-	
 
 	public int hashCode(){
 		int factor = 31;

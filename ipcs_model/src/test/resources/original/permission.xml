@@ -1,0 +1,20 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<dataset>
+
+	<role role_objid = "1" name = "ADMIN"/>
+	<role role_objid = "2" name = "CHILDREN"/>
+	<role role_objid = "3" name = "STAFF"/>
+	<role role_objid = "4" name = "PARENT"/>
+
+	<permission PERMISSION_OBJID="1" NAME = "LOGIN"/>
+	<permission PERMISSION_OBJID="2" NAME = "ADD_UPDATE_REMOVE_STUDENT"/>
+	<permission PERMISSION_OBJID="3" NAME = "ADD_UPDATE_REMOVE_TEACHER"/>
+
+	<role_permission role_permission_objid="1" ROLE_FK="1" PERMISSION_FK="1"/>
+	<role_permission role_permission_objid="2" ROLE_FK="1" PERMISSION_FK="2"/>
+	<role_permission role_permission_objid="3" ROLE_FK="1" PERMISSION_FK="3"/>
+	<role_permission role_permission_objid="4" ROLE_FK="3" PERMISSION_FK="1"/>
+
+
+
+</dataset>

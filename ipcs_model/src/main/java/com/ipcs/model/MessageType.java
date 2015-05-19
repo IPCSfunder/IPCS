@@ -2,17 +2,34 @@ package com.ipcs.model;
 
 import com.ipcs.model.Base.BasicObject;
 
+import javax.persistence.*;
+
 /**
  * @author Chen Chao
  *
  */
+
+@Entity
+@Table(name = "MESSAGE_TYPE")
 public class MessageType extends BasicObject {
+	private Long objectId;
 
 	private String typeName;
 
 	private String description;
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "MESSAGE_TYPE_OBJID", unique = true, nullable = false)
+	public Long getObjectId() {
+		return objectId;
+	}
 
+	public void setObjectId(Long objectId) {
+		this.objectId = objectId;
+	}
+
+	@Column(name="TYPE_NAME")
 	public String getTypeName() {
 		return typeName;
 	}
@@ -21,6 +38,7 @@ public class MessageType extends BasicObject {
 		this.typeName = typeName;
 	}
 
+	@Column(name="DESCRIPTION")
 	public String getDescription() {
 		return description;
 	}
