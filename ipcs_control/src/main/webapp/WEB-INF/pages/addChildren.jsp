@@ -64,12 +64,8 @@
             <td width="150px"></td>
             <td><form:label path="personDetail.nationality">Nationality</form:label></td>
             <td>
-                <form:select path="personDetail.nationality">
-                    <form:option value="Singapore" selected="selected">Singapore</form:option>
-                    <form:option value="China">China</form:option>
-                    <form:option value="America">America</form:option>
+                <form:select path="personDetail.nationality" selected="personDetail.nationality" items="${nationalities}">
                 </form:select>
-
             </td>
         </tr>
 

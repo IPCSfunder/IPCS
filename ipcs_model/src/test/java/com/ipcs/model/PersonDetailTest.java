@@ -31,15 +31,13 @@ public class PersonDetailTest{
     @Test
     @ExpectedDatabase(value= "/expected/personDetail.xml", assertionMode = DatabaseAssertionMode.NON_STRICT)
     @DatabaseTearDown(value= "/original/personDetail.xml",type = DatabaseOperation.DELETE_ALL)
-    public void testInsertPersonRole() throws ParseException {
+    public void testInsertPersonDetails() throws ParseException {
         Session session = sessionFactory.openSession();
         session.beginTransaction();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         PersonDetail personDetail = new PersonDetail.PersonBuilder().withAge(25).withDob(sdf.parse("1986-08-25"))
                 .withFirstName("Richard").withLastName("Gard").withMarketOption(Boolean.valueOf(false))
                 .withNationality("Singaporean").withNickName("GG").withNric("1234567").withSex("FEMALE").build();
-        Person person = (Person) session.get(Person.class, 2l);
-        personDetail.setPerson(person);
         session.save(personDetail);
         session.getTransaction().commit();
         session.close();

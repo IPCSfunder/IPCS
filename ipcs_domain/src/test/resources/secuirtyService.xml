@@ -4,6 +4,12 @@
 	<school_type SCHOOL_TYPE_OBJID="1" NAME ="HIGH_SCHOOL"/>
 	<school SCHOOL_OBJID="1" name = "PUNGOL_PRIMARY_SCHOOL" ADDRESS="PUNGOL" SCHOOL_TYPE_FK="1"/>-
 	<role role_objid = "1" name = "ADMIN"/>
+	<permission PERMISSION_OBJID="1" NAME = "LOGIN"/>
+	<permission PERMISSION_OBJID="2" NAME = "ADD_UPDATE_REMOVE_STUDENT"/>
+	<permission PERMISSION_OBJID="3" NAME = "ADD_UPDATE_REMOVE_TEACHER"/>
+	<role_permission role_permission_objid="1" ROLE_FK="1" PERMISSION_FK="1"/>
+	<role_permission role_permission_objid="2" ROLE_FK="1" PERMISSION_FK="2"/>
+	<role_permission role_permission_objid="3" ROLE_FK="1" PERMISSION_FK="3"/>
 	<person person_objid="1" account_name="JamesChen" password_hash="12345" SCHOOL_FK="1"/>
 	<person person_objid="2" account_name="WilliamWang"  password_hash="12345" SCHOOL_FK="1"/>
 	<person_role PERSON_ROLE_OBJID="1" person_fk="1" role_fk="1"></person_role>

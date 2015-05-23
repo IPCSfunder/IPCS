@@ -57,10 +57,7 @@ public class Role extends BasicObject {
 	}
 
 
-	@ManyToMany(fetch = FetchType.LAZY)
-	@JoinTable(name = "PERSON_ROLE", joinColumns = {
-			@JoinColumn(name = "ROLE_FK", nullable = false)},
-			inverseJoinColumns = {@JoinColumn(name = "PERSON_FK")})
+	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "roles",cascade = CascadeType.ALL)
 	public List<Person> getPersons() {
 		return persons;
 	}

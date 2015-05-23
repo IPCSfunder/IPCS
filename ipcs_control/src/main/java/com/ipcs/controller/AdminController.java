@@ -1,5 +1,6 @@
 package com.ipcs.controller;
 
+import com.ipcs.controller.util.Nationality;
 import com.ipcs.controller.validator.ActivityValidator;
 import com.ipcs.controller.validator.PersonValidator;
 import com.ipcs.model.*;
@@ -33,19 +34,6 @@ public class AdminController {
     @Autowired
     private RegistoryService registoryService;
 
-    public void setSecurityService(SecurityService securityService) {
-        this.securityService = securityService;
-    }
-
-    public void setAdminservice(AdminService adminservice) {
-        this.adminservice = adminservice;
-    }
-
-    public void setRegistoryService(RegistoryService registoryService) {
-        this.registoryService = registoryService;
-    }
-
-
     @InitBinder("command")
     public void initBinderForChild(WebDataBinder binder) {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -64,14 +52,15 @@ public class AdminController {
 
 
     @RequestMapping(value = "/addChildren", method = RequestMethod.GET)
-    public ModelAndView student(@RequestParam Map<String,String> requestParams) {
+    public ModelAndView addChildren(@RequestParam Map<String,String> requestParams) {
         String account_name = requestParams.get("account_name");
+        List<String> nationalities = Nationality.getNationalityList();
         if(null!=account_name){
             Person child = adminservice.getChildDetail(account_name);
-            return new ModelAndView("addChildren", "command", child).addObject("operation","update");
+            return new ModelAndView("addChildren", "command", child).addObject("operation","update").addObject("nationalities",nationalities);
         }
         else
-            return new ModelAndView("addChildren", "command", new Person()).addObject("operation","add");
+            return new ModelAndView("addChildren", "command", new Person()).addObject("operation","add").addObject("nationalities",nationalities);
     }
 
 
@@ -83,10 +72,10 @@ public class AdminController {
             adminservice.updatePerson(child);
             return "navigator";
         }
-        School school = ((Person) session.getAttribute("authenticatedAdmin")).getSchools().iterator().next();
+        School school = ((Person) session.getAttribute("authenticatedAdmin")).getSchool();
         child.setAccount_name(child.getPersonDetail().getFirstName()+child.getPersonDetail().getLastName());
         child.setPassword_hash("11");
-        child.addSchool(school);
+        child.setSchool(school);
         adminservice.addPerson(child);
         return "navigator";
     }
@@ -115,17 +104,17 @@ public class AdminController {
             adminservice.updatePerson(staff);
             return "navigator";
         }
-        School school = ((Person) session.getAttribute("authenticatedAdmin")).getSchools().iterator().next();
+        School school = ((Person) session.getAttribute("authenticatedAdmin")).getSchool();
         staff.setAccount_name(staff.getPersonDetail().getFirstName()+staff.getPersonDetail().getLastName());
         staff.setPassword_hash("11");
-        staff.addSchool(school);
+        staff.setSchool(school);
         adminservice.addPerson(staff);
         return "navigator";
     }
 
     @RequestMapping(value = "/listChildren", method = RequestMethod.GET)
     public ModelAndView listStudent(HttpSession session) {
-        School school = ((Person) session.getAttribute("authenticatedAdmin")).getSchools().iterator().next();
+        School school = ((Person) session.getAttribute("authenticatedAdmin")).getSchool();
         List<Person> students = adminservice.listAllPersonByRoleName(school.getName(), "CHILDREN");
         return new ModelAndView("listChildren", "command", students);
     }
@@ -133,7 +122,7 @@ public class AdminController {
 
     @RequestMapping(value = "/listStaff", method = RequestMethod.GET)
     public ModelAndView listStaff(HttpSession session) {
-        School school = ((Person) session.getAttribute("authenticatedAdmin")).getSchools().iterator().next();
+        School school = ((Person) session.getAttribute("authenticatedAdmin")).getSchool();
         List<Person> staffs = adminservice.listAllPersonByRoleName(school.getName(), "STAFF");
         return new ModelAndView("listStaff", "command", staffs);
     }
@@ -147,7 +136,7 @@ public class AdminController {
 
     @RequestMapping(value = "/addActivity", method = RequestMethod.GET)
     public ModelAndView addActivity(@RequestParam Map<String,String> requestParams, HttpSession session) {
-        School school = ((Person) session.getAttribute("authenticatedAdmin")).getSchools().iterator().next();
+        School school = ((Person) session.getAttribute("authenticatedAdmin")).getSchool();
         List<Person> teachers = adminservice.listAllPersonByRoleName(school.getName(), "STAFF");
         List<Person> students = adminservice.listAllPersonByRoleName(school.getName(), "CHILDREN");
         String activityId = requestParams.get("activityId");
@@ -161,7 +150,7 @@ public class AdminController {
 
     @RequestMapping(value = "/persistActivity", method = RequestMethod.POST)
     public ModelAndView persistActivity(@ModelAttribute("activity")  @Validated Activity activity, BindingResult bindingResult, HttpSession session,ModelMap model,@RequestParam Map<String,String> requestParams) throws ParseException {
-        School school = ((Person) session.getAttribute("authenticatedAdmin")).getSchools().iterator().next();
+        School school = ((Person) session.getAttribute("authenticatedAdmin")).getSchool();
         List<Person> teachers = adminservice.listAllPersonByRoleName(school.getName(), "STAFF");
         List<Person> students = adminservice.listAllPersonByRoleName(school.getName(), "CHILDREN");
 

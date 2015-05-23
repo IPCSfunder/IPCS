@@ -1,83 +1,87 @@
-/**
- * 
- */
 package com.ipcs.service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
 
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
-import org.testng.Assert;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Test;
-
+import com.github.springtestdbunit.TransactionDbUnitTestExecutionListener;
+import com.github.springtestdbunit.annotation.DatabaseOperation;
+import com.github.springtestdbunit.annotation.DatabaseSetup;
+import com.github.springtestdbunit.annotation.DatabaseTearDown;
 import com.ipcs.model.Permission;
 import com.ipcs.model.Person;
 import com.ipcs.model.Role;
 import com.ipcs.model.School;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.TestExecutionListeners;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
+import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
 
-/**
- * @author Chen Chao
- *
- */
+import javax.annotation.Resource;
+import javax.sql.DataSource;
+import java.util.List;
+
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations = { "classpath:/Services.xml" })
+@TestExecutionListeners({ DependencyInjectionTestExecutionListener.class, TransactionalTestExecutionListener.class, TransactionDbUnitTestExecutionListener.class })
 public class SecurityServiceTest {
-
+    @Resource
+    DataSource dataSource;
 
     SecurityService securityService = null;
     AdminService adminService = null;
-    List<Person> adminAndStudents = new ArrayList<Person>();
 
-    @SuppressWarnings("unchecked")
-    @BeforeClass
-    public void setUp() {
-	ApplicationContext appContext = new ClassPathXmlApplicationContext(
-		"Services.xml");
-	securityService = (SecurityService) appContext
-		.getBean("securityServiceImpl");
-	adminService = (AdminService) appContext
-		.getBean("adminServiceImpl");
+    @Before
+    public void purgeData() throws Exception {
+        ApplicationContext appContext = new ClassPathXmlApplicationContext(
+                "Services.xml");
+        securityService = (SecurityService) appContext
+                .getBean("securityServiceImpl");
+        adminService = (AdminService) appContext
+                .getBean("adminServiceImpl");
+    }
+
+
+    @Test
+    @DatabaseSetup(value= "/secuirtyService.xml", type=DatabaseOperation.REFRESH)
+    @DatabaseTearDown(value= "/secuirtyService.xml",type = DatabaseOperation.DELETE_ALL)
+    public void insertAdmin() {
+        Role role = adminService.getRoleByName("ADMIN");
+        School school = adminService.getSchoolByName("PUNGOL_PRIMARY_SCHOOL");
+        Person person = DataFactory.preparePerson("admin3", "password");
+        person.addRole(role);
+        person.setSchool(school);
+        adminService.addPerson(person);
     }
 
     @Test
-    public void insertAdmin() {
-	Role role = new Role("admin");
-	School school = new School("PUNGOL");
-	Person person = DataFactory.preparePerson("admin3", "password");
-	person.addRole(role);
-	person.addSchool(school);
-	adminService.addPerson(person);
-	adminAndStudents.add(person);
+    @DatabaseSetup(value= "/secuirtyService.xml", type=DatabaseOperation.REFRESH)
+    @DatabaseTearDown(value= "/secuirtyService.xml",type = DatabaseOperation.DELETE_ALL)
+    public void testAuthenticateLoginInfo() {
+        boolean flag = securityService.authenticateLoginInfo("JamesChen", "12345");
+        Assert.assertTrue(flag);
     }
-    
-    @Test(dependsOnMethods = {"insertAdmin"})
-    public void testAuthenticateLoginInfo(){
-	boolean flag= securityService.authenticateLoginInfo("admin3","password");
-	Assert.assertTrue(flag);
-    }
-    
-    @Test(enabled=true, dependsOnMethods = {"testAuthenticateLoginInfo"})
-    public void testListPermission(){
-	List<Permission> permissions= securityService.listPermission("admin3");
-	Assert.assertEquals(permissions.size(), 4);
-    }
-    
-    
-    @Test(dependsOnMethods = {"testListPermission"})
-    public void testListRoles(){
-	List<Role> roles= securityService.listRole("admin3");
-	Assert.assertEquals(roles.size(), 1);
-	Assert.assertEquals(roles.get(0).getName(), "ADMIN");
-    }
-    
-    @AfterClass
-    public void tearDown(){
-	adminService.deleteBatchSubodinates(adminAndStudents);
+
+    @Test
+    @DatabaseSetup(value= "/secuirtyService.xml", type=DatabaseOperation.REFRESH)
+    @DatabaseTearDown(value= "/secuirtyService.xml",type = DatabaseOperation.DELETE_ALL)
+    public void testListPermission() {
+        List<Permission> permissions = securityService.listPermission("JamesChen");
+        Assert.assertEquals(permissions.size(), 3);
     }
 
 
-}
+    @Test
+    @DatabaseSetup(value= "/secuirtyService.xml", type=DatabaseOperation.REFRESH)
+    @DatabaseTearDown(value= "/secuirtyService.xml",type = DatabaseOperation.DELETE_ALL)
+    public void testListRoles() {
+        List<Role> roles = securityService.listRole("JamesChen");
+        Assert.assertEquals(roles.size(), 1);
+        Assert.assertEquals(roles.get(0).getName(), "ADMIN");
+    }
+
+}  

@@ -75,7 +75,10 @@ public class Person extends BasicObject {
         this.password_hash = password_hash;
     }
 
-    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "persons")
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "PERSON_ROLE", joinColumns = {
+            @JoinColumn(name = "PERSON_FK", nullable = false)},
+            inverseJoinColumns = {@JoinColumn(name = "ROLE_FK")})
     public List<Role> getRoles() {
         return roles;
     }
@@ -103,7 +106,7 @@ public class Person extends BasicObject {
         this.roles.add(role);
     }
 
-    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "persons")
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "persons",cascade = CascadeType.ALL)
     public List<Activity> getActivities() {
         return activities;
     }

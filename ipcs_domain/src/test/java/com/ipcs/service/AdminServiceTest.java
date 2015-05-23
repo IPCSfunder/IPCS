@@ -3,16 +3,30 @@
  */
 package com.ipcs.service;
 
+import com.github.springtestdbunit.TransactionDbUnitTestExecutionListener;
+import com.github.springtestdbunit.annotation.DatabaseSetup;
+import com.github.springtestdbunit.annotation.DatabaseTearDown;
 import com.ipcs.model.Activity;
 import com.ipcs.model.Person;
 import com.ipcs.model.Role;
 import com.ipcs.model.School;
+import org.junit.Before;
+import org.junit.runner.RunWith;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.TestExecutionListeners;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
+import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
+
+import javax.annotation.Resource;
+import javax.sql.DataSource;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -20,109 +34,121 @@ import java.util.List;
 /**
  * @author Chen Chao
  */
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations = { "classpath:/Services.xml" })
+@TestExecutionListeners({ DependencyInjectionTestExecutionListener.class, TransactionalTestExecutionListener.class, TransactionDbUnitTestExecutionListener.class })
 public class AdminServiceTest {
+    @Resource
+    DataSource dataSource;
 
     AdminService adminService = null;
-    List<Person> adminAndStudents = new ArrayList<Person>();
     Person person = null;
 
-    @SuppressWarnings("unchecked")
-    @BeforeClass
-    public void setUp() {
+
+    @Before
+    public void setUp() throws Exception{
         ApplicationContext appContext = new ClassPathXmlApplicationContext(
                 "Services.xml");
         adminService = (AdminService) appContext
                 .getBean("adminServiceImpl");
-
     }
 
-    @Test(groups = "inserDummyData")
+    @org.junit.Test
+    @DatabaseSetup(value= "/adminService.xml", type= com.github.springtestdbunit.annotation.DatabaseOperation.REFRESH)
+    @DatabaseTearDown(value= "/adminService.xml",type = com.github.springtestdbunit.annotation.DatabaseOperation.DELETE_ALL)
     public void insertAdmin() {
-        Role role = new Role("admin");
-        School school = new School("PUNGOL");
+        Role role = new Role("ADMIN");
+        School school = adminService.getSchoolByName("PUNGOL_PRIMARY_SCHOOL");
         Person person = DataFactory.preparePerson("admin", "password");
         person.addRole(role);
-        person.addSchool(school);
+        person.setSchool(school);
         adminService.addPerson(person);
-        adminAndStudents.add(person);
     }
 
 
-    @Test(dependsOnMethods = {"insertAdmin"}, groups = "inserDummyData")
+    @org.junit.Test
+    @DatabaseSetup(value= "/adminService.xml", type= com.github.springtestdbunit.annotation.DatabaseOperation.REFRESH)
+    @DatabaseTearDown(value= "/adminService.xml",type = com.github.springtestdbunit.annotation.DatabaseOperation.DELETE_ALL)
     public void insertStudents() {
-        Role role = adminService.getRoleByName("children");
-        School school = adminService.getSchoolByName("PUNGOL");
+        Role role = adminService.getRoleByName("ADMIN");
+        School school = adminService.getSchoolByName("PUNGOL_PRIMARY_SCHOOL");
         List<Person> persons = DataFactory.prepareStudent(3, "children", "passsword");
         for (Person person : persons) {
             person.addRole(role);
-            person.addSchool(school);
+            person.setSchool(school);
         }
         adminService.addBatchSubodinates(persons);
-        adminAndStudents.addAll(persons);
     }
 
 
-    @Test(dependsOnMethods = {"insertStudents"}, groups = "inserDummyData")
+    @org.junit.Test
+    @DatabaseSetup(value= "/adminService.xml", type= com.github.springtestdbunit.annotation.DatabaseOperation.REFRESH)
+    @DatabaseTearDown(value= "/adminService.xml",type = com.github.springtestdbunit.annotation.DatabaseOperation.DELETE_ALL)
     public void testFindAllStudents() {
-        List<Person> students = adminService.listAllPersonByRoleName("PUNGOL", "children");
-        Assert.assertTrue(students.size() >= 4);
+        List<Person> admins = adminService.listAllPersonByRoleName("PUNGOL_PRIMARY_SCHOOL", "ADMIN");
+        Assert.assertTrue(admins.size() == 2);
     }
 
-    @Test(dependsOnMethods = {"testFindAllStudents"}, groups = "inserDummyData")
+    @org.junit.Test
+    @DatabaseSetup(value= "/adminService.xml", type= com.github.springtestdbunit.annotation.DatabaseOperation.REFRESH)
+    @DatabaseTearDown(value= "/adminService.xml",type = com.github.springtestdbunit.annotation.DatabaseOperation.DELETE_ALL)
     public void testGetAdminInfo() {
-        Person admin = adminService.getAdminInfo("admin");
-        Assert.assertEquals(admin.getSchools().size(), 1);
-        Assert.assertEquals(admin.getSchools().iterator().next().getName(), "PUNGOL");
+        Person admin = adminService.getAdminInfo("JamesChen");
+        Assert.assertEquals(admin.getSchool().getName(), "PUNGOL_PRIMARY_SCHOOL");
     }
 
 
-    @Test(dependsOnMethods = {"testGetAdminInfo"}, groups = "query")
+    @org.junit.Test
+    @DatabaseSetup(value= "/adminService.xml", type= com.github.springtestdbunit.annotation.DatabaseOperation.REFRESH)
+    @DatabaseTearDown(value= "/adminService.xml",type = com.github.springtestdbunit.annotation.DatabaseOperation.DELETE_ALL)
     public void testQueryActivies() {
-        List<Activity> activities = adminService.listAllActivities(2l);
+        List<Activity> activities = adminService.listAllActivities(1l);
         Assert.assertEquals(activities.size(), 1);
-        Assert.assertEquals(activities.iterator().next().getName(), "Math");
+        Assert.assertEquals(activities.iterator().next().getName(), "Language");
     }
-    @Test(dependsOnMethods = {"testGetAdminInfo"}, groups = "query")
+
+    @org.junit.Test
+    @DatabaseSetup(value= "/adminService.xml", type= com.github.springtestdbunit.annotation.DatabaseOperation.REFRESH)
+    @DatabaseTearDown(value= "/adminService.xml",type = com.github.springtestdbunit.annotation.DatabaseOperation.DELETE_ALL)
     public void testQueryActiviesUnderAdmin() {
-        List<Activity> activities = adminService.listAllActivitiesFromAdmin("Person");
-        Assert.assertTrue(activities.size()>=1);
+        List<Activity> activities = adminService.listAllActivitiesFromAdmin("JamesChen");
+        Assert.assertTrue(activities.size() == 2);
     }
 
 
-
-
-    @Test(dependsOnMethods = {"testGetAdminInfo"},groups = "query")
-    public void testQueryChildrenDetail() {
-        Person person = adminService.getChildDetail("admin");
-        Assert.assertEquals(person.getPersonDetail().getFirstName(), "DetailFirst");
-    }
-
-
-    @Test(dependsOnGroups = {"query"},groups = "update")
-    public void testUpdateUser() {
-        Person person = adminAndStudents.get(0);
-        person.setAccount_name("admin3");
-        adminService.updatePerson(person);
-
-    }
-
-
-    @Test(groups = "listAllChild")
-    public void tesListAllChild() {
-        List<Person> activities = adminService.listAllChild(4l);
-        Assert.assertEquals(activities.size(), 2);
-    }
-
-    @Test(dependsOnGroups = {"query"})
-    public void testAddActivityWithHost(){
-        Activity activity = new Activity.ActivityBuilder().withDescription("Physical").withStartDate(new Date()).withLocation("Shanghai").withHost(new Person("Person")).withName("Physical").withSchool(new School("PUNGOL")).builder();
-        adminService.addActivity(activity);
-    }
+//    @Test(dependsOnMethods = {"testGetAdminInfo"}, groups = "query")
+//    public void testQueryChildrenDetail() {
+//        Person person = adminService.getChildDetail("admin");
+//        Assert.assertEquals(person.getPersonDetail().getFirstName(), "DetailFirst");
+//    }
+//
+//
+//    @Test(dependsOnGroups = {"query"}, groups = "update")
+//    public void testUpdateUser() {
+//        person.setAccount_name("admin3");
+//        adminService.updatePerson(person);
+//
+//    }
+//
+//
+//    @Test(groups = "listAllChild")
+//    public void tesListAllChild() {
+//        List<Person> activities = adminService.listAllChild(4l);
+//        Assert.assertEquals(activities.size(), 2);
+//    }
+//
+//    @Test(dependsOnGroups = {"query"})
+//    public void testAddActivityWithHost() {
+//        School school = adminService.getSchoolByName("PUNGOL");
+//        Person person = adminService.findPersonByName("admin");
+//        Activity activity = new Activity.ActivityBuilder().withDescription("Physical").withStartDate(new Date()).withLocation("Shanghai").withHost(person).withName("Physical").withSchool(school).builder();
+//        adminService.addActivity(activity);
+//    }
 
 
     @AfterClass
     public void tearDown() {
-        adminService.deleteBatchSubodinates(adminAndStudents);
+
     }
 
 
