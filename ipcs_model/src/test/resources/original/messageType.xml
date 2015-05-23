@@ -1,0 +1,5 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<dataset>
+    <message_type message_type_objid="1" type_name="MESSAGE" description="message"></message_type>
+    <message_type message_type_objid="2" type_name="VIDEO" description="video"></message_type>
+</dataset>

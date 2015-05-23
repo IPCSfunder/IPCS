@@ -5,7 +5,7 @@ CREATE TABLE IF NOT EXISTS `ipcs`.`person_detail` (
   `age` INT NULL,
   `sex` VARCHAR(10) NULL,
   `nationality` VARCHAR(45) NULL,
-  `dob` DATETIME NULL,
+  `dob` DATE NULL,
   `nric` VARCHAR(45) NULL,
   `nick_name` VARCHAR(45) NULL,
   `market_option` BOOLEAN NULL,

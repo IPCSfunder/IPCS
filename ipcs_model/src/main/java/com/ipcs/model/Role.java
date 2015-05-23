@@ -2,6 +2,7 @@ package com.ipcs.model;
 
 import com.ipcs.model.Base.BasicObject;
 
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -11,9 +12,12 @@ import java.util.Set;
  * @author Chen Chao
  *
  */
+@Entity
+@Table(name = "ROLE")
 public class Role extends BasicObject {
+	private Long objectId;
 	
-	private String name = "";
+	private String name;
 
 	private List<Person> persons = new ArrayList<Person>();
 	
@@ -31,7 +35,19 @@ public class Role extends BasicObject {
 	public Role(RoleBuilder roleBuilder){
 		this.name = roleBuilder.name;
 	}
-	
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "ROLE_OBJID", unique = true, nullable = false)
+	public Long getObjectId() {
+		return objectId;
+	}
+
+	public void setObjectId(Long objectId) {
+		this.objectId = objectId;
+	}
+
+	@Column(name="name")
 	public String getName() {
 		return name;
 	}
@@ -39,22 +55,9 @@ public class Role extends BasicObject {
 	public void setName(String name) {
 		this.name = name;
 	}
-	
-	public static class RoleBuilder{
-		
-		private String name;
-		
-		public RoleBuilder withName(String name){
-			this.name = name;
-			return this;
-		}
-		
-		public Role build(){
-			return new Role(this);
-		}
-	}
-	
 
+
+	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "roles",cascade = CascadeType.ALL)
 	public List<Person> getPersons() {
 		return persons;
 	}
@@ -66,12 +69,12 @@ public class Role extends BasicObject {
 	public void addPerson(Person person){
 		persons.add(person);
 	}
-	
+
 	public void addPermission(Permission permission){
 		permissions.add(permission);
 	}
-	
-	
+
+	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "roles")
 	public List<Permission> getPermissions() {
 		return permissions;
 	}
@@ -97,6 +100,20 @@ public class Role extends BasicObject {
 	
 	public String toString(){
 		return "Role name is "+ name +super.toString();
+	}
+
+	public static class RoleBuilder{
+
+		private String name;
+
+		public RoleBuilder withName(String name){
+			this.name = name;
+			return this;
+		}
+
+		public Role build(){
+			return new Role(this);
+		}
 	}
 
 }

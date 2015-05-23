@@ -1,0 +1,8 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<dataset>
+	<person person_objid="3" account_name="Teacher" password_hash="11"/>
+	<person person_objid="4" account_name="Parent" password_hash="11"/>
+	<relationship_type relationship_type_objid="1" name="PARENT"></relationship_type>
+	<contact address="Punggol Street" postcode="1234223" mobile_number="198767654" relationship_type_fk="1" primary_contact="1" person_fk="3" contact_name="Child_Parent"/>
+	<contact address="Sengkang Street" postcode="12345678" mobile_number="123456" relationship_type_fk="1" primary_contact="1" person_fk="4" contact_name="ChildFather"/>
+</dataset>

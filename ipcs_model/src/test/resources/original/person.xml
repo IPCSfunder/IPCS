@@ -1,0 +1,12 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<dataset>
+	<person_detail></person_detail>
+	<school_type SCHOOL_TYPE_OBJID="1" NAME ="HIGH_SCHOOL"/>
+	<school SCHOOL_OBJID="1" name = "PUNGOL_PRIMARY_SCHOOL" ADDRESS="PUNGOL" SCHOOL_TYPE_FK="1"/>-
+	<role role_objid = "1" name = "ADMIN"/>
+	<person person_objid="1" account_name="JamesChen" password_hash="12345" SCHOOL_FK="1"/>
+	<person person_objid="2" account_name="WilliamWang"  password_hash="12345" SCHOOL_FK="1"/>
+	<person_role PERSON_ROLE_OBJID="1" person_fk="1" role_fk="1"></person_role>
+	<relationship_type relationship_type_objid="1" name="PARENT"></relationship_type>
+	<contact contact_objid="1" address="Punggol Street" postcode="1234223" mobile_number="198767654" relationship_type_fk="1" primary_contact="1" contact_name="Child_Parent"/>
+</dataset>

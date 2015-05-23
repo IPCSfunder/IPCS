@@ -2,16 +2,23 @@ package com.ipcs.model;
 
 import com.ipcs.model.Base.BasicObject;
 
+import javax.persistence.*;
+import java.util.Date;
+
 /**
  * @author Chen Chao
  *
  */
+
+@Entity
+@Table(name = "CONTACT")
 public class Contact extends BasicObject {
-	
+	private Long objectId;
+
 	private String address;
 
 	private String postcode;
-	
+
 	private String mobileNumber;
 
 	private boolean primary;
@@ -19,10 +26,76 @@ public class Contact extends BasicObject {
 	private RelationshipType relationshipType;
 
 	private String contacterName;
-	
+
 	private String emailAddress;
-	
+
 	private Person person;
+
+	public Contact(ContactBuilder contactBuilder){
+		this.address = contactBuilder.address;
+		this.postcode = contactBuilder.postcode;
+		this.mobileNumber = contactBuilder.mobileNumber;
+		this.primary = contactBuilder.primary;
+		this.relationshipType = contactBuilder.relationshipType;
+		this.contacterName = contactBuilder.contacterName;
+		this.emailAddress = contactBuilder.emailAddress;
+		this.person = contactBuilder.person;
+	}
+
+	public static class ContactBuilder {
+		private String address;
+		private String postcode;
+		private String mobileNumber;
+		private boolean primary;
+		private RelationshipType relationshipType;
+		private String contacterName;
+		private String emailAddress;
+		private Person person;
+
+		public ContactBuilder withAddress(String address){
+            this.address = address;
+            return this;
+        }
+
+        public ContactBuilder withPostcode(String postcode){
+            this.postcode = postcode;
+            return this;
+        }
+
+        public ContactBuilder withMobileNumber(String mobileNumber){
+            this.mobileNumber = mobileNumber;
+            return this;
+        }
+
+        public ContactBuilder withPrimary(Boolean primary){
+            this.primary = primary;
+            return this;
+        }
+
+        public ContactBuilder withRelationshipType(RelationshipType relationshipType){
+            this.relationshipType = relationshipType;
+            return this;
+        }
+
+        public ContactBuilder withContacterName(String contacterName){
+            this.contacterName = contacterName;
+            return this;
+        }
+
+		public ContactBuilder withEmailAddress(String emailAddress){
+			this.emailAddress = emailAddress;
+			return this;
+		}
+
+		public ContactBuilder withPerson(Person person){
+			this.person = person;
+			return this;
+		}
+
+		public Contact builder() {
+			return new Contact(this);
+		}
+	}
 
 	public Contact(){
 		super();
@@ -35,6 +108,18 @@ public class Contact extends BasicObject {
 		this.emailAddress = emailAddress;
 	}
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "CONTACT_OBJID", unique = true, nullable = false)
+	public Long getObjectId() {
+		return objectId;
+	}
+
+	public void setObjectId(Long objectId) {
+		this.objectId = objectId;
+	}
+
+	@Column(name="POSTCODE")
 	public String getPostcode() {
 		return postcode;
 	}
@@ -43,6 +128,8 @@ public class Contact extends BasicObject {
 		this.postcode = postcode;
 	}
 
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "PERSON_FK")
 	public Person getPerson() {
 		return person;
 	}
@@ -51,6 +138,8 @@ public class Contact extends BasicObject {
 		this.person = person;
 	}
 
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "RELATIONSHIP_TYPE_FK")
 	public RelationshipType getRelationshipType() {
 		return relationshipType;
 	}
@@ -61,6 +150,7 @@ public class Contact extends BasicObject {
 		this.relationshipType = relationshipType;
 	}
 
+	@Column(name="ADDRESS")
 	public String getAddress() {
 		return address;
 	}
@@ -69,6 +159,7 @@ public class Contact extends BasicObject {
 		this.address = address;
 	}
 
+	@Column(name="EMAIL_ADDRESS")
 	public String getEmailAddress() {
 		return emailAddress;
 	}
@@ -77,6 +168,7 @@ public class Contact extends BasicObject {
 		this.emailAddress = emailAddress;
 	}
 
+	@Column(name="PRIMARY_CONTACT")
 	public boolean isPrimary() {
 		return primary;
 	}
@@ -85,6 +177,8 @@ public class Contact extends BasicObject {
 		this.primary = primary;
 	}
 
+
+	@Column(name="MOBILE_NUMBER")
 	public String getMobileNumber() {
 		return mobileNumber;
 	}
@@ -93,6 +187,7 @@ public class Contact extends BasicObject {
 		this.mobileNumber = mobileNumber;
 	}
 
+	@Column(name="CONTACT_NAME")
 	public String getContacterName() {
 		return contacterName;
 	}
@@ -107,7 +202,7 @@ public class Contact extends BasicObject {
 		result = result*17+mobileNumber.hashCode();
 		return result;
 	}
-	
+
 	public boolean equals(Object obj){
 		if (null ==obj)
 			return false;
@@ -118,7 +213,7 @@ public class Contact extends BasicObject {
 		Contact contact = (Contact)obj;
 		return (contact.getMobileNumber().equals(this.mobileNumber));
 	}
-	
+
 	public String toString(){
 		StringBuilder details = new StringBuilder();
 		details.append("Contact address is ").append(address);

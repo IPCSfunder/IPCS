@@ -1,0 +1,5 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<dataset>
+	<person_detail last_name="Michael" first_Name="Jackson" age="35" sex="MALE" nationality="Chinese" dob="1987-08-25" nick_name="JJ" nric="8767656788" market_option="1"/>
+	<person_detail last_name="Gard"  first_Name="Richard" age="25" sex="FEMALE" nationality="Singaporean" dob="1986-08-25" nick_name="GG" nric="1234567" market_option="0"/>
+</dataset>

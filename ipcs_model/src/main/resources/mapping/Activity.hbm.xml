@@ -20,7 +20,7 @@
             <column name="description" length="255"/>
         </property>
 
-        <property name="startTime" type="date">
+        <property name="startTime" type="java.sql.Timestamp">
             <column name="start_time"/>
         </property>
 

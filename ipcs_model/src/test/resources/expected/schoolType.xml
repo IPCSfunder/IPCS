@@ -1,0 +1,5 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<dataset>
+	<school_type NAME ="HIGH_SCHOOL"/>
+	<school_type NAME ="PRIMARY_SCHOOL"/>
+</dataset>

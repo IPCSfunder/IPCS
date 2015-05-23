@@ -2,6 +2,7 @@ package com.ipcs.model;
 
 import com.ipcs.model.Base.BasicObject;
 
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -11,14 +12,18 @@ import java.util.Set;
  * @author Chen Chao
  *
  */
+
+@Entity
+@Table(name = "PERMISSION")
 public class Permission extends BasicObject {
+	private Long objectId;
 	
 	private String name;
 	
 	private List<Role> roles = new ArrayList<Role>();
 	
 	public Permission(){
-		
+		super();
 	}
 	
 	public Permission(PermissionBuilder builder){
@@ -37,8 +42,23 @@ public class Permission extends BasicObject {
 			return new Permission(this);
 		}
 	}
-	
 
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "PERMISSION_OBJID", unique = true, nullable = false)
+	public Long getObjectId() {
+		return objectId;
+	}
+
+	public void setObjectId(Long objectId) {
+		this.objectId = objectId;
+	}
+
+	@ManyToMany(fetch = FetchType.LAZY)
+	@JoinTable(name = "ROLE_PERMISSION", joinColumns = {
+			@JoinColumn(name = "PERMISSION_FK", nullable = false)},
+			inverseJoinColumns = {@JoinColumn(name = "ROLE_FK")})
 	public List<Role> getRoles() {
 		return roles;
 	}
@@ -47,17 +67,17 @@ public class Permission extends BasicObject {
 		this.roles = roles;
 	}
 
+	public void addRole(Role role){
+		roles.add(role);
+	}
+
+	@Column(name="name")
 	public String getName() {
 		return name;
 	}
 
 	public void setName(String name) {
 		this.name = name;
-	}
-	
-	
-	public void addRole(Role role){
-		roles.add(role);
 	}
 	
 	public int hashCode(){

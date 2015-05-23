@@ -1,0 +1,5 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<dataset>
+	<RELATIONSHIP_TYPE NAME="FATHER"></RELATIONSHIP_TYPE>
+	<RELATIONSHIP_TYPE NAME="MOTHER"></RELATIONSHIP_TYPE>
+</dataset>

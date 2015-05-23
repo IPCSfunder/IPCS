@@ -3,6 +3,7 @@ CREATE TABLE IF NOT EXISTS `ipcs`.`person` (
   `account_name` VARCHAR(45) NULL,
   `password_hash` VARCHAR(45) NULL,
   `person_detail_fk` INT null,
+  `school_fk` INT null,
   `date_created` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `date_modified` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`person_objid`),

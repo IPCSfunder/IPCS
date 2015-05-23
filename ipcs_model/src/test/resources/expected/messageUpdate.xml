@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<dataset>
+	<message_type message_type_objid ="1" type_name="MESSAGE" description="message"></message_type>
+	<message_type message_type_objid ="2" type_name="VIDEO" description="video"></message_type>
+	<person person_objid="1" account_name="JamesChen" password_hash="12345"/>
+	<message header="hello man" content="hello badman!" message_type_fk="1"></message>
+</dataset>

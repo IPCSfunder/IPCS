@@ -2,13 +2,18 @@ package com.ipcs.model;
 
 import com.ipcs.model.Base.BasicObject;
 
+import javax.persistence.*;
 import java.util.Date;
 
 /**
  * @author Chen Chao
  *
  */
+
+@Entity
+@Table(name = "PERSON_DETAIL")
 public class PersonDetail extends BasicObject {
+	private Long objectId;
 
 	private String firstName;
 
@@ -47,6 +52,18 @@ public class PersonDetail extends BasicObject {
 		this.marketOption = builder.marketOption;
 	}
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "PERSON_DETAIL_OBJID", unique = true, nullable = false)
+	public Long getObjectId() {
+		return objectId;
+	}
+
+	public void setObjectId(Long objectId) {
+		this.objectId = objectId;
+	}
+
+	@Column
 	public Integer getAge() {
 		return age;
 	}
@@ -55,6 +72,8 @@ public class PersonDetail extends BasicObject {
 		this.age = age;
 	}
 
+	@Temporal(TemporalType.DATE)
+	@Column(name = "DOB")
 	public Date getDateOfBirth() {
 		return dateOfBirth;
 	}
@@ -63,6 +82,7 @@ public class PersonDetail extends BasicObject {
 		this.dateOfBirth = dateOfBirth;
 	}
 
+	@Column(name="FIRST_NAME")
 	public String getFirstName() {
 		return firstName;
 	}
@@ -71,14 +91,7 @@ public class PersonDetail extends BasicObject {
 		this.firstName = firstName;
 	}
 
-	public Boolean isMarketOption() {
-		return marketOption;
-	}
-
-	public void setMarketOption(Boolean marketOption) {
-		this.marketOption = marketOption;
-	}
-
+	@Column(name="LAST_NAME")
 	public String getLastName() {
 		return lastName;
 	}
@@ -87,6 +100,16 @@ public class PersonDetail extends BasicObject {
 		this.lastName = lastName;
 	}
 
+	@Column(name="MARKET_OPTION")
+	public Boolean isMarketOption() {
+		return marketOption;
+	}
+
+	public void setMarketOption(Boolean marketOption) {
+		this.marketOption = marketOption;
+	}
+
+	@Column(name="NATIONALITY")
 	public String getNationality() {
 		return nationality;
 	}
@@ -95,6 +118,7 @@ public class PersonDetail extends BasicObject {
 		this.nationality = nationality;
 	}
 
+	@Column(name="NICK_NAME")
 	public String getNickName() {
 		return nickName;
 	}
@@ -103,6 +127,7 @@ public class PersonDetail extends BasicObject {
 		this.nickName = nickName;
 	}
 
+	@Column(name="NRIC")
 	public String getNric() {
 		return nric;
 	}
@@ -111,6 +136,7 @@ public class PersonDetail extends BasicObject {
 		this.nric = nric;
 	}
 
+	@OneToOne(mappedBy = "personDetail")
 	public Person getPerson() {
 		return person;
 	}
@@ -119,7 +145,7 @@ public class PersonDetail extends BasicObject {
 		this.person = person;
 	}
 
-
+	@Column(name="SEX")
 	public String getSex() {
 		return sex;
 	}

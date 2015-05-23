@@ -1,0 +1,10 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<dataset>
+    <role name="ADMIN"/>
+    <role name="CHILDREN"/>
+    <role name="STAFF"/>
+    <role name="PARENT"/>
+
+    <permission PERMISSION_OBJID="1" NAME = "ADD_UPDATE_REMOVE_TEACHER"/>
+    <role_permission permission_fk="1"></role_permission>
+</dataset>

@@ -85,14 +85,14 @@ public class SecurityServiceImpl implements SecurityService {
     @Transactional
     public List<Permission> listPermission(String userName) {
 	return permissionDao
-		.find("select permission from Person as p left join p.roles as r left join r.permissions as permission where  p.account_name = '"
+		.find("select permission from Person as p inner join p.roles as r inner join r.permissions as permission where  p.account_name = '"
 			+ userName + "'");
     }
 
     @Transactional
     public List<Role> listRole(String userName) {
 	return roleDao
-		.find("select r from Person as p left join p.roles as r where  p.account_name = '"
+		.find("select r from Person as p inner join p.roles as r where  p.account_name = '"
 			+ userName + "'");
     }
 

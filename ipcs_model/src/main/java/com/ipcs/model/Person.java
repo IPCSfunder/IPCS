@@ -6,12 +6,15 @@ package com.ipcs.model;
 
 import com.ipcs.model.Base.BasicObject;
 
+import javax.persistence.*;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
+@Entity
+@Table(name = "PERSON")
 public class Person extends BasicObject {
+    private Long objectId;
+
     private String account_name;
 
     private String password_hash;
@@ -22,11 +25,11 @@ public class Person extends BasicObject {
 
     private PersonDetail personDetail;
 
-    private List<School> schools = new ArrayList<School>();
+    private School school;
 
     private List<Relationship> relationships = new ArrayList<Relationship>();
 
-    private List<Activity> activities = new ArrayList<Activity>();
+    private List<Activity> activities;
 
     public Person(String name, String password) {
         super();
@@ -43,7 +46,18 @@ public class Person extends BasicObject {
         super();
     }
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "PERSON_OBJID", unique = true)
+    public Long getObjectId() {
+        return objectId;
+    }
 
+    public void setObjectId(Long objectId) {
+        this.objectId = objectId;
+    }
+
+    @Column
     public String getAccount_name() {
         return account_name;
     }
@@ -52,8 +66,7 @@ public class Person extends BasicObject {
         this.account_name = account_name;
     }
 
-
-
+    @Column
     public String getPassword_hash() {
         return password_hash;
     }
@@ -62,6 +75,10 @@ public class Person extends BasicObject {
         this.password_hash = password_hash;
     }
 
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "PERSON_ROLE", joinColumns = {
+            @JoinColumn(name = "PERSON_FK", nullable = false)},
+            inverseJoinColumns = {@JoinColumn(name = "ROLE_FK")})
     public List<Role> getRoles() {
         return roles;
     }
@@ -70,24 +87,18 @@ public class Person extends BasicObject {
         this.roles = roles;
     }
 
-    public List<School> getSchools() {
-        return schools;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "SCHOOL_FK")
+    public School getSchool() {
+        return school;
     }
 
-    public void setSchools(List<School> schools) {
-        this.schools = schools;
-    }
-
-    public void addSchool(School school) {
-        this.schools.add(school);
-    }
-
-    public void evictSchools(){
-        this.schools.clear();
+    public void setSchool(School school) {
+        this.school = school;
     }
 
 
-    public void evictRoles(){
+    public void evictRoles() {
         this.roles.clear();
     }
 
@@ -95,6 +106,7 @@ public class Person extends BasicObject {
         this.roles.add(role);
     }
 
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "persons",cascade = CascadeType.ALL)
     public List<Activity> getActivities() {
         return activities;
     }
@@ -103,8 +115,7 @@ public class Person extends BasicObject {
         this.activities = activities;
     }
 
-
-
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "person", cascade = CascadeType.ALL)
     public List<Contact> getContacts() {
         return contacts;
     }
@@ -113,10 +124,12 @@ public class Person extends BasicObject {
         this.contacts = contacts;
     }
 
-    public void addContact(Contact contact){
+    public void addContact(Contact contact) {
         this.contacts.add(contact);
     }
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "person_detail_fk")
     public PersonDetail getPersonDetail() {
         return personDetail;
     }
@@ -125,6 +138,7 @@ public class Person extends BasicObject {
         this.personDetail = personDetail;
     }
 
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "whose", cascade = CascadeType.ALL)
     public List<Relationship> getRelationships() {
         return relationships;
     }
@@ -133,7 +147,7 @@ public class Person extends BasicObject {
         this.relationships = relationships;
     }
 
-    public void addRelationship(Relationship relationship){
+    public void addRelationship(Relationship relationship) {
         this.relationships.add(relationship);
     }
 

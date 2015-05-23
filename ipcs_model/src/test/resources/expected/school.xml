@@ -1,0 +1,6 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<dataset>
+	<school_type NAME ="HIGH_SCHOOL"/>
+	<school name = "PUNGOL_PRIMARY_SCHOOL" ADDRESS="PUNGOL" SCHOOL_TYPE_FK="1"/>
+	<school name = "PUNGOL_HIGH_SCHOOL" ADDRESS="SENGKANG" SCHOOL_TYPE_FK="1"/>
+</dataset>

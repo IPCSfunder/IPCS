@@ -2,6 +2,7 @@ package com.ipcs.model;
 
 import com.ipcs.model.Base.BasicObject;
 
+import javax.persistence.*;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -9,17 +10,35 @@ import java.util.Set;
 /**
  * @author Chen Chao
  */
+
+@Entity
+@Table(name = "USER_GROUP")
 public class UserGroup extends BasicObject {
+    private Long objectId;
 
     private String name;
 
-    private Person orginizer;
+    private Person organizer;
 
     private Person groupMember;
 
     public UserGroup() {
+        super();
     }
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "USER_GROUP_OBJID", unique = true)
+    public Long getObjectId() {
+        return objectId;
+    }
+
+    public void setObjectId(Long objectId) {
+        this.objectId = objectId;
+    }
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "SCHOOL_TYPE_FK")
     public Person getGroupMember() {
         return groupMember;
     }
@@ -28,6 +47,7 @@ public class UserGroup extends BasicObject {
         this.groupMember = groupMember;
     }
 
+    @Column
     public String getName() {
         return name;
     }
@@ -36,13 +56,17 @@ public class UserGroup extends BasicObject {
         this.name = name;
     }
 
-    public Person getOrginizer() {
-        return orginizer;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "GROUOP_MEMBER")
+    public Person getOrganizer() {
+        return organizer;
     }
 
-    public void setOrginizer(Person orginizer) {
-        this.orginizer = orginizer;
+    public void setOrganizer(Person organizer) {
+        this.organizer = organizer;
     }
+
+
 
     public int hashCode() {
         int factor = 31;
@@ -59,7 +83,6 @@ public class UserGroup extends BasicObject {
             return false;
         UserGroup activity = (UserGroup) obj;
         return this.name.equals(activity.getName());
-
     }
 
     public String toString() {
