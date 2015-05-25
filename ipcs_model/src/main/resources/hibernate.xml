@@ -13,9 +13,11 @@ http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
 
         <property name="hibernateProperties">
             <props>
-                <prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+                <!--<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>-->
+                <prop key="hibernate.dialect">org.hibernate.dialect.HSQLDialect</prop>
                 <prop key="hibernate.show_sql">true</prop>
-                <!-- <prop key="hibernate.current_session_context_class">thread</prop> -->
+                <!--<prop key="hibernate.current_session_context_class">thread</prop>-->
+                <prop key="hibernate.hbm2ddl.auto">update</prop>
             </props>
         </property>
 
@@ -24,24 +26,5 @@ http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
                 <value>com.ipcs.model</value>
             </list>
         </property>
-
-        <!--<property name="mappingResources">
-            <list>
-                <value>mapping/Person.hbm.xml</value>
-                <value>mapping/Role.hbm.xml</value>
-                <value>mapping/Contact.hbm.xml</value>
-                <value>mapping/PersonDetail.hbm.xml</value>
-                <value>mapping/SchoolType.hbm.xml</value>
-                <value>mapping/School.hbm.xml</value>
-                <value>mapping/Permission.hbm.xml</value>
-                <value>mapping/MessageType.hbm.xml</value>
-                <value>mapping/Message.hbm.xml</value>
-                <value>mapping/RelationshipType.hbm.xml</value>
-                <value>mapping/Relationship.hbm.xml</value>
-                <value>mapping/Activity.hbm.xml</value>
-                <value>mapping/UserGroup.hbm.xml</value>
-            </list>
-        </property>-->
-
     </bean>
 </beans>

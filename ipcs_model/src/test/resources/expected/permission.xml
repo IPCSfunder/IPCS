@@ -6,15 +6,14 @@
 	<role role_objid = "3" name = "STAFF"/>
 	<role role_objid = "4" name = "PARENT"/>
 
-	<role_permission ROLE_FK="1" />
-	<role_permission ROLE_FK="1" />
-	<role_permission ROLE_FK="1" />
-	<role_permission ROLE_FK="3" />
-	<role_permission ROLE_FK="3" />
-
-
 	<permission NAME = "LOGIN"/>
 	<permission NAME = "ADD_UPDATE_REMOVE_STUDENT"/>
 	<permission NAME = "ADD_UPDATE_REMOVE_TEACHER"/>
 	<permission NAME = "ADD_UPDATE_REMOVE_ACTIVITY"/>
+
+	<role_permission ROLE_FK="1" />
+	<role_permission ROLE_FK="1" />
+	<role_permission ROLE_FK="1" />
+	<role_permission ROLE_FK="3" />
+	<role_permission ROLE_FK="3" />
 </dataset>

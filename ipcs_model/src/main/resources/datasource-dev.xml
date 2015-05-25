@@ -1,33 +1,39 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
-xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-xsi:schemaLocation="http://www.springframework.org/schema/beans
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
 http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
- 
-<!-- <bean 
-class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-	<property name="location">
-		<value>/database.properties</value>
-	</property>
-</bean> -->
 
-	<bean id="dataSource"
-		  class="org.apache.commons.dbcp.BasicDataSource"
-		  destroy-method="close" scope="singleton">
+    <!-- <bean
+    class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="location">
+            <value>/database.properties</value>
+        </property>
+    </bean> -->
 
-	<property name="driverClassName" value="com.mysql.jdbc.Driver" />
-	<property name="url" value="jdbc:mysql://rdsjh5yddsy2ug4mb5baepublic.mysql.rds.aliyuncs.com:3306/ipcs" />
-	<property name="username" value="ipcs_admin" />
-	<property name="password" value="password" />
-	<property name="maxActive" value="15"/>
-	<property name="minIdle" value="5"/>
-	<property name="maxIdle" value="8"/>
-	<property name="initialSize" value="2"/>
+    <bean id="dataSource"
+          class="org.apache.commons.dbcp.BasicDataSource"
+          destroy-method="close">
 
-	<!--<property name="url" value="jdbc:mysql://120.24.166.170:3306/ipcs" />
-	<property name="username" value="ipcs_admin" />
-	<property name="password" value="password" />-->
+        <!--<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+        <property name="url" value="jdbc:mysql://rdsjh5yddsy2ug4mb5baepublic.mysql.rds.aliyuncs.com:3306/ipcs" />
+        <property name="username" value="ipcs_admin" />
+        <property name="password" value="password" />-->
+
+
+        <!--<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+        <property name="url" value="jdbc:mysql://120.24.166.170:3306/ipcs" />
+        <property name="username" value="ipcs_admin" />
+        <property name="password" value="password" />-->
+
+        <property name="driverClassName" value="org.hsqldb.jdbcDriver" />
+        <property name="url" value="jdbc:hsqldb:mem:aname" />
+        <property name="username" value="SA" />
+        <property name="password" value="" />
+        <property name="maxActive" value="15"/>
+        <property name="minIdle" value="5"/>
+        <property name="maxIdle" value="8"/>
+        <property name="initialSize" value="2"/>
     </bean>
 
 
-
-    </beans>
+</beans>
