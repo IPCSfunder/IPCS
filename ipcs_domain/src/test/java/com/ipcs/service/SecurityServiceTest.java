@@ -28,6 +28,7 @@ import java.util.List;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:/Services.xml" })
 @TestExecutionListeners({ DependencyInjectionTestExecutionListener.class, TransactionalTestExecutionListener.class, TransactionDbUnitTestExecutionListener.class })
+@DatabaseSetup(value= "/secuirtyService.xml", type=DatabaseOperation.REFRESH)
 public class SecurityServiceTest {
     @Resource
     DataSource dataSource;
@@ -47,8 +48,7 @@ public class SecurityServiceTest {
 
 
     @Test
-    @DatabaseSetup(value= "/secuirtyService.xml", type=DatabaseOperation.REFRESH)
-    @DatabaseTearDown(value= "/secuirtyService.xml",type = DatabaseOperation.DELETE_ALL)
+    @DatabaseTearDown(value= "/secuirtyService.xml",type = DatabaseOperation.CLEAN_INSERT)
     public void insertAdmin() {
         Role role = adminService.getRoleByName("ADMIN");
         School school = adminService.getSchoolByName("PUNGOL_PRIMARY_SCHOOL");
@@ -59,16 +59,14 @@ public class SecurityServiceTest {
     }
 
     @Test
-    @DatabaseSetup(value= "/secuirtyService.xml", type=DatabaseOperation.REFRESH)
-    @DatabaseTearDown(value= "/secuirtyService.xml",type = DatabaseOperation.DELETE_ALL)
+    @DatabaseTearDown(value= "/secuirtyService.xml",type = DatabaseOperation.CLEAN_INSERT)
     public void testAuthenticateLoginInfo() {
         boolean flag = securityService.authenticateLoginInfo("JamesChen", "12345");
         Assert.assertTrue(flag);
     }
 
     @Test
-    @DatabaseSetup(value= "/secuirtyService.xml", type=DatabaseOperation.REFRESH)
-    @DatabaseTearDown(value= "/secuirtyService.xml",type = DatabaseOperation.DELETE_ALL)
+    @DatabaseTearDown(value= "/secuirtyService.xml",type = DatabaseOperation.CLEAN_INSERT)
     public void testListPermission() {
         List<Permission> permissions = securityService.listPermission("JamesChen");
         Assert.assertEquals(permissions.size(), 3);
@@ -76,8 +74,7 @@ public class SecurityServiceTest {
 
 
     @Test
-    @DatabaseSetup(value= "/secuirtyService.xml", type=DatabaseOperation.REFRESH)
-    @DatabaseTearDown(value= "/secuirtyService.xml",type = DatabaseOperation.DELETE_ALL)
+    @DatabaseTearDown(value= "/secuirtyService.xml",type = DatabaseOperation.CLEAN_INSERT)
     public void testListRoles() {
         List<Role> roles = securityService.listRole("JamesChen");
         Assert.assertEquals(roles.size(), 1);

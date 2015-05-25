@@ -4,12 +4,14 @@
 package com.ipcs.service;
 
 import com.github.springtestdbunit.TransactionDbUnitTestExecutionListener;
+import com.github.springtestdbunit.annotation.DatabaseOperation;
 import com.github.springtestdbunit.annotation.DatabaseSetup;
 import com.github.springtestdbunit.annotation.DatabaseTearDown;
 import com.ipcs.model.Activity;
 import com.ipcs.model.Person;
 import com.ipcs.model.Role;
 import com.ipcs.model.School;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.runner.RunWith;
 import org.springframework.context.ApplicationContext;
@@ -20,10 +22,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
 import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
 import org.testng.Assert;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Test;
-
 import javax.annotation.Resource;
 import javax.sql.DataSource;
 import java.io.File;
@@ -37,6 +35,7 @@ import java.util.List;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:/Services.xml" })
 @TestExecutionListeners({ DependencyInjectionTestExecutionListener.class, TransactionalTestExecutionListener.class, TransactionDbUnitTestExecutionListener.class })
+@DatabaseSetup(value= "/adminService.xml", type= com.github.springtestdbunit.annotation.DatabaseOperation.REFRESH)
 public class AdminServiceTest {
     @Resource
     DataSource dataSource;
@@ -54,8 +53,7 @@ public class AdminServiceTest {
     }
 
     @org.junit.Test
-    @DatabaseSetup(value= "/adminService.xml", type= com.github.springtestdbunit.annotation.DatabaseOperation.REFRESH)
-    @DatabaseTearDown(value= "/adminService.xml",type = com.github.springtestdbunit.annotation.DatabaseOperation.DELETE_ALL)
+    @DatabaseTearDown(value= "/adminService.xml",type = DatabaseOperation.CLEAN_INSERT)
     public void insertAdmin() {
         Role role = new Role("ADMIN");
         School school = adminService.getSchoolByName("PUNGOL_PRIMARY_SCHOOL");
@@ -67,8 +65,7 @@ public class AdminServiceTest {
 
 
     @org.junit.Test
-    @DatabaseSetup(value= "/adminService.xml", type= com.github.springtestdbunit.annotation.DatabaseOperation.REFRESH)
-    @DatabaseTearDown(value= "/adminService.xml",type = com.github.springtestdbunit.annotation.DatabaseOperation.DELETE_ALL)
+    @DatabaseTearDown(value= "/adminService.xml",type = DatabaseOperation.CLEAN_INSERT)
     public void insertStudents() {
         Role role = adminService.getRoleByName("ADMIN");
         School school = adminService.getSchoolByName("PUNGOL_PRIMARY_SCHOOL");
@@ -82,16 +79,14 @@ public class AdminServiceTest {
 
 
     @org.junit.Test
-    @DatabaseSetup(value= "/adminService.xml", type= com.github.springtestdbunit.annotation.DatabaseOperation.REFRESH)
-    @DatabaseTearDown(value= "/adminService.xml",type = com.github.springtestdbunit.annotation.DatabaseOperation.DELETE_ALL)
+    @DatabaseTearDown(value= "/adminService.xml",type = DatabaseOperation.CLEAN_INSERT)
     public void testFindAllStudents() {
         List<Person> admins = adminService.listAllPersonByRoleName("PUNGOL_PRIMARY_SCHOOL", "ADMIN");
         Assert.assertTrue(admins.size() == 2);
     }
 
     @org.junit.Test
-    @DatabaseSetup(value= "/adminService.xml", type= com.github.springtestdbunit.annotation.DatabaseOperation.REFRESH)
-    @DatabaseTearDown(value= "/adminService.xml",type = com.github.springtestdbunit.annotation.DatabaseOperation.DELETE_ALL)
+    @DatabaseTearDown(value= "/adminService.xml",type = DatabaseOperation.CLEAN_INSERT)
     public void testGetAdminInfo() {
         Person admin = adminService.getAdminInfo("JamesChen");
         Assert.assertEquals(admin.getSchool().getName(), "PUNGOL_PRIMARY_SCHOOL");
@@ -99,8 +94,7 @@ public class AdminServiceTest {
 
 
     @org.junit.Test
-    @DatabaseSetup(value= "/adminService.xml", type= com.github.springtestdbunit.annotation.DatabaseOperation.REFRESH)
-    @DatabaseTearDown(value= "/adminService.xml",type = com.github.springtestdbunit.annotation.DatabaseOperation.DELETE_ALL)
+    @DatabaseTearDown(value= "/adminService.xml",type = DatabaseOperation.CLEAN_INSERT)
     public void testQueryActivies() {
         List<Activity> activities = adminService.listAllActivities(1l);
         Assert.assertEquals(activities.size(), 1);
@@ -108,8 +102,8 @@ public class AdminServiceTest {
     }
 
     @org.junit.Test
-    @DatabaseSetup(value= "/adminService.xml", type= com.github.springtestdbunit.annotation.DatabaseOperation.REFRESH)
-    @DatabaseTearDown(value= "/adminService.xml",type = com.github.springtestdbunit.annotation.DatabaseOperation.DELETE_ALL)
+
+    @DatabaseTearDown(value= "/adminService.xml",type = DatabaseOperation.CLEAN_INSERT)
     public void testQueryActiviesUnderAdmin() {
         List<Activity> activities = adminService.listAllActivitiesFromAdmin("JamesChen");
         Assert.assertTrue(activities.size() == 2);
@@ -146,7 +140,7 @@ public class AdminServiceTest {
 //    }
 
 
-    @AfterClass
+    @After
     public void tearDown() {
 
     }
