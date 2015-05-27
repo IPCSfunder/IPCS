@@ -34,10 +34,8 @@ public class PermissionTest
 	public void testInsertPermission() {
     	Session session = sessionFactory.openSession();
 		session.beginTransaction();
-		Role role = (Role)session.get(Role.class,3L);
 		Permission permission = new Permission();
 		permission.setName("ADD_UPDATE_REMOVE_ACTIVITY");
-		permission.addRole(role);
 		session.save(permission);
 		session.getTransaction().commit();
 		session.close();

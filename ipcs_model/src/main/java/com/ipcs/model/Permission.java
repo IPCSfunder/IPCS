@@ -55,10 +55,7 @@ public class Permission extends BasicObject {
 		this.objectId = objectId;
 	}
 
-	@ManyToMany(fetch = FetchType.LAZY)
-	@JoinTable(name = "ROLE_PERMISSION", joinColumns = {
-			@JoinColumn(name = "PERMISSION_FK", nullable = false)},
-			inverseJoinColumns = {@JoinColumn(name = "ROLE_FK")})
+	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "permissions")
 	public List<Role> getRoles() {
 		return roles;
 	}

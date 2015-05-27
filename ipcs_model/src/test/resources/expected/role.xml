@@ -1,10 +1,14 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <dataset>
-    <role name="ADMIN"/>
-    <role name="CHILDREN"/>
-    <role name="STAFF"/>
+    <role name = "ADMIN"/>
+    <role name = "CHILDREN"/>
+    <role name = "STAFF"/>
     <role name="PARENT"/>
 
     <permission PERMISSION_OBJID="1" NAME = "ADD_UPDATE_REMOVE_TEACHER"/>
+    <permission PERMISSION_OBJID="2" NAME = "ADD_UPDATE_REMOVE_ACTIVITY"/>
+
+    <role_permission permission_fk="2"></role_permission>
     <role_permission permission_fk="1"></role_permission>
+    <role_permission permission_fk="2"></role_permission>
 </dataset>
