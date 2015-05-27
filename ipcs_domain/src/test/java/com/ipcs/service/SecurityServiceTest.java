@@ -20,6 +20,7 @@ import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
 import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import javax.sql.DataSource;
@@ -56,6 +57,10 @@ public class SecurityServiceTest {
         person.addRole(role);
         person.setSchool(school);
         adminService.addPerson(person);
+
+        Person persistedPerson = adminService.getPersonInfo("admin3");
+        Assert.assertEquals(persistedPerson.getPassword_hash(),"password");
+        Assert.assertEquals(((Role)persistedPerson.getRoles().get(0)).getName(),"ADMIN");
     }
 
     @Test
