@@ -56,7 +56,7 @@ public class AdminController {
         String account_name = requestParams.get("account_name");
         List<String> nationalities = Nationality.getNationalityList();
         if(null!=account_name){
-            Person child = adminservice.getChildDetail(account_name);
+            Person child = adminservice.getPersonInfo(account_name);
             return new ModelAndView("addChildren", "command", child).addObject("operation","update").addObject("nationalities",nationalities);
         }
         else
@@ -88,7 +88,7 @@ public class AdminController {
     public ModelAndView staff(@RequestParam Map<String,String> requestParams) {
         String account_name = requestParams.get("account_name");
         if(null!=account_name){
-            Person staff = adminservice.getChildDetail(account_name);
+            Person staff = adminservice.getPersonInfo(account_name);
             return new ModelAndView("addStaff", "command", staff).addObject("operation","update");
         }
         else
