@@ -9,6 +9,7 @@ import com.github.springtestdbunit.annotation.ExpectedDatabase;
 import com.github.springtestdbunit.assertion.DatabaseAssertionMode;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
@@ -20,27 +21,46 @@ import org.springframework.test.context.transaction.TransactionalTestExecutionLi
 import javax.annotation.Resource;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"classpath:/Services.xml" })
+@ContextConfiguration(locations = {"classpath:/Services.xml"})
 @TestExecutionListeners({DependencyInjectionTestExecutionListener.class, TransactionalTestExecutionListener.class, TransactionDbUnitTestExecutionListener.class})
-public class SchooTest{
-	@Resource
-	SessionFactory sessionFactory;
+public class SchooTest {
+    @Resource
+    SessionFactory sessionFactory;
 
 
-	@Test
-	@DatabaseSetup(value = "/original/school.xml", type = DatabaseOperation.REFRESH)
-	@ExpectedDatabase(value = "/expected/school.xml", assertionMode = DatabaseAssertionMode.NON_STRICT)
-	@DatabaseTearDown(value = "/original/school.xml", type = DatabaseOperation.DELETE_ALL)
-	public void testInsertSchool() {
-		Session session = sessionFactory.openSession();
-		session.beginTransaction();
-		School school = new School();
-		school.setAddress("SENGKANG");
-		school.setName("PUNGOL_HIGH_SCHOOL");
-		SchoolType schoolType = (SchoolType)session.get(SchoolType.class,1L);
-		school.setType(schoolType);
-		session.save(school);
-		session.getTransaction().commit();
+    @Test
+    @DatabaseSetup(value = "/original/school.xml", type = DatabaseOperation.REFRESH)
+    @ExpectedDatabase(value = "/expected/school.xml", assertionMode = DatabaseAssertionMode.NON_STRICT)
+    @DatabaseTearDown(value = "/original/school.xml", type = DatabaseOperation.DELETE_ALL)
+    public void testInsertSchool() {
+        Session session = sessionFactory.openSession();
+        session.beginTransaction();
+        School school = new School();
+        school.setAddress("SENGKANG");
+        school.setName("PUNGOL_HIGH_SCHOOL");
+        SchoolType schoolType = (SchoolType) session.get(SchoolType.class, 1L);
+        school.setType(schoolType);
+        session.save(school);
+        session.getTransaction().commit();
         session.close();
-}
+    }
+
+    @Test
+    @DatabaseSetup(value = "/original/school.xml", type = DatabaseOperation.REFRESH)
+    @DatabaseTearDown(value = "/original/school.xml", type = DatabaseOperation.DELETE_ALL)
+    public void testDeleteScholl(){
+        Session session = sessionFactory.openSession();
+        session.beginTransaction();
+        School school = (School)session.get(School.class,1L);
+        session.delete(school);
+        session.getTransaction().commit();
+        session.close();
+
+        session = sessionFactory.openSession();
+        session.beginTransaction();
+        school = (School)session.get(School.class,1L);
+        Assert.assertNull(school);
+        session.getTransaction().commit();
+        session.close();
+    }
 }

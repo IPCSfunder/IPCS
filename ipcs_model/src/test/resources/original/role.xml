@@ -1,8 +1,9 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <dataset>
 	<permission PERMISSION_OBJID="1" NAME = "ADD_UPDATE_REMOVE_TEACHER"/>
+	<permission PERMISSION_OBJID="2" NAME = "ADD_UPDATE_REMOVE_ACTIVITY"/>
 	<role role_objid = "1" name = "ADMIN"/>
 	<role role_objid = "2" name = "CHILDREN"/>
 	<role role_objid = "3" name = "STAFF"/>
-	<role_permission></role_permission>
+	<role_permission role_permission_objid="1" role_fk="1" permission_fk="2"></role_permission>
 </dataset>

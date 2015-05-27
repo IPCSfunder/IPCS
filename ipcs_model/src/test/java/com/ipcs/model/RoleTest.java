@@ -9,6 +9,8 @@ import com.github.springtestdbunit.annotation.ExpectedDatabase;
 import com.github.springtestdbunit.assertion.DatabaseAssertionMode;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
@@ -37,9 +39,28 @@ public class RoleTest
 		Role role = new Role();
 		role.setName("PARENT");
 		Permission permission = (Permission)session.get(Permission.class,1l);
-		permission.addRole(role);
+		Permission permissionActivity = (Permission)session.get(Permission.class,2l);
+		role.addPermission(permission);
+		role.addPermission(permissionActivity);
 		session.save(role);
-		session.save(permission);
+		session.getTransaction().commit();
+		session.close();
+	}
+
+	@Test
+	@DatabaseTearDown(value= "/original/role.xml",type = DatabaseOperation.DELETE_ALL)
+	public void testDeleteRole() {
+		Session session = sessionFactory.openSession();
+		session.beginTransaction();
+		Role role = (Role)session.get(Role.class, 1l);
+		session.delete(role);
+		session.getTransaction().commit();
+		session.close();
+
+		session = sessionFactory.openSession();
+		session.beginTransaction();
+		role = (Role)session.get(Role.class, 1l);
+		Assert.assertNull(role);
 		session.getTransaction().commit();
 		session.close();
 	}
