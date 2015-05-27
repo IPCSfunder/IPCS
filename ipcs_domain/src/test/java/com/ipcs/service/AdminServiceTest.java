@@ -13,6 +13,7 @@ import com.ipcs.model.Role;
 import com.ipcs.model.School;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -24,8 +25,6 @@ import org.springframework.test.context.transaction.TransactionalTestExecutionLi
 import org.testng.Assert;
 import javax.annotation.Resource;
 import javax.sql.DataSource;
-import java.io.File;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -52,7 +51,7 @@ public class AdminServiceTest {
                 .getBean("adminServiceImpl");
     }
 
-    @org.junit.Test
+    @Test
     @DatabaseTearDown(value= "/adminService.xml",type = DatabaseOperation.CLEAN_INSERT)
     public void insertAdmin() {
         Role role = new Role("ADMIN");
@@ -61,10 +60,14 @@ public class AdminServiceTest {
         person.addRole(role);
         person.setSchool(school);
         adminService.addPerson(person);
+
+        Person persistedPerson = adminService.getPersonInfo("admin");
+        org.junit.Assert.assertEquals(persistedPerson.getPassword_hash(), "password");
+        org.junit.Assert.assertEquals( persistedPerson.getSchool().getName(), "PUNGOL_PRIMARY_SCHOOL");
     }
 
 
-    @org.junit.Test
+    @Test
     @DatabaseTearDown(value= "/adminService.xml",type = DatabaseOperation.CLEAN_INSERT)
     public void insertStudents() {
         Role role = adminService.getRoleByName("ADMIN");
@@ -78,22 +81,22 @@ public class AdminServiceTest {
     }
 
 
-    @org.junit.Test
+    @Test
     @DatabaseTearDown(value= "/adminService.xml",type = DatabaseOperation.CLEAN_INSERT)
     public void testFindAllStudents() {
         List<Person> admins = adminService.listAllPersonByRoleName("PUNGOL_PRIMARY_SCHOOL", "ADMIN");
         Assert.assertTrue(admins.size() == 2);
     }
 
-    @org.junit.Test
+    @Test
     @DatabaseTearDown(value= "/adminService.xml",type = DatabaseOperation.CLEAN_INSERT)
     public void testGetAdminInfo() {
-        Person admin = adminService.getAdminInfo("JamesChen");
+        Person admin = adminService.getPersonInfo("JamesChen");
         Assert.assertEquals(admin.getSchool().getName(), "PUNGOL_PRIMARY_SCHOOL");
     }
 
 
-    @org.junit.Test
+    @Test
     @DatabaseTearDown(value= "/adminService.xml",type = DatabaseOperation.CLEAN_INSERT)
     public void testQueryActivies() {
         List<Activity> activities = adminService.listAllActivities(1l);
@@ -101,8 +104,7 @@ public class AdminServiceTest {
         Assert.assertEquals(activities.iterator().next().getName(), "Language");
     }
 
-    @org.junit.Test
-
+    @Test
     @DatabaseTearDown(value= "/adminService.xml",type = DatabaseOperation.CLEAN_INSERT)
     public void testQueryActiviesUnderAdmin() {
         List<Activity> activities = adminService.listAllActivitiesFromAdmin("JamesChen");
@@ -110,40 +112,43 @@ public class AdminServiceTest {
     }
 
 
-//    @Test(dependsOnMethods = {"testGetAdminInfo"}, groups = "query")
-//    public void testQueryChildrenDetail() {
-//        Person person = adminService.getChildDetail("admin");
-//        Assert.assertEquals(person.getPersonDetail().getFirstName(), "DetailFirst");
-//    }
-//
-//
-//    @Test(dependsOnGroups = {"query"}, groups = "update")
-//    public void testUpdateUser() {
-//        person.setAccount_name("admin3");
-//        adminService.updatePerson(person);
-//
-//    }
-//
-//
-//    @Test(groups = "listAllChild")
+    @Test
+    @DatabaseTearDown(value= "/adminService.xml",type = DatabaseOperation.CLEAN_INSERT)
+    public void testQueryChildrenDetail() {
+        Person person = adminService.getPersonInfo("JamesChen");
+        Assert.assertEquals(person.getPersonDetail().getFirstName(), "Jackson");
+    }
+
+
+    @Test
+    @DatabaseTearDown(value= "/adminService.xml",type = DatabaseOperation.CLEAN_INSERT)
+    public void testUpdatePerson() {
+        Person person = adminService.getPersonInfo("JamesChen");
+        person.setAccount_name("admin3");
+        adminService.updatePerson(person);
+
+        Person updatedPerson = adminService.getPersonInfo("admin3");
+        Assert.assertEquals(updatedPerson.getPersonDetail().getFirstName(),"Jackson");
+    }
+
+
+//    @Test
+//    @DatabaseTearDown(value= "/adminService.xml",type = DatabaseOperation.CLEAN_INSERT)
 //    public void tesListAllChild() {
 //        List<Person> activities = adminService.listAllChild(4l);
 //        Assert.assertEquals(activities.size(), 2);
 //    }
 //
-//    @Test(dependsOnGroups = {"query"})
-//    public void testAddActivityWithHost() {
-//        School school = adminService.getSchoolByName("PUNGOL");
-//        Person person = adminService.findPersonByName("admin");
-//        Activity activity = new Activity.ActivityBuilder().withDescription("Physical").withStartDate(new Date()).withLocation("Shanghai").withHost(person).withName("Physical").withSchool(school).builder();
-//        adminService.addActivity(activity);
-//    }
 
+    @Test
+    @DatabaseTearDown(value= "/adminService.xml",type = DatabaseOperation.CLEAN_INSERT)
+    public void testAddActivityWithHost() {
+        School school = adminService.getSchoolByName("PUNGOL_PRIMARY_SCHOOL");
+        Person person = adminService.findPersonByName("JamesChen");
+        Activity activity = new Activity.ActivityBuilder().withDescription("Physical").withStartDate(new Date()).withLocation("Shanghai").withHost(person).withName("Physical").withSchool(school).builder();
+        adminService.addActivity(activity);
 
-    @After
-    public void tearDown() {
-
+        activity = adminService.getActivityDetail(activity.getObjectId());
+        Assert.assertEquals(activity.getSchool().getName(),"PUNGOL_PRIMARY_SCHOOL");
     }
-
-
 }

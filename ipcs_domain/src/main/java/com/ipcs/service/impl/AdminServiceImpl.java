@@ -113,6 +113,8 @@ public class AdminServiceImpl implements AdminService {
     @Transactional
     public void updatePerson(Person person) {
         Person persistPerson = personDao.load(person.getObjectId());
+        persistPerson.setAccount_name(person.getAccount_name());
+        persistPerson.setPassword_hash(person.getPassword_hash());
         persistPerson.getPersonDetail().setFirstName(person.getPersonDetail().getFirstName());
         persistPerson.getPersonDetail().setLastName(person.getPersonDetail().getLastName());
         persistPerson.getPersonDetail().setAge(person.getPersonDetail().getAge());
@@ -171,8 +173,8 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Transactional(readOnly=true)
-    public Person getAdminInfo(String adminName) {
-        return personDao.find("select p from Person as p left join fetch p.school left join  p.roles left join p.contacts left join p.personDetail where p.account_name ='" + adminName + "'").get(0);
+    public Person getPersonInfo(String name) {
+        return personDao.find("select p from Person as p left join fetch p.school left join fetch p.roles left join p.contacts left join fetch p.personDetail where p.account_name ='" + name + "'").get(0);
     }
 
     @Transactional(readOnly=true)
@@ -188,11 +190,6 @@ public class AdminServiceImpl implements AdminService {
     @Transactional(readOnly=true)
     public List<Person> listAllChild(Long parentId) {
         return personDao.find("select w from Relationship r inner join r.whose w inner join r.type t inner join r.iswho i where t.name = 'PARENT' and i.objectId = '" + parentId + "'");
-    }
-
-    @Transactional(readOnly=true)
-    public Person getChildDetail(String childName){
-        return personDao.find("select p from Person as p left join fetch p.school left join p.roles left join p.contacts left join fetch p.personDetail where p.account_name ='" + childName + "'").get(0);
     }
 
     @Transactional(readOnly=true)
@@ -256,6 +253,6 @@ public class AdminServiceImpl implements AdminService {
 
     @Transactional(readOnly=true)
     public Activity getActivityDetail(Long activityId){
-        return activityDao.find("from Activity ac inner join fetch ac.host where ac.objectId = '"+activityId+"'").get(0);
+        return activityDao.find("from Activity ac inner join fetch ac.host inner join fetch ac.school where ac.objectId = '"+activityId+"'").get(0);
     }
 }

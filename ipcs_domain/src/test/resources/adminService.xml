@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <dataset>
-	<person_detail></person_detail>
+	<person_detail person_detail_objid="1" last_name="Michael" first_Name="Jackson" age="35" sex="MALE" nationality="Chinese" dob="1987-08-25" nick_name="JJ" nric="8767656788" market_option="1"/>
 	<school_type SCHOOL_TYPE_OBJID="1" NAME ="HIGH_SCHOOL"/>
 	<school SCHOOL_OBJID="1" name = "PUNGOL_PRIMARY_SCHOOL" ADDRESS="PUNGOL" SCHOOL_TYPE_FK="1"/>-
 	<role role_objid = "1" name = "ADMIN"/>
@@ -11,7 +11,7 @@
 	<role_permission role_permission_objid="2" ROLE_FK="1" PERMISSION_FK="2"/>
 	<role_permission role_permission_objid="3" ROLE_FK="1" PERMISSION_FK="3"/>
 
-	<person person_objid="1" account_name="JamesChen" password_hash="12345" SCHOOL_FK="1"/>
+	<person person_objid="1" account_name="JamesChen" password_hash="12345" SCHOOL_FK="1" person_detail_fk="1"/>
 	<person person_objid="2" account_name="WilliamWang"  password_hash="12345" SCHOOL_FK="1"/>
 	<activity activity_objid="1" name="Math" host="2" location="NANNING" description="Math" start_time="2015-05-14 05:00:00" school_fk="1"></activity>
 	<activity activity_objid="2" name="Language" host="1" location="PUNGGOL" description="Language" start_time="2015-05-12 05:00:00" school_fk="1"></activity>
