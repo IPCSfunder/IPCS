@@ -87,16 +87,15 @@ public class AdminServiceImpl implements AdminService {
         }
 
         List<Contact> contacts = person.getContacts();
-        if(person.getPersonDetail()!=null)
-            personDetailDao.save(person.getPersonDetail());
-        personDao.save(person);
         for (Contact contact : contacts) {
             RelationshipType type = getRelationshipTypeByName(contact.getRelationshipType().getName());
             contact.setRelationshipType(type);
-            contactDao.save(contact);
+            contact.setPerson(person);
         }
 
-
+        if(person.getPersonDetail()!=null)
+            personDetailDao.save(person.getPersonDetail());
+        personDao.save(person);
     }
 
     @Transactional
@@ -115,13 +114,14 @@ public class AdminServiceImpl implements AdminService {
         Person persistPerson = personDao.load(person.getObjectId());
         persistPerson.setAccount_name(person.getAccount_name());
         persistPerson.setPassword_hash(person.getPassword_hash());
-        persistPerson.getPersonDetail().setFirstName(person.getPersonDetail().getFirstName());
-        persistPerson.getPersonDetail().setLastName(person.getPersonDetail().getLastName());
-        persistPerson.getPersonDetail().setAge(person.getPersonDetail().getAge());
-        persistPerson.getPersonDetail().setDateOfBirth(person.getPersonDetail().getDateOfBirth());
-        persistPerson.getPersonDetail().setNationality(person.getPersonDetail().getNationality());
-        persistPerson.getPersonDetail().setNric(person.getPersonDetail().getNric());
-
+        PersonDetail personDetail = persistPerson.getPersonDetail();
+        personDetail.setFirstName(person.getPersonDetail().getFirstName());
+        personDetail.setLastName(person.getPersonDetail().getLastName());
+        personDetail.setAge(person.getPersonDetail().getAge());
+        personDetail.setDateOfBirth(person.getPersonDetail().getDateOfBirth());
+        personDetail.setNationality(person.getPersonDetail().getNationality());
+        personDetail.setNric(person.getPersonDetail().getNric());
+        personDetailDao.update(personDetail);
 
 
         List<Contact> persistContacts =  persistPerson.getContacts();
@@ -136,7 +136,7 @@ public class AdminServiceImpl implements AdminService {
                 }
             }
         }
-
+        persistPerson.setPersonDetail(personDetail);
         personDao.update(persistPerson);
     }
 
@@ -153,28 +153,41 @@ public class AdminServiceImpl implements AdminService {
 
     @Transactional(readOnly=true)
     public Role getRoleByName(String name) {
-        return roleDao.find("select r from Role as r where  r.name = '" + name + "'").get(0);
+        List<Role> roles =  roleDao.find("select r from Role as r where  r.name = '" + name + "'");
+        if(roles.size()==0)
+            return null;
+        return roles.get(0);
     }
 
     @Transactional(readOnly=true)
     public RelationshipType getRelationshipTypeByName(String name) {
-        return relationshipTypeDao.find("select r from RelationshipType as r where  r.name = '" + name + "'").get(0);
+        List<RelationshipType> relationships = relationshipTypeDao.find("select r from RelationshipType as r where  r.name = '" + name + "'");
+        if(relationships.size()==0)
+            return null;
+        return relationships.get(0);
     }
 
 
     @Transactional(readOnly=true)
     public School getSchoolByName(String name) {
-        return schoolDao.find("select s from School as s where s.name = '" + name + "'").get(0);
+        List<School> schools = schoolDao.find("select s from School as s where s.name = '" + name + "'");
+        if(schools.size()==0)
+            return null;
+        return schools.get(0);
     }
 
     @Transactional(readOnly=true)
     public List<School> getSchoolByType(String type) {
-        return schoolDao.find("select s from School as s inner join s.type as t where  t.name = '" + type + "'");
+        List<School> schools = schoolDao.find("select s from School as s inner join s.type as t where  t.name = '" + type + "'");
+        return schools;
     }
 
     @Transactional(readOnly=true)
     public Person getPersonInfo(String name) {
-        return personDao.find("select p from Person as p left join fetch p.school left join fetch p.roles left join p.contacts left join fetch p.personDetail where p.account_name ='" + name + "'").get(0);
+        List<Person> persons = personDao.find("select p from Person as p left join fetch p.school left join fetch p.roles left join p.contacts left join fetch p.personDetail where p.account_name ='" + name + "'");
+        if(persons.size() == 0)
+            return null;
+        return persons.get(0);
     }
 
     @Transactional(readOnly=true)
@@ -199,7 +212,10 @@ public class AdminServiceImpl implements AdminService {
 
     @Transactional(readOnly=true)
     public Person findPersonByName(String accountName){
-        return personDao.find("from Person p inner join fetch p.school where p.account_name = '"+accountName+"'").get(0);
+        List<Person> persons = personDao.find("from Person p inner join fetch p.school where p.account_name = '"+accountName+"'");
+        if(persons.size() == 0)
+            return null;
+        return persons.get(0);
     }
 
     @Transactional
@@ -251,8 +267,17 @@ public class AdminServiceImpl implements AdminService {
         activityDao.delete(activity);
     }
 
+    @Transactional
+    public void deletePerson(Long personId){
+        Person person = personDao.get(personId);
+        personDao.delete(person);
+    }
+
     @Transactional(readOnly=true)
     public Activity getActivityDetail(Long activityId){
-        return activityDao.find("from Activity ac inner join fetch ac.host inner join fetch ac.school where ac.objectId = '"+activityId+"'").get(0);
+        List<Activity> activities = activityDao.find("from Activity ac inner join fetch ac.host inner join fetch ac.school where ac.objectId = '"+activityId+"'");
+        if(activities.size() == 0)
+            return null;
+        return activities.get(0);
     }
 }

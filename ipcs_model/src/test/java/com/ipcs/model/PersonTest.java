@@ -46,14 +46,15 @@ public class PersonTest{
 		person.setSchool(school);
 		Role role = (Role)session.get(Role.class, 1l);
 		person.addRole(role);
-		Contact contact = (Contact)session.load(Contact.class, 1L);
+		RelationshipType relationshipType = (RelationshipType)session.get(RelationshipType.class, 1L);
+		Contact contact = new Contact.ContactBuilder().withAddress("Sengkang Street").withPostcode("12345678").withMobileNumber("123456").withPrimary(true).withContacterName("ChildFather").withRelationshipType(relationshipType).withPerson(person).builder();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		PersonDetail personDetail = new PersonDetail.PersonBuilder().withAge(25).withDob(sdf.parse("1986-08-25"))
 				.withFirstName("Richard").withLastName("Gard").withMarketOption(Boolean.valueOf(false))
 				.withNationality("Singaporean").withNickName("GG").withNric("1234567").withSex("FEMALE").build();
 		person.setPersonDetail(personDetail);
+		person.addContact(contact);
 		session.save(person);
-		contact.setPerson(person);
 		session.getTransaction().commit();
 		session.close();
 	}
