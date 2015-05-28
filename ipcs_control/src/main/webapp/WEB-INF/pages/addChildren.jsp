@@ -22,7 +22,7 @@
     <c:if test="${operation == 'update'}">Update Child Details</c:if>
 </h2>
 
-<form:form name="htmlform" method="POST" action="/ipcs_control/persistChild?operation=${operation}">
+<form:form name="htmlform" method="POST" action="/ipcs_control/persistChild?operation=${operation}" commandName="child">
     <table align="center" width="50%">
         <tr>
             <td><form:label path="personDetail.firstName">First Name</form:label></td>
@@ -95,10 +95,8 @@
             <td>
                 <form:select path="contacts[0].relationshipType.name">
                     <form:option value="TEACHER" selected="selected">Teacher</form:option>
-                    <form:option value="PARENT">Parent</form:option>
-                    <!--<form:option value="FATHER">Fatyher</form:option>
-                    <form:option value="GRANDMOTHER">Grandmother</form:option>
-                    <form:option value="GRANDFATHER">Grandfather</form:option>-->
+                    <form:option value="FATHER">Father</form:option>
+                    <form:option value="MOTHER">Mother</form:option>
                 </form:select>
                 <form:hidden path="contacts[0].primary" value="true"></form:hidden>
             </td colspan="2">
@@ -112,7 +110,8 @@
             <td>
                 <form:select path="contacts[1].relationshipType.name">
                     <form:option value="TEACHER" selected="selected">Teacher</form:option>
-                    <form:option value="PARENT">Parent</form:option>
+                    <form:option value="FATHER">Father</form:option>
+                    <form:option value="MOTHER">Mother</form:option>
                 </form:select>
                 <form:hidden path="contacts[1].primary" value="false"></form:hidden>
             </td>

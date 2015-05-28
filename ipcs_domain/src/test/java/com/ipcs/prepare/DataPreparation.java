@@ -4,6 +4,7 @@ package com.ipcs.prepare;
 import com.github.springtestdbunit.TransactionDbUnitTestExecutionListener;
 import com.github.springtestdbunit.annotation.DatabaseOperation;
 import com.github.springtestdbunit.annotation.DatabaseSetup;
+import com.github.springtestdbunit.annotation.DatabaseTearDown;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -36,6 +37,7 @@ public class DataPreparation {
         statement.execute("delete from role;");
         statement.execute("delete from schedule;");
         statement.execute("delete from permission;");
+        statement.execute("delete from person;");
         statement.execute("delete from school;");
         statement.execute("delete from school_type;");
         statement.execute("delete from activity;");
@@ -45,13 +47,12 @@ public class DataPreparation {
         statement.execute("delete from relationship;");
         statement.execute("delete from relationship_type;");
         statement.execute("delete from user_group;");
-        statement.execute("delete from person;");
         statement.execute("delete from person_detail;");
         connection.close();
     }
 
     @Test
-    @DatabaseSetup(value= "/secuirtyService.xml", type=DatabaseOperation.REFRESH)
+    @DatabaseTearDown(value= "/testDataPrepartion.xml", type=DatabaseOperation.INSERT)
     public void prepareData() throws ParseException {
     }
 }  

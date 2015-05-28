@@ -30,11 +30,14 @@
 	    <th width="200">Operation</th>
 	</tr>
    
-   <c:forEach items="${command}" var="person">
+   <c:forEach items="${child}" var="person">
 		<tr>
 			<td>${person.account_name}</td>
 			<td>${person.account_name}</td>
-			<td><a href="<c:url value='/addChildren?account_name=${person.account_name}'/>">View Details</a></td>
+			<td><a href="<c:url value='/addChildren?account_name=${person.account_name}'/>">View Details</a>
+				&nbsp; &nbsp; &nbsp;
+				<a href="<c:url value='/deleteChild?person_objid=${person.objectId}'/>">Delete</a>
+			</td>
 		</tr>
 	</c:forEach>
 

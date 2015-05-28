@@ -44,7 +44,7 @@ public class LoginController {
         boolean authenticated = securityService.authenticateLoginInfo(
                 admin.getAccount_name(), admin.getPassword_hash());
         if (authenticated) {
-            Person authenticatedAdmin = adminService.getPersonInfo( admin.getAccount_name());
+            Person authenticatedAdmin = adminService.getPersonInfo ( admin.getAccount_name());
             session.setAttribute("authenticatedAdmin",authenticatedAdmin);
             return "navigator";
         } else
