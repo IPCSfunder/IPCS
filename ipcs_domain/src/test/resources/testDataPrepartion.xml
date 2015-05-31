@@ -16,4 +16,6 @@
 	<relationship_type relationship_type_objid="1" name="TEACHER"></relationship_type>
 	<relationship_type relationship_type_objid="2" name="FATHER"></relationship_type>
 	<relationship_type relationship_type_objid="3" name="MOTHER"></relationship_type>
+	<activity_type activity_type_objid="1" name="CLASS"></activity_type>
+	<activity_type activity_type_objid="2" name="MISCELLANEOUS"></activity_type>
 </dataset>

@@ -23,7 +23,7 @@ public class ActivityValidator implements Validator {
         Activity activity = (Activity) obj;
         if (null ==activity.getName()||"".equals(activity.getName()))
             errors.rejectValue("name", null, "Activity name not provided.");
-        if (null == activity.getHost().getAccount_name()||"".equals(activity.getHost().getAccount_name()))
+        if (null == activity.getHost()||"".equals(activity.getHost().getAccount_name()))
             errors.rejectValue("host.account_name", null, "Teacher name not provided.");
         if (null == activity.getLocation()||"".equals(activity.getLocation()))
             errors.rejectValue("location", null, "Location not provided.");

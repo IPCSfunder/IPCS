@@ -48,6 +48,7 @@ public class DataPreparation {
         statement.execute("delete from relationship_type;");
         statement.execute("delete from user_group;");
         statement.execute("delete from person_detail;");
+        statement.execute("delete from activity_type;");
         connection.close();
     }
 

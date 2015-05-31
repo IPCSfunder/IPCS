@@ -57,4 +57,6 @@ public interface AdminService {
 	void deletePerson(Long personId);
 
 	Activity getActivityDetail(Long activityId);
+
+	List<ActivityType> listAllActivityType();
 }
