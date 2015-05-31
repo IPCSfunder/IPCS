@@ -12,7 +12,10 @@
     <script src="<c:url value="/resources/jquery/jquery-ui.js"/>"></script>
     <script>
         $(function () {
-            $("#datepicker").datepicker();
+            $("#datepicker").datepicker({
+                yearRange: "-50:+0",
+                changeYear: true
+            });
         });
     </script>
 </head>
@@ -23,11 +26,12 @@
 </h2>
 
 <form:form name="htmlform" method="POST" action="/ipcs_control/persistChild?operation=${operation}" commandName="child">
-    <table align="center" width="50%">
+    <table align="center" width="60%">
         <tr>
             <td><form:label path="personDetail.firstName">First Name</form:label></td>
             <td><form:input path="personDetail.firstName"/></td>
-            <td width="150px"><form:hidden path="roles[0].name" value="CHILDREN"></form:hidden><form:hidden path="objectId"></form:hidden></td>
+            <td width="150px"><form:hidden path="roles[0].name" value="CHILDREN"></form:hidden><form:hidden
+                    path="objectId"></form:hidden></td>
             <td><form:label path="personDetail.lastName">Last Name</form:label></td>
             <td><form:input path="personDetail.lastName"/></td>
         </tr>
@@ -53,9 +57,9 @@
         </tr>
 
         <tr>
-            <td colspan="2"><form:errors path="personDetail.sex" cssClass="error"/></td>
+            <td colspan="2"><form:errors path="personDetail.dateOfBirth" cssClass="error"/></td>
             <td width="150px"></td>
-            <td colspan="2"></td>
+            <td colspan="2"><form:errors path="personDetail.sex" cssClass="error"/></td>
         </tr>
 
         <tr>
@@ -64,7 +68,8 @@
             <td width="150px"></td>
             <td><form:label path="personDetail.nationality">Nationality</form:label></td>
             <td>
-                <form:select path="personDetail.nationality" selected="personDetail.nationality" items="${nationalities}">
+                <form:select path="personDetail.nationality" selected="personDetail.nationality"
+                             items="${nationalities}">
                 </form:select>
             </td>
         </tr>
@@ -72,7 +77,7 @@
         <tr>
             <td colspan="2"><form:errors path="personDetail.age" cssClass="error"/></td>
             <td width="150px"></td>
-            <td colspan="2"></td>
+            <td colspan="2"><form:errors path="personDetail.nationality" cssClass="error"/></td>
         </tr>
     </table>
 
@@ -90,7 +95,8 @@
         </tr>
 
         <tr>
-            <td><form:label path="contacts[0].contacterName">Primary Contact</form:label><form:hidden path="contacts[0].objectId"></form:hidden></td>
+            <td><form:label path="contacts[0].contacterName">Primary Contact</form:label><form:hidden
+                    path="contacts[0].objectId"></form:hidden></td>
             <td><form:input path="contacts[0].contacterName"/></td>
             <td>
                 <form:select path="contacts[0].relationshipType.name">
@@ -105,7 +111,8 @@
 
 
         <tr>
-            <td><form:label path="contacts[1].contacterName">Secondary Contact</form:label><form:hidden path="contacts[1].objectId"></form:hidden></td>
+            <td><form:label path="contacts[1].contacterName">Secondary Contact</form:label><form:hidden
+                    path="contacts[1].objectId"></form:hidden></td>
             <td><form:input path="contacts[1].contacterName"/></td>
             <td>
                 <form:select path="contacts[1].relationshipType.name">
@@ -117,13 +124,34 @@
             </td>
             <td colspan="2"><form:input path="contacts[1].mobileNumber"/></td>
         </tr>
+    </table>
+
+    <br>
+    <hr>
+    <br>
+
+    <table align="center" width="50%">
+
+        <tr>
+            <td>Class</td>
+            <td>
+                <form:select path="" selected=""
+                             items="${classes}">
+                </form:select>
+            </td>
+            <td></td>
+            <td>
+                <form:select path="host.account_name" selected="host.account_name" items="${teachers}" itemLabel="account_name" itemValue="account_name"/>
+            </td>
+
+        </tr>
 
         <tr>
             <td colspan="5" align="center">
                 <input type="submit" value="Submit"/>
             </td>
         </tr>
-
+        </tr>
     </table>
 </form:form>
 </body>

@@ -4,8 +4,6 @@ delete from role_permission;
 delete from role;
 delete from schedule;
 delete from permission;
-delete from school;
-delete from school_type;
 delete from activity;
 delete from contact;
 delete from message;
@@ -14,4 +12,8 @@ delete from relationship;
 delete from relationship_type;
 delete from user_group;
 delete from person;
+delete from school;
+delete from school_type;
 delete from person_detail;
+delete from activity_type;
+

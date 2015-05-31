@@ -43,6 +43,9 @@ public class AdminServiceImpl implements AdminService {
     @Autowired
     private ContactDao contactDao;
 
+    @Autowired
+    private ActivitytTypeDao activityTypeDao;
+
     public void setActivityDao(ActivityDao activityDao) {
         this.activityDao = activityDao;
     }
@@ -221,15 +224,18 @@ public class AdminServiceImpl implements AdminService {
     @Transactional
     public void addActivity(Activity activity){
         List<Person> trainsientPersons = new ArrayList<Person>();
-        trainsientPersons.addAll(activity.getPersons());
-        activity.getPersons().clear();;
-        for (Person person : trainsientPersons) {
-            person = findPersonByName(person.getAccount_name());
-            if (null != person)
-                activity.addPerson(person);
+        List<Person> students = activity.getPersons();
+        if(null != students && students.size()!=0){
+            trainsientPersons.addAll(students);
+            activity.getPersons().clear();;
+            for (Person person : trainsientPersons) {
+                person = findPersonByName(person.getAccount_name());
+                if (null != person)
+                    activity.addPerson(person);
+            }
         }
-
-
+        ActivityType activityType = (ActivityType)activityTypeDao.findActivityByName(activity.getActivityType().getName());
+        activity.setActivityType(activityType);
         Person host = findPersonByName(activity.getHost().getAccount_name());
         activity.setHost(host);
         School school = getSchoolByName(activity.getSchool().getName());
@@ -249,14 +255,20 @@ public class AdminServiceImpl implements AdminService {
         persistedActivity.setHost(persistedHost);
 
         List<Person> trainsientPersons = new ArrayList<Person>();
-        trainsientPersons.addAll(activity.getPersons());
-        persistedActivity.getPersons().clear();;
-        for (Person person : trainsientPersons) {
-            person = findPersonByName(person.getAccount_name());
-            if (null != person)
-                persistedActivity.addPerson(person);
+        List<Person> students = activity.getPersons();
+        if(null!=students&&students.size() != 0){
+            trainsientPersons.addAll(students);
+            persistedActivity.getPersons().clear();
+            for (Person person : trainsientPersons) {
+                person = findPersonByName(person.getAccount_name());
+                if (null != person)
+                    persistedActivity.addPerson(person);
+            }
         }
-            activityDao.update(persistedActivity);
+
+        ActivityType activityType = (ActivityType)activityTypeDao.findActivityByName(activity.getActivityType().getName());
+        persistedActivity.setActivityType(activityType);
+        activityDao.update(persistedActivity);
         }
     }
 
@@ -275,9 +287,14 @@ public class AdminServiceImpl implements AdminService {
 
     @Transactional(readOnly=true)
     public Activity getActivityDetail(Long activityId){
-        List<Activity> activities = activityDao.find("from Activity ac inner join fetch ac.host inner join fetch ac.school where ac.objectId = '"+activityId+"'");
+        List<Activity> activities = activityDao.find("from Activity ac inner join fetch ac.host inner join fetch ac.school where ac.objectId = '" + activityId + "'");
         if(activities.size() == 0)
             return null;
         return activities.get(0);
+    }
+
+    @Transactional(readOnly=true)
+    public List<ActivityType> listAllActivityType(){
+        return activityTypeDao.findAll();
     }
 }

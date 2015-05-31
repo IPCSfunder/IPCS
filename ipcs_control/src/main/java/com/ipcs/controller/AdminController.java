@@ -1,6 +1,7 @@
 package com.ipcs.controller;
 
 import com.ipcs.controller.util.Nationality;
+import com.ipcs.controller.util.SchoolClass;
 import com.ipcs.controller.validator.ActivityValidator;
 import com.ipcs.controller.validator.PersonValidator;
 import com.ipcs.model.*;
@@ -60,32 +61,39 @@ public class AdminController {
 
 
     @RequestMapping(value = "/addChildren", method = RequestMethod.GET)
-    public ModelAndView addChildren(@RequestParam Map<String,String> requestParams) {
+    public ModelAndView addChildren(@RequestParam Map<String,String> requestParams, HttpSession session) {
+        School school = ((Person) session.getAttribute("authenticatedAdmin")).getSchool();
         String account_name = requestParams.get("account_name");
         List<String> nationalities = Nationality.getNationalityList();
+        List<String> classes = SchoolClass.getClassList();
+        List<Person> teachers = adminservice.listAllPersonByRoleName(school.getName(), "STAFF");
         if(null!=account_name){
             Person child = adminservice.getPersonInfo(account_name);
-            return new ModelAndView("addChildren", "child", child).addObject("operation","update").addObject("nationalities",nationalities);
+            return new ModelAndView("addChildren", "child", child).addObject("operation","update").addObject("nationalities",nationalities).addObject("classes",classes).addObject("teachers",teachers);
         }
         else
-            return new ModelAndView("addChildren", "child", new Person()).addObject("operation","add").addObject("nationalities",nationalities);
+            return new ModelAndView("addChildren", "child", new Person()).addObject("operation","add").addObject("nationalities", nationalities).addObject("classes",classes).addObject("teachers",teachers);
     }
 
 
     @RequestMapping(value = "/persistChild", method = RequestMethod.POST)
-    public String persistStudent(@ModelAttribute("child") @Validated Person child, BindingResult bindingResult, HttpSession session,@RequestParam Map<String,String> requestParams) throws ParseException {
-        if(bindingResult.hasErrors())
-            return "addChildren";
+    public ModelAndView persistStudent(@ModelAttribute("child") @Validated Person child, BindingResult bindingResult, HttpSession session,@RequestParam Map<String,String> requestParams) throws ParseException {
+        if(bindingResult.hasErrors()) {
+            List<String> nationalities = Nationality.getNationalityList();
+            List<String> classes = SchoolClass.getClassList();
+            return new ModelAndView("addChildren", "operation", "update").addObject("nationalities", nationalities).addObject("classes", classes);
+        }
         School school = ((Person) session.getAttribute("authenticatedAdmin")).getSchool();
         child.setAccount_name(child.getPersonDetail().getFirstName()+" "+child.getPersonDetail().getLastName());
         child.setPassword_hash("11");
         child.setSchool(school);
+
         if("update".equals(requestParams.get("operation"))) {
             adminservice.updatePerson(child);
-            return "navigator";
+            return  new ModelAndView("navigator");
         }
         adminservice.addPerson(child);
-        return "navigator";
+        return  new ModelAndView("navigator");
     }
 
     @RequestMapping(value = "/deleteChild", method = RequestMethod.GET)
@@ -109,29 +117,32 @@ public class AdminController {
     @RequestMapping(value = "/addStaff", method = RequestMethod.GET)
     public ModelAndView staff(@RequestParam Map<String,String> requestParams) {
         String account_name = requestParams.get("account_name");
+        List<String> nationalities = Nationality.getNationalityList();
         if(null!=account_name){
             Person staff = adminservice.getPersonInfo(account_name);
-            return new ModelAndView("addStaff", "command", staff).addObject("operation","update");
+            return new ModelAndView("addStaff", "command", staff).addObject("operation","update").addObject("nationalities", nationalities);
         }
         else
-            return new ModelAndView("addStaff", "command", new Person()).addObject("operation","add");
+            return new ModelAndView("addStaff", "command", new Person()).addObject("operation","add").addObject("nationalities", nationalities);
     }
 
 
     @RequestMapping(value = "/persistStaff", method = RequestMethod.POST)
-    public String persistStaff(@ModelAttribute("command") @Validated Person staff, BindingResult bindingResult, HttpSession session,ModelMap model,@RequestParam Map<String,String> requestParams) throws ParseException {
-        if(bindingResult.hasErrors())
-            return "addStaff";
+    public ModelAndView persistStaff(@ModelAttribute("command") @Validated Person staff, BindingResult bindingResult, HttpSession session,ModelMap model,@RequestParam Map<String,String> requestParams) throws ParseException {
+        if(bindingResult.hasErrors()) {
+            List<String> nationalities = Nationality.getNationalityList();
+            return new ModelAndView("addStaff", "operation", "update").addObject("nationalities", nationalities);
+        }
         if("update".equals(requestParams.get("operation"))) {
             adminservice.updatePerson(staff);
-            return "navigator";
+            return new ModelAndView("navigator");
         }
         School school = ((Person) session.getAttribute("authenticatedAdmin")).getSchool();
         staff.setAccount_name(staff.getPersonDetail().getFirstName()+staff.getPersonDetail().getLastName());
         staff.setPassword_hash("11");
         staff.setSchool(school);
         adminservice.addPerson(staff);
-        return "navigator";
+        return new ModelAndView("navigator");
     }
 
 
@@ -156,13 +167,14 @@ public class AdminController {
         School school = ((Person) session.getAttribute("authenticatedAdmin")).getSchool();
         List<Person> teachers = adminservice.listAllPersonByRoleName(school.getName(), "STAFF");
         List<Person> students = adminservice.listAllPersonByRoleName(school.getName(), "CHILDREN");
+        List<ActivityType> activityTypes = adminservice.listAllActivityType();
         String activityId = requestParams.get("activityId");
         if(null!=activityId){
             Activity activity = adminservice.getActivityDetail(Long.parseLong(activityId));
-            return new ModelAndView("addActivity", "activity", activity).addObject("operation","update").addObject("teachers", teachers).addObject("students",students);
+            return new ModelAndView("addActivity", "activity", activity).addObject("operation","update").addObject("teachers", teachers).addObject("students",students).addObject("activityTypes",activityTypes);
         }
         else
-            return new ModelAndView("addActivity", "activity", new Activity()).addObject("operation","add").addObject("teachers", teachers).addObject("students",students);
+            return new ModelAndView("addActivity", "activity", new Activity()).addObject("operation","add").addObject("teachers", teachers).addObject("students",students).addObject("activityTypes",activityTypes);
     }
 
     @RequestMapping(value = "/persistActivity", method = RequestMethod.POST)
@@ -170,9 +182,9 @@ public class AdminController {
         School school = ((Person) session.getAttribute("authenticatedAdmin")).getSchool();
         List<Person> teachers = adminservice.listAllPersonByRoleName(school.getName(), "STAFF");
         List<Person> students = adminservice.listAllPersonByRoleName(school.getName(), "CHILDREN");
-
+        List<ActivityType> activityTypes = adminservice.listAllActivityType();
         if(bindingResult.hasErrors())
-            return  new ModelAndView("addActivity", "operation", "add").addObject("teachers", teachers).addObject("students",students);
+            return  new ModelAndView("addActivity", "operation", "add").addObject("teachers", teachers).addObject("students", students).addObject("activityTypes",activityTypes);;
         activity.setSchool(school);
 
         if("update".equals(requestParams.get("operation"))) {

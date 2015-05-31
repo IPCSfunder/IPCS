@@ -29,6 +29,12 @@ public class PersonValidator implements Validator {
             errors.rejectValue("personDetail.dateOfBirth", null, "Date of birth provided.");
         if (null == user.getPersonDetail().getAge()||"".equals(user.getPersonDetail().getAge()))
             errors.rejectValue("personDetail.age", null, "Age not provided.");
+        if (null == user.getPersonDetail().getDateOfBirth()||"".equals(user.getPersonDetail().getDateOfBirth()))
+            errors.rejectValue("personDetail.dateOfBirth", null, "Date of birth not provided.");
+        if (null == user.getPersonDetail().getSex()||"".equals(user.getPersonDetail().getSex()))
+            errors.rejectValue("personDetail.sex", null, "Gender not provided.");
+        if (null == user.getPersonDetail().getNationality()||"".equals(user.getPersonDetail().getNationality()))
+            errors.rejectValue("personDetail.nationality", null, "Nationality not provided.");
 
     }
 }

@@ -28,6 +28,8 @@ public class Activity extends BasicObject {
 
     private School school;
 
+    private ActivityType activityType;
+
     private List<Person> persons = new ArrayList<Person>();
 
     public Activity() {
@@ -128,6 +130,16 @@ public class Activity extends BasicObject {
         this.school = school;
     }
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "ACTIVITY_TYPE_FK")
+    public ActivityType getActivityType() {
+        return activityType;
+    }
+
+    public void setActivityType(ActivityType activityType) {
+        this.activityType = activityType;
+    }
+
     public int hashCode() {
         int factor = 31;
         int result = 17 * factor + name.hashCode();
@@ -144,7 +156,7 @@ public class Activity extends BasicObject {
         if (obj.getClass() != Permission.class)
             return false;
         Activity activity = (Activity) obj;
-        return this.name.equals(activity.getName()) && this.location.equals(activity.getLocation()) && this.startTime.equals((activity.getStartTime()));
+        return this.name.equals(activity.getName()) && this.activityType.equals(activity.getActivityType()) &&this.location.equals(activity.getLocation()) && this.startTime.equals((activity.getStartTime()));
 
     }
 

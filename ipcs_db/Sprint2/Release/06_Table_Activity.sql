@@ -5,6 +5,7 @@ CREATE TABLE IF NOT EXISTS `ipcs`.`activity` (
   `description` VARCHAR(255) NULL,
   `host` INT NULL,
   `school_fk` INT NULL,
+  `activity_type_fk` INT NULL,
   `start_time` TIMESTAMP NULL,
   `date_created` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `date_modified` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,

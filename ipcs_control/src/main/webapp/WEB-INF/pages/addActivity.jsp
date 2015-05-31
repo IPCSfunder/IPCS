@@ -65,15 +65,17 @@
             <td><form:label path="startTime">Time</form:label></td>
             <td><form:input id ="datepicker" path="startTime"/></td>
             <td width="150px"></td>
-            <td></td>
+            <td>Activity Type</td>
             <td>
+                <form:select path="activityType.name" selected="activityType.name" items="${activityTypes}" itemLabel="name" itemValue="name">
+                </form:select>
             </td>
         </tr>
 
         <tr>
             <td colspan="2"><form:errors path="startTime" cssClass="error"/></td>
             <td width="150px"></td>
-            <td colspan="2"></td>
+            <td colspan="2"><form:errors path="activityType.name" cssClass="error"/></td>
 
 
         <tr>

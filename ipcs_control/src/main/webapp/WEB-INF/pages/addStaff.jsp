@@ -12,7 +12,10 @@
     <script src="<c:url value="/resources/jquery/jquery-ui.js"/>"></script>
     <script>
         $(function () {
-            $("#datepicker").datepicker();
+            $("#datepicker").datepicker({
+                yearRange: "-50:+0",
+                changeYear: true
+            });
         });
     </script>
 </head>
@@ -53,9 +56,9 @@
         </tr>
 
         <tr>
-            <td colspan="2"><form:errors path="personDetail.sex" cssClass="error"/></td>
+            <td colspan="2"><form:errors path="personDetail.dateOfBirth" cssClass="error"/></td>
             <td width="150px"></td>
-            <td colspan="2"></td>
+            <td colspan="2"><form:errors path="personDetail.sex" cssClass="error"/></td>
         </tr>
 
         <tr>
@@ -64,19 +67,16 @@
             <td width="150px"></td>
             <td><form:label path="personDetail.nationality">Nationality</form:label></td>
             <td>
-                <form:select path="personDetail.nationality">
-                    <form:option value="Singapore" selected="selected">Singapore</form:option>
-                    <form:option value="China">China</form:option>
-                    <form:option value="America">America</form:option>
+                 <form:select path="personDetail.nationality" selected="personDetail.nationality"
+                             items="${nationalities}">
                 </form:select>
-
             </td>
         </tr>
 
         <tr>
             <td colspan="2"><form:errors path="personDetail.age" cssClass="error"/></td>
             <td width="150px"></td>
-            <td colspan="2"></td>
+            <td colspan="2"><form:errors path="personDetail.nationality" cssClass="error"/></td>
         </tr>
     </table>
 
