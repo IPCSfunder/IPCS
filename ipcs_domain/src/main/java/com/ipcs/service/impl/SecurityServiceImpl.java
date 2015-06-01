@@ -37,32 +37,7 @@ public class SecurityServiceImpl implements SecurityService {
     @Autowired
     private RoleDao roleDao;
 
-    public PersonDao getPersonDao() {
-	return personDao;
-    }
-
-    public void setPersonDao(PersonDao personDao) {
-	this.personDao = personDao;
-    }
-
-    public PermissionDao getPermissionDao() {
-        return permissionDao;
-    }
-
-    public void setPermissionDao(PermissionDao permissionDao) {
-        this.permissionDao = permissionDao;
-    }
-
-    public RoleDao getRoleDao() {
-        return roleDao;
-    }
-
-    public void setRoleDao(RoleDao roleDao) {
-        this.roleDao = roleDao;
-    }
-
-
-    @Transactional
+   @Transactional
     public long getAuthenticatedUserID(String userName, String password) {
         Criterion[] criterion = { Restrictions.eq("account_name", userName) };
         List<Person> persons = personDao.createCriteria(criterion);
@@ -83,17 +58,13 @@ public class SecurityServiceImpl implements SecurityService {
     }
 
     @Transactional
-    public List<Permission> listPermission(String userName) {
-	return permissionDao
-		.find("select permission from Person as p inner join p.roles as r inner join r.permissions as permission where  p.account_name = '"
-			+ userName + "'");
+    public List<Permission> listPermissionsByUserName(String userName) {
+	return permissionDao.listPermissionByUserName(userName);
     }
 
     @Transactional
-    public List<Role> listRole(String userName) {
-	return roleDao
-		.find("select r from Person as p inner join p.roles as r where  p.account_name = '"
-			+ userName + "'");
+    public List<Role> listRolesByUserName(String userName) {
+	return roleDao.listRolesByUserName(userName);
     }
 
 }

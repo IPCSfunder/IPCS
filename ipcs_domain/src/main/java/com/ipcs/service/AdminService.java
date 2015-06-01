@@ -28,23 +28,27 @@ public interface AdminService {
 	
 	void updatePerson(Person person);
 	
-	boolean broadcaseMessageTo(List<Person> subodidates);
-	
-	Role getRoleByName(String name);
-	
-	School getSchoolByName(String name);
-	
-	List<School> getSchoolByType(String type);
-
 	Person getPersonInfo(String name);
-	
-	List<Message> listAllMessages(String adminName);
 
-	List<Activity> listAllActivities(Long studentId);
+	void deletePerson(Long personId);
 
 	List<Person> listAllChild(Long parentId);
 
+
+
+
+
 	RelationshipType getRelationshipTypeByName(String name);
+
+
+
+
+	boolean broadcaseMessageTo(List<Person> subodidates);
+
+	List<Message> listAllMessages(String adminName);
+
+
+	List<Activity> listAllActivities(Long studentId);
 
 	List<Activity> listAllActivitiesFromAdmin(String adminName);
 
@@ -54,9 +58,19 @@ public interface AdminService {
 
 	void deleteActivity(Long activtyId);
 
-	void deletePerson(Long personId);
-
 	Activity getActivityDetail(Long activityId);
 
+	List<Activity> listActivityByType(String typeName);
+
 	List<ActivityType> listAllActivityType();
+
+
+	Role getRoleByName(String name);
+
+
+
+	School getSchoolByName(String name);
+
+	List<School> getSchoolByType(String type);
+
 }

@@ -73,7 +73,7 @@ public class SecurityServiceTest {
     @Test
     @DatabaseTearDown(value= "/secuirtyService.xml",type = DatabaseOperation.CLEAN_INSERT)
     public void testListPermission() {
-        List<Permission> permissions = securityService.listPermission("JamesChen");
+        List<Permission> permissions = securityService.listPermissionsByUserName("JamesChen");
         Assert.assertEquals(permissions.size(), 3);
     }
 
@@ -81,7 +81,7 @@ public class SecurityServiceTest {
     @Test
     @DatabaseTearDown(value= "/secuirtyService.xml",type = DatabaseOperation.CLEAN_INSERT)
     public void testListRoles() {
-        List<Role> roles = securityService.listRole("JamesChen");
+        List<Role> roles = securityService.listRolesByUserName("JamesChen");
         Assert.assertEquals(roles.size(), 1);
         Assert.assertEquals(roles.get(0).getName(), "ADMIN");
     }

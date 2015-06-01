@@ -251,4 +251,9 @@ public class AdminServiceImpl implements AdminService {
     public List<ActivityType> listAllActivityType(){
         return activityTypeDao.findAll();
     }
+
+    @Transactional(readOnly= true)
+    public List<Activity> listActivityByType(String typeName){
+        return activityDao.listActivitiesByType(typeName);
+    }
 }

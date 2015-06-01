@@ -96,6 +96,8 @@ public class AdminServiceTest {
     }
 
 
+
+
     @Test
     @DatabaseTearDown(value= "/adminService.xml",type = DatabaseOperation.CLEAN_INSERT)
     public void testQueryActivies() {
@@ -158,5 +160,12 @@ public class AdminServiceTest {
 
         activity = adminService.getActivityDetail(activity.getObjectId());
         Assert.assertEquals(activity.getSchool().getName(),"PUNGOL_PRIMARY_SCHOOL");
+    }
+
+    @Test
+    @DatabaseTearDown(value= "/adminService.xml",type = DatabaseOperation.CLEAN_INSERT)
+    public void testListClass() {
+        List<Activity> classes = adminService.listActivityByType("CLASS");
+        Assert.assertEquals(classes.size(),3);
     }
 }

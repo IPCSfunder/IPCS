@@ -9,4 +9,7 @@
 	<person_role PERSON_ROLE_OBJID="1" person_fk="1" role_fk="1"></person_role>
 	<relationship_type relationship_type_objid="1" name="PARENT"></relationship_type>
 	<contact></contact>
+	<activity_type ACTIVITY_TYPE_OBJID="1" NAME ="CLASS"/>
+	<activity activity_objid="1" activity_type_fk="1" host="2" name="Math" location="NANNING" description="Math" start_time="2015-05-14 05:00:00" school_fk="1"></activity>
+
 </dataset>

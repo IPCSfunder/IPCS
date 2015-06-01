@@ -20,4 +20,8 @@ public class RoleDao extends GenericHibernateDao<Role, Long> {
         return roles.get(0);
     }
 
+    public List<Role> listRolesByUserName(String name){
+        return find("from Person as p inner join p.roles as r where  p.account_name = '"+name + "'");
+    }
+
 }
