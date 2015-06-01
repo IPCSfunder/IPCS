@@ -41,34 +41,7 @@ public class AdminServiceImpl implements AdminService {
     private PersonDetailDao personDetailDao;
 
     @Autowired
-    private ContactDao contactDao;
-
-    @Autowired
     private ActivitytTypeDao activityTypeDao;
-
-    public void setActivityDao(ActivityDao activityDao) {
-        this.activityDao = activityDao;
-    }
-
-    public void setPersonDao(PersonDao personDao) {
-        this.personDao = personDao;
-    }
-
-    public void setRoleDao(RoleDao roleDao) {
-        this.roleDao = roleDao;
-    }
-
-    public void setSchoolDao(SchoolDao schoolDao) {
-        this.schoolDao = schoolDao;
-    }
-
-    public void setMessageDao(com.ipcs.dao.MessageDao messageDao) {
-        MessageDao = messageDao;
-    }
-
-    public void setRelationshipTypeDao(RelationshipTypeDao relationshipTypeDao) {
-        this.relationshipTypeDao = relationshipTypeDao;
-    }
 
     @Transactional
     public void addBatchSubodinates(List<Person> subodidates) {
@@ -108,7 +81,7 @@ public class AdminServiceImpl implements AdminService {
 
     @Transactional(readOnly=true)
     public List<Person> listAllPersonByRoleName(String schoolName, String roleName) {
-        return personDao.find("select p from Person as p left join p.school s left join p.roles as r where  s.name = '" + schoolName + "' and r.name = '" + roleName + "'");
+        return personDao.listPersonsBy(schoolName,roleName);
     }
 
 
@@ -156,41 +129,28 @@ public class AdminServiceImpl implements AdminService {
 
     @Transactional(readOnly=true)
     public Role getRoleByName(String name) {
-        List<Role> roles =  roleDao.find("select r from Role as r where  r.name = '" + name + "'");
-        if(roles.size()==0)
-            return null;
-        return roles.get(0);
+        return roleDao.findRoleByName(name);
     }
 
     @Transactional(readOnly=true)
     public RelationshipType getRelationshipTypeByName(String name) {
-        List<RelationshipType> relationships = relationshipTypeDao.find("select r from RelationshipType as r where  r.name = '" + name + "'");
-        if(relationships.size()==0)
-            return null;
-        return relationships.get(0);
+        return relationshipTypeDao.findRelationshipTypeByName(name);
     }
 
 
     @Transactional(readOnly=true)
     public School getSchoolByName(String name) {
-        List<School> schools = schoolDao.find("select s from School as s where s.name = '" + name + "'");
-        if(schools.size()==0)
-            return null;
-        return schools.get(0);
+        return schoolDao.findSchoolByName(name);
     }
 
     @Transactional(readOnly=true)
-    public List<School> getSchoolByType(String type) {
-        List<School> schools = schoolDao.find("select s from School as s inner join s.type as t where  t.name = '" + type + "'");
-        return schools;
+    public List<School> getSchoolByType(String typeName) {
+        return schoolDao.listSchoolsByType(typeName);
     }
 
     @Transactional(readOnly=true)
     public Person getPersonInfo(String name) {
-        List<Person> persons = personDao.find("select p from Person as p left join fetch p.school left join fetch p.roles left join p.contacts left join fetch p.personDetail where p.account_name ='" + name + "'");
-        if(persons.size() == 0)
-            return null;
-        return persons.get(0);
+        return personDao.findPersonDetailsByName(name);
     }
 
     @Transactional(readOnly=true)
@@ -199,8 +159,8 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Transactional(readOnly=true)
-    public List<Activity> listAllActivities(Long studentId) {
-        return activityDao.find("from Activity m inner join fetch m.persons p where p.objectId = '" + studentId + "'");
+    public List<Activity> listAllActivities(Long childId) {
+        return activityDao.listActivitieByChild(childId);
     }
 
     @Transactional(readOnly=true)
@@ -210,15 +170,12 @@ public class AdminServiceImpl implements AdminService {
 
     @Transactional(readOnly=true)
     public List<Activity> listAllActivitiesFromAdmin(String adminName){
-        return activityDao.find("select ac from Person as p inner join p.school s inner join s.activities ac where p.account_name='" + adminName + "'");
+        return activityDao.listActivitiesByAdmin(adminName);
     }
 
     @Transactional(readOnly=true)
     public Person findPersonByName(String accountName){
-        List<Person> persons = personDao.find("from Person p inner join fetch p.school where p.account_name = '"+accountName+"'");
-        if(persons.size() == 0)
-            return null;
-        return persons.get(0);
+        return personDao.findPersonByName(accountName);
     }
 
     @Transactional
@@ -234,7 +191,7 @@ public class AdminServiceImpl implements AdminService {
                     activity.addPerson(person);
             }
         }
-        ActivityType activityType = (ActivityType)activityTypeDao.findActivityByName(activity.getActivityType().getName());
+        ActivityType activityType = activityTypeDao.findActivityByName(activity.getActivityType().getName());
         activity.setActivityType(activityType);
         Person host = findPersonByName(activity.getHost().getAccount_name());
         activity.setHost(host);
@@ -266,7 +223,7 @@ public class AdminServiceImpl implements AdminService {
             }
         }
 
-        ActivityType activityType = (ActivityType)activityTypeDao.findActivityByName(activity.getActivityType().getName());
+        ActivityType activityType = activityTypeDao.findActivityByName(activity.getActivityType().getName());
         persistedActivity.setActivityType(activityType);
         activityDao.update(persistedActivity);
         }
@@ -287,13 +244,10 @@ public class AdminServiceImpl implements AdminService {
 
     @Transactional(readOnly=true)
     public Activity getActivityDetail(Long activityId){
-        List<Activity> activities = activityDao.find("from Activity ac inner join fetch ac.host inner join fetch ac.school where ac.objectId = '" + activityId + "'");
-        if(activities.size() == 0)
-            return null;
-        return activities.get(0);
+        return activityDao.findActivityDetailsById(activityId);
     }
 
-    @Transactional(readOnly=true)
+    @Transactional(readOnly= true)
     public List<ActivityType> listAllActivityType(){
         return activityTypeDao.findAll();
     }

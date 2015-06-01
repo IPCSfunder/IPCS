@@ -106,6 +106,14 @@ public class AdminServiceTest {
 
     @Test
     @DatabaseTearDown(value= "/adminService.xml",type = DatabaseOperation.CLEAN_INSERT)
+    public void testGetActivityInfo() {
+        Activity activitie = adminService.getActivityDetail(2L);
+        Assert.assertEquals(activitie.getName(), "Language");
+        Assert.assertEquals(activitie.getSchool().getName(),"PUNGOL_PRIMARY_SCHOOL");
+    }
+
+    @Test
+    @DatabaseTearDown(value= "/adminService.xml",type = DatabaseOperation.CLEAN_INSERT)
     public void testQueryActiviesUnderAdmin() {
         List<Activity> activities = adminService.listAllActivitiesFromAdmin("JamesChen");
         Assert.assertTrue(activities.size() == 2);
