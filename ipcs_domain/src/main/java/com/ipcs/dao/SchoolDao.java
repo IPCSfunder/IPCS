@@ -19,7 +19,7 @@ public class SchoolDao extends GenericHibernateDao<School, Long> {
     }
 
     public List<School> listSchoolsByType(String typeName){
-        List<School> schools = find("from School s inner join s.type as t where  t.name = '" + typeName + "'");
+        List<School> schools = find("select s from School s inner join s.type as t where  t.name = '" + typeName + "'");
         return schools;
     }
 

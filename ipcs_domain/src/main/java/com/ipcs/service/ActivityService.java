@@ -26,4 +26,6 @@ public interface ActivityService {
 	Activity getActivityDetail(Long activityId);
 
 	List<Activity> listActivityByType(String typeName);
+
+	List<ActivityType> listActivityTypes();
 }

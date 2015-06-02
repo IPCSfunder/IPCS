@@ -37,7 +37,7 @@ public class ActivityTest{
         Date date = sdf.parse("2015-05-12 05:00:00");
         Session session = sessionFactory.openSession();
         session.beginTransaction();
-        Activity activity = new Activity.ActivityBuilder().withName("Language").withDescription("Language").withLocation("PUNGGOL").withStartDate(date).builder();
+        Activity activity = new Activity.ActivityBuilder().withName("Language").withDescription("Language").withLocation("PUNGGOL").withStartTime(date).builder();
         Person williamWang = (Person) session.get(Person.class, 2l);
         Person michaelMiao = (Person) session.get(Person.class, 4l);
         Person host = (Person) session.get(Person.class, 1l);

@@ -21,7 +21,7 @@ public class RoleDao extends GenericHibernateDao<Role, Long> {
     }
 
     public List<Role> listRolesByUserName(String name){
-        return find("from Person as p inner join p.roles as r where  p.account_name = '"+name + "'");
+        return find("select r from Person as p inner join p.roles as r where  p.account_name = '"+name + "'");
     }
 
 }

@@ -19,4 +19,8 @@ public class ActivitytTypeDao extends GenericHibernateDao<ActivityType, Long>{
         }
         return activityTypes.get(0);
     }
+
+    public List<ActivityType> listActivitiesTypes(){
+        return findAll();
+    }
 }

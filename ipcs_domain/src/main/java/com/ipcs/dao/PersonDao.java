@@ -21,7 +21,7 @@ public class PersonDao extends GenericHibernateDao<Person, Long> {
      * @return
      */
     public Person findPersonByName(String name){
-        List<Person> persons = find("from Person p inner join fetch p.school where p.account_name = '"+name+"'");
+        List<Person> persons = find("select p from Person p inner join fetch p.school where p.account_name = '"+name+"'");
         if(persons.size() == 0)
             return null;
         return persons.get(0);
@@ -40,6 +40,6 @@ public class PersonDao extends GenericHibernateDao<Person, Long> {
     }
 
     public List<Person> listPersonsBy(String schoolName, String roleName) {
-        return find("from Person p inner join p.school s inner join p.roles as r where  s.name = '" + schoolName + "' and r.name = '" + roleName + "'");
+        return find("select p from Person p inner join p.school s inner join p.roles as r where  s.name = '" + schoolName + "' and r.name = '" + roleName + "'");
     }
 }

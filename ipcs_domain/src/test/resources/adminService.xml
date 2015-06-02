@@ -13,8 +13,12 @@
 
 	<person person_objid="1" account_name="JamesChen" password_hash="12345" SCHOOL_FK="1" person_detail_fk="1"/>
 	<person person_objid="2" account_name="WilliamWang"  password_hash="12345" SCHOOL_FK="1"/>
-	<activity activity_objid="1" name="Math" host="2" location="NANNING" description="Math" start_time="2015-05-14 05:00:00" school_fk="1"></activity>
-	<activity activity_objid="2" name="Language" host="1" location="PUNGGOL" description="Language" start_time="2015-05-12 05:00:00" school_fk="1"></activity>
+
+	<activity_type activity_type_objid="1" name="CLASS"></activity_type>
+	<activity_type activity_type_objid="2" name="MISCELLANEOUS"></activity_type>
+	<activity activity_objid="1" activity_type_fk="1" name="Math" host="2" location="NANNING" description="Math" start_time="2015-05-14 05:00:00" school_fk="1"></activity>
+	<activity activity_objid="2" activity_type_fk="1" name="Language" host="1" location="PUNGGOL" description="Language" start_time="2015-05-12 05:00:00" school_fk="1"></activity>
+	<activity activity_objid="3" activity_type_fk="1" name="Chemical" host="2" location="HARBOURFRONT" description="Chemical" start_time="2015-05-14 05:00:00" school_fk="1"></activity>
 
 	<schedule schedule_objid="1" person_fk="2" activity_fk="1"></schedule>
 	<schedule schedule_objid="2" person_fk="1" activity_fk="2"></schedule>

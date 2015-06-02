@@ -119,4 +119,9 @@ public class ActivityServiceImpl implements ActivityService {
     public List<Activity> listActivityByType(String typeName) {
         return activityDao.listActivitiesByType(typeName);
     }
+
+    @Transactional(readOnly = true)
+    public List<ActivityType> listActivityTypes(){
+        return activityTypeDao.listActivitiesTypes();
+    }
 }

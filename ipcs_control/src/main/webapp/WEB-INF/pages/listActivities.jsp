@@ -64,7 +64,7 @@
         <th width="200">Operation</th>
     </tr>
 
-    <c:forEach items="${command}" var="activity">
+    <c:forEach items="${activities}" var="activity">
         <tr>
             <td>${activity.name}</td>
             <td>

@@ -28,7 +28,12 @@ public class ActivityValidator implements Validator {
         if (null == activity.getLocation()||"".equals(activity.getLocation()))
             errors.rejectValue("location", null, "Location not provided.");
         if (null == activity.getStartTime()||"".equals(activity.getStartTime()))
-            errors.rejectValue("startTime", null, "StartTime not provided.");
+            errors.rejectValue("startTime", null, "Start time not provided.");
+        if (null == activity.getEndTime()||"".equals(activity.getEndTime()))
+            errors.rejectValue("endTime", null, "End time not provided.");
+        if (null != activity.getEndTime()&&null!=activity.getStartTime())
+            if((activity.getEndTime().compareTo(activity.getStartTime()))<0)
+                errors.rejectValue("startTime", null, "Start time  should earlier than end time.");
 
     }
 }

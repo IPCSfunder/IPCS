@@ -7,9 +7,9 @@
     <style type="text/css">
         <%@include file="CSS/style.css" %>
     </style>
-    <link rel="stylesheet" href="<c:url value="/resources/jquery/jquery-ui.css"/>">
-    <script src="<c:url value="/resources/jquery/jquery.js"/>"></script>
-    <script src="<c:url value="/resources/jquery/jquery-ui.js"/>"></script>
+    <link rel="stylesheet" href="<c:url value="/resources/jquery/DatePicker/jquery-ui.css"/>">
+    <script src="<c:url value="/resources/jquery/DatePicker/jquery.js"/>"></script>
+    <script src="<c:url value="/resources/jquery/DatePicker/jquery-ui.js"/>"></script>
     <script>
         $(function () {
             $("#datepicker").datepicker({
@@ -131,8 +131,7 @@
     <br>
 
     <table align="center" width="50%">
-
-        <tr>
+      <tr>
             <td>Class</td>
             <td>
                 <form:select path="" selected=""
@@ -141,16 +140,14 @@
             </td>
             <td></td>
             <td>
-                <form:select path="host.account_name" selected="host.account_name" items="${teachers}" itemLabel="account_name" itemValue="account_name"/>
-            </td>
 
+            </td>
         </tr>
 
         <tr>
             <td colspan="5" align="center">
                 <input type="submit" value="Submit"/>
             </td>
-        </tr>
         </tr>
     </table>
 </form:form>

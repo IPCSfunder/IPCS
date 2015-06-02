@@ -87,7 +87,7 @@ public class ActivityServiceTest {
     public void testAddActivityWithHost() {
         School school = schoolService.getSchoolByName("PUNGOL_PRIMARY_SCHOOL");
         Person person = personService.findPersonByName("JamesChen");
-        Activity activity = new Activity.ActivityBuilder().withDescription("Physical").withStartDate(new Date()).withLocation("Shanghai").withHost(person).withName("Physical").withSchool(school).builder();
+        Activity activity = new Activity.ActivityBuilder().withDescription("Physical").withStartTime(new Date()).withLocation("Shanghai").withHost(person).withName("Physical").withSchool(school).builder();
         activityService.addActivity(activity);
 
         activity = activityService.getActivityDetail(activity.getObjectId());

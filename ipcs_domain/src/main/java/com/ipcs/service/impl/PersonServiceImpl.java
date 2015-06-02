@@ -5,7 +5,6 @@ package com.ipcs.service.impl;
 
 import com.ipcs.dao.*;
 import com.ipcs.model.*;
-import com.ipcs.service.AdminService;
 import com.ipcs.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

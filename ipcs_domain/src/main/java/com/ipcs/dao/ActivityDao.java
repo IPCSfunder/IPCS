@@ -13,7 +13,7 @@ import java.util.List;
 public class ActivityDao extends GenericHibernateDao<Activity, Long>{
 
     public Activity findActivityDetailsById(Long activityId){
-        List<Activity> activities = find("from Activity ac inner join fetch ac.host inner join fetch ac.school where ac.objectId = '" + activityId + "'");
+        List<Activity> activities = find("select ac from Activity ac inner join fetch ac.host inner join fetch ac.school where ac.objectId = '" + activityId + "'");
         if(activities.size() == 0)
             return null;
         return activities.get(0);
