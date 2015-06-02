@@ -7,9 +7,9 @@
     <style type="text/css">
         <%@include file="CSS/style.css" %>
     </style>
-    <link rel="stylesheet" href="<c:url value="/resources/jquery/jquery-ui.css"/>">
-    <script src="<c:url value="/resources/jquery/jquery.js"/>"></script>
-    <script src="<c:url value="/resources/jquery/jquery-ui.js"/>"></script>
+    <link rel="stylesheet" href="<c:url value="/resources/jquery/DatePicker/jquery-ui.css"/>">
+    <script src="<c:url value="/resources/jquery/DatePicker/jquery.js"/>"></script>
+    <script src="<c:url value="/resources/jquery/DatePicker/jquery-ui.js"/>"></script>
     <script>
         $(function () {
             $("#datepicker").datepicker({

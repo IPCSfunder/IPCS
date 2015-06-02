@@ -16,6 +16,9 @@
 	<relationship_type relationship_type_objid="1" name="TEACHER"></relationship_type>
 	<relationship_type relationship_type_objid="2" name="FATHER"></relationship_type>
 	<relationship_type relationship_type_objid="3" name="MOTHER"></relationship_type>
+	<relationship_type relationship_type_objid="4" name="GRANDFATHER"></relationship_type>
+	<relationship_type relationship_type_objid="5" name="GRANDMOTHER"></relationship_type>
+	<relationship_type relationship_type_objid="6" name="OTHERS"></relationship_type>
 	<activity_type activity_type_objid="1" name="CLASS"></activity_type>
 	<activity_type activity_type_objid="2" name="MISCELLANEOUS"></activity_type>
 </dataset>

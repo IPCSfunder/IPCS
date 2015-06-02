@@ -12,7 +12,7 @@
 	</style>
 </head>
 <body>
-<div style="text-align: center;">Children List</div>
+<div style="text-align: center;">Staff List</div>
 
 <br/>
 <br/>

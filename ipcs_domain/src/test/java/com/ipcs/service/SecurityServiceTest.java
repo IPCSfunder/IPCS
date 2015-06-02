@@ -35,7 +35,9 @@ public class SecurityServiceTest {
     DataSource dataSource;
 
     SecurityService securityService = null;
-    AdminService adminService = null;
+    PersonService personService;
+    SchoolService schoolService;
+    RoleService roleService;
 
     @Before
     public void purgeData() throws Exception {
@@ -43,22 +45,25 @@ public class SecurityServiceTest {
                 "Services.xml");
         securityService = (SecurityService) appContext
                 .getBean("securityServiceImpl");
-        adminService = (AdminService) appContext
-                .getBean("adminServiceImpl");
+
+        personService = (PersonService) appContext
+                .getBean("personServiceImpl");
+        schoolService = (SchoolService) appContext.getBean("schoolServiceImpl");
+        roleService = (RoleService) appContext.getBean("roleServiceImpl");
     }
 
 
     @Test
     @DatabaseTearDown(value= "/secuirtyService.xml",type = DatabaseOperation.CLEAN_INSERT)
     public void insertAdmin() {
-        Role role = adminService.getRoleByName("ADMIN");
-        School school = adminService.getSchoolByName("PUNGOL_PRIMARY_SCHOOL");
+        Role role = roleService.getRoleByName("ADMIN");
+        School school = schoolService.getSchoolByName("PUNGOL_PRIMARY_SCHOOL");
         Person person = DataFactory.preparePerson("admin3", "password");
         person.addRole(role);
         person.setSchool(school);
-        adminService.addPerson(person);
+        personService.addPerson(person);
 
-        Person persistedPerson = adminService.getPersonInfo("admin3");
+        Person persistedPerson = personService.getPersonDetail("admin3");
         Assert.assertEquals(persistedPerson.getPassword_hash(),"password");
         Assert.assertEquals(((Role)persistedPerson.getRoles().get(0)).getName(),"ADMIN");
     }
@@ -73,7 +78,7 @@ public class SecurityServiceTest {
     @Test
     @DatabaseTearDown(value= "/secuirtyService.xml",type = DatabaseOperation.CLEAN_INSERT)
     public void testListPermission() {
-        List<Permission> permissions = securityService.listPermission("JamesChen");
+        List<Permission> permissions = securityService.listPermissionsByUserName("JamesChen");
         Assert.assertEquals(permissions.size(), 3);
     }
 
@@ -81,7 +86,7 @@ public class SecurityServiceTest {
     @Test
     @DatabaseTearDown(value= "/secuirtyService.xml",type = DatabaseOperation.CLEAN_INSERT)
     public void testListRoles() {
-        List<Role> roles = securityService.listRole("JamesChen");
+        List<Role> roles = securityService.listRolesByUserName("JamesChen");
         Assert.assertEquals(roles.size(), 1);
         Assert.assertEquals(roles.get(0).getName(), "ADMIN");
     }

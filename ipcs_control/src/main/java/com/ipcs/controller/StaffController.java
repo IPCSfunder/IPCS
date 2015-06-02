@@ -1,0 +1,88 @@
+package com.ipcs.controller;
+
+import com.ipcs.controller.util.BusinessConstants;
+import com.ipcs.controller.util.Nationality;
+import com.ipcs.controller.validator.PersonValidator;
+import com.ipcs.model.Person;
+import com.ipcs.model.School;
+import com.ipcs.service.PersonService;
+import com.ipcs.service.RegistoryService;
+import com.ipcs.service.SecurityService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
+
+import javax.servlet.http.HttpSession;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
+
+@Controller
+public class StaffController {
+
+    @Autowired
+    private SecurityService securityService;
+
+    @Autowired
+    private PersonService personService;
+
+    @Autowired
+    private RegistoryService registoryService;
+
+    @InitBinder("command")
+    public void initBinderForStaff(WebDataBinder binder) {
+        SimpleDateFormat sdf = new SimpleDateFormat(BusinessConstants.DATE_FORMAT);
+        sdf.setLenient(false);
+        binder.registerCustomEditor(Date.class, new CustomDateEditor(sdf, true));
+        binder.setValidator(new PersonValidator());
+    }
+
+    @RequestMapping(value = "/addStaff", method = RequestMethod.GET)
+    public ModelAndView staff(@RequestParam Map<String,String> requestParams) {
+        String account_name = requestParams.get("account_name");
+        List<String> nationalities = Nationality.getNationalityList();
+        if(null!=account_name){
+            Person staff = personService.getPersonDetail(account_name);
+            return new ModelAndView("addStaff", "command", staff).addObject("operation", "update").addObject("nationalities", nationalities);
+        }
+        else
+            return new ModelAndView("addStaff", "command", new Person()).addObject("operation", "add").addObject("nationalities", nationalities);
+    }
+
+
+    @RequestMapping(value = "/persistStaff", method = RequestMethod.POST)
+    public ModelAndView persistStaff(@ModelAttribute("command") @Validated Person staff, BindingResult bindingResult, HttpSession session,ModelMap model,@RequestParam Map<String,String> requestParams) throws ParseException {
+        if(bindingResult.hasErrors()) {
+            List<String> nationalities = Nationality.getNationalityList();
+            return new ModelAndView("addStaff", "operation", "update").addObject("nationalities", nationalities);
+        }
+        if("update".equals(requestParams.get("operation"))) {
+            personService.updatePerson(staff);
+            return new ModelAndView("navigator");
+        }
+        School school = ((Person) session.getAttribute("authenticatedAdmin")).getSchool();
+        staff.setAccount_name(staff.getPersonDetail().getFirstName()+BusinessConstants.NAME_CONCATENATE_SYMBOL+staff.getPersonDetail().getLastName());
+        staff.setPassword_hash(BusinessConstants.DEFAULT_PASSWORD);
+        staff.setSchool(school);
+        personService.addPerson(staff);
+        return new ModelAndView("navigator");
+    }
+
+
+
+
+    @RequestMapping(value = "/listStaff", method = RequestMethod.GET)
+    public ModelAndView listStaff(HttpSession session) {
+        School school = ((Person) session.getAttribute("authenticatedAdmin")).getSchool();
+        List<Person> staffs = personService.listPersonsByRoleName(school.getName(), "STAFF");
+        return new ModelAndView("listStaff", "command", staffs);
+   }
+}

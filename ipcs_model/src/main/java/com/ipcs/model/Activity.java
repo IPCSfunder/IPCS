@@ -24,6 +24,8 @@ public class Activity extends BasicObject {
 
     private Date startTime;
 
+    private Date endTime;
+
     private Person host;
 
     private School school;
@@ -41,6 +43,7 @@ public class Activity extends BasicObject {
         this.location = activityBuilder.location;
         this.description = activityBuilder.description;
         this.startTime = activityBuilder.startTime;
+        this.endTime = activityBuilder.endTime;
         this.host = activityBuilder.host;
         this.school = activityBuilder.school;
     }
@@ -103,6 +106,15 @@ public class Activity extends BasicObject {
         this.startTime = startTime;
     }
 
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "END_TIME")
+    public Date getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(Date endTime) {
+        this.endTime = endTime;
+    }
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "SCHEDULE", joinColumns = {
@@ -136,6 +148,7 @@ public class Activity extends BasicObject {
         return activityType;
     }
 
+
     public void setActivityType(ActivityType activityType) {
         this.activityType = activityType;
     }
@@ -145,6 +158,7 @@ public class Activity extends BasicObject {
         int result = 17 * factor + name.hashCode();
         result = 17 * result + location.hashCode();
         result = 17 * result + startTime.hashCode();
+        result = 17 * result + endTime.hashCode();
         return result;
     }
 
@@ -169,6 +183,7 @@ public class Activity extends BasicObject {
         private String location;
         private String description;
         private Date startTime;
+        private Date endTime;
         private Person host;
         private School school;
 
@@ -187,8 +202,13 @@ public class Activity extends BasicObject {
             return this;
         }
 
-        public ActivityBuilder withStartDate(Date startTime) {
+        public ActivityBuilder withStartTime(Date startTime) {
             this.startTime = startTime;
+            return this;
+        }
+
+        public ActivityBuilder withEndTime(Date endTime) {
+            this.endTime = endTime;
             return this;
         }
 

@@ -54,6 +54,8 @@ public class PersonTest{
 				.withNationality("Singaporean").withNickName("GG").withNric("1234567").withSex("FEMALE").build();
 		person.setPersonDetail(personDetail);
 		person.addContact(contact);
+		Activity activity = (Activity)session.get(Activity.class,1L);
+
 		session.save(person);
 		session.getTransaction().commit();
 		session.close();
