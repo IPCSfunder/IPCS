@@ -11,7 +11,6 @@ import org.springframework.validation.Validator;
 public class ActivityValidator implements Validator {
 
     public boolean supports(Class<?> clazz) {
-        // TODO Auto-generated method stub
         return Activity.class.equals(clazz);
     }
 
@@ -19,7 +18,6 @@ public class ActivityValidator implements Validator {
 
     @Override
     public void validate(Object obj, Errors errors) {
-        // TODO Auto-generated method stub
         Activity activity = (Activity) obj;
         if (null ==activity.getName()||"".equals(activity.getName()))
             errors.rejectValue("name", null, "Activity name not provided.");
@@ -34,6 +32,5 @@ public class ActivityValidator implements Validator {
         if (null != activity.getEndTime()&&null!=activity.getStartTime())
             if((activity.getEndTime().compareTo(activity.getStartTime()))<0)
                 errors.rejectValue("startTime", null, "Start time  should earlier than end time.");
-
     }
 }

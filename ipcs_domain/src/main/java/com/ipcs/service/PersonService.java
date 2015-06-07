@@ -31,5 +31,5 @@ public interface PersonService {
 	
 	List<Person> listChildsByParentId(Long parentId);
 
-
+	List<RelationshipType> listRelationshipTypes();
 }
