@@ -94,7 +94,7 @@ public class PersonServiceImpl implements PersonService {
                     persistContact.setMobileNumber(transientContact.getMobileNumber());
                     persistContact.setContacterName(transientContact.getContacterName());
                     persistContact.setAddress(transientContact.getAddress());
-                    persistContact.getRelationshipType().setName(transientContact.getRelationshipType().getName());
+                    persistContact.setRelationshipType(relationshipTypeDao.findRelationshipTypeByName(transientContact.getRelationshipType().getName()));
                 }
             }
         }
@@ -128,5 +128,10 @@ public class PersonServiceImpl implements PersonService {
     public void removePerson(Long personId){
         Person person = personDao.get(personId);
         personDao.delete(person);
+    }
+
+    @Transactional
+    public List<RelationshipType> listRelationshipTypes(){
+        return  relationshipTypeDao.findAll();
     }
 }

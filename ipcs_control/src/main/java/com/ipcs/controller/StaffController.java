@@ -8,6 +8,9 @@ import com.ipcs.model.School;
 import com.ipcs.service.PersonService;
 import com.ipcs.service.RegistoryService;
 import com.ipcs.service.SecurityService;
+import org.joda.time.DateTime;
+import org.joda.time.LocalDate;
+import org.joda.time.Years;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
@@ -59,11 +62,16 @@ public class StaffController {
 
 
     @RequestMapping(value = "/persistStaff", method = RequestMethod.POST)
-    public ModelAndView persistStaff(@ModelAttribute("command") @Validated Person staff, BindingResult bindingResult, HttpSession session,ModelMap model,@RequestParam Map<String,String> requestParams) throws ParseException {
+    public ModelAndView addStaff(@ModelAttribute("command") @Validated Person staff, BindingResult bindingResult, HttpSession session,ModelMap model,@RequestParam Map<String,String> requestParams) throws ParseException {
         if(bindingResult.hasErrors()) {
             List<String> nationalities = Nationality.getNationalityList();
             return new ModelAndView("addStaff", "operation", "update").addObject("nationalities", nationalities);
         }
+        //Get age
+        Date dob = staff.getPersonDetail().getDateOfBirth();
+        DateTime jodaDob = new DateTime(dob);
+        int age = Years.yearsBetween(jodaDob.toLocalDate(), new LocalDate()).getYears();
+        staff.getPersonDetail().setAge(age);
         if("update".equals(requestParams.get("operation"))) {
             personService.updatePerson(staff);
             return new ModelAndView("navigator");

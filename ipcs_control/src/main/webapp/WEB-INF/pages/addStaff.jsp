@@ -26,7 +26,7 @@
 </h2>
 
 <form:form name="htmlform" method="POST" action="/ipcs_control/persistStaff?operation=${operation}">
-    <table align="center" width="50%">
+    <table align="center" width="60%">
         <tr>
             <td><form:label path="personDetail.firstName">First Name</form:label></td>
             <td><form:input path="personDetail.firstName"/></td>
@@ -62,21 +62,18 @@
         </tr>
 
         <tr>
-            <td><form:label path="personDetail.age">Age</form:label></td>
-            <td><form:input path="personDetail.age"/></td>
-            <td width="150px"></td>
             <td><form:label path="personDetail.nationality">Nationality</form:label></td>
-            <td>
-                 <form:select path="personDetail.nationality" selected="personDetail.nationality"
+            <td colspan="4">
+                <form:select path="personDetail.nationality" selected="personDetail.nationality"
                              items="${nationalities}">
                 </form:select>
             </td>
         </tr>
 
         <tr>
-            <td colspan="2"><form:errors path="personDetail.age" cssClass="error"/></td>
-            <td width="150px"></td>
             <td colspan="2"><form:errors path="personDetail.nationality" cssClass="error"/></td>
+            <td width="150px"></td>
+            <td colspan="2"></td>
         </tr>
     </table>
 
@@ -84,7 +81,7 @@
     <hr>
     <br>
 
-    <table align="center" width="50%">
+    <table align="center" width="60%">
         <tr>
             <td></td>
             <td>Name</td>

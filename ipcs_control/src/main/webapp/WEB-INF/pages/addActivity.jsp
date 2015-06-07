@@ -58,7 +58,6 @@
             <td><form:label path="host.account_name">Teacher</form:label></td>
             <td>
                 <form:select path="host.account_name" selected="host.account_name" items="${teachers}" itemLabel="account_name" itemValue="account_name">
-
                 </form:select>
             </td>
             <!--<td><form:label path="persons">Students</form:label></td>

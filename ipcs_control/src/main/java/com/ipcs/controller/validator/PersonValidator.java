@@ -19,22 +19,21 @@ public class PersonValidator implements Validator {
 
     @Override
     public void validate(Object obj, Errors errors) {
-        // TODO Auto-generated method stub
         Person user = (Person) obj;
         if (null == user.getPersonDetail().getFirstName()||"".equals(user.getPersonDetail().getFirstName()))
             errors.rejectValue("personDetail.firstName", null, "First name not provided.");
         if (null == user.getPersonDetail().getLastName()||"".equals(user.getPersonDetail().getLastName()))
             errors.rejectValue("personDetail.lastName", null, "Last name not provided.");
         if (null == user.getPersonDetail().getDateOfBirth()||"".equals(user.getPersonDetail().getDateOfBirth()))
-            errors.rejectValue("personDetail.dateOfBirth", null, "Date of birth provided.");
-        if (null == user.getPersonDetail().getAge()||"".equals(user.getPersonDetail().getAge()))
-            errors.rejectValue("personDetail.age", null, "Age not provided.");
-        if (null == user.getPersonDetail().getDateOfBirth()||"".equals(user.getPersonDetail().getDateOfBirth()))
             errors.rejectValue("personDetail.dateOfBirth", null, "Date of birth not provided.");
         if (null == user.getPersonDetail().getSex()||"".equals(user.getPersonDetail().getSex()))
             errors.rejectValue("personDetail.sex", null, "Gender not provided.");
         if (null == user.getPersonDetail().getNationality()||"".equals(user.getPersonDetail().getNationality()))
             errors.rejectValue("personDetail.nationality", null, "Nationality not provided.");
+        if (null == user.getContacts().get(0).getContacterName()||"".equals(user.getContacts().get(0).getContacterName()))
+            errors.rejectValue("contacts[0].contacterName", null, "Primary contact name not provided.");
+        if (null == user.getContacts().get(0).getMobileNumber()||"".equals(user.getContacts().get(0).getMobileNumber()))
+            errors.rejectValue("contacts[0].mobileNumber", null, "Mobile number not provided.");
 
     }
 }

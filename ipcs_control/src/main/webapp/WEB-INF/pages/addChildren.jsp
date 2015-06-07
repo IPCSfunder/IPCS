@@ -27,15 +27,15 @@
 
 <form:form name="htmlform" method="POST" action="/ipcs_control/persistChild?operation=${operation}" commandName="child">
     <table align="center" width="60%">
+
         <tr>
-            <td><form:label path="personDetail.firstName">First Name</form:label></td>
+            <td><form:label cssClass="required" path="personDetail.firstName">First Name</form:label></td>
             <td><form:input path="personDetail.firstName"/></td>
             <td width="150px"><form:hidden path="roles[0].name" value="CHILDREN"></form:hidden><form:hidden
                     path="objectId"></form:hidden></td>
-            <td><form:label path="personDetail.lastName">Last Name</form:label></td>
+            <td><form:label cssClass="required" path="personDetail.lastName">Last Name</form:label></td>
             <td><form:input path="personDetail.lastName"/></td>
         </tr>
-
         <tr>
             <td colspan="2"><form:errors path="personDetail.firstName" cssClass="error"/></td>
             <td width="150px"></td>
@@ -43,13 +43,13 @@
         </tr>
 
         <tr>
-            <td><form:label path="personDetail.dateOfBirth">Date of Birth </form:label></td>
+            <td><form:label cssClass="required" path="personDetail.dateOfBirth">Date of Birth </form:label></td>
             <td>
                 <form:input id="datepicker" path="personDetail.dateOfBirth"/>
 
             </td>
             <td width="150px"></td>
-            <td><form:label path="personDetail.sex">Gender</form:label></td>
+            <td><form:label cssClass="required" path="personDetail.sex">Gender</form:label></td>
             <td>
                 <form:radiobutton path="personDetail.sex" value="MALE"/> Male
                 <form:radiobutton path="personDetail.sex" value="FEMALE"/> Female
@@ -63,11 +63,8 @@
         </tr>
 
         <tr>
-            <td><form:label path="personDetail.age">Age</form:label></td>
-            <td><form:input path="personDetail.age"/></td>
-            <td width="150px"></td>
-            <td><form:label path="personDetail.nationality">Nationality</form:label></td>
-            <td>
+            <td><form:label cssClass="required" path="personDetail.nationality">Nationality</form:label></td>
+            <td colspan="4">
                 <form:select path="personDetail.nationality" selected="personDetail.nationality"
                              items="${nationalities}">
                 </form:select>
@@ -75,9 +72,9 @@
         </tr>
 
         <tr>
-            <td colspan="2"><form:errors path="personDetail.age" cssClass="error"/></td>
-            <td width="150px"></td>
             <td colspan="2"><form:errors path="personDetail.nationality" cssClass="error"/></td>
+            <td width="150px"></td>
+            <td colspan="2"></td>
         </tr>
     </table>
 
@@ -85,7 +82,7 @@
     <hr>
     <br>
 
-    <table align="center" width="50%">
+    <table align="center" width="60%">
         <tr>
             <td></td>
             <td>Name</td>
@@ -95,34 +92,39 @@
         </tr>
 
         <tr>
-            <td><form:label path="contacts[0].contacterName">Primary Contact</form:label><form:hidden
+            <td><form:label cssClass="required" path="contacts[0].contacterName">Primary Contact</form:label><form:hidden
                     path="contacts[0].objectId"></form:hidden></td>
             <td><form:input path="contacts[0].contacterName"/></td>
             <td>
-                <form:select path="contacts[0].relationshipType.name">
-                    <form:option value="TEACHER" selected="selected">Teacher</form:option>
-                    <form:option value="FATHER">Father</form:option>
-                    <form:option value="MOTHER">Mother</form:option>
+                <form:select path="contacts[0].relationshipType.name" selected="contacts[0].relationshipType.name" items="${relationshipTypes}" itemLabel="name" itemValue="name">
                 </form:select>
                 <form:hidden path="contacts[0].primary" value="true"></form:hidden>
-            </td colspan="2">
-            <td><form:input path="contacts[0].mobileNumber"/></td>
+            </td>
+            <td colspan="2"><form:input path="contacts[0].mobileNumber"/></td>
         </tr>
 
+        <tr>
+        <td colspan="2"><form:errors path="contacts[0].contacterName" cssClass="error"/></td>
+        <td></td>
+        <td colspan="2"><form:errors path="contacts[0].mobileNumber" cssClass="error"/></td>
+        </tr>
 
         <tr>
             <td><form:label path="contacts[1].contacterName">Secondary Contact</form:label><form:hidden
                     path="contacts[1].objectId"></form:hidden></td>
             <td><form:input path="contacts[1].contacterName"/></td>
             <td>
-                <form:select path="contacts[1].relationshipType.name">
-                    <form:option value="TEACHER" selected="selected">Teacher</form:option>
-                    <form:option value="FATHER">Father</form:option>
-                    <form:option value="MOTHER">Mother</form:option>
+                <form:select path="contacts[1].relationshipType.name" selected="contacts[1].relationshipType.name" items="${relationshipTypes}" itemLabel="name" itemValue="name">
                 </form:select>
                 <form:hidden path="contacts[1].primary" value="false"></form:hidden>
             </td>
             <td colspan="2"><form:input path="contacts[1].mobileNumber"/></td>
+        </tr>
+
+        <tr>
+            <td colspan="2"><form:errors path="contacts[1].contacterName" cssClass="error"/></td>
+            <td></td>
+            <td colspan="2"><form:errors path="contacts[1].mobileNumber" cssClass="error"/></td>
         </tr>
     </table>
 
@@ -130,17 +132,16 @@
     <hr>
     <br>
 
-    <table align="center" width="50%">
+    <table align="center" width="60%">
+
+
       <tr>
             <td>Class</td>
             <td>
-                <form:select path="" selected=""
-                             items="${classes}">
-                </form:select>
-            </td>
-            <td></td>
-            <td>
 
+            </td>
+            <td width="150px"></td>
+            <td>
             </td>
         </tr>
 

@@ -31,3 +31,9 @@ ul
     padding: 8px;
     margin: 16px;
 }
+
+.required:after {
+    color: #d00;
+    content: "*";
+    margin-left: 8px;
+}

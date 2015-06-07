@@ -4,9 +4,15 @@ import com.ipcs.controller.util.BusinessConstants;
 import com.ipcs.controller.util.Nationality;
 import com.ipcs.controller.util.SchoolClass;
 import com.ipcs.controller.validator.PersonValidator;
+import com.ipcs.model.Activity;
 import com.ipcs.model.Person;
+import com.ipcs.model.RelationshipType;
 import com.ipcs.model.School;
+import com.ipcs.service.ActivityService;
 import com.ipcs.service.PersonService;
+import org.joda.time.DateTime;
+import org.joda.time.LocalDate;
+import org.joda.time.Years;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
@@ -29,10 +35,14 @@ public class ChildController {
     @Autowired
     private PersonService personService;
 
+    @Autowired
+    private ActivityService activityService;
+
 
     @InitBinder("child")
     public void initBinderForChild(WebDataBinder binder) {
         SimpleDateFormat sdf = new SimpleDateFormat(BusinessConstants.DATE_FORMAT);
+        sdf.setLenient(false);
         sdf.setLenient(false);
         binder.registerCustomEditor(Date.class, new CustomDateEditor(sdf, true));
         binder.setValidator(new PersonValidator());
@@ -43,12 +53,14 @@ public class ChildController {
         School school = ((Person) session.getAttribute("authenticatedAdmin")).getSchool();
         String account_name = requestParams.get("account_name");
         List<String> nationalities = Nationality.getNationalityList();
-        List<String> classes = SchoolClass.getClassList();
+        List<Activity> classes = activityService.listActivityByType("CLASS");
         List<Person> teachers = personService.listPersonsByRoleName(school.getName(), BusinessConstants.STAFF);
+        List<RelationshipType> relationshipTypes =personService.listRelationshipTypes();
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("nationalities", nationalities);
         modelAndView.addObject("classes", classes);
         modelAndView.addObject("teachers", teachers);
+        modelAndView.addObject("relationshipTypes", relationshipTypes);
         modelAndView.setViewName("addChildren");
         if (null != account_name) {
             Person child = personService.getPersonDetail(account_name);
@@ -68,15 +80,22 @@ public class ChildController {
     @RequestMapping(value = "/persistChild", method = RequestMethod.POST)
     public ModelAndView persistStudent(@ModelAttribute("child") @Validated Person child, BindingResult bindingResult, HttpSession session, @RequestParam Map<String, String> requestParams) throws ParseException {
         if (bindingResult.hasErrors()) {
+            School school = ((Person) session.getAttribute("authenticatedAdmin")).getSchool();
             List<String> nationalities = Nationality.getNationalityList();
             List<String> classes = SchoolClass.getClassList();
-            return new ModelAndView("addChildren", "operation", "update").addObject("nationalities", nationalities).addObject("classes", classes);
-        }
+            List<Person> teachers = personService.listPersonsByRoleName(school.getName(), BusinessConstants.STAFF);
+            List<RelationshipType> relationshipTypes =personService.listRelationshipTypes();
+
+            return new ModelAndView("addChildren", "operation", "update").addObject("nationalities", nationalities).addObject("classes", classes).addObject("teachers",teachers).addObject("relationshipTypes",relationshipTypes);        }
         School school = ((Person) session.getAttribute("authenticatedAdmin")).getSchool();
         child.setAccount_name(child.getPersonDetail().getFirstName() + BusinessConstants.NAME_CONCATENATE_SYMBOL + child.getPersonDetail().getLastName());
         child.setPassword_hash(BusinessConstants.DEFAULT_PASSWORD);
         child.setSchool(school);
-
+        //Get age
+        Date dob = child.getPersonDetail().getDateOfBirth();
+        DateTime jodaDob = new DateTime(dob);
+        int age = Years.yearsBetween(jodaDob.toLocalDate(), new LocalDate()).getYears();
+        child.getPersonDetail().setAge(age);
         if ("update".equals(requestParams.get("operation"))) {
             personService.updatePerson(child);
             return new ModelAndView("navigator");
