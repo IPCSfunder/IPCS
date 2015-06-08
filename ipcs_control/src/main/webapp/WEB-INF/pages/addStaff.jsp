@@ -75,55 +75,12 @@
             <td width="150px"></td>
             <td colspan="2"></td>
         </tr>
-    </table>
-
-    <br>
-    <hr>
-    <br>
-
-    <table align="center" width="60%">
-        <tr>
-            <td></td>
-            <td>Name</td>
-            <td>Relationship</td>
-            <td colspan="2">Mobile</td>
-
-        </tr>
-
-        <tr>
-            <td><form:label path="contacts[0].contacterName">Primary Contact</form:label><form:hidden path="contacts[0].objectId"></form:hidden></td>
-            <td><form:input path="contacts[0].contacterName"/></td>
-            <td>
-                <form:select path="contacts[0].relationshipType.name">
-                    <form:option value="TEACHER" selected="selected">Teacher</form:option>
-                    <form:option value="FATHER">Fatyher</form:option>
-                    <form:option value="MOTHER">Mother</form:option>
-                </form:select>
-                <form:hidden path="contacts[0].primary" value="true"></form:hidden>
-            </td colspan="2">
-            <td><form:input path="contacts[0].mobileNumber"/></td>
-        </tr>
-
-
-        <tr>
-            <td><form:label path="contacts[1].contacterName">Secondary Contact</form:label><form:hidden path="contacts[1].objectId"></form:hidden></td>
-            <td><form:input path="contacts[1].contacterName"/></td>
-            <td>
-                <form:select path="contacts[1].relationshipType.name">
-                    <form:option value="TEACHER" selected="selected">Teacher</form:option>
-                    <form:option value="PARENT">Parent</form:option>
-                </form:select>
-                <form:hidden path="contacts[1].primary" value="false"></form:hidden>
-            </td>
-            <td colspan="2"><form:input path="contacts[1].mobileNumber"/></td>
-        </tr>
 
         <tr>
             <td colspan="5" align="center">
                 <input type="submit" value="Submit"/>
             </td>
         </tr>
-
     </table>
 </form:form>
 </body>

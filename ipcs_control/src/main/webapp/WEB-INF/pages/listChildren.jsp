@@ -36,7 +36,7 @@
 			<td>${person.account_name}</td>
 			<td><a href="<c:url value='/addChildren?account_name=${person.account_name}'/>">View Details</a>
 				&nbsp; &nbsp; &nbsp;
-				<a href="<c:url value='/deleteChild?person_objid=${person.objectId}'/>">Delete</a>
+				<a href="<c:url value='/deleteChild?person_objid=${person.objectId}'/>" onclick="return confirm('Are you sure?')">Delete</a>
 			</td>
 		</tr>
 	</c:forEach>

@@ -72,9 +72,9 @@
                     ${activity.host.account_name}
                 </c:if>
             </td>
-            <td><a href="<c:url value='/addActivity?activityId=${activity.objectId}'/>">View Details</a>
+            <td><a href="<c:url value='/addActivity?activityId=${activity.objectId}'/>" >View Details</a>
                 &nbsp; &nbsp; &nbsp;
-                <a href="<c:url value='/deleteActivity?activityId=${activity.objectId}'/>">Delete</a>
+                <a href="<c:url value='/deleteActivity?activityId=${activity.objectId}'/>" onclick="return confirm('Are you sure?')">Delete</a>
             </td>
         </tr>
     </c:forEach>
