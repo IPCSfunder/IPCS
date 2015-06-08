@@ -72,12 +72,13 @@ public class StaffController {
         DateTime jodaDob = new DateTime(dob);
         int age = Years.yearsBetween(jodaDob.toLocalDate(), new LocalDate()).getYears();
         staff.getPersonDetail().setAge(age);
+        School school = ((Person) session.getAttribute("authenticatedAdmin")).getSchool();
+        staff.setAccount_name(staff.getPersonDetail().getFirstName() + BusinessConstants.NAME_CONCATENATE_SYMBOL + staff.getPersonDetail().getLastName());
         if("update".equals(requestParams.get("operation"))) {
             personService.updatePerson(staff);
             return new ModelAndView("navigator");
         }
-        School school = ((Person) session.getAttribute("authenticatedAdmin")).getSchool();
-        staff.setAccount_name(staff.getPersonDetail().getFirstName()+BusinessConstants.NAME_CONCATENATE_SYMBOL+staff.getPersonDetail().getLastName());
+
         staff.setPassword_hash(BusinessConstants.DEFAULT_PASSWORD);
         staff.setSchool(school);
         personService.addPerson(staff);
@@ -85,12 +86,20 @@ public class StaffController {
     }
 
 
+    @RequestMapping(value = "/deleteStaff", method = RequestMethod.GET)
+    public ModelAndView deleteChild(@RequestParam Map<String, String> requestParams, HttpSession session) {
+        Person person = (Person) session.getAttribute("authenticatedAdmin");
+        String personId = requestParams.get("person_objid");
+        personService.removePerson(Long.parseLong(personId));
+        List<Person> staffs = personService.listPersonsByRoleName(person.getSchool().getName(), BusinessConstants.STAFF);
+        return new ModelAndView("listStaff", "staffs", staffs);
+    }
 
 
     @RequestMapping(value = "/listStaff", method = RequestMethod.GET)
     public ModelAndView listStaff(HttpSession session) {
         School school = ((Person) session.getAttribute("authenticatedAdmin")).getSchool();
-        List<Person> staffs = personService.listPersonsByRoleName(school.getName(), "STAFF");
+        List<Person> staffs = personService.listPersonsByRoleName(school.getName(), BusinessConstants.STAFF);
         return new ModelAndView("listStaff", "command", staffs);
    }
 }

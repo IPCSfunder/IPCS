@@ -55,7 +55,7 @@ public class ChildController {
         List<String> nationalities = Nationality.getNationalityList();
         List<Activity> classes = activityService.listActivityByType("CLASS");
         List<Person> teachers = personService.listPersonsByRoleName(school.getName(), BusinessConstants.STAFF);
-        List<RelationshipType> relationshipTypes =personService.listRelationshipTypes();
+        List<RelationshipType> relationshipTypes = personService.listRelationshipTypes();
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("nationalities", nationalities);
         modelAndView.addObject("classes", classes);
@@ -68,8 +68,7 @@ public class ChildController {
             modelAndView.addObject("operation", "update");
             modelAndView.addObject("child", child);
             return modelAndView;
-        } else
-        {
+        } else {
             modelAndView.addObject("operation", "add");
             modelAndView.addObject("child", new Person());
             return modelAndView;
@@ -84,9 +83,9 @@ public class ChildController {
             List<String> nationalities = Nationality.getNationalityList();
             List<String> classes = SchoolClass.getClassList();
             List<Person> teachers = personService.listPersonsByRoleName(school.getName(), BusinessConstants.STAFF);
-            List<RelationshipType> relationshipTypes =personService.listRelationshipTypes();
-
-            return new ModelAndView("addChildren", "operation", "update").addObject("nationalities", nationalities).addObject("classes", classes).addObject("teachers",teachers).addObject("relationshipTypes",relationshipTypes);        }
+            List<RelationshipType> relationshipTypes = personService.listRelationshipTypes();
+            return new ModelAndView("addChildren", "operation", "update").addObject("nationalities", nationalities).addObject("classes", classes).addObject("teachers", teachers).addObject("relationshipTypes", relationshipTypes);
+        }
         School school = ((Person) session.getAttribute("authenticatedAdmin")).getSchool();
         child.setAccount_name(child.getPersonDetail().getFirstName() + BusinessConstants.NAME_CONCATENATE_SYMBOL + child.getPersonDetail().getLastName());
         child.setPassword_hash(BusinessConstants.DEFAULT_PASSWORD);
