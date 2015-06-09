@@ -28,10 +28,10 @@
 <form:form name="htmlform" method="POST" action="/ipcs_control/persistStaff?operation=${operation}">
     <table align="center" width="60%">
         <tr>
-            <td><form:label path="personDetail.firstName">First Name</form:label></td>
+            <td><form:label cssClass="required" path="personDetail.firstName">First Name</form:label></td>
             <td><form:input path="personDetail.firstName"/></td>
             <td width="150px"><form:hidden path="roles[0].name" value="STAFF"></form:hidden><form:hidden path="objectId"></form:hidden></td>
-            <td><form:label path="personDetail.lastName">Last Name</form:label></td>
+            <td><form:label cssClass="required" path="personDetail.lastName">Last Name</form:label></td>
             <td><form:input path="personDetail.lastName"/></td>
         </tr>
 
@@ -42,13 +42,13 @@
         </tr>
 
         <tr>
-            <td><form:label path="personDetail.dateOfBirth">Date of Birth </form:label></td>
+            <td><form:label cssClass="required" path="personDetail.dateOfBirth">Date of Birth </form:label></td>
             <td>
                 <form:input id="datepicker" path="personDetail.dateOfBirth"/>
 
             </td>
             <td width="150px"></td>
-            <td><form:label path="personDetail.sex">Gender</form:label></td>
+            <td><form:label cssClass="required" path="personDetail.sex">Gender</form:label></td>
             <td>
                 <form:radiobutton path="personDetail.sex" value="MALE"/> Male
                 <form:radiobutton path="personDetail.sex" value="FEMALE"/> Female
@@ -62,7 +62,7 @@
         </tr>
 
         <tr>
-            <td><form:label path="personDetail.nationality">Nationality</form:label></td>
+            <td><form:label cssClass="required" path="personDetail.nationality">Nationality</form:label></td>
             <td colspan="4">
                 <form:select path="personDetail.nationality" selected="personDetail.nationality"
                              items="${nationalities}">

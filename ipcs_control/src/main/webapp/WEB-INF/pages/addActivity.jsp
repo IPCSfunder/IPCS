@@ -30,7 +30,7 @@
 </h2>
 
 <form:form method="POST" action="/ipcs_control/persistActivity?operation=${operation}" commandName="activity">
-    <table align="center" width="50%">
+    <table align="center" width="60%">
         <tr>
             <td><form:label path="name">Activity</form:label></td>
             <td><form:input path="name"/></td>
@@ -60,16 +60,12 @@
                 <form:select path="host.account_name" selected="host.account_name" items="${teachers}" itemLabel="account_name" itemValue="account_name">
                 </form:select>
             </td>
-            <!--<td><form:label path="persons">Students</form:label></td>
-            <td>
-           <form:select multiple="true" path="persons" items="${students}" itemLabel="account_name" itemValue="account_name" />
-            </td>-->
         </tr>
 
         <tr>
             <td colspan="2"><form:errors path="location" cssClass="error"/></td>
             <td width="150px"></td>
-            <td colspan="2"><td colspan="2"><form:errors path="host.account_name" cssClass="error"/></td></td>
+            <td colspan="2"><form:errors path="host.account_name" cssClass="error"/></td>
         </tr>
 
         <tr>
