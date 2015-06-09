@@ -3,6 +3,7 @@ package com.ipcs.controller;
 import com.ipcs.controller.util.BusinessConstants;
 import com.ipcs.controller.util.Nationality;
 import com.ipcs.controller.validator.PersonValidator;
+import com.ipcs.controller.validator.StaffValidator;
 import com.ipcs.model.Person;
 import com.ipcs.model.School;
 import com.ipcs.service.PersonService;
@@ -45,19 +46,19 @@ public class StaffController {
         SimpleDateFormat sdf = new SimpleDateFormat(BusinessConstants.DATE_FORMAT);
         sdf.setLenient(false);
         binder.registerCustomEditor(Date.class, new CustomDateEditor(sdf, true));
-        binder.setValidator(new PersonValidator());
+        binder.setValidator(new StaffValidator());
     }
 
     @RequestMapping(value = "/addStaff", method = RequestMethod.GET)
-    public ModelAndView staff(@RequestParam Map<String,String> requestParams) {
+    public ModelAndView addStaff(@RequestParam Map<String,String> requestParams) {
         String account_name = requestParams.get("account_name");
         List<String> nationalities = Nationality.getNationalityList();
-        if(null!=account_name){
+        if(null!=account_name&&!account_name.equals("")){
             Person staff = personService.getPersonDetail(account_name);
-            return new ModelAndView("addStaff", "command", staff).addObject("operation", "update").addObject("nationalities", nationalities);
+            return new ModelAndView("addStaff", "command", staff).addObject("operation", BusinessConstants.UPDATE).addObject("nationalities", nationalities);
         }
         else
-            return new ModelAndView("addStaff", "command", new Person()).addObject("operation", "add").addObject("nationalities", nationalities);
+            return new ModelAndView("addStaff", "command", new Person()).addObject("operation", BusinessConstants.ADD).addObject("nationalities", nationalities);
     }
 
 
@@ -65,7 +66,11 @@ public class StaffController {
     public ModelAndView addStaff(@ModelAttribute("command") @Validated Person staff, BindingResult bindingResult, HttpSession session,ModelMap model,@RequestParam Map<String,String> requestParams) throws ParseException {
         if(bindingResult.hasErrors()) {
             List<String> nationalities = Nationality.getNationalityList();
-            return new ModelAndView("addStaff", "operation", "update").addObject("nationalities", nationalities);
+            if(BusinessConstants.UPDATE.equals(requestParams.get("operation"))) {
+                return new ModelAndView("addStaff", "operation", BusinessConstants.UPDATE).addObject("nationalities", nationalities);
+            }
+            else
+                return new ModelAndView("addStaff", "operation", BusinessConstants.ADD).addObject("nationalities", nationalities);
         }
         //Get age
         Date dob = staff.getPersonDetail().getDateOfBirth();
@@ -74,7 +79,7 @@ public class StaffController {
         staff.getPersonDetail().setAge(age);
         School school = ((Person) session.getAttribute("authenticatedAdmin")).getSchool();
         staff.setAccount_name(staff.getPersonDetail().getFirstName() + BusinessConstants.NAME_CONCATENATE_SYMBOL + staff.getPersonDetail().getLastName());
-        if("update".equals(requestParams.get("operation"))) {
+        if(BusinessConstants.UPDATE.equals(requestParams.get("operation"))) {
             personService.updatePerson(staff);
             return new ModelAndView("navigator");
         }

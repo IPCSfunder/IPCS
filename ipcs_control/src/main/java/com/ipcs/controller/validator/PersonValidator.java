@@ -30,6 +30,11 @@ public class PersonValidator implements Validator {
             errors.rejectValue("personDetail.sex", null, "Gender not provided.");
         if (null == user.getPersonDetail().getNationality()||"".equals(user.getPersonDetail().getNationality()))
             errors.rejectValue("personDetail.nationality", null, "Nationality not provided.");
+
+        if (null == user.getPersonDetail().getAddress()||"".equals(user.getPersonDetail().getAddress()))
+            errors.rejectValue("personDetail.address", null, "Address not provided.");
+        if (null == user.getPersonDetail().getPostcode()||"".equals(user.getPersonDetail().getPostcode()))
+            errors.rejectValue("personDetail.postcode", null, "Postcode not provided.");
         if(null!= user.getContacts()&&user.getContacts().size()!=0){
             if (null == user.getContacts().get(0).getContacterName()||"".equals(user.getContacts().get(0).getContacterName()))
                 errors.rejectValue("contacts[0].contacterName", null, "Primary contact name not provided.");

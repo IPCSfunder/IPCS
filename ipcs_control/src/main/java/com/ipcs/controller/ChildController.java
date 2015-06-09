@@ -84,7 +84,10 @@ public class ChildController {
             List<String> classes = SchoolClass.getClassList();
             List<Person> teachers = personService.listPersonsByRoleName(school.getName(), BusinessConstants.STAFF);
             List<RelationshipType> relationshipTypes = personService.listRelationshipTypes();
-            return new ModelAndView("addChildren", "operation", "update").addObject("nationalities", nationalities).addObject("classes", classes).addObject("teachers", teachers).addObject("relationshipTypes", relationshipTypes);
+            if ("update".equals(requestParams.get("operation"))) {
+                return new ModelAndView("addChildren", "operation", BusinessConstants.UPDATE).addObject("nationalities", nationalities).addObject("classes", classes).addObject("teachers", teachers).addObject("relationshipTypes", relationshipTypes);
+            }else
+                return new ModelAndView("addChildren", "operation", BusinessConstants.ADD).addObject("nationalities", nationalities).addObject("classes", classes).addObject("teachers", teachers).addObject("relationshipTypes", relationshipTypes);
         }
         School school = ((Person) session.getAttribute("authenticatedAdmin")).getSchool();
         child.setAccount_name(child.getPersonDetail().getFirstName() + BusinessConstants.NAME_CONCATENATE_SYMBOL + child.getPersonDetail().getLastName());
@@ -95,7 +98,7 @@ public class ChildController {
         DateTime jodaDob = new DateTime(dob);
         int age = Years.yearsBetween(jodaDob.toLocalDate(), new LocalDate()).getYears();
         child.getPersonDetail().setAge(age);
-        if ("update".equals(requestParams.get("operation"))) {
+        if (BusinessConstants.UPDATE.equals(requestParams.get("operation"))) {
             personService.updatePerson(child);
             return new ModelAndView("navigator");
         }

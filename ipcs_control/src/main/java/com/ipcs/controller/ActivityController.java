@@ -62,14 +62,14 @@ public class ActivityController {
         modelAndView.addObject("students", students);
         modelAndView.addObject("activityTypes", activityTypes);
 
-        if (null != activityId) {
+        if (null != activityId&&!activityId.equals("")) {
             Activity activity = activityService.getActivityDetail(Long.parseLong(activityId));
             modelAndView.addObject("activity", activity);
-            modelAndView.addObject("operation", "update");
+            modelAndView.addObject("operation", BusinessConstants.UPDATE);
             return modelAndView;
         } else {
             modelAndView.addObject("activity", new Activity());
-            modelAndView.addObject("operation", "add");
+            modelAndView.addObject("operation", BusinessConstants.ADD);
             return modelAndView;
         }
     }
