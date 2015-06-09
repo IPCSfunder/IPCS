@@ -35,6 +35,10 @@ public class PersonDetail extends BasicObject {
 	
 	private Person person;
 
+	private String address;
+
+	private String postcode;
+
 	public PersonDetail(){
 		super();
 	}
@@ -50,6 +54,8 @@ public class PersonDetail extends BasicObject {
 		this.nric = builder.nric;
 		this.nickName = builder.nickName;
 		this.marketOption = builder.marketOption;
+		this.postcode = builder.postcode;
+		this.address = builder.address;
 	}
 
 	@Id
@@ -154,6 +160,24 @@ public class PersonDetail extends BasicObject {
 		this.sex = sex;
 	}
 
+	@Column(name="ADDRESS")
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	@Column(name="POSTCODE")
+	public String getPostcode() {
+		return postcode;
+	}
+
+	public void setPostcode(String postcode) {
+		this.postcode = postcode;
+	}
+
 	public static class PersonBuilder{
 		private String lastName;
 		private String firstName;
@@ -164,6 +188,8 @@ public class PersonDetail extends BasicObject {
 		private String nric;
 		private String nickName;
 		private Boolean marketOption = false;
+		private String address;
+		private String postcode;
 		
 		public PersonBuilder withNickName(String nickName){
 			this.nickName = nickName;
@@ -208,6 +234,16 @@ public class PersonDetail extends BasicObject {
 		
 		public PersonBuilder withMarketOption(Boolean marketOption){
 			this.marketOption = marketOption;
+			return this;
+		}
+
+		public PersonBuilder withAddress(String address){
+			this.address = address;
+			return this;
+		}
+
+		public PersonBuilder withPostcode(String postcode){
+			this.postcode = postcode;
 			return this;
 		}
 		

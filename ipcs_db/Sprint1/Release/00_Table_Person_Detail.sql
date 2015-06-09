@@ -8,6 +8,8 @@ CREATE TABLE IF NOT EXISTS `ipcs`.`person_detail` (
   `dob` DATE NULL,
   `nric` VARCHAR(45) NULL,
   `nick_name` VARCHAR(45) NULL,
+  `address` VARCHAR(255) NULL,
+  `postcode` VARCHAR(45) NULL,
   `market_option` BOOLEAN NULL,
   `date_created` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `date_modified` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,

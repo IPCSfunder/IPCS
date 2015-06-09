@@ -29,7 +29,7 @@ public class Person extends BasicObject {
 
     private List<Relationship> relationships = new ArrayList<Relationship>();
 
-    private List<Activity> activities;
+    private List<Activity> activities = new ArrayList<Activity>();
 
     public Person(String name, String password) {
         super();

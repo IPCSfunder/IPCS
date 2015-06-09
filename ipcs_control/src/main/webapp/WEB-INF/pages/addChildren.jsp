@@ -76,6 +76,28 @@
             <td width="150px"></td>
             <td colspan="2"></td>
         </tr>
+
+        <tr>
+            <td><form:label cssClass="required" path="personDetail.address">Address</form:label></td>
+            <td colspan="4">
+                <form:input size="60%"  path="personDetail.address"/>
+            </td>
+        </tr>
+
+        <tr>
+            <td colspan="5"><form:errors path="personDetail.address" cssClass="error"/></td>
+        </tr>
+
+        <tr>
+            <td><form:label cssClass="required" path="personDetail.postcode">PostCode</form:label></td>
+            <td colspan="4">
+                <form:input path="personDetail.postcode"/>
+            </td>
+        </tr>
+
+        <tr>
+            <td colspan="5"><form:errors path="personDetail.postcode" cssClass="error"/></td>
+        </tr>
     </table>
 
     <br>
@@ -138,7 +160,7 @@
       <tr>
             <td>Class</td>
             <td>
-
+                
             </td>
             <td width="150px"></td>
             <td>
