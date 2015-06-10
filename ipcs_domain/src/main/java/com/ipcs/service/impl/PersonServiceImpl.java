@@ -29,6 +29,9 @@ public class PersonServiceImpl implements PersonService {
     private SchoolDao schoolDao;
 
     @Autowired
+    private ActivityDao activityDao;
+
+    @Autowired
     private PersonDetailDao personDetailDao;
 
     @Autowired
@@ -41,7 +44,7 @@ public class PersonServiceImpl implements PersonService {
 
     @Transactional
     public void addPerson(Person person) {
-        if(null != person.getSchool())
+        if (null != person.getSchool())
             person.setSchool(schoolDao.findSchoolByName(person.getSchool().getName()));
 
         List<Role> roles = new ArrayList<Role>();
@@ -53,19 +56,31 @@ public class PersonServiceImpl implements PersonService {
                 person.addRole(role);
         }
 
-        List<Contact> contacts = person.getContacts();
-        for (Contact contact : contacts) {
-            RelationshipType type = relationshipTypeDao.findRelationshipTypeByName(contact.getRelationshipType().getName());
-            contact.setRelationshipType(type);
-            contact.setPerson(person);
+        List<Contact> contacts = new ArrayList<Contact>();
+        for (Contact contact : person.getContacts()) {
+            if (contact.getContacterName() != null && contact.getContacterName().equals(""))
+            {
+                RelationshipType type = relationshipTypeDao.findRelationshipTypeByName(contact.getRelationshipType().getName());
+                contact.setRelationshipType(type);
+                contact.setPerson(person);
+                contacts.add(contact);
+            }
         }
+        person.setContacts(contacts);
 
-        if(person.getPersonDetail()!=null)
+        List<Activity> activities = new ArrayList<Activity>();
+        for (Activity activity : person.getActivities()) {
+            Activity persistedActivity = activityDao.findActivityDetailsById(activity.getObjectId());
+            activities.add(persistedActivity);
+        }
+        person.setActivities(activities);
+
+        if (person.getPersonDetail() != null)
             personDetailDao.save(person.getPersonDetail());
         personDao.save(person);
     }
 
-    @Transactional(readOnly=true)
+    @Transactional(readOnly = true)
     public List<Person> listPersonsByRoleName(String schoolName, String roleName) {
         return personDao.listPersonsBy(schoolName, roleName);
     }
@@ -86,11 +101,10 @@ public class PersonServiceImpl implements PersonService {
         personDetailDao.update(personDetail);
 
 
-        List<Contact> persistContacts =  persistPerson.getContacts();
-        for(Contact persistContact:persistContacts ){
-            for(Contact transientContact: person.getContacts()){
-                if(persistContact.getObjectId() == transientContact.getObjectId())
-                {
+        List<Contact> persistContacts = persistPerson.getContacts();
+        for (Contact persistContact : persistContacts) {
+            for (Contact transientContact : person.getContacts()) {
+                if (persistContact.getObjectId() == transientContact.getObjectId()) {
                     persistContact.setMobileNumber(transientContact.getMobileNumber());
                     persistContact.setContacterName(transientContact.getContacterName());
                     persistContact.setAddress(transientContact.getAddress());
@@ -108,30 +122,30 @@ public class PersonServiceImpl implements PersonService {
         personDao.deleteAll(subodinates);
     }
 
-    @Transactional(readOnly=true)
+    @Transactional(readOnly = true)
     public Person getPersonDetail(String name) {
         return personDao.findPersonDetailsByName(name);
     }
 
-    @Transactional(readOnly=true)
+    @Transactional(readOnly = true)
     public List<Person> listChildsByParentId(Long parentId) {
         return personDao.find("select w from Relationship r inner join r.whose w inner join r.type t inner join r.iswho i where t.name = 'PARENT' and i.objectId = '" + parentId + "'");
     }
 
-    @Transactional(readOnly=true)
-    public Person findPersonByName(String accountName){
+    @Transactional(readOnly = true)
+    public Person findPersonByName(String accountName) {
         return personDao.findPersonByName(accountName);
     }
 
 
     @Transactional
-    public void removePerson(Long personId){
+    public void removePerson(Long personId) {
         Person person = personDao.get(personId);
         personDao.delete(person);
     }
 
     @Transactional
-    public List<RelationshipType> listRelationshipTypes(){
-        return  relationshipTypeDao.findAll();
+    public List<RelationshipType> listRelationshipTypes() {
+        return relationshipTypeDao.findAll();
     }
 }

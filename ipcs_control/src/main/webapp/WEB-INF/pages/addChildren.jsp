@@ -160,7 +160,9 @@
       <tr>
             <td>Class</td>
             <td>
-                
+                <form:select path="activities[0].objectId" selected="activities[0].objectId">
+                    <form:options items="${classes}" itemValue="objectId" itemLabel="name" />
+                </form:select>
             </td>
             <td width="150px"></td>
             <td>
