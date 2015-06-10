@@ -81,7 +81,7 @@ public class ChildController {
         if (bindingResult.hasErrors()) {
             School school = ((Person) session.getAttribute("authenticatedAdmin")).getSchool();
             List<String> nationalities = Nationality.getNationalityList();
-            List<String> classes = SchoolClass.getClassList();
+            List<Activity> classes = activityService.listActivityByType("CLASS");
             List<Person> teachers = personService.listPersonsByRoleName(school.getName(), BusinessConstants.STAFF);
             List<RelationshipType> relationshipTypes = personService.listRelationshipTypes();
             if ("update".equals(requestParams.get("operation"))) {

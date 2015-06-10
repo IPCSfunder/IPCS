@@ -106,7 +106,10 @@ public class Person extends BasicObject {
         this.roles.add(role);
     }
 
-    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "persons",cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "SCHEDULE", joinColumns = {
+            @JoinColumn(name = "PERSON_FK", nullable = false)},
+            inverseJoinColumns = {@JoinColumn(name = "ACTIVITY_FK")})
     public List<Activity> getActivities() {
         return activities;
     }

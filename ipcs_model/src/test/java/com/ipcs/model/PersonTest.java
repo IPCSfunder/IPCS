@@ -55,7 +55,7 @@ public class PersonTest{
 		person.setPersonDetail(personDetail);
 		person.addContact(contact);
 		Activity activity = (Activity)session.get(Activity.class,1L);
-
+		person.getActivities().add(activity);
 		session.save(person);
 		session.getTransaction().commit();
 		session.close();
