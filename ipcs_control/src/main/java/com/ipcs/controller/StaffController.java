@@ -62,6 +62,15 @@ public class StaffController {
     }
 
 
+    @RequestMapping(value = "/viewStaff", method = RequestMethod.GET)
+    public ModelAndView viewStaff(@RequestParam Map<String,String> requestParams) {
+        String account_name = requestParams.get("account_name");
+        List<String> nationalities = Nationality.getNationalityList();
+        Person staff = personService.getPersonDetail(account_name);
+        return new ModelAndView("addStaff", "command", staff).addObject("operation", BusinessConstants.VIEW).addObject("nationalities", nationalities);
+    }
+
+
     @RequestMapping(value = "/persistStaff", method = RequestMethod.POST)
     public ModelAndView addStaff(@ModelAttribute("command") @Validated Person staff, BindingResult bindingResult, HttpSession session,ModelMap model,@RequestParam Map<String,String> requestParams) throws ParseException {
         if(bindingResult.hasErrors()) {

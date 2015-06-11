@@ -27,6 +27,7 @@
 <h2 style="text-align: center;">
     <c:if test="${operation == 'add'}">Add Activity Details</c:if>
     <c:if test="${operation == 'update'}">Update Activity Details</c:if>
+    <c:if test="${operation == 'view'}">View Activity Details</c:if>
 </h2>
 
 <form:form method="POST" action="/ipcs_control/persistActivity?operation=${operation}" commandName="activity">
@@ -84,7 +85,11 @@
 
         <tr>
             <td colspan="5" align="center">
-                <input type="submit" value="Submit"/>
+                <c:if test="${operation != 'view'}"><input type="submit" value="Submit"/></c:if>
+                &nbsp; &nbsp; &nbsp;
+                <a href="<c:url value='/listActivity' />">
+                    <input type="button" value="Back"/>
+                </a>
             </td>
         </tr>
     </table>

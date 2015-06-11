@@ -38,4 +38,9 @@ public class LoginController {
         } else
             return "error";
     }
+
+    @RequestMapping(value = "/navigator", method = RequestMethod.GET)
+    public String goNavigator(HttpSession session, @ModelAttribute Person admin, ModelMap model) {
+        return "navigator";
+    }
 }

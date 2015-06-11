@@ -72,13 +72,25 @@
                     ${activity.host.account_name}
                 </c:if>
             </td>
-            <td><a href="<c:url value='/addActivity?activityId=${activity.objectId}'/>" >View Details</a>
+            <td><a href="<c:url value='/addActivity?activityId=${activity.objectId}'/>" >Update</a>
+                &nbsp; &nbsp; &nbsp;
+                <a href="<c:url value='/viewActivity?activityId=${activity.objectId}'/>" >View</a>
                 &nbsp; &nbsp; &nbsp;
                 <a href="<c:url value='/deleteActivity?activityId=${activity.objectId}'/>" onclick="return confirm('Are you sure?')">Delete</a>
             </td>
         </tr>
     </c:forEach>
 
+
 </table>
+<br/>
+<br/>
+
+<div align="center">
+    <a href="<c:url value='/navigator' />">
+        <input type="button" value="Back"/>
+    </a>
+</div>
+
 </body>
 </html>

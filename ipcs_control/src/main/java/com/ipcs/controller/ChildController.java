@@ -76,6 +76,27 @@ public class ChildController {
     }
 
 
+    @RequestMapping(value = "/viewChildren", method = RequestMethod.GET)
+    public ModelAndView viewChildren(@RequestParam Map<String, String> requestParams, HttpSession session) {
+        School school = ((Person) session.getAttribute("authenticatedAdmin")).getSchool();
+        String account_name = requestParams.get("account_name");
+        List<String> nationalities = Nationality.getNationalityList();
+        List<Activity> classes = activityService.listActivityByType("CLASS");
+        List<Person> teachers = personService.listPersonsByRoleName(school.getName(), BusinessConstants.STAFF);
+        List<RelationshipType> relationshipTypes = personService.listRelationshipTypes();
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.addObject("nationalities", nationalities);
+        modelAndView.addObject("classes", classes);
+        modelAndView.addObject("teachers", teachers);
+        modelAndView.addObject("relationshipTypes", relationshipTypes);
+        modelAndView.setViewName("addChildren");
+        Person child = personService.getPersonDetail(account_name);
+
+        modelAndView.addObject("operation", BusinessConstants.VIEW);
+        modelAndView.addObject("child", child);
+        return modelAndView;
+    }
+
     @RequestMapping(value = "/persistChild", method = RequestMethod.POST)
     public ModelAndView persistStudent(@ModelAttribute("child") @Validated Person child, BindingResult bindingResult, HttpSession session, @RequestParam Map<String, String> requestParams) throws ParseException {
         if (bindingResult.hasErrors()) {

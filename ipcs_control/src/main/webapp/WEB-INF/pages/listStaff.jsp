@@ -34,13 +34,22 @@
 		<tr>
 			<td>${person.account_name}</td>
 			<td>${person.account_name}</td>
-			<td><a href="<c:url value='/addStaff?account_name=${person.account_name}'/>">View Details</a>
+			<td><a href="<c:url value='/addStaff?account_name=${person.account_name}'/>">Update</a>
+				&nbsp; &nbsp; &nbsp;
+				<a href="<c:url value='/viewStaff?account_name=${person.account_name}'/>">View</a>
 				&nbsp; &nbsp; &nbsp;
 				<a href="<c:url value='/deleteStaff?person_objid=${person.objectId}'/>" onclick="return confirm('Are you sure?')">Delete</a>
 			</td>
 		</tr>
 	</c:forEach>
-
 </table>
+
+<br/>
+<br/>
+<div align="center">
+	<a href="<c:url value='/navigator' />">
+		<input type="button" value="Back"/>
+	</a>
+</div>
 </body>
 </html>
