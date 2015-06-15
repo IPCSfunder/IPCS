@@ -123,7 +123,7 @@
                 </form:select>
                 <form:hidden path="contacts[0].primary" value="true"></form:hidden>
             </td>
-            <td colspan="2"><form:input path="contacts[0].mobileNumber"/></td>
+            <td colspan="2"><form:input cssClass="required" path="contacts[0].mobileNumber"/></td>
         </tr>
 
         <tr>
