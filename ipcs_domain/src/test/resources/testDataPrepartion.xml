@@ -13,7 +13,6 @@
 	<role_permission role_permission_objid="2" ROLE_FK="1" PERMISSION_FK="2"/>
 	<role_permission role_permission_objid="3" ROLE_FK="1" PERMISSION_FK="3"/>
 	<person_role PERSON_ROLE_OBJID="1" person_fk="1" role_fk="1"></person_role>
-	<relationship_type relationship_type_objid="1" name="TEACHER"></relationship_type>
 	<relationship_type relationship_type_objid="2" name="FATHER"></relationship_type>
 	<relationship_type relationship_type_objid="3" name="MOTHER"></relationship_type>
 	<relationship_type relationship_type_objid="4" name="GRANDFATHER"></relationship_type>

@@ -23,6 +23,7 @@
 <h2 style="text-align: center;">
     <c:if test="${operation == 'add'}">Add Child Details</c:if>
     <c:if test="${operation == 'update'}">Update Child Details</c:if>
+    <c:if test="${operation == 'view'}">View Child Details</c:if>
 </h2>
 
 <form:form name="htmlform" method="POST" action="/ipcs_control/persistChild?operation=${operation}" commandName="child">
@@ -122,7 +123,7 @@
                 </form:select>
                 <form:hidden path="contacts[0].primary" value="true"></form:hidden>
             </td>
-            <td colspan="2"><form:input path="contacts[0].mobileNumber"/></td>
+            <td colspan="2"><form:input cssClass="required" path="contacts[0].mobileNumber"/></td>
         </tr>
 
         <tr>
@@ -171,7 +172,11 @@
 
         <tr>
             <td colspan="5" align="center">
-                <input type="submit" value="Submit"/>
+                <c:if test="${operation != 'view'}"><input type="submit" value="Submit"/></c:if>
+                &nbsp; &nbsp; &nbsp;
+                <a href="<c:url value='/listChildren' />">
+                    <input type="button" value="Back"/>
+                </a>
             </td>
         </tr>
     </table>

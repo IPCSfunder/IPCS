@@ -74,6 +74,25 @@ public class ActivityController {
         }
     }
 
+
+    @RequestMapping(value = "/viewActivity", method = RequestMethod.GET)
+    public ModelAndView viewActivity(@RequestParam Map<String, String> requestParams, HttpSession session) {
+        School school = ((Person) session.getAttribute("authenticatedAdmin")).getSchool();
+        List<Person> teachers = personService.listPersonsByRoleName(school.getName(), BusinessConstants.STAFF);
+        List<Person> students = personService.listPersonsByRoleName(school.getName(), BusinessConstants.CHILDREN);
+        List<ActivityType> activityTypes = activityService.listActivityTypes();
+        String activityId = requestParams.get("activityId");
+
+        ModelAndView modelAndView = new ModelAndView("addActivity");
+        modelAndView.addObject("teachers", teachers);
+        modelAndView.addObject("students", students);
+        modelAndView.addObject("activityTypes", activityTypes);
+        Activity activity = activityService.getActivityDetail(Long.parseLong(activityId));
+        modelAndView.addObject("activity", activity);
+        modelAndView.addObject("operation", BusinessConstants.VIEW);
+        return modelAndView;
+    }
+
     @RequestMapping(value = "/persistActivity", method = RequestMethod.POST)
     public ModelAndView persistActivity(@ModelAttribute("activity") @Validated Activity activity, BindingResult bindingResult, HttpSession session, ModelMap model, @RequestParam Map<String, String> requestParams) throws ParseException {
         School school = ((Person) session.getAttribute("authenticatedAdmin")).getSchool();

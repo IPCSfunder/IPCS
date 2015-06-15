@@ -12,6 +12,7 @@ public class BusinessConstants {
     public static final String DATETIME_FORMAT="yyyy/MM/dd HH:mm";
     public static final String ADD = "add";
     public static final String UPDATE="update";
+    public static final String VIEW="view";
     public static final String DEFAULT_PASSWORD="11";
     public static final String NAME_CONCATENATE_SYMBOL = " ";
 
