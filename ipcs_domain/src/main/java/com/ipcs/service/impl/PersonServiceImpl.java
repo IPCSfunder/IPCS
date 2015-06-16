@@ -69,12 +69,13 @@ public class PersonServiceImpl implements PersonService {
         person.setContacts(contacts);
 
         List<Activity> activities = new ArrayList<Activity>();
-        for (Activity activity : person.getActivities()) {
-            Activity persistedActivity = activityDao.findActivityDetailsById(activity.getObjectId());
-            activities.add(persistedActivity);
+        if(person.getActivities()!=null){
+            for (Activity activity : person.getActivities()) {
+                Activity persistedActivity = activityDao.findActivityDetailsById(activity.getObjectId());
+                activities.add(persistedActivity);
+            }
+            person.setActivities(activities);
         }
-        person.setActivities(activities);
-
         if (person.getPersonDetail() != null)
             personDetailDao.save(person.getPersonDetail());
         personDao.save(person);
@@ -113,6 +114,15 @@ public class PersonServiceImpl implements PersonService {
             }
         }
         persistPerson.setPersonDetail(personDetail);
+
+        List<Activity> activities = new ArrayList<Activity>();
+        if(person.getActivities()!=null){
+            for (Activity activity : person.getActivities()) {
+                Activity persistedActivity = activityDao.findActivityDetailsById(activity.getObjectId());
+                activities.add(persistedActivity);
+            }
+            persistPerson.setActivities(activities);
+        }
         personDao.update(persistPerson);
     }
 

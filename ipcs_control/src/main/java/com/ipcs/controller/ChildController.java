@@ -14,6 +14,7 @@ import org.joda.time.DateTime;
 import org.joda.time.LocalDate;
 import org.joda.time.Years;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomCollectionEditor;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -41,6 +42,32 @@ public class ChildController {
 
     @InitBinder("child")
     public void initBinderForChild(WebDataBinder binder) {
+        binder.registerCustomEditor(List.class, "activities", new CustomCollectionEditor(List.class)
+        {
+            @Override
+            protected Object convertElement(Object element)
+            {
+                Long id = null;
+                if(element instanceof String && !((String)element).equals("")){
+                    //From the JSP 'element' will be a String
+                    try{
+                        id = Long.parseLong((String) element);
+                    }
+                    catch (NumberFormatException e) {
+                        e.printStackTrace();
+                    }
+                }
+                else if(element instanceof Long) {
+                    //From the database 'element' will be a Long
+                    id = (Long) element;
+                }
+                Activity activity = new Activity();
+                activity.setObjectId(id);
+                return id != null ? activity : null;
+            }
+        });
+
+
         SimpleDateFormat sdf = new SimpleDateFormat(BusinessConstants.DATE_FORMAT);
         sdf.setLenient(false);
         sdf.setLenient(false);

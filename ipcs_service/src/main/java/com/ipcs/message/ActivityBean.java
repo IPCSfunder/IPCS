@@ -12,11 +12,13 @@ public class ActivityBean {
 
     private String description;
 
-    private Date startTime;
+//    private Date startTime;
+
+    private String startTime;
 
     private String host_account;
 
-    public ActivityBean(String name, String location, String description, Date startTime, String host_account) {
+    public ActivityBean(String name, String location, String description, String startTime, String host_account) {
         this.name = name;
         this.location = location;
         this.description = description;
@@ -36,7 +38,7 @@ public class ActivityBean {
         return description;
     }
 
-    public Date getStartTime() {
+    public String getStartTime() {
         return startTime;
     }
 
