@@ -3,12 +3,12 @@ package com.ipcs.webservice;
 import com.ipcs.message.ActivityBean;
 import com.ipcs.message.ActivityMsg;
 import com.ipcs.model.Activity;
-import com.ipcs.service.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,18 +20,18 @@ import java.util.List;
 public class ActivityService {
 
     @Autowired
-    private AdminService adminService;
+    private com.ipcs.service.ActivityService activityService;
 
     @RequestMapping("/listAllActivities")
     public ActivityMsg listAllActivities(@RequestParam(value = "id") long personID) {
-        List<Activity> activities = adminService.listAllActivities(personID);
+        List<Activity> activities = activityService.listActivitiesByChildId(personID);
         List actBeans = new ArrayList();
 
         for(Activity activity: activities){
-            actBeans.add(new ActivityBean(activity.getName(),activity.getLocation(),activity.getDescription(),activity.getStartTime(),activity.getHost().getAccount_name()));
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            actBeans.add(new ActivityBean(activity.getName(),activity.getLocation(),activity.getDescription(),sdf.format(activity.getStartTime()),activity.getHost().getAccount_name()));
         }
 
         return new ActivityMsg(personID, actBeans.size(), actBeans);
     }
-
 }

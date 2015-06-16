@@ -123,7 +123,7 @@
                 </form:select>
                 <form:hidden path="contacts[0].primary" value="true"></form:hidden>
             </td>
-            <td colspan="2"><form:input cssClass="required" path="contacts[0].mobileNumber"/></td>
+            <td colspan="2"><form:input path="contacts[0].mobileNumber"/></td>
         </tr>
 
         <tr>
@@ -158,16 +158,22 @@
     <table align="center" width="60%">
 
 
-      <tr>
-            <td>Class</td>
+        <tr>
+            <td><form:label path="activities">Class</form:label></td>
             <td>
-                <form:select path="activities[0].objectId" selected="activities[0].objectId">
-                    <form:options items="${classes}" itemValue="objectId" itemLabel="name" />
+
+                <form:select multiple="true" path="activities">
+                <form:options items="${classes}" itemValue="objectId" itemLabel="name"/>
                 </form:select>
             </td>
             <td width="150px"></td>
             <td>
             </td>
+        </tr>
+        <tr>
+            <td colspan="2"><form:errors path="activities" cssClass="error"/></td>
+            <td></td>
+            <td colspan="2"></td>
         </tr>
 
         <tr>
