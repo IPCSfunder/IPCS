@@ -19,9 +19,9 @@ How to import IPCS into Intellij Idea
 
 Remote MySQL DB source
 
-Host: 120.24.166.170 Port:3306
+Host: rds6s843qz264d3qedyc.mysql.rds.aliyuncs.com Port:3306
 
-Database:ipcs
+Database:ipcs_uat
 
 User:ipcs_admin
 
