@@ -1,4 +1,4 @@
-#  IPCS
+#    IPCS
 This is a project which is called Integrated Preschool Connectivity System
 
 How to import IPCS into Intellij Idea  
